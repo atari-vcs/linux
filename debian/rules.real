@@ -452,7 +452,7 @@ endif
 			printf irqbalance,; \
 		fi)"
 
-install-image_$(ARCH)_$(FEATURESET)_$(FLAVOUR)_dt: DT_INSTALL_DIR = $(PACKAGE_DIR)/usr/lib/linux-image-$(REAL_VERSION)
+install-image_$(ARCH)_$(FEATURESET)_$(FLAVOUR)_dt: DT_INSTALL_DIR = $(PACKAGE_DIR)/boot/dtbs/$(REAL_VERSION)
 install-image_$(ARCH)_$(FEATURESET)_$(FLAVOUR)_dt:
 ifneq ($(filter arm64 armel armhf mipsr6 mipsr6el mips64r6 mips64r6el,$(ARCH)),)
 	+$(MAKE_CLEAN) -C $(DIR) dtbs
