@@ -1,3 +1,6 @@
+[packages]
+installer: false
+
 [abi]
 abiname: 2
 ignore-changes:
