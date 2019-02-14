@@ -1,3 +1,15 @@
+linux (4.19.20-1co1) apertis; urgency=medium
+
+  * Install dtbs in /boot
+  * Widen the binnmu match for Apertis builds
+  * Disable rt flavours
+  * Add default apertis gbp.conf
+  * Add configuration for 64 bit Renesas platforms
+  * Add configuration for i.mx6 media pipeline
+  * Disable build of udeb packages
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Thu, 14 Feb 2019 23:40:03 +0100
+
 linux (4.19.20-1) unstable; urgency=medium
 
   * New upstream stable update:
