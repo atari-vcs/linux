@@ -197,6 +197,7 @@ CONFIG_HW_RANDOM_OMAP=m
 ## file: drivers/clk/Kconfig
 ##
 CONFIG_COMMON_CLK_MAX77686=m
+CONFIG_COMMON_CLK_PWM=m
 CONFIG_COMMON_CLK_RK808=m
 CONFIG_COMMON_CLK_SI5351=m
 CONFIG_COMMON_CLK_S2MPS11=m
@@ -569,10 +570,22 @@ CONFIG_BCM2835_MBOX=y
 CONFIG_MEDIA_SUPPORT=y
 CONFIG_MEDIA_CONTROLLER=y
 CONFIG_VIDEO_V4L2_SUBDEV_API=y
+CONFIG_MEDIA_SUBDRV_AUTOSELECT=n
+
+##
+## file: drivers/media/i2c/Kconfig
+##
+CONFIG_VIDEO_OV5640=m
+
+##
+## file: drivers/media/i2c/soc_camera/Kconfig
+##
+CONFIG_SOC_CAMERA_OV5642=m
 
 ##
 ## file: drivers/media/platform/Kconfig
 ##
+CONFIG_SOC_CAMERA=m
 CONFIG_VIDEO_OMAP3=m
 CONFIG_VIDEO_TI_VPE=m
 
@@ -1110,6 +1123,16 @@ CONFIG_SPI_SUN4I=m
 CONFIG_SPI_SUN6I=m
 CONFIG_SPI_TEGRA114=m
 CONFIG_SPI_TEGRA20_SFLASH=m
+
+##
+## file: drivers/staging/media/Kconfig
+CONFIG_STAGING_MEDIA=y
+##
+
+##
+## file: drivers/staging/media/imx/Kconfig
+##
+CONFIG_VIDEO_IMX_MEDIA=m
 
 ##
 ## file: drivers/staging/vc04_services/bcm2835-audio/Kconfig
