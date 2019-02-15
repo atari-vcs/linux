@@ -1,3 +1,9 @@
+linux (4.19.20-1co2) apertis; urgency=medium
+
+  * Fix binnmu detection again
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Fri, 15 Feb 2019 10:25:50 +0100
+
 linux (4.19.20-1co1) apertis; urgency=medium
 
   * Install dtbs in /boot
