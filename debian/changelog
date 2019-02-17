@@ -1,3 +1,9 @@
+linux (4.19.20-1co3) apertis; urgency=medium
+
+  * Don't build signed templated
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Sun, 17 Feb 2019 23:08:07 +0100
+
 linux (4.19.20-1co2) apertis; urgency=medium
 
   * Fix binnmu detection again
