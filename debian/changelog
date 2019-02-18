@@ -1,3 +1,11 @@
+linux (4.19.20-1co4) apertis; urgency=medium
+
+  * armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+  * armhf: config: Disable XEN
+  * Correct debian-branch
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Mon, 18 Feb 2019 23:16:45 +0100
+
 linux (4.19.20-1co3) apertis; urgency=medium
 
   * Don't build signed templated
