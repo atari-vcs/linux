@@ -195,4 +195,9 @@ features/all/ena/0016-net-ena-fix-compilation-error-in-xtensa-architecture.patch
 features/all/ena/0017-net-ena-fix-crash-during-ena_remove.patch
 features/all/ena/0018-net-ena-update-driver-version-from-2.0.1-to-2.0.2.patch
 
+# AppArmor
+apparmor/0001-apparmor-patch-to-provide-compatibility-with-v2.x-ne.patch
+apparmor/0002-apparmor-af_unix-mediation.patch
+apparmor/0003-apparmor-fix-use-after-free-in-sk_peer_label.patch
+
 # ABI maintenance
