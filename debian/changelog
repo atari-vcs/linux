@@ -1,3 +1,9 @@
+linux (4.19.20-1co5) apertis; urgency=medium
+
+  * Refresh the AppArmor af_unix mediation patches.
+
+ -- Andrej Shadura <andrew.shadura@collabora.co.uk>  Fri, 22 Mar 2019 14:36:02 +0100
+
 linux (4.19.20-1co4) apertis; urgency=medium
 
   * armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
