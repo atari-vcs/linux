@@ -200,4 +200,5 @@ apparmor/0001-apparmor-patch-to-provide-compatibility-with-v2.x-ne.patch
 apparmor/0002-apparmor-af_unix-mediation.patch
 apparmor/0003-apparmor-fix-use-after-free-in-sk_peer_label.patch
 
-# ABI maintenance
+# RaspberryPi support
+rpi/ARM-dts-add-Raspberry-Pi-Compute-Module-3-and-IO-boa.patch
