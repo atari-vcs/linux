@@ -1,3 +1,9 @@
+linux (4.19.20-1co6) apertis; urgency=medium
+
+  * Enable support for Raspbery Pi CM3 (APERTIS-6053) 
+
+ -- Ritesh Raj Sarraf <ritesh.sarraf@collabora.com>  Tue, 28 May 2019 12:44:57 +0530
+
 linux (4.19.20-1co5) apertis; urgency=medium
 
   * Refresh the AppArmor af_unix mediation patches.
