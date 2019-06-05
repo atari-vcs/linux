@@ -444,6 +444,7 @@ CONFIG_HWSPINLOCK_OMAP=m
 ## file: drivers/i2c/Kconfig
 ##
 CONFIG_I2C_MUX=m
+CONFIG_I2C_MUX_GPIO=m
 
 ##
 ## file: drivers/i2c/busses/Kconfig
@@ -1384,6 +1385,13 @@ CONFIG_SND_SOC=m
 CONFIG_SND_BCM2835_SOC_I2S=m
 
 ##
+## file: sound/soc/codecs/Kconfig
+##
+CONFIG_SND_SOC_CS42L42=m
+CONFIG_SND_SOC_CS42XX8=m
+CONFIG_SND_SOC_CS42XX8_I2C=m
+
+##
 ## file: sound/soc/davinci/Kconfig
 ##
 CONFIG_SND_EDMA_SOC=m
@@ -1392,12 +1400,14 @@ CONFIG_SND_DAVINCI_SOC_MCASP=m
 ##
 ## file: sound/soc/fsl/Kconfig
 ##
+CONFIG_SND_SOC_FSL_ASRC=m
 CONFIG_SND_IMX_SOC=m
 CONFIG_SND_SOC_EUKREA_TLV320=m
 CONFIG_SND_SOC_IMX_ES8328=m
 CONFIG_SND_SOC_IMX_SGTL5000=m
 CONFIG_SND_SOC_IMX_SPDIF=m
 CONFIG_SND_SOC_IMX_MC13783=m
+CONFIG_SND_SOC_FSL_ASOC_CARD=m
 
 ##
 ## file: sound/soc/generic/Kconfig
