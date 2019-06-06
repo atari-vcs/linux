@@ -1,0 +1,117 @@
+From 43e689eafb4979f4ada8e266291cdc3561017f12 Mon Sep 17 00:00:00 2001
+From: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+Date: Wed, 5 Jun 2019 16:42:01 +0200
+Subject: [PATCH] cs42xx8-i2c: Fix module auto-loading
+
+Move the OF match table from the core driver module to the module
+actually implementing the i2c driver. Otherwise for cs42xx8 device in
+device-tree only the cs42xx8.ko gets loaded rather then cs42xx8-i2c.ko.
+
+Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+---
+ sound/soc/codecs/cs42xx8-i2c.c | 21 +++++++++++++++++++--
+ sound/soc/codecs/cs42xx8.c     | 22 +++-------------------
+ sound/soc/codecs/cs42xx8.h     |  4 ++--
+ 3 files changed, 24 insertions(+), 23 deletions(-)
+
+diff --git a/sound/soc/codecs/cs42xx8-i2c.c b/sound/soc/codecs/cs42xx8-i2c.c
+index 0214e3ab9da0..6e63cf0212d3 100644
+--- a/sound/soc/codecs/cs42xx8-i2c.c
++++ b/sound/soc/codecs/cs42xx8-i2c.c
+@@ -17,11 +17,27 @@
+ 
+ #include "cs42xx8.h"
+ 
++const struct of_device_id cs42xx8_of_match[] = {
++	{ .compatible = "cirrus,cs42448", .data = &cs42448_data, },
++	{ .compatible = "cirrus,cs42888", .data = &cs42888_data, },
++	{ /* sentinel */ }
++};
++
+ static int cs42xx8_i2c_probe(struct i2c_client *i2c,
+ 			     const struct i2c_device_id *id)
+ {
+-	int ret = cs42xx8_probe(&i2c->dev,
+-			devm_regmap_init_i2c(i2c, &cs42xx8_regmap_config));
++	const struct of_device_id *of_id;
++	int ret;
++	
++	of_id = i2c_of_match_device(cs42xx8_of_match, i2c);
++	if (!of_id || !of_id->data) {
++		dev_err(&i2c->dev, "failed to find driver data\n");
++		return -EINVAL;
++	}
++
++	ret = cs42xx8_probe(&i2c->dev,
++			    devm_regmap_init_i2c(i2c, &cs42xx8_regmap_config),
++			    of_id->data);
+ 	if (ret)
+ 		return ret;
+ 
+@@ -44,6 +60,7 @@ static struct i2c_device_id cs42xx8_i2c_id[] = {
+ 	{}
+ };
+ MODULE_DEVICE_TABLE(i2c, cs42xx8_i2c_id);
++MODULE_DEVICE_TABLE(of, cs42xx8_of_match);
+ 
+ static struct i2c_driver cs42xx8_i2c_driver = {
+ 	.driver = {
+diff --git a/sound/soc/codecs/cs42xx8.c b/sound/soc/codecs/cs42xx8.c
+index ebb9e0cf8364..8c9cb46b34ec 100644
+--- a/sound/soc/codecs/cs42xx8.c
++++ b/sound/soc/codecs/cs42xx8.c
+@@ -431,17 +431,9 @@ const struct cs42xx8_driver_data cs42888_data = {
+ };
+ EXPORT_SYMBOL_GPL(cs42888_data);
+ 
+-const struct of_device_id cs42xx8_of_match[] = {
+-	{ .compatible = "cirrus,cs42448", .data = &cs42448_data, },
+-	{ .compatible = "cirrus,cs42888", .data = &cs42888_data, },
+-	{ /* sentinel */ }
+-};
+-MODULE_DEVICE_TABLE(of, cs42xx8_of_match);
+-EXPORT_SYMBOL_GPL(cs42xx8_of_match);
+-
+-int cs42xx8_probe(struct device *dev, struct regmap *regmap)
++int cs42xx8_probe(struct device *dev, struct regmap *regmap,
++		  const struct cs42xx8_driver_data *data)
+ {
+-	const struct of_device_id *of_id;
+ 	struct cs42xx8_priv *cs42xx8;
+ 	int ret, val, i;
+ 
+@@ -457,15 +449,7 @@ int cs42xx8_probe(struct device *dev, struct regmap *regmap)
+ 
+ 	cs42xx8->regmap = regmap;
+ 	dev_set_drvdata(dev, cs42xx8);
+-
+-	of_id = of_match_device(cs42xx8_of_match, dev);
+-	if (of_id)
+-		cs42xx8->drvdata = of_id->data;
+-
+-	if (!cs42xx8->drvdata) {
+-		dev_err(dev, "failed to find driver data\n");
+-		return -EINVAL;
+-	}
++	cs42xx8->drvdata = data;
+ 
+ 	cs42xx8->clk = devm_clk_get(dev, "mclk");
+ 	if (IS_ERR(cs42xx8->clk)) {
+diff --git a/sound/soc/codecs/cs42xx8.h b/sound/soc/codecs/cs42xx8.h
+index d36c61b6df74..b6247ab4c52d 100644
+--- a/sound/soc/codecs/cs42xx8.h
++++ b/sound/soc/codecs/cs42xx8.h
+@@ -22,8 +22,8 @@ extern const struct dev_pm_ops cs42xx8_pm;
+ extern const struct cs42xx8_driver_data cs42448_data;
+ extern const struct cs42xx8_driver_data cs42888_data;
+ extern const struct regmap_config cs42xx8_regmap_config;
+-extern const struct of_device_id cs42xx8_of_match[];
+-int cs42xx8_probe(struct device *dev, struct regmap *regmap);
++int cs42xx8_probe(struct device *dev, struct regmap *regmap,
++		  const struct cs42xx8_driver_data *data);
+ 
+ /* CS42888 register map */
+ #define CS42XX8_CHIPID				0x01	/* Chip ID */
+-- 
+2.20.1
+
