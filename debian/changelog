@@ -1,3 +1,10 @@
+linux (4.19.20-1co8) apertis; urgency=medium
+
+  * Add latest upstream apparmor patches
+    + Including fix to enforce denied dbus transations
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Mon, 17 Jun 2019 18:22:16 +0100
+
 linux (4.19.20-1co7) apertis; urgency=medium
 
   * d/p/apertis/sabreai-audio
