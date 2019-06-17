@@ -199,6 +199,8 @@ features/all/ena/0018-net-ena-update-driver-version-from-2.0.1-to-2.0.2.patch
 apparmor/0001-apparmor-patch-to-provide-compatibility-with-v2.x-ne.patch
 apparmor/0002-apparmor-af_unix-mediation.patch
 apparmor/0003-apparmor-fix-use-after-free-in-sk_peer_label.patch
+apparmor/0001-UBUNTU-SAUCE-apparmor-fix-apparmor-mediating-locking.patch
+apparmor/0002-UBUNTU-SAUCE-apparmor-userspace-queries.patch
 
 # RaspberryPi support
 rpi/ARM-dts-add-Raspberry-Pi-Compute-Module-3-and-IO-boa.patch
