@@ -633,7 +633,6 @@ CONFIG_ZORRO_NAMES=y
 ## file: fs/Kconfig.binfmt
 ##
 CONFIG_BINFMT_ELF=y
-CONFIG_BINFMT_AOUT=m
 CONFIG_BINFMT_MISC=m
 
 ##
@@ -675,11 +674,6 @@ CONFIG_BINFMT_MISC=m
 ## file: fs/jfs/Kconfig
 ##
 # CONFIG_JFS_FS is not set
-
-##
-## file: fs/ntfs/Kconfig
-##
-# CONFIG_NTFS_FS is not set
 
 ##
 ## file: fs/ocfs2/Kconfig
