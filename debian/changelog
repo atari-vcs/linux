@@ -1,3 +1,29 @@
+linux (4.19.37-5co1) UNRELEASED; urgency=medium
+
+  * Merge from Debian. Remaining changes:
+    + Install dtbs in /boot
+    + Widen the binnmu match for Apertis builds
+    + Disable rt flavours
+    + Add default apertis gbp.conf
+    + Add configuration for 64 bit Renesas platforms
+    + Add configuration for i.mx6 media pipeline
+    + Disable build of udeb packages
+    + Fix binnmu detection again
+    + Don't build signed templated
+    + armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+    + armhf: config: Disable XEN
+    + Correct debian-branch
+    + Refresh the AppArmor af_unix mediation patches.
+    + Enable support for Raspbery Pi CM3 (APERTIS-6053) 
+    + d/p/apertis/sabreai-audio
+      + Add fixes for loading and using the audio on i.MX5 Sabre AI boards
+    + d/config/armhf/config:
+      + Add configuration options needed for Audio and USB on Sabre AI boards
+    + Add latest upstream apparmor patches
+      + Including fix to enforce denied dbus transations
+
+ -- Andrej Shadura <andrewsh@debian.org>  Thu, 05 Sep 2019 09:41:20 +0200
+
 linux (4.19.37-5) unstable; urgency=medium
 
   [ Romain Perier ]
