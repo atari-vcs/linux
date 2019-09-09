@@ -10,7 +10,7 @@ build-source:
     - ci-buildpackage -S --git-prebuild='debian/rules debian/control || true'
   artifacts:
     paths:
-      - build/
+      - _build/
   except:
     - /^upstream\//
     - /^debian\//
@@ -31,7 +31,7 @@ tag-release:
     - |
         if git describe --tags --match 'apertis/*' --exact-match > /dev/null 2>&1; then
           echo "Fetching existing source package"
-          pristine-lfs -v checkout --full --branch ${PRISTINE_SOURCE} --auto -o build
+          pristine-lfs -v checkout --full --branch ${PRISTINE_SOURCE} --auto -o _build
         else
           echo "Building source package"
           gbp buildpackage \
@@ -40,7 +40,7 @@ tag-release:
             --git-debian-tag='apertis/%(version)s' \
             --git-debian-tag-msg='%(pkg)s Apertis release %(version)s'
           ci-buildpackage -S --git-prebuild='debian/rules debian/control || true'
-          pristine-lfs -v import-dsc --full --branch ${PRISTINE_SOURCE} build/*.dsc
+          pristine-lfs -v import-dsc --full --branch ${PRISTINE_SOURCE} _build/*.dsc
           git push --follow-tags ${CI_AUTH_PROJECT_URL} ${PRISTINE_SOURCE}:${PRISTINE_SOURCE}
         fi
     - >
@@ -49,7 +49,7 @@ tag-release:
       $(git describe --tags --match "apertis/*")
   artifacts:
     paths:
-      - build/
+      - _build/
   only:
     - /^apertis\//
   except:
