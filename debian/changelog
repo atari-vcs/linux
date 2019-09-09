@@ -1,4 +1,4 @@
-linux (4.19.37-5co1) UNRELEASED; urgency=medium
+linux (4.19.37-5co1) apertis; urgency=medium
 
   * Merge from Debian. Remaining changes:
     + Install dtbs in /boot
