@@ -1,3 +1,9 @@
+linux (4.19.37-5co2) apertis; urgency=medium
+
+  * d/rules: Accept dots in the extended BINNMU rule
+
+ -- Emanuele Aina <emanuele.aina@collabora.com>  Mon, 09 Sep 2019 15:05:22 +0000
+
 linux (4.19.37-5co1) apertis; urgency=medium
 
   * Merge from Debian. Remaining changes:
