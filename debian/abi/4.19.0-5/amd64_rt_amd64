@@ -6637,7 +6637,6 @@
 0x1aea1e55 finish_open vmlinux EXPORT_SYMBOL
 0x782d8822 finish_swait vmlinux EXPORT_SYMBOL
 0x6d52f979 finish_wait vmlinux EXPORT_SYMBOL
-0xb0aa812e fips_enabled vmlinux EXPORT_SYMBOL_GPL
 0xfc7ad24d firmware_config_table vmlinux EXPORT_SYMBOL_GPL
 0x33632d3c firmware_kobj vmlinux EXPORT_SYMBOL_GPL
 0x5fcd9d5f firmware_request_cache vmlinux EXPORT_SYMBOL_GPL

@@ -3818,7 +3818,6 @@
 0xa60a32bd finish_open vmlinux EXPORT_SYMBOL
 0x72803974 finish_swait vmlinux EXPORT_SYMBOL
 0x92540fbf finish_wait vmlinux EXPORT_SYMBOL
-0xb0aa812e fips_enabled vmlinux EXPORT_SYMBOL_GPL
 0xdc964125 firmware_kobj vmlinux EXPORT_SYMBOL_GPL
 0x162182a0 firmware_request_cache vmlinux EXPORT_SYMBOL_GPL
 0x38bbff20 firmware_request_nowarn vmlinux EXPORT_SYMBOL_GPL

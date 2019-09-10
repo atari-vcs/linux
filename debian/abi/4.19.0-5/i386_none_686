@@ -6566,7 +6566,6 @@
 0x5c71a20b finish_open vmlinux EXPORT_SYMBOL
 0xef93012f finish_swait vmlinux EXPORT_SYMBOL
 0x92540fbf finish_wait vmlinux EXPORT_SYMBOL
-0xb0aa812e fips_enabled vmlinux EXPORT_SYMBOL_GPL
 0x8c44bd9b firmware_config_table vmlinux EXPORT_SYMBOL_GPL
 0xb109952f firmware_kobj vmlinux EXPORT_SYMBOL_GPL
 0xb9be93ec firmware_request_cache vmlinux EXPORT_SYMBOL_GPL
