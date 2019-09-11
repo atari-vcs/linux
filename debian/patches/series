@@ -279,6 +279,9 @@ features/all/ena/0016-net-ena-fix-compilation-error-in-xtensa-architecture.patch
 features/all/ena/0017-net-ena-fix-crash-during-ena_remove.patch
 features/all/ena/0018-net-ena-update-driver-version-from-2.0.1-to-2.0.2.patch
 
+# ABI maintenance
+debian/abi/tcp-avoid-abi-change-for-dos-fixes.patch
+
 # AppArmor
 apparmor/0001-apparmor-patch-to-provide-compatibility-with-v2.x-ne.patch
 apparmor/0002-apparmor-af_unix-mediation.patch
@@ -292,4 +295,3 @@ rpi/ARM-dts-add-Raspberry-Pi-Compute-Module-3-and-IO-boa.patch
 # Apertis support/fixes for sabre ai audio
 apertis/sabreai-audio/0001-cs42xx8-i2c-Fix-module-auto-loading.patch
 apertis/sabreai-audio/0002-Hack-hardcode-to-sample-rates-usable-on-sabre-AI.patch
-debian/abi/tcp-avoid-abi-change-for-dos-fixes.patch
