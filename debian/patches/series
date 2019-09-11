@@ -295,3 +295,6 @@ rpi/ARM-dts-add-Raspberry-Pi-Compute-Module-3-and-IO-boa.patch
 # Apertis support/fixes for sabre ai audio
 apertis/sabreai-audio/0001-cs42xx8-i2c-Fix-module-auto-loading.patch
 apertis/sabreai-audio/0002-Hack-hardcode-to-sample-rates-usable-on-sabre-AI.patch
+
+# Apertis misc
+apertis/preserve-abi-with-modsig-disabled.patch
