@@ -1,7 +1,6 @@
 [base]
 flavours:
  arm64
- cloud-arm64
 default-flavour: arm64
 
 [cloud-arm64_image]
