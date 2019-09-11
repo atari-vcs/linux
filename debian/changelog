@@ -1,3 +1,11 @@
+linux (4.19.37-5co4) apertis; urgency=medium
+
+  * d/patches/series: Fixup spurious change
+  * Disable cloud images
+  * Preserve ABI whether the module signing support is enabled or not
+
+ -- Emanuele Aina <emanuele.aina@collabora.com>  Wed, 11 Sep 2019 10:26:06 +0200
+
 linux (4.19.37-5co3) apertis; urgency=medium
 
   * Drop the check for the fips_enabled symbol
