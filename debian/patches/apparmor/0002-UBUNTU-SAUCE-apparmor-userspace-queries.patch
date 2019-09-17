@@ -15,11 +15,9 @@ Signed-off-by: Seth Forshee <seth.forshee@canonical.com>
  security/apparmor/include/policy.h | 10 ++++++++++
  2 files changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/security/apparmor/apparmorfs.c b/security/apparmor/apparmorfs.c
-index d302960562f0..732dfb5302d7 100644
 --- a/security/apparmor/apparmorfs.c
 +++ b/security/apparmor/apparmorfs.c
-@@ -625,7 +625,7 @@ static void profile_query_cb(struct aa_profile *profile, struct aa_perms *perms,
+@@ -624,7 +624,7 @@ static void profile_query_cb(struct aa_p
  			tmp = aa_compute_fperms(dfa, state, &cond);
  		}
  	} else if (profile->policy.dfa) {
@@ -28,27 +26,22 @@ index d302960562f0..732dfb5302d7 100644
  			return;	/* no change to current perms */
  		dfa = profile->policy.dfa;
  		state = aa_dfa_match_len(dfa, profile->policy.start[0],
-diff --git a/security/apparmor/include/policy.h b/security/apparmor/include/policy.h
-index 405caee83b7f..c29b62f413c7 100644
 --- a/security/apparmor/include/policy.h
 +++ b/security/apparmor/include/policy.h
-@@ -220,6 +220,16 @@ static inline struct aa_profile *aa_get_newest_profile(struct aa_profile *p)
+@@ -226,6 +226,16 @@ static inline unsigned int PROFILE_MEDIA
+ 					profile->policy.start[0], &class, 1);
  }
  
- #define PROFILE_MEDIATES(P, T)  ((P)->policy.start[(unsigned char) (T)])
 +/* safe version of POLICY_MEDIATES for full range input */
 +static inline unsigned int PROFILE_MEDIATES_SAFE(struct aa_profile *profile,
-+						 unsigned char class)
++                                                unsigned char class)
 +{
-+	if (profile->policy.dfa)
-+		return aa_dfa_match_len(profile->policy.dfa,
-+					profile->policy.start[0], &class, 1);
-+	return 0;
++       if (profile->policy.dfa)
++               return aa_dfa_match_len(profile->policy.dfa,
++                                       profile->policy.start[0], &class, 1);
++       return 0;
 +}
 +
  static inline unsigned int PROFILE_MEDIATES_AF(struct aa_profile *profile,
  					       u16 AF) {
  	unsigned int state = PROFILE_MEDIATES(profile, AA_CLASS_NET);
--- 
-2.20.1
-
