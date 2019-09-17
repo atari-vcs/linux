@@ -1,4 +1,4 @@
-linux (4.19.67-2co1) UNRELEASED; urgency=medium
+linux (4.19.67-2co1) apertis; urgency=medium
 
   * Merge from Debian buster. Remaining apertis changes:
     + Add default apertis gbp.conf
