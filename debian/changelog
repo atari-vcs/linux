@@ -17,9 +17,11 @@ linux (4.19.67-2co1) UNRELEASED; urgency=medium
       + Add configuration options needed for Audio and USB on Sabre AI boards
     + armhf: d/p/apertis/sabreai-audio: Add fixes for loading and using the
       audio on i.MX6 Sabre AI boards
+    + Bump abiname as we don't match the Debian kernel ABI
   * Dropped downstream changes:
     + Support for Raspbery Pi CM3 (APERTIS-6053): shipped upstream
-    + Module ABI tweaks: build was still broken on armhf and arm64
+    + Module ABI tweaks: build was still broken on armhf and arm64, replaced
+      by abiname bump
 
  -- Andrew Lee (李健秋) <andrew.lee@collabora.co.uk>  Tue, 17 Sep 2019 13:51:56 +0800
 
