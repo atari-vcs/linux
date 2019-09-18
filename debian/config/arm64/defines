@@ -3,7 +3,6 @@ cross-compile-compat: arm-linux-gnueabihf-
 kernel-arch: arm64
 featuresets:
  none
- rt
 
 [build]
 image-file: arch/arm64/boot/Image
