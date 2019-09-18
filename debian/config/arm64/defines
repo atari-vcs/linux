@@ -2,7 +2,6 @@
 kernel-arch: arm64
 featuresets:
  none
- rt
 
 [build]
 debug-info: true
