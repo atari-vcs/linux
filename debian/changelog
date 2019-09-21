@@ -1,3 +1,11 @@
+linux (4.19.67-2co2) apertis; urgency=medium
+
+  * Disable the rt flavours for armhf and arm64 as well
+  * Revert abiname bump
+  * Disable the module ABI check
+
+ -- Emanuele Aina <emanuele.aina@collabora.com>  Sat, 21 Sep 2019 02:06:57 +0200
+
 linux (4.19.67-2co1) apertis; urgency=medium
 
   * Merge from Debian buster. Remaining apertis changes:
