@@ -1,3 +1,9 @@
+linux (4.19.67-2co3) apertis; urgency=medium
+
+  * Re-add configuration for 64 bit Renesas platforms
+
+ -- Emanuele Aina <emanuele.aina@collabora.com>  Tue, 24 Sep 2019 16:10:24 +0200
+
 linux (4.19.67-2co2) apertis; urgency=medium
 
   * Disable the rt flavours for armhf and arm64 as well
