@@ -1349,6 +1349,14 @@ CONFIG_MESON_WATCHDOG=m
 CONFIG_BCM2835_WDT=m
 
 ##
+## file: fs/pstore/Kconfig
+##
+CONFIG_PSTORE=y
+# CONFIG_PSTORE_DEFLATE_COMPRESS is not set
+CONFIG_PSTORE_CONSOLE=y
+CONFIG_PSTORE_RAM=y
+
+##
 ## file: kernel/power/Kconfig
 ##
 CONFIG_SUSPEND=y
