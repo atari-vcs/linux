@@ -1,0 +1,41 @@
+From bfeef09b5a4acc3453e5e0d045c5febc50d7aeb1 Mon Sep 17 00:00:00 2001
+From: Ming Lei <ming.lei@redhat.com>
+Date: Tue, 11 Jun 2019 17:31:53 +0800
+Subject: [PATCH 3/3] blk-mq: remove WARN_ON(!q->elevator) from
+ blk_mq_sched_free_requests
+
+blk_mq_sched_free_requests() may be called in failure path in which
+q->elevator may not be setup yet, so remove WARN_ON(!q->elevator) from
+blk_mq_sched_free_requests for avoiding the false positive.
+
+This function is actually safe to call in case of !q->elevator because
+hctx->sched_tags is checked.
+
+Cc: Bart Van Assche <bvanassche@acm.org>
+Cc: Christoph Hellwig <hch@lst.de>
+Cc: Yi Zhang <yi.zhang@redhat.com>
+Fixes: c3e2219216c9 ("block: free sched's request pool in blk_cleanup_queue")
+Reported-by: syzbot+b9d0d56867048c7bcfde@syzkaller.appspotmail.com
+Signed-off-by: Ming Lei <ming.lei@redhat.com>
+Signed-off-by: Jens Axboe <axboe@kernel.dk>
+(cherry picked from commit c326f846ebc2a30eca386b85dffba96e23803d81)
+Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+---
+ block/blk-mq-sched.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/block/blk-mq-sched.c b/block/blk-mq-sched.c
+index 105f8c124604..156e6444dc8f 100644
+--- a/block/blk-mq-sched.c
++++ b/block/blk-mq-sched.c
+@@ -533,7 +533,6 @@ void blk_mq_sched_free_requests(struct request_queue *q)
+ 	int i;
+ 
+ 	lockdep_assert_held(&q->sysfs_lock);
+-	WARN_ON(!q->elevator);
+ 
+ 	queue_for_each_hw_ctx(q, hctx, i) {
+ 		if (hctx->sched_tags)
+-- 
+2.24.0
+
