@@ -90,7 +90,6 @@ CONFIG_PATA_LEGACY=m
 ##
 ## file: drivers/block/Kconfig
 ##
-CONFIG_BLK_DEV_DAC960=m
 CONFIG_BLK_DEV_UMEM=m
 CONFIG_BLK_DEV_SX8=m
 CONFIG_CDROM_PKTCDVD=m
@@ -333,35 +332,13 @@ CONFIG_SERIO_RAW=m
 ## file: drivers/isdn/Kconfig
 ##
 CONFIG_ISDN=y
-CONFIG_ISDN_CAPI=m
 
 ##
 ## file: drivers/isdn/capi/Kconfig
 ##
+CONFIG_ISDN_CAPI=m
 CONFIG_ISDN_CAPI_CAPI20=m
 # CONFIG_ISDN_CAPI_MIDDLEWARE is not set
-
-##
-## file: drivers/isdn/hardware/avm/Kconfig
-##
-CONFIG_CAPI_AVM=y
-CONFIG_ISDN_DRV_AVMB1_B1PCI=m
-CONFIG_ISDN_DRV_AVMB1_B1PCIV4=y
-CONFIG_ISDN_DRV_AVMB1_B1PCMCIA=m
-CONFIG_ISDN_DRV_AVMB1_AVM_CS=m
-CONFIG_ISDN_DRV_AVMB1_T1PCI=m
-CONFIG_ISDN_DRV_AVMB1_C4=m
-
-##
-## file: drivers/isdn/hardware/eicon/Kconfig
-##
-CONFIG_CAPI_EICON=y
-CONFIG_ISDN_DIVAS=m
-CONFIG_ISDN_DIVAS_BRIPCI=y
-CONFIG_ISDN_DIVAS_PRIPCI=y
-CONFIG_ISDN_DIVAS_DIVACAPI=m
-CONFIG_ISDN_DIVAS_USERIDI=m
-CONFIG_ISDN_DIVAS_MAINT=m
 
 ##
 ## file: drivers/media/radio/Kconfig
@@ -618,6 +595,8 @@ CONFIG_RTC_DRV_EFI=y
 ## file: drivers/scsi/Kconfig
 ##
 CONFIG_SCSI_ARCMSR=m
+CONFIG_SCSI_MYRB=m
+CONFIG_SCSI_MYRS=m
 CONFIG_SCSI_DMX3191D=m
 CONFIG_SCSI_IPS=m
 CONFIG_SCSI_INITIO=m
@@ -651,6 +630,17 @@ CONFIG_PCMCIA_SYM53C500=m
 ## file: drivers/sn/Kconfig
 ##
 CONFIG_SGI_IOC3=m
+
+##
+## file: drivers/staging/isdn/avm/Kconfig
+##
+CONFIG_CAPI_AVM=y
+CONFIG_ISDN_DRV_AVMB1_B1PCI=m
+CONFIG_ISDN_DRV_AVMB1_B1PCIV4=y
+CONFIG_ISDN_DRV_AVMB1_B1PCMCIA=m
+CONFIG_ISDN_DRV_AVMB1_AVM_CS=m
+CONFIG_ISDN_DRV_AVMB1_T1PCI=m
+CONFIG_ISDN_DRV_AVMB1_C4=m
 
 ##
 ## file: drivers/staging/wlan-ng/Kconfig
@@ -767,11 +757,6 @@ CONFIG_PSTORE=y
 ## file: lib/xz/Kconfig
 ##
 CONFIG_XZ_DEC_IA64=y
-
-##
-## file: net/ax25/Kconfig
-##
-CONFIG_HAMRADIO=y
 
 ##
 ## file: net/ipv6/Kconfig

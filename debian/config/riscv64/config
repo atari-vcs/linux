@@ -2,7 +2,11 @@
 ## file: arch/riscv/Kconfig
 ##
 CONFIG_SMP=y
-CONFIG_PCI=y
+
+##
+## file: arch/riscv/Kconfig.socs
+##
+CONFIG_SOC_SIFIVE=y
 
 ##
 ## file: drivers/ata/Kconfig
@@ -16,9 +20,14 @@ CONFIG_DRM=m
 CONFIG_DRM_RADEON=m
 
 ##
-## file: drivers/irqchip/Kconfig
+## file: drivers/mmc/Kconfig
 ##
-CONFIG_SIFIVE_PLIC=y
+CONFIG_MMC=m
+
+##
+## file: drivers/mmc/host/Kconfig
+##
+CONFIG_MMC_SPI=m
 
 ##
 ## file: drivers/net/ethernet/cadence/Kconfig
@@ -26,14 +35,29 @@ CONFIG_SIFIVE_PLIC=y
 CONFIG_MACB=m
 
 ##
+## file: drivers/pci/Kconfig
+##
+CONFIG_PCI=y
+
+##
 ## file: drivers/pci/controller/Kconfig
 ##
 CONFIG_PCIE_XILINX=y
 
 ##
+## file: drivers/spi/Kconfig
+##
+CONFIG_SPI_SIFIVE=m
+
+##
 ## file: drivers/tty/hvc/Kconfig
 ##
 CONFIG_HVC_RISCV_SBI=y
+
+##
+## file: drivers/tty/serial/Kconfig
+##
+CONFIG_SERIAL_EARLYCON_RISCV_SBI=y
 
 ##
 ## file: drivers/tty/serial/8250/Kconfig

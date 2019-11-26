@@ -1,20 +1,21 @@
+debian/gitignore.patch
+
 # Disable features broken by exclusion of upstream files
 debian/dfsg/arch-powerpc-platforms-8xx-ucode-disable.patch
 debian/dfsg/drivers-media-dvb-dvb-usb-af9005-disable.patch
 debian/dfsg/vs6624-disable.patch
 debian/dfsg/drivers-net-appletalk-cops.patch
 debian/dfsg/video-remove-nvidiafb-and-rivafb.patch
+debian/dfsg/documentation-fix-broken-link-to-cipso-draft.patch
 
 # Changes to support package build system
 debian/version.patch
 debian/uname-version-timestamp.patch
 debian/kernelvariables.patch
-debian/gitignore.patch
 debian/ia64-hardcode-arch-script-output.patch
 debian/mips-disable-werror.patch
 debian/mips-boston-disable-its.patch
 debian/arch-sh4-fix-uimage-build.patch
-debian/powerpcspe-omit-uimage.patch
 debian/tools-perf-version.patch
 debian/tools-perf-install.patch
 debian/wireless-add-debian-wireless-regdb-certificates.patch
@@ -29,17 +30,18 @@ bugfix/all/firmware-remove-redundant-log-messages-from-drivers.patch
 bugfix/all/radeon-amdgpu-firmware-is-required-for-drm-and-kms-on-r600-onward.patch
 debian/firmware_class-refer-to-debian-wiki-firmware-page.patch
 
-# Patches from aufs4 repository, imported with debian/bin/genpatch-aufs.
+# Patches from aufs5 repository, imported with debian/bin/genpatch-aufs.
 # These are only the changes needed to allow aufs to be built out-of-tree.
-features/all/aufs4/aufs4-base.patch
-features/all/aufs4/aufs4-mmap.patch
-features/all/aufs4/aufs4-standalone.patch
+features/all/aufs5/aufs5-base.patch
+features/all/aufs5/aufs5-mmap.patch
+features/all/aufs5/aufs5-standalone.patch
 
 # Change some defaults for security reasons
 debian/af_802154-Disable-auto-loading-as-mitigation-against.patch
 debian/rds-Disable-auto-loading-as-mitigation-against-local.patch
 debian/decnet-Disable-auto-loading-as-mitigation-against-lo.patch
 debian/dccp-disable-auto-loading-as-mitigation-against-local-exploits.patch
+debian/hamradio-disable-auto-loading-as-mitigation-against-local-exploits.patch
 debian/fs-enable-link-security-restrictions-by-default.patch
 
 # Set various features runtime-disabled by default
@@ -47,6 +49,8 @@ debian/sched-autogroup-disabled.patch
 debian/yama-disable-by-default.patch
 debian/add-sysctl-to-disallow-unprivileged-CLONE_NEWUSER-by-default.patch
 features/all/security-perf-allow-further-restriction-of-perf_event_open.patch
+features/x86/intel-iommu-add-option-to-exclude-integrated-gpu-only.patch
+features/x86/intel-iommu-add-kconfig-option-to-exclude-igpu-by-default.patch
 
 # Disable autoloading/probing of various drivers by default
 debian/cdc_ncm-cdc_mbim-use-ncm-by-default.patch
@@ -61,107 +65,49 @@ debian/btrfs-warn-about-raid5-6-being-experimental-at-mount.patch
 # Arch bug fixes
 bugfix/arm/arm-dts-kirkwood-fix-sata-pinmux-ing-for-ts419.patch
 bugfix/arm64/dts-rockchip-correct-voltage-selector-firefly-RK3399.patch
-bugfix/x86/platform-x86-ideapad-laptop-add-ideapad-310-15ikb-to.patch
-bugfix/x86/platform-x86-ideapad-laptop-add-ideapad-v310-15isk-t.patch
-bugfix/x86/platform-x86-ideapad-laptop-add-y520-15ikbn-to-no_hw.patch
-bugfix/x86/platform-x86-ideapad-laptop-add-y720-15ikbn-to-no_hw.patch
-bugfix/x86/platform-x86-ideapad-laptop-add-ideapad-v510-15ikb-t.patch
-bugfix/x86/platform-x86-ideapad-laptop-add-several-models-to-no.patch
 bugfix/x86/perf-tools-fix-unwind-build-on-i386.patch
 bugfix/sh/sh-boot-do-not-use-hyphen-in-exported-variable-name.patch
-bugfix/powerpc/powerpc-lib-sstep-fix-building-for-powerpcspe.patch
-bugfix/powerpc/powerpc-lib-makefile-don-t-pull-in-quad.o-for-32-bit.patch
 bugfix/arm/arm-mm-export-__sync_icache_dcache-for-xen-privcmd.patch
 bugfix/powerpc/powerpc-boot-fix-missing-crc32poly.h-when-building-with-kernel_xz.patch
 bugfix/arm64/arm64-acpi-Add-fixup-for-HPE-m400-quirks.patch
 bugfix/x86/x86-32-disable-3dnow-in-generic-config.patch
-bugfix/powerpc/powerpc-fix-mcpu-options-for-spe-only-compiler.patch
-bugfix/x86/x86-kvmclock-set-offset-for-kvm-unstable-clock.patch
-bugfix/arm/ARM-dts-sun8i-h3-add-sy8106a-to-orange-pi-plus.patch
-bugfix/arm64/arm64-dts-allwinner-a64-Enable-A64-timer-workaround.patch
-bugfix/mips/MIPS-Loongson-Introduce-and-use-loongson_llsc_mb.patch
-bugfix/powerpc/powerpc-vdso-make-vdso32-installation-conditional-in.patch
 
 # Arch features
-features/mips/MIPS-increase-MAX-PHYSMEM-BITS-on-Loongson-3-only.patch
 features/mips/MIPS-Loongson-3-Add-Loongson-LS3A-RS780E-1-way-machi.patch
 features/x86/x86-memtest-WARN-if-bad-RAM-found.patch
 features/x86/x86-make-x32-syscall-support-conditional.patch
-features/x86/x86-boot-Add-ACPI-RSDP-address-to-setup_header.patch
-features/x86/x86-acpi-x86-boot-Take-RSDP-address-for-boot-params-.patch
-features/x86/x86-boot-Mostly-revert-commit-ae7e1238e68f2a-Add-ACP.patch
-features/x86/x86-acpi-x86-boot-Take-RSDP-address-from-boot-params.patch
-features/x86/x86-boot-Clear-RSDP-address-in-boot_params-for-broke.patch
-features/arm64/arm64-dts-allwinner-a64-Add-Pine64-LTS-device-tree-f.patch
 
 # Miscellaneous bug fixes
-bugfix/all/kbuild-use-nostdinc-in-compile-tests.patch
 bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
 bugfix/all/partially-revert-usb-kconfig-using-select-for-usb_co.patch
-bugfix/all/kbuild-include-addtree-remove-quotes-before-matching-path.patch
 debian/revert-objtool-fix-config_stack_validation-y-warning.patch
-bugfix/all/mt76-use-the-correct-hweight8-function.patch
-bugfix/all/rtc-s35390a-set-uie_unsupported.patch
-bugfix/all/dm-disable-discard-if-the-underlying-storage-no-longer-supports-it.patch
-bugfix/all/xfs-fix-missing-ILOCK-unlock-when-xfs_setattr_nonsiz.patch
+bugfix/all/partially-revert-net-socket-implement-64-bit-timestamps.patch
 
 # Miscellaneous features
 
-# Lockdown (formerly 'securelevel') patchset
-features/all/lockdown/0001-Add-the-ability-to-lock-down-access-to-the-running-k.patch
-features/all/lockdown/0002-Add-a-SysRq-option-to-lift-kernel-lockdown.patch
-features/all/lockdown/0003-ima-require-secure_boot-rules-in-lockdown-mode.patch
-features/all/lockdown/0004-Enforce-module-signatures-if-the-kernel-is-locked-do.patch
-features/all/lockdown/0005-Restrict-dev-mem-kmem-port-when-the-kernel-is-locked.patch
-features/all/lockdown/0006-kexec-Disable-at-runtime-if-the-kernel-is-locked-dow.patch
-features/all/lockdown/0007-Copy-secure_boot-flag-in-boot-params-across-kexec-re.patch
-features/all/lockdown/0008-kexec_file-Restrict-at-runtime-if-the-kernel-is-lock.patch
-features/all/lockdown/0009-hibernate-Disable-when-the-kernel-is-locked-down.patch
-features/all/lockdown/0010-uswsusp-Disable-when-the-kernel-is-locked-down.patch
-features/all/lockdown/0011-PCI-Lock-down-BAR-access-when-the-kernel-is-locked-d.patch
-features/all/lockdown/0012-x86-Lock-down-IO-port-access-when-the-kernel-is-lock.patch
-features/all/lockdown/0013-x86-msr-Restrict-MSR-access-when-the-kernel-is-locke.patch
-features/all/lockdown/0014-asus-wmi-Restrict-debugfs-interface-when-the-kernel-.patch
-features/all/lockdown/0015-ACPI-Limit-access-to-custom_method-when-the-kernel-i.patch
-features/all/lockdown/0016-acpi-Ignore-acpi_rsdp-kernel-param-when-the-kernel-h.patch
-features/all/lockdown/0017-acpi-Disable-ACPI-table-override-if-the-kernel-is-lo.patch
-features/all/lockdown/0018-acpi-Disable-APEI-error-injection-if-the-kernel-is-l.patch
-features/all/lockdown/0020-Prohibit-PCMCIA-CIS-storage-when-the-kernel-is-locke.patch
-features/all/lockdown/0021-Lock-down-TIOCSSERIAL.patch
-features/all/lockdown/0022-Lock-down-module-params-that-specify-hardware-parame.patch
-features/all/lockdown/0023-x86-mmiotrace-Lock-down-the-testmmiotrace-module.patch
-features/all/lockdown/0024-debugfs-Disallow-use-of-debugfs-files-when-the-kerne.patch
-features/all/lockdown/0025-Lock-down-proc-kcore.patch
-features/all/lockdown/0026-Lock-down-kprobes.patch
-features/all/lockdown/0027-bpf-Restrict-kernel-image-access-functions-when-the-.patch
-features/all/lockdown/0028-efi-Add-an-EFI_SECURE_BOOT-flag-to-indicate-secure-b.patch
-features/all/lockdown/0029-efi-Lock-down-the-kernel-if-booted-in-secure-boot-mo.patch
-# some missing pieces
+# Lockdown missing pieces
+features/all/lockdown/efi-add-an-efi_secure_boot-flag-to-indicate-secure-b.patch
+features/all/lockdown/efi-lock-down-the-kernel-if-booted-in-secure-boot-mo.patch
+features/all/lockdown/add-a-sysrq-option-to-lift-kernel-lockdown.patch
 features/all/lockdown/enable-cold-boot-attack-mitigation.patch
 features/all/lockdown/mtd-disable-slram-and-phram-when-locked-down.patch
 features/all/lockdown/arm64-add-kernel-config-option-to-lock-down-when.patch
 # until the "kernel_lockdown.7" manual page exists
 features/all/lockdown/lockdown-refer-to-debian-wiki-until-manual-page-exists.patch
 
-# load db and MOK keys into secondary keyring for kernel modules verification
-features/all/db-mok-keyring/0001-KEYS-Allow-unrestricted-boot-time-addition-of-keys-t.patch
-features/all/db-mok-keyring/0002-efi-Add-EFI-signature-data-types.patch
-features/all/db-mok-keyring/0003-efi-Add-an-EFI-signature-blob-parser.patch
-features/all/db-mok-keyring/0004-MODSIGN-Import-certificates-from-UEFI-Secure-Boot.patch
-features/all/db-mok-keyring/0005-MODSIGN-Allow-the-db-UEFI-variable-to-be-suppressed.patch
+# Improve integrity platform keyring for kernel modules verification
 features/all/db-mok-keyring/0006-Make-get_cert_list-not-complain-about-cert-lists-tha.patch
-features/all/db-mok-keyring/0007-modsign-Use-secondary-trust-keyring-for-module-signi.patch
 features/all/db-mok-keyring/0001-MODSIGN-do-not-load-mok-when-secure-boot-disabled.patch
 features/all/db-mok-keyring/0002-MODSIGN-load-blacklist-from-MOKx.patch
 features/all/db-mok-keyring/0003-MODSIGN-checking-the-blacklisted-hash-before-loading-a-kernel-module.patch
 features/all/db-mok-keyring/0004-MODSIGN-check-the-attributes-of-db-and-mok.patch
 features/all/db-mok-keyring/modsign-make-shash-allocation-failure-fatal.patch
+features/all/db-mok-keyring/KEYS-Make-use-of-platform-keyring-for-module-signature.patch
 
 # Security fixes
 debian/i386-686-pae-pci-set-pci-nobios-by-default.patch
 debian/ntfs-mark-it-as-broken.patch
-bugfix/all/netfilter-conntrack-use-consistent-ct-id-hash-calcul.patch
 
 # Fix exported symbol versions
 bugfix/all/module-disable-matching-missing-version-crc.patch
@@ -171,7 +117,6 @@ bugfix/all/usbip-document-tcp-wrappers.patch
 bugfix/all/kbuild-fix-recordmcount-dependency.patch
 bugfix/all/tools-perf-man-date.patch
 bugfix/all/tools-perf-remove-shebangs.patch
-bugfix/all/tools-lib-traceevent-use-ldflags.patch
 bugfix/x86/revert-perf-build-fix-libunwind-feature-detection-on.patch
 bugfix/all/tools-build-remove-bpf-run-time-check-at-build-time.patch
 bugfix/all/cpupower-bump-soname-version.patch
@@ -179,80 +124,13 @@ bugfix/all/libcpupower-hide-private-function.patch
 bugfix/all/cpupower-fix-checks-for-cpu-existence.patch
 bugfix/all/tools-lib-api-fs-fs.c-fix-misuse-of-strncpy.patch
 bugfix/all/usbip-fix-misuse-of-strncpy.patch
-bugfix/x86/tools-x86_energy_perf_policy-fix-uninitialized-varia.patch
-bugfix/x86/tools-turbostat-Add-checks-for-failure-of-fgets-and-.patch
-bugfix/all/libbpf-add-soname-to-shared-object.patch
-bugfix/all/libbpf-link-shared-object-with-libelf.patch
-bugfix/all/libbpf-generate-pkg-config.patch
+bugfix/all/usbip-network-fix-unaligned-member-access.patch
+bugfix/all/tools-perf-pmu-events-fix-reproducibility.patch
 
 # wireless: Disable regulatory.db direct loading (until we sort out signing)
 debian/wireless-disable-regulatory.db-direct-loading.patch
 
-# Licence clarification
-bugfix/all/documentation-media-uapi-explicitly-say-there-are-no-invariant-sections.patch
-
 # overlay: allow mounting in user namespaces
 debian/overlayfs-permit-mounts-in-userns.patch
 
-# Amazon ENA ethernet driver backport from Linux 4.20
-features/all/ena/0001-net-ethernet-remove-redundant-include.patch
-features/all/ena/0002-net-ena-minor-performance-improvement.patch
-features/all/ena/0003-net-ena-complete-host-info-to-match-latest-ENA-spec.patch
-features/all/ena/0004-net-ena-introduce-Low-Latency-Queues-data-structures.patch
-features/all/ena/0005-net-ena-add-functions-for-handling-Low-Latency-Queue.patch
-features/all/ena/0006-net-ena-add-functions-for-handling-Low-Latency-Queue.patch
-features/all/ena/0007-net-ena-use-CSUM_CHECKED-device-indication-to-report.patch
-features/all/ena/0008-net-ena-explicit-casting-and-initialization-and-clea.patch
-features/all/ena/0009-net-ena-limit-refill-Rx-threshold-to-256-to-avoid-la.patch
-features/all/ena/0010-net-ena-change-rx-copybreak-default-to-reduce-kernel.patch
-features/all/ena/0011-net-ena-remove-redundant-parameter-in-ena_com_admin_.patch
-features/all/ena/0012-net-ena-update-driver-version-to-2.0.1.patch
-features/all/ena/0013-net-ena-fix-indentations-in-ena_defs-for-better-read.patch
-features/all/ena/0014-net-ena-Fix-Kconfig-dependency-on-X86.patch
-features/all/ena/0015-net-ena-enable-Low-Latency-Queues.patch
-features/all/ena/0016-net-ena-fix-compilation-error-in-xtensa-architecture.patch
-features/all/ena/0017-net-ena-fix-crash-during-ena_remove.patch
-features/all/ena/0018-net-ena-update-driver-version-from-2.0.1-to-2.0.2.patch
-
-# Backported bugfixes from 4.20/4.21 for the Huawei TaiShan server platform (aka D06)
-bugfix/arm64/huawei-taishan/0001-scsi-hisi_sas-Feed-back-linkrate-max-min-when-re-att.patch
-bugfix/arm64/huawei-taishan/0002-scsi-hisi_sas-Move-evaluation-of-hisi_hba-in-hisi_sa.patch
-bugfix/arm64/huawei-taishan/0003-scsi-hisi_sas-Fix-the-race-between-IO-completion-and.patch
-bugfix/arm64/huawei-taishan/0004-scsi-hisi_sas-Free-slot-later-in-slot_complete_vx_hw.patch
-bugfix/arm64/huawei-taishan/0005-scsi-hisi_sas-unmask-interrupts-ent72-and-ent74.patch
-bugfix/arm64/huawei-taishan/0006-scsi-hisi_sas-Use-block-layer-tag-instead-for-IPTT.patch
-bugfix/arm64/huawei-taishan/0007-scsi-hisi_sas-Update-v3-hw-AIP_LIMIT-and-CFG_AGING_T.patch
-bugfix/arm64/huawei-taishan/0008-scsi-hisi_sas-Fix-spin-lock-management-in-slot_index.patch
-bugfix/arm64/huawei-taishan/0009-scsi-hisi_sas-use-dma_set_mask_and_coherent.patch
-bugfix/arm64/huawei-taishan/0010-scsi-hisi_sas-Create-separate-host-attributes-per-HB.patch
-bugfix/arm64/huawei-taishan/0011-scsi-hisi_sas-Add-support-for-interrupt-converge-for.patch
-bugfix/arm64/huawei-taishan/0012-scsi-hisi_sas-Add-support-for-interrupt-coalescing-f.patch
-bugfix/arm64/huawei-taishan/0013-scsi-hisi_sas-Relocate-some-codes-to-avoid-an-unused.patch
-bugfix/arm64/huawei-taishan/0014-scsi-hisi_sas-Fix-warnings-detected-by-sparse.patch
-bugfix/arm64/huawei-taishan/0015-scsi-hisi_sas-Relocate-some-code-to-reduce-complexit.patch
-bugfix/arm64/huawei-taishan/0016-scsi-hisi_sas-Make-sg_tablesize-consistent-value.patch
-bugfix/arm64/huawei-taishan/0017-net-hns3-remove-unnecessary-configuration-recapture-.patch
-bugfix/arm64/huawei-taishan/0018-net-hns3-remove-1000M-half-support-of-phy.patch
-bugfix/arm64/huawei-taishan/0019-net-hns3-synchronize-speed-and-duplex-from-phy-when-.patch
-bugfix/arm64/huawei-taishan/0020-net-hns3-getting-tx-and-dv-buffer-size-through-firmw.patch
-bugfix/arm64/huawei-taishan/0021-net-hns3-aligning-buffer-size-in-SSU-to-256-bytes.patch
-bugfix/arm64/huawei-taishan/0022-net-hns3-fix-a-SSU-buffer-checking-bug.patch
-bugfix/arm64/huawei-taishan/0023-net-hns3-change-default-tc-state-to-close.patch
-bugfix/arm64/huawei-taishan/0024-net-hns3-fix-a-bug-caused-by-udelay.patch
-bugfix/arm64/huawei-taishan/0025-net-hns3-remove-redundant-variable-initialization.patch
-bugfix/arm64/huawei-taishan/0026-net-hns3-call-hns3_nic_net_open-while-doing-HNAE3_UP.patch
-bugfix/arm64/huawei-taishan/0027-RDMA-hns-Fix-the-bug-with-updating-rq-head-pointer-w.patch
-bugfix/arm64/huawei-taishan/0028-RDMA-hns-Bugfix-for-the-scene-without-receiver-queue.patch
-bugfix/arm64/huawei-taishan/0029-RDMA-hns-Add-constraint-on-the-setting-of-local-ACK-.patch
-bugfix/arm64/huawei-taishan/0030-RDMA-hns-Modify-the-pbl-ba-page-size-for-hip08.patch
-bugfix/arm64/huawei-taishan/0031-RDMA-hns-RDMA-hns-Assign-rq-head-pointer-when-enable.patch
-bugfix/arm64/huawei-taishan/0032-scsi-hisi_sas-Fix-NULL-pointer-dereference.patch
-bugfix/arm64/huawei-taishan/0033-scsi-hisi_sas-fix-calls-to-dma_set_mask_and_coherent.patch
-
-# Backported DTB support for Raspberry Pi Compute Module 3 from 4.20-rc1:
-features/arm/ARM-dts-add-Raspberry-Pi-Compute-Module-3-and-IO-boa.patch
-features/arm64/arm64-dts-broadcom-Add-reference-to-Compute-Module-I.patch
-features/arm64/arm64-dts-broadcom-Use-the-.dtb-name-in-the-rule-rat.patch
-
 # ABI maintenance
-debian/abi/powerpc-avoid-abi-change-for-disabling-tm.patch
