@@ -23,3 +23,9 @@ cros_ec_spi ?
 
 # PCIe PHYs
 phy-rockchip-pcie ?
+
+# For spi-rockchip
+pl330 ?
+
+# Regulator-SoC synchronization
+rockchip-io-domain ?

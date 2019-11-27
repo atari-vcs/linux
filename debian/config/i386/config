@@ -172,12 +172,6 @@ CONFIG_MOUSE_PC110PAD=m
 # CONFIG_INTEL_IOMMU is not set
 
 ##
-## file: drivers/isdn/hardware/avm/Kconfig
-##
-CONFIG_ISDN_DRV_AVMB1_B1ISA=m
-CONFIG_ISDN_DRV_AVMB1_T1ISA=m
-
-##
 ## file: drivers/leds/Kconfig
 ##
 CONFIG_LEDS_WRAP=m
@@ -291,13 +285,6 @@ CONFIG_NET_VENDOR_SMSC=y
 CONFIG_SMC9194=m
 
 ##
-## file: drivers/net/hamradio/Kconfig
-##
-CONFIG_SCC=m
-# CONFIG_SCC_DELAY is not set
-# CONFIG_SCC_TRXECHO is not set
-
-##
 ## file: drivers/net/wan/Kconfig
 ##
 CONFIG_HOSTESS_SV11=m
@@ -406,6 +393,12 @@ CONFIG_COMEDI_PCMDA12=m
 CONFIG_COMEDI_PCMMIO=m
 CONFIG_COMEDI_PCMUIO=m
 CONFIG_COMEDI_MULTIQ3=m
+
+##
+## file: drivers/staging/isdn/avm/Kconfig
+##
+CONFIG_ISDN_DRV_AVMB1_B1ISA=m
+CONFIG_ISDN_DRV_AVMB1_T1ISA=m
 
 ##
 ## file: drivers/staging/olpc_dcon/Kconfig

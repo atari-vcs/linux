@@ -7,7 +7,7 @@ Forwarded: not-needed
 
 --- a/.gitignore
 +++ b/.gitignore
-@@ -64,11 +64,6 @@ modules.builtin
+@@ -67,11 +67,6 @@ modules.builtin
  /*.spec
  
  #
@@ -19,25 +19,27 @@ Forwarded: not-needed
  # Snap directory (make snap-pkg)
  #
  /snap/
-@@ -79,14 +74,6 @@ modules.builtin
+@@ -82,16 +77,6 @@ modules.builtin
  /tar-install/
  
  #
--# git files that we don't want to ignore even if they are dot-files
+-# We don't want to ignore the following even if they are dot-files
 -#
+-!.clang-format
+-!.cocciconfig
+-!.get_maintainer.ignore
+-!.gitattributes
 -!.gitignore
 -!.mailmap
--!.cocciconfig
--!.clang-format
 -
 -#
  # Generated include files
  #
- include/config
-@@ -132,3 +119,10 @@ all.config
+ /include/config/
+@@ -145,3 +130,10 @@ x509.genkey
  
- # Kdevelop4
- *.kdev4
+ # Clang's compilation database file
+ /compile_commands.json
 +
 +#
 +# Debian packaging: ignore everything at the top level, since it isn't

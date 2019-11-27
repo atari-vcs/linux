@@ -1,0 +1,5 @@
+.*:
+  license: GPL-2
+Documentation/logo.gif:
+  override-copyright: Larry Ewing
+  license: GPL-2

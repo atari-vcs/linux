@@ -60,7 +60,7 @@ diff --git a/sound/soc/codecs/cs42xx8.c b/sound/soc/codecs/cs42xx8.c
 index ebb9e0cf8364..8c9cb46b34ec 100644
 --- a/sound/soc/codecs/cs42xx8.c
 +++ b/sound/soc/codecs/cs42xx8.c
-@@ -431,17 +431,9 @@ const struct cs42xx8_driver_data cs42888_data = {
+@@ -511,17 +511,9 @@ const struct cs42xx8_driver_data cs42888_data = {
  };
  EXPORT_SYMBOL_GPL(cs42888_data);
  
@@ -80,7 +80,7 @@ index ebb9e0cf8364..8c9cb46b34ec 100644
  	struct cs42xx8_priv *cs42xx8;
  	int ret, val, i;
  
-@@ -457,15 +449,7 @@ int cs42xx8_probe(struct device *dev, struct regmap *regmap)
+@@ -537,15 +529,7 @@ int cs42xx8_probe(struct device *dev, struct regmap *regmap)
  
  	cs42xx8->regmap = regmap;
  	dev_set_drvdata(dev, cs42xx8);
@@ -95,8 +95,8 @@ index ebb9e0cf8364..8c9cb46b34ec 100644
 -	}
 +	cs42xx8->drvdata = data;
  
- 	cs42xx8->clk = devm_clk_get(dev, "mclk");
- 	if (IS_ERR(cs42xx8->clk)) {
+ 	cs42xx8->gpiod_reset = devm_gpiod_get_optional(dev, "reset",
+ 							GPIOD_OUT_HIGH);
 diff --git a/sound/soc/codecs/cs42xx8.h b/sound/soc/codecs/cs42xx8.h
 index d36c61b6df74..b6247ab4c52d 100644
 --- a/sound/soc/codecs/cs42xx8.h

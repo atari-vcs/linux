@@ -2,7 +2,7 @@
 installer: false
 
 [abi]
-abiname: 6
+abiname: trunk
 ignore-changes:
  __cpuhp_*
  bpf_analyzer
@@ -81,20 +81,22 @@ ignore-changes:
  nf_nat_masquerade_ipv6_register_notifier
 # ignore changes to hisi_sas/*
  module:drivers/scsi/hisi_sas/*
-# Private to KVM
+# KVM internal
+ __gfn_*
+ __kvmhv_*
  __kvm_*
  __xive_vm_h_*
- _kvmppc_*
- gfn_to_*
+ gfn_*
+ h_ipi_redirect
+ halt_poll_ns*
  kvm_*
+ kvmhv_*
  kvmppc_*
  mark_page_dirty
  vcpu_*
+ module:arch/powerpc/kvm/*
+ module:arch/s390/kvm/*
  module:arch/x86/kvm/*
-# Only exported for use by KVM
- tm_abort
- tm_disable
- tm_enable
 
 [base]
 arches:
@@ -121,7 +123,6 @@ arches:
  mipsr6
  mipsr6el
  powerpc
- powerpcspe
  ppc64
  ppc64el
  riscv64
@@ -143,7 +144,7 @@ debug-info: true
 signed-code: false
 
 [featureset-rt_base]
-enabled: true
+enabled: false
 
 [description]
 part-long-up: This kernel is not suitable for SMP (multi-processor,
