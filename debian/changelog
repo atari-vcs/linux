@@ -1,4 +1,4 @@
-linux (5.4-2~co1) apertis; urgency=medium
+linux (5.4-1~exp1co1) apertis; urgency=medium
 
   * Merge from Debian. Remaining Apertis changes:
     - Add default Apertis gbp.conf
