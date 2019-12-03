@@ -19,6 +19,7 @@ linux (5.4-2~co1) apertis; urgency=medium
     - armhf: d/p/apertis/sabreai-audio: Add fixes for loading and using the
       audio on i.MX6 Sabre AI boards
     - sabrelite: Add patch to disable the LCD display by default
+    - arm64: Back out "Use armhf cross-compiler for building compat vDSO"
   * Dropped downstream changes:
     - Add backported fix for USB detach panic
 
