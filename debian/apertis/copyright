@@ -62310,7 +62310,7 @@ License: GPL-2
 Files: drivers/staging/comedi/drivers/usbdux.c
  drivers/staging/comedi/drivers/usbduxfast.c
  drivers/staging/comedi/drivers/usbduxsigma.c
-Copyright: 2003-2015, Bernd Porr, mail@berndporr.me.uk
+Copyright: 2003-2019, Bernd Porr, mail@berndporr.me.uk
 License: GPL-2
 
 Files: drivers/staging/comedi/drivers/vmk80xx.c
