@@ -1,0 +1,31 @@
+From: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+Date: Thu, 12 Dec 2019 11:08:18 +0100
+Subject: ARM: dts: imx6qdl: Enable egalax touch screen
+
+Sabrelite boards can have an lvds screen attached with a built-in i2c touch
+screen. Enable this in the dtsi.
+
+Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+---
+ arch/arm/boot/dts/imx6qdl-sabrelite.dtsi | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi b/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi
+index f9f5dbc..24923c7 100644
+--- a/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi
+@@ -417,6 +417,14 @@
+ 	pinctrl-names = "default";
+ 	pinctrl-0 = <&pinctrl_i2c3>;
+ 	status = "okay";
++
++	touchscreen@4 {
++		compatible = "eeti,egalax_ts";
++		reg = <0x04>;
++		interrupt-parent = <&gpio1>;
++		interrupts = <9 IRQ_TYPE_EDGE_FALLING>;
++		wakeup-gpios = <&gpio1 9 GPIO_ACTIVE_LOW>;
++	};
+ };
+ 
+ &iomuxc {

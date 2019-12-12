@@ -146,3 +146,4 @@ apparmor/0002-UBUNTU-SAUCE-apparmor-userspace-queries.patch
 apertis/sabreai-audio/0001-cs42xx8-i2c-Fix-module-auto-loading.patch
 apertis/sabreai-audio/0002-Hack-hardcode-to-sample-rates-usable-on-sabre-AI.patch
 apertis/sabrelite/0216-Disable-the-lcd-interface.patch
+apertis/sabrelite/0103-ARM-dts-imx6qdl-Enable-egalax-touch-screen.patch
