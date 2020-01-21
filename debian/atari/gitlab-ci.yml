@@ -1,0 +1,64 @@
+include:
+  - project: 'atari/ci-package-builder'
+    file: '/ci-package-builder.yml'
+
+build-source:
+  variables:
+    GIT_STRATEGY: clone
+  stage: build
+  script:
+    - ci-buildpackage -S --git-prebuild='debian/rules debian/control || true'
+  artifacts:
+    paths:
+      - _build/
+  except:
+    - /^upstream\//
+    - /^debian\//
+    - /^pristine-/
+    - tags
+
+tag-release:
+  variables:
+    GIT_STRATEGY: clone
+    RELEASE: 1
+    PRISTINE_SOURCE: pristine-lfs-source
+  stage: postbuild
+  script:
+    # Refuse to tag when changelog says unreleased
+    - dpkg-parsechangelog -c1 -SDistribution | grep -v UNRELEASED
+    # Refuse to tag when the changelog entry needs to be summarized
+    - test -z "$(dpkg-parsechangelog -c1 | grep 'PLEASE SUMMARIZE')"
+    - |
+        if git describe --tags --match 'atari/*' --exact-match > /dev/null 2>&1; then
+          echo "Fetching existing source package"
+          pristine-lfs -v checkout --full --branch ${PRISTINE_SOURCE} --auto -o _build
+        else
+          echo "Building source package"
+          gbp buildpackage \
+            --git-tag-only \
+            --git-ignore-branch \
+            --git-debian-tag='atari/%(version)s' \
+            --git-debian-tag-msg='%(pkg)s Apertis release %(version)s'
+          ci-buildpackage -S --git-prebuild='debian/rules debian/control || true'
+          pristine-lfs -v import-dsc --full --branch ${PRISTINE_SOURCE} _build/*.dsc
+          git push --follow-tags ${CI_AUTH_PROJECT_URL} ${PRISTINE_SOURCE}:${PRISTINE_SOURCE}
+        fi
+    - >
+      git push
+      ${CI_AUTH_PROJECT_URL}
+      $(git describe --tags --match "atari/*")
+  artifacts:
+    paths:
+      - _build/
+  only:
+    - /^atari\//
+  except:
+    - /^apertis\//
+    - /^upstream\//
+    - /^debian\//
+    - /^pristine-/
+    - tags
+  when: manual
+  allow_failure: false
+  dependencies: []
+
