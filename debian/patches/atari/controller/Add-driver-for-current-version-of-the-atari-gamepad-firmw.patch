@@ -7,11 +7,11 @@ defined by gamepad.rst
 
 Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
 ---
- drivers/hid/Kconfig     |   6 +++
+ drivers/hid/Kconfig     |   6 ++
  drivers/hid/Makefile    |   1 +
- drivers/hid/hid-atari.c | 140 ++++++++++++++++++++++++++++++++++++++++++++++++
+ drivers/hid/hid-atari.c | 145 ++++++++++++++++++++++++++++++++++++++++++++++++
  drivers/hid/hid-ids.h   |   4 ++
- 4 files changed, 151 insertions(+)
+ 4 files changed, 156 insertions(+)
  create mode 100644 drivers/hid/hid-atari.c
 
 diff --git a/drivers/hid/Kconfig b/drivers/hid/Kconfig
@@ -45,10 +45,10 @@ index 0c03308..79bc3c5 100644
  obj-$(CONFIG_HID_AUREAL)	+= hid-aureal.o
 diff --git a/drivers/hid/hid-atari.c b/drivers/hid/hid-atari.c
 new file mode 100644
-index 0000000..b0ad612
+index 0000000..1edbdd2
 --- /dev/null
 +++ b/drivers/hid/hid-atari.c
-@@ -0,0 +1,140 @@
+@@ -0,0 +1,145 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later
 +
 +#include <linux/input.h>
@@ -64,6 +64,11 @@ index 0000000..b0ad612
 +		struct hid_field *field, struct hid_usage *usage,
 +		unsigned long **bit, int *max)
 +{
++	/* Ignore the usage pages other then the first one for now */
++	if (usage->collection_index != 1) {
++		return -1;
++	}
++
 +	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_BUTTON) {
 +		int code = ((usage->hid - 1) & HID_USAGE);
 +		switch (code) {
@@ -81,7 +86,7 @@ index 0000000..b0ad612
 +			case 0x040:
 +				map_key(BTN_START);
 +				return 1;
-+			case 0x223: 
++			case 0x223:
 +				map_key(BTN_MODE);
 +				return 1;
 +			case 0x224:
