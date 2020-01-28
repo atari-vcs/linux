@@ -1,8 +1,8 @@
-linux (5.4-1~exp1co1ata1) vcs; urgency=medium
+linux (5.4-1~exp1co1ata2) vcs; urgency=medium
 
-  * Add initial Atari gamepad driver (modern controller)
+  * Add initial Atari gamepad driver (modern and classic)
 
- -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Mon, 27 Jan 2020 16:48:16 +0100
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Mon, 28 Jan 2020 16:48:16 +0100
 
 linux (5.4-1~exp1co1) apertis; urgency=medium
 

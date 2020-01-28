@@ -147,3 +147,5 @@ apertis/sabreai-audio/0001-cs42xx8-i2c-Fix-module-auto-loading.patch
 apertis/sabreai-audio/0002-Hack-hardcode-to-sample-rates-usable-on-sabre-AI.patch
 apertis/sabrelite/0216-Disable-the-lcd-interface.patch
 atari/controller/Add-driver-for-current-version-of-the-atari-gamepad-firmw.patch
+atari/controller/Correct-PID-of-the-atari-classic-controller.patch
+atari/controller/Add-mapping-for-the-atari-classic-controller.patch
