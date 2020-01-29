@@ -1,6 +1,24 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 
 Files: *
+Copyright: UNKNOWN
+License: or GPL-2
+
+Files: .clang-format
+ .cocciconfig
+ .get_maintainer.ignore
+ .gitattributes
+ .mailmap
+ CREDITS
+ Kbuild
+ Kconfig
+ MAINTAINERS
+ Makefile
+ README
+Copyright: no-info-found
+License: GPL-2
+
+Files: Documentation/*
 Copyright: no-info-found
 License: GPL-2
 
@@ -121,6 +139,10 @@ Files: Documentation/cpu-freq/pcc-cpufreq.txt
 Copyright: 2009, Red Hat, Matthew Garrett <mjg@redhat.com>
  2009, Hewlett-Packard Development Company, L.P.
 License: GPL-2
+
+Files: Documentation/crypto/descore-readme.txt
+Copyright: 1992, Dana L. How
+License: LGPL-2+
 
 Files: Documentation/dev-tools/coccinelle.rst
 Copyright: 2010, Nicolas Palix <npalix@diku.dk>
@@ -390,7 +412,7 @@ License: GPL-2
 
 Files: Documentation/mips/au1xxx_ide.rst
 Copyright: no-info-found
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: Documentation/misc-devices/c2port.txt
 Copyright: 2007, Rodolfo Giometti <giometti@enneenne.com>
@@ -573,6 +595,58 @@ Files: Documentation/s390/cds.rst
 Copyright: IBM Corp. 1999-2002
 License: GPL-2
 
+Files: Documentation/scsi/*
+Copyright: 1995, 1996, Mylex Corporation
+License: BSD-3-clause or GPL
+
+Files: Documentation/scsi/53c700.txt
+ Documentation/scsi/ChangeLog.arcmsr
+ Documentation/scsi/ChangeLog.ips
+ Documentation/scsi/ChangeLog.lpfc
+ Documentation/scsi/ChangeLog.megaraid
+ Documentation/scsi/ChangeLog.megaraid_sas
+ Documentation/scsi/ChangeLog.ncr53c8xx
+ Documentation/scsi/ChangeLog.sym53c8xx
+ Documentation/scsi/ChangeLog.sym53c8xx_2
+ Documentation/scsi/FlashPoint.txt
+ Documentation/scsi/NinjaSCSI.txt
+ Documentation/scsi/aacraid.txt
+ Documentation/scsi/advansys.txt
+ Documentation/scsi/aic79xx.txt
+ Documentation/scsi/aic7xxx.txt
+ Documentation/scsi/arcmsr_spec.txt
+ Documentation/scsi/bfa.txt
+ Documentation/scsi/bnx2fc.txt
+ Documentation/scsi/cxgb3i.txt
+ Documentation/scsi/dc395x.txt
+ Documentation/scsi/dpti.txt
+ Documentation/scsi/hpsa.txt
+ Documentation/scsi/hptiop.txt
+ Documentation/scsi/libsas.txt
+ Documentation/scsi/link_power_management_policy.txt
+ Documentation/scsi/lpfc.txt
+ Documentation/scsi/megaraid.txt
+ Documentation/scsi/ncr53c8xx.txt
+ Documentation/scsi/ppa.txt
+ Documentation/scsi/qlogicfas.txt
+ Documentation/scsi/scsi-changer.txt
+ Documentation/scsi/scsi-generic.txt
+ Documentation/scsi/scsi-parameters.txt
+ Documentation/scsi/scsi.txt
+ Documentation/scsi/scsi_eh.txt
+ Documentation/scsi/scsi_fc_transport.txt
+ Documentation/scsi/scsi_mid_low_api.txt
+ Documentation/scsi/sd-parameters.txt
+ Documentation/scsi/smartpqi.txt
+ Documentation/scsi/st.txt
+ Documentation/scsi/sym53c500_cs.txt
+ Documentation/scsi/sym53c8xx_2.txt
+ Documentation/scsi/tcm_qla2xxx.txt
+ Documentation/scsi/ufs.txt
+ Documentation/scsi/wd719x.txt
+Copyright: no-info-found
+License: GPL-2
+
 Files: Documentation/scsi/BusLogic.txt
 Copyright: 1995-1998, Leonard N. Zubkoff <lnz@dandelion.com>
 License: GPL-2
@@ -584,6 +658,10 @@ License: GPL-2
 Files: Documentation/scsi/g_NCR5380.txt
 Copyright: 1994-1996, Kevin Lentin
  1993, Drew Eckhard
+License: GPL-2
+
+Files: Documentation/scsi/scsi_transport_srp/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: Documentation/sound/designs/seq-oss.rst
@@ -688,6 +766,10 @@ Copyright: 2002, Christer Weingel <wingel@nano-system.com>
  2000, Jakob Oestergaard <jakob@ostenfeld.dk>
 License: GPL-2
 
+Files: arch/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: arch/alpha/Makefile
 Copyright: 1991-2006, 2010, 2013, 2014, Linus Torvalds
 License: GPL-2
@@ -730,7 +812,7 @@ Copyright: 2000, 2001, Jeff Wiedemeier (Compaq Computer Corporation)
 License: GPL-2
 
 Files: arch/alpha/include/asm/floppy.h
-Copyright: 1995
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/alpha/include/asm/parport.h
@@ -1450,7 +1532,7 @@ License: GPL-2
 
 Files: arch/arm/boot/dts/artpec6.dtsi
 Copyright: no-info-found
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/aspeed-ast2600-evb.dts
  arch/arm/boot/dts/aspeed-g6-pinctrl.dtsi
@@ -1663,11 +1745,11 @@ Files: arch/arm/boot/dts/axp152.dtsi
  arch/arm/boot/dts/sun9i-a80-optimus.dts
  arch/arm/boot/dts/sun9i-a80.dtsi
 Copyright: 2014, 2015, 2017, Chen-Yu Tsai
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/axp223.dtsi
 Copyright: 2016, Free Electrons
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/bcm-cygnus-clock.dtsi
  arch/arm/boot/dts/bcm-cygnus.dtsi
@@ -1875,12 +1957,12 @@ License: GPL-2
 
 Files: arch/arm/boot/dts/cros-ec-sbs.dtsi
 Copyright: 2015, Google, Inc
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/cx92755.dtsi
  arch/arm/boot/dts/cx92755_equinox.dts
 Copyright: 2014, Paradox Innovation Ltd.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/da850-enbw-cmc.dts
  arch/arm/boot/dts/da850.dtsi
@@ -1898,7 +1980,7 @@ License: GPL-2
 Files: arch/arm/boot/dts/dove-cm-a510.dtsi
  arch/arm/boot/dts/dove-sbc-a510.dts
 Copyright: 2015, Sebastian Hesselbarth <sebastian.hesselbarth@gmail.com>
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/dra7-mmc-iodelay.dtsi
  arch/arm/boot/dts/dra76x-mmc-iodelay.dtsi
@@ -2141,7 +2223,7 @@ License: GPL
 Files: arch/arm/boot/dts/imx23-sansa.dts
  arch/arm/boot/dts/imx23-xfi3.dts
 Copyright: 2013-2016, Marek Vasut <marek.vasut@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/imx25-eukrea-cpuimx25.dtsi
  arch/arm/boot/dts/imx25-eukrea-mbimxsd25-baseboard-cmo-qvga.dts
@@ -2249,7 +2331,7 @@ License: GPL-2
 Files: arch/arm/boot/dts/imx28-tx28.dts
 Copyright: 2013-2017, Lothar Waßmann <LW@KARO-electronics.de>
  2012, Shawn Guo <shawn.guo@linaro.org>
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx31-bug.dts
 Copyright: 2012, Denis GNUtoo Carikli <GNUtoo@no-log.org>
@@ -2335,7 +2417,7 @@ Files: arch/arm/boot/dts/imx53-kp-ddc.dts
  arch/arm/boot/dts/imx6q-kp-tpc.dts
  arch/arm/boot/dts/imx6q-kp.dtsi
  arch/arm/boot/dts/vf610-bk4.dts
-Copyright: 2018
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/arm/boot/dts/imx53-mba53.dts
@@ -2346,7 +2428,7 @@ License: GPL-2
 
 Files: arch/arm/boot/dts/imx53-ppd.dts
 Copyright: 2014, General Electric Company
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx53-tx53-x03x.dts
  arch/arm/boot/dts/imx53-tx53-x13x.dts
@@ -2383,17 +2465,17 @@ Files: arch/arm/boot/dts/imx53-tx53-x03x.dts
  arch/arm/boot/dts/imx6ul-tx6ul-mainboard.dts
  arch/arm/boot/dts/imx6ul-tx6ul.dtsi
 Copyright: 2013-2017, Lothar Waßmann <LW@KARO-electronics.de>
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx53-tx53.dtsi
 Copyright: 2012-2017, <LW@KARO-electronics.de>
  2011, Linaro Ltd.
  2011, Freescale Semiconductor, Inc.
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx53-usbarmory.dts
 Copyright: 2015, Inverse Path
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/imx53-voipac-bsb.dts
  arch/arm/boot/dts/imx53-voipac-dmm-668.dtsi
@@ -2411,13 +2493,13 @@ Files: arch/arm/boot/dts/imx6dl-apf6dev.dts
  arch/arm/boot/dts/imx6qdl-apf6.dtsi
  arch/arm/boot/dts/imx6qdl-apf6dev.dtsi
 Copyright: 2015, Armadeus Systems
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/imx6dl-aristainetos2_4.dts
  arch/arm/boot/dts/imx6dl-aristainetos2_7.dts
  arch/arm/boot/dts/imx6qdl-aristainetos2.dtsi
 Copyright: 2015, Heiko Schocher <hs@denx.de>
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6dl-aristainetos_4.dts
  arch/arm/boot/dts/imx6dl-aristainetos_7.dts
@@ -2434,7 +2516,7 @@ Files: arch/arm/boot/dts/imx6dl-colibri-eval-v3.dts
 Copyright: 2014-2017, Toradex AG
  2012, Freescale Semiconductor, Inc.
  2011, Linaro Ltd.
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6dl-cubox-i-emmc-som-v15.dts
  arch/arm/boot/dts/imx6dl-cubox-i-som-v15.dts
@@ -2449,7 +2531,7 @@ Files: arch/arm/boot/dts/imx6dl-cubox-i-emmc-som-v15.dts
  arch/arm/boot/dts/imx6qdl-sr-som-ti.dtsi
  arch/arm/boot/dts/imx6qdl-sr-som.dtsi
 Copyright: 2013, 2014, Russell King
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6dl-dfi-fs700-m60.dts
  arch/arm/boot/dts/imx6q-dfi-fs700-m60.dts
@@ -2503,7 +2585,7 @@ Files: arch/arm/boot/dts/imx6dl-gw551x.dts
  arch/arm/boot/dts/imx6qdl-gw5903.dtsi
  arch/arm/boot/dts/imx6qdl-gw5904.dtsi
 Copyright: 2014, 2016, 2017, Gateworks Corporation
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/imx6dl-hummingboard-emmc-som-v15.dts
  arch/arm/boot/dts/imx6dl-hummingboard-som-v15.dts
@@ -2512,7 +2594,7 @@ Files: arch/arm/boot/dts/imx6dl-hummingboard-emmc-som-v15.dts
  arch/arm/boot/dts/imx6q-hummingboard-som-v15.dts
  arch/arm/boot/dts/imx6q-hummingboard.dts
 Copyright: 2014, Rabeeh Khoury (rabeeh@solid-run.com)
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6dl-hummingboard2-emmc-som-v15.dts
  arch/arm/boot/dts/imx6dl-hummingboard2-som-v15.dts
@@ -2526,7 +2608,7 @@ Files: arch/arm/boot/dts/imx6dl-hummingboard2.dts
  arch/arm/boot/dts/imx6q-hummingboard2.dts
  arch/arm/boot/dts/imx6qdl-hummingboard2.dtsi
 Copyright: 2015, Rabeeh Khoury <rabeeh@solid-run.com>
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6dl-icore-mipi.dts
  arch/arm/boot/dts/imx6dl-icore-rqs.dts
@@ -2600,26 +2682,26 @@ Files: arch/arm/boot/dts/imx6dl-sabrelite.dts
  arch/arm/boot/dts/imx6qdl-sabrelite.dtsi
 Copyright: 2011, Linaro Ltd.
  2011, Freescale Semiconductor, Inc.
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6dl-savageboard.dts
  arch/arm/boot/dts/imx6q-savageboard.dts
  arch/arm/boot/dts/imx6qdl-savageboard.dtsi
  arch/arm/boot/dts/sun8i-h3-nanopi-m1.dts
 Copyright: 2016, 2017, Milo Kim <woogyom.kim@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/imx6dl-ts4900.dts
  arch/arm/boot/dts/imx6q-ts4900.dts
  arch/arm/boot/dts/imx6qdl-ts4900.dtsi
 Copyright: 2015, Technologic Systems
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6dl-ts7970.dts
  arch/arm/boot/dts/imx6q-ts7970.dts
 Copyright: 2017, Savoir-faire Linux
  2015, Technologic Systems
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6dl-yapp4-common.dtsi
  arch/arm/boot/dts/imx6dl-yapp4-draco.dts
@@ -2635,11 +2717,11 @@ Files: arch/arm/boot/dts/imx6q-b450v3.dts
  arch/arm/boot/dts/imx6q-bx50v3.dtsi
 Copyright: 2015, Timesys Corporation.
  2015, General Electric Company
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6q-cm-fx6.dts
 Copyright: 2013, CompuLab Ltd.
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6q-dhcom-pdk2.dts
  arch/arm/boot/dts/imx6q-dhcom-som.dtsi
@@ -2650,7 +2732,7 @@ License: GPL-2
 Files: arch/arm/boot/dts/imx6q-display5-tianma-tm070-1280x768.dts
  arch/arm/boot/dts/imx6q-display5.dtsi
 Copyright: 2017, Lukasz Majewski, DENX Software Engineering, lukma@denx.de
-License: Expat and/or GPL
+License: Expat or GPL
 
 Files: arch/arm/boot/dts/imx6q-dmo-edmqmx6.dts
 Copyright: 2013, Data Modul AG
@@ -2658,7 +2740,7 @@ License: GPL-2
 
 Files: arch/arm/boot/dts/imx6q-evi.dts
 Copyright: 2016, United Western Technologies.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/imx6q-gk802.dts
 Copyright: 2006-2009, 2013, Philipp Zabel
@@ -2666,11 +2748,11 @@ License: GPL-2
 
 Files: arch/arm/boot/dts/imx6q-h100.dts
 Copyright: 2015, Lucas Stach <kernel@pengutronix.de>
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6q-marsboard.dts
 Copyright: 2016, Sergio Prado (sergio.prado@e-labworks.com)
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6q-mccmon6.dts
 Copyright: 2016, 2017
@@ -2678,11 +2760,11 @@ License: GPL-2
 
 Files: arch/arm/boot/dts/imx6q-novena.dts
 Copyright: 2015, Sutajio Ko-Usagi PTE LTD
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/imx6q-pistachio.dts
 Copyright: 2017, NutsBoard.Org
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/imx6q-sabreauto.dts
  arch/arm/boot/dts/imx6q-sabresd.dts
@@ -2703,7 +2785,7 @@ License: GPL-2
 Files: arch/arm/boot/dts/imx6q-utilite-pro.dts
 Copyright: 2016, Christopher Spinrath
  2013, CompuLab Ltd.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/imx6q-var-dt6customboard.dts
  arch/arm/boot/dts/imx6qdl-var-dart.dtsi
@@ -2729,11 +2811,11 @@ License: GPL-2
 Files: arch/arm/boot/dts/imx6qdl-ts7970.dtsi
 Copyright: 2017, Savoir-Faire Linux
  2015, Technologic Systems
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6sl-warp.dts
 Copyright: 2014, 2015, O.S. Systems Software LTDA.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/imx6sll-evk.dts
  arch/arm/boot/dts/imx6sll-pinfunc.h
@@ -2775,12 +2857,12 @@ License: GPL-2
 Files: arch/arm/boot/dts/imx6ul-liteboard.dts
  arch/arm/boot/dts/imx6ul-litesom.dtsi
 Copyright: 2016, Grinn
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/imx6ul-opos6ul.dtsi
  arch/arm/boot/dts/imx6ul-opos6uldev.dts
 Copyright: 2017, Armadeus Systems <support@armadeus.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/imx6ul-phytec-segin-peb-eval-01.dtsi
 Copyright: 2016, PHYTEC Messtechnik
@@ -2828,7 +2910,7 @@ Files: arch/arm/boot/dts/imx7-colibri-eval-v3.dtsi
  arch/arm/boot/dts/imx7s-colibri-eval-v3.dts
  arch/arm/boot/dts/imx7s-colibri.dtsi
 Copyright: 2016, Toradex AG
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/imx7-mba7.dtsi
  arch/arm/boot/dts/imx7-tqma7.dtsi
@@ -2955,7 +3037,7 @@ Copyright: 2013, Simon Baatz <gmbnomis@gmail.com>
 License: GPL-2
 
 Files: arch/arm/boot/dts/kirkwood-t5325.dts
-Copyright: 2014
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/arm/boot/dts/lpc18xx.dtsi
@@ -2991,7 +3073,7 @@ Files: arch/arm/boot/dts/ls1021a-qds.dts
  arch/arm/boot/dts/ls1021a-twr.dts
 Copyright: 2018, NXP
  2013, 2014, Freescale Semiconductor, Inc.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/ls1021a-tsn.dts
 Copyright: 2018, 2019, Vladimir Oltean <olteanv@gmail.com>
@@ -3000,7 +3082,7 @@ License: GPL-2
 
 Files: arch/arm/boot/dts/ls1021a.dtsi
 Copyright: 2013, 2014, Freescale Semiconductor, Inc.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/meson.dtsi
  arch/arm/boot/dts/meson6-atv1200.dts
@@ -3051,7 +3133,7 @@ Files: arch/arm/boot/dts/mps2-an385.dts
  arch/arm/boot/dts/mps2-an399.dts
  arch/arm/boot/dts/mps2.dtsi
 Copyright: 2015, ARM Limited
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/mt2701-evb.dts
  arch/arm/boot/dts/mt2701-pinfunc.h
@@ -3095,7 +3177,7 @@ Files: arch/arm/boot/dts/mvebu-linkstation-fan.dtsi
  arch/arm/boot/dts/orion5x-linkstation-lswtgl.dts
  arch/arm/boot/dts/orion5x-linkstation.dtsi
 Copyright: 2015, 2016, Roger Shimizu <rogershimizu@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/nspire-classic.dtsi
  arch/arm/boot/dts/nspire-clp.dts
@@ -3198,7 +3280,7 @@ License: GPL-2
 Files: arch/arm/boot/dts/omap3-pandora-1ghz.dts
  arch/arm/boot/dts/omap3-pandora-600mhz.dts
  arch/arm/boot/dts/omap3-pandora-common.dtsi
-Copyright: 2015
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/arm/boot/dts/omap3-sniper.dts
@@ -3214,7 +3296,7 @@ License: GPL-2
 Files: arch/arm/boot/dts/orion5x-kuroboxpro.dts
  arch/arm/boot/dts/orion5x-linkstation-lsgl.dts
 Copyright: Ronen Shitrit <rshitrit@marvell.com> / 2016, Roger Shimizu <rogershimizu@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/orion5x-lacie-d2-network.dts
 Copyright: 2014, Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
@@ -3231,13 +3313,13 @@ License: GPL-2
 Files: arch/arm/boot/dts/orion5x-linkstation-lschl.dts
 Copyright: 2016, Ash Hughes <ashley.hughes@blueyonder.co.uk>
  2015-2017, Roger Shimizu <rogershimizu@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/orion5x-lswsgl.dts
 Copyright: 2015, Benjamin Cama <benoar@dolka.fr>
  2014, Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
  2008, Alexey Kopytko <alexey@kopytko.ru>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/orion5x-maxtor-shared-storage-2.dts
 Copyright: Sylver Bruneau <sylver.bruneau@googlemail.com> / 2014, Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
@@ -3290,7 +3372,7 @@ Files: arch/arm/boot/dts/qcom-mdm9615-wp8548-mangoh-green.dts
  arch/arm/boot/dts/qcom-mdm9615-wp8548.dtsi
  arch/arm/boot/dts/qcom-mdm9615.dtsi
 Copyright: 2016, BayLibre, SAS.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/r7s72100-genmai.dts
  arch/arm/boot/dts/r7s72100.dtsi
@@ -3602,7 +3684,7 @@ Files: arch/arm/boot/dts/stm32429i-eval.dts
  arch/arm/boot/dts/stm32f429.dtsi
  arch/arm/boot/dts/stm32f746.dtsi
 Copyright: 2015, - Maxime Coquelin <mcoquelin.stm32@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/stm32f4-pinctrl.dtsi
  arch/arm/boot/dts/stm32f429-pinctrl.dtsi
@@ -3611,11 +3693,11 @@ Files: arch/arm/boot/dts/stm32f4-pinctrl.dtsi
  arch/arm/boot/dts/stm32h743.dtsi
  arch/arm/boot/dts/stm32h743i-eval.dts
 Copyright: 2017, - Alexandre Torgue <alexandre.torgue@st.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/stm32f469-disco.dts
 Copyright: 2016, - Lee Jones <lee.jones@linaro.org>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/stm32f469.dtsi
  arch/arm/boot/dts/stm32f7-pinctrl.dtsi
@@ -3631,11 +3713,11 @@ License: GPL-2
 Files: arch/arm/boot/dts/stm32f746-disco.dts
  arch/arm/boot/dts/stm32f769-disco.dts
 Copyright: 2017, - Vikas MANOCHA <vikas.manocha@st.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/stm32h743i-disco.dts
 Copyright: 2017, - Patrice Chotard <patrice.chotard@st.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/stm32mp157a-avenger96.dts
 Copyright: Linaro Ltd 2019
@@ -3652,7 +3734,7 @@ License: GPL-2
 
 Files: arch/arm/boot/dts/sun4i-a10-a1000.dts
 Copyright: 2013, Emilio López
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-ba10-tvbox.dts
  arch/arm/boot/dts/sun5i-a10s-r7-tv-dongle.dts
@@ -3664,7 +3746,7 @@ Files: arch/arm/boot/dts/sun4i-a10-ba10-tvbox.dts
  arch/arm/boot/dts/sun7i-a20-i12-tvbox.dts
  arch/arm/boot/dts/sun7i-a20-m3.dts
 Copyright: 2014, Hans de Goede <hdegoede@redhat.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-chuwi-v7-cw0825.dts
  arch/arm/boot/dts/sun4i-a10-hyundai-a7hd.dts
@@ -3693,12 +3775,12 @@ Files: arch/arm/boot/dts/sun4i-a10-chuwi-v7-cw0825.dts
  arch/arm/boot/dts/sun8i-reference-design-tablet.dtsi
  arch/arm/boot/dts/sunxi-reference-design-tablet.dtsi
 Copyright: 2015, Hans de Goede <hdegoede@redhat.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-cubieboard.dts
  arch/arm/boot/dts/sun4i-a10.dtsi
 Copyright: 2012, Stefan Roese
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-dserve-dsrv9703c.dts
  arch/arm/boot/dts/sun5i-a13-difrnce-dit4350.dts
@@ -3715,11 +3797,11 @@ Files: arch/arm/boot/dts/sun4i-a10-dserve-dsrv9703c.dts
  arch/arm/boot/dts/sun8i-h3-orangepi-pc-plus.dts
  arch/arm/boot/dts/sun8i-h3-orangepi-plus2e.dts
 Copyright: 2016, Hans de Goede <hdegoede@redhat.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-gemei-g9.dts
 Copyright: 2015, Priit Laes
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-hackberry.dts
  arch/arm/boot/dts/sun4i-a10-mini-xplus.dts
@@ -3736,43 +3818,43 @@ Files: arch/arm/boot/dts/sun4i-a10-hackberry.dts
  arch/arm/boot/dts/sun7i-a20.dtsi
  arch/arm/boot/dts/sun8i-a23-evb.dts
 Copyright: 2012-2015, Maxime Ripard
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-inet97fv2.dts
 Copyright: 2014, Open Source Support GmbH
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-itead-iteaduino-plus.dts
 Copyright: 2015, Josef Gajdusek <atx@atx.name> / 2015, - Marcus Cooper <codekipper@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-jesurun-q5.dts
 Copyright: 2015, Gábor Nyers
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-marsboard.dts
  arch/arm/boot/dts/sun7i-a20-wexler-tab7200.dts
 Copyright: 2015, Aleksei Mamlin
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-olinuxino-lime.dts
  arch/arm/boot/dts/sunxi-common-regulators.dtsi
 Copyright: 2014, - Hans de Goede <hdegoede@redhat.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-pcduino.dts
  arch/arm/boot/dts/sun7i-a20-pcduino3.dts
 Copyright: 2014, Zoltan HERPAI
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun4i-a10-pcduino2.dts
 Copyright: 2015, Siarhei Siamashka <siarhei.siamashka@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun5i-a10s-wobo-i5.dts
  arch/arm/boot/dts/sun8i-h3-nanopi-neo-air.dts
 Copyright: 2015, 2017, Jelle van der Waa <jelle@vdwaa.nl>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun5i-a13-hsg-h702.dts
  arch/arm/boot/dts/sun6i-a31s-sina31s-core.dtsi
@@ -3781,18 +3863,18 @@ Files: arch/arm/boot/dts/sun5i-a13-hsg-h702.dts
  arch/arm/boot/dts/sun8i-h3-orangepi-pc.dts
  arch/arm/boot/dts/sunxi-bananapi-m2-plus.dtsi
 Copyright: 2014-2017, Chen-Yu Tsai <wens@csie.org>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun5i-a13-licheepi-one.dts
 Copyright: 2016, Icenowy Zheng <icenowy@aosc.xyz>
  2013, Hans de Goede <hdegoede@redhat.com>
  2012, Maxime Ripard <maxime.ripard@free-electrons.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun5i-a13-olinuxino-micro.dts
 Copyright: 2013, Hans de Goede <hdegoede@redhat.com>
  2012, Maxime Ripard <maxime.ripard@free-electrons.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun5i-gr8-chip-pro.dts
  arch/arm/boot/dts/sun5i-gr8-evb.dts
@@ -3800,59 +3882,59 @@ Files: arch/arm/boot/dts/sun5i-gr8-chip-pro.dts
  arch/arm/boot/dts/sun5i-r8.dtsi
 Copyright: 2015, 2016, NextThing Co
  2015, 2016, Free Electrons
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun5i-gr8.dtsi
 Copyright: 2016, Mylène Josserand
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun6i-a31-app4-evb1.dts
 Copyright: 2014, Boris Brezillon
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun6i-a31-i7.dts
 Copyright: 2015, Marcus Cooper <codekipper@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun6i-a31s-primo81.dts
 Copyright: 2015, Karsten Merker <merker@debian.org>
  2015, Chen-Yu Tsai <wens@csie.org>
  2014, Siarhei Siamashka <siarhei.siamashka@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun6i-a31s-yones-toptech-bs1078-v2.dts
 Copyright: 2015, Lawrence Yu <lyu@micile.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-bananapi-m1-plus.dts
 Copyright: 2016, Luo Yi <luoyi.ly@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-cubietruck.dts
 Copyright: 2013, Oliver Schinagl
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-hummingbird.dts
 Copyright: 2013, Wills Wang
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-icnova-swac.dts
 Copyright: 2015, Stefan Roese <sr@denx.de>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-itead-ibox.dts
  arch/arm/boot/dts/sunxi-itead-core-common.dtsi
 Copyright: 2015, - Marcus Cooper <codekipper@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-lamobo-r1.dts
  arch/arm/boot/dts/sun7i-a20-wits-pro-a20-dkt.dts
 Copyright: 2015, Jelle de Jong <jelledejong@powercraft.nl>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-mk808c.dts
 Copyright: 2015, Marcus Cooper
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-olimex-som-evb-emmc.dts
  arch/arm/boot/dts/sun7i-a20-olimex-som204-evb-emmc.dts
@@ -3862,46 +3944,46 @@ License: GPL-2
 
 Files: arch/arm/boot/dts/sun7i-a20-olimex-som-evb.dts
 Copyright: 2015, - Marcus Cooper <codekipper@gmail.com> / 2015, - Karsten Merker <merker@debian.org>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-olinuxino-lime.dts
 Copyright: 2014, FUKAUMI Naoki <naobsd@gmail.com> / 2014, - Hans de Goede <hdegoede@redhat.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-olinuxino-lime2-emmc.dts
 Copyright: 2015, - Ultimaker B.V.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-olinuxino-lime2.dts
 Copyright: 2014, - Iain Paton <ipaton0@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-olinuxino-micro-emmc.dts
 Copyright: 2017, Olimex Ltd.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun7i-a20-pcduino3-nano.dts
 Copyright: 2015, Adam Sampson <ats@offog.org>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-a33-inet-d978-rev2.dts
  arch/arm/boot/dts/sun8i-h2-plus-orangepi-zero.dts
 Copyright: 2016, Icenowy Zheng <icenowy@aosc.xyz>
  2015, 2016, Hans de Goede <hdegoede@redhat.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-a33-olinuxino.dts
 Copyright: 2016, - Stefan Mavrodiev <stefan.mavrodiev@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-a83t-allwinner-h8homlet-v2.dts
  arch/arm/boot/dts/sun8i-a83t.dtsi
 Copyright: 2015, Vishnu Patekar
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-a83t-tbs-a711.dts
 Copyright: 2017, Touchless Biometric Systems AG
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-h2-plus-bananapi-m2-zero.dts
 Copyright: 2017, Icenowy Zheng <icenowy@aosc.io>
@@ -3921,11 +4003,11 @@ Files: arch/arm/boot/dts/sun8i-h2-plus-orangepi-r1.dts
  arch/arm/boot/dts/sun8i-v3s-licheepi-zero.dts
  arch/arm/boot/dts/sun8i-v3s.dtsi
 Copyright: 2016, 2017, Icenowy Zheng <icenowy@aosc.xyz>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-h3-beelink-x2.dts
 Copyright: 2017, Marcus Cooper <codekipper@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-h3-mapleboard-mp130.dts
 Copyright: 2018, Jonathan McDowell <noodles@earth.li>
@@ -3934,27 +4016,27 @@ License: GPL-2
 
 Files: arch/arm/boot/dts/sun8i-h3-nanopi-m1-plus.dts
 Copyright: 2017, Jagan Teki <jteki@openedev.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-h3-nanopi-neo.dts
 Copyright: 2016, James Pettigrew <james@innovum.com.au>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-h3-nanopi.dtsi
 Copyright: 2016, Milo Kim <woogyom.kim@gmail.com>
  2016, James Pettigrew <james@innovum.com.au>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-h3-orangepi-plus.dts
  arch/arm/boot/dts/sun8i-h3.dtsi
  arch/arm/boot/dts/sunxi-h3-h5.dtsi
 Copyright: 2015, Jens Kuske <jenskuske@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-h3-orangepi-zero-plus2.dts
 Copyright: 2018, Diego Rondini <diego.rondini@kynetics.com>
  2017, Jagan Teki <jteki@openedev.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-h3-rervision-dvk.dts
 Copyright: 2019, Bootlin
@@ -3962,7 +4044,7 @@ License: GPL-2
 
 Files: arch/arm/boot/dts/sun8i-r16-bananapi-m2m.dts
 Copyright: 2017, Free Electrons <maxime.ripard@free-electrons.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-r16-nintendo-super-nes-classic.dts
 Copyright: 2018, Miquèl RAYNAL <miquel.raynal@bootlin.com>
@@ -3970,13 +4052,13 @@ License: GPL-2
 
 Files: arch/arm/boot/dts/sun8i-r16-parrot.dts
 Copyright: 2016, Quentin Schulz
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-r40-bananapi-m2-ultra.dts
  arch/arm/boot/dts/sun8i-r40.dtsi
 Copyright: 2017, Icenowy Zheng <icenowy@aosc.io>
  2017, Chen-Yu Tsai <wens@csie.org>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-s3-lichee-zero-plus.dts
  arch/arm/boot/dts/sun8i-v3.dtsi
@@ -3988,15 +4070,15 @@ Files: arch/arm/boot/dts/sun8i-t3-cqa3t-bv3.dts
 Copyright: 2018, Hao Zhang <hao5781286@gmail.com>
  2017, Icenowy Zheng <icenowy@aosc.io>
  2017, Chen-Yu Tsai <wens@csie.org>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun8i-v40-bananapi-m2-berry.dts
 Copyright: 2017, Icenowy Zheng <icenowy@aosc.io>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/sun9i-a80-cubieboard4.dts
 Copyright: 2015, Tyler Baker
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/suniv-f1c100s.dtsi
 Copyright: 2018, Mesih Kilinc <mesihkilinc@gmail.com>
@@ -4034,7 +4116,7 @@ Files: arch/arm/boot/dts/vf-colibri-eval-v3.dtsi
  arch/arm/boot/dts/vf610-colibri-eval-v3.dts
  arch/arm/boot/dts/vf610-colibri.dtsi
 Copyright: 2014, Toradex AG
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/vf610-cosmic.dts
 Copyright: 2011, 2013, Linaro Limited
@@ -4044,7 +4126,7 @@ License: GPL-2
 Files: arch/arm/boot/dts/vf610-zii-dev.dtsi
 Copyright: 2015, Freescale Semiconductor, Inc.
  2015, 2016, Zodiac Inflight Innovations
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm/boot/dts/vf610-zii-ssmb-dtu.dts
  arch/arm/boot/dts/vf610-zii-ssmb-spu3.dts
@@ -4054,11 +4136,11 @@ License: GPL-2
 Files: arch/arm/boot/dts/vf610m4-colibri.dts
  arch/arm/boot/dts/vf610m4.dtsi
 Copyright: 2015, Stefan Agner
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/vf610m4-cosmic.dts
-Copyright: 2015
-License: Expat and/or GPL-2+
+Copyright: no-info-found
+License: Expat or GPL-2+
 
 Files: arch/arm/boot/dts/vt8500-bv07.dts
  arch/arm/boot/dts/vt8500.dtsi
@@ -4186,7 +4268,7 @@ License: GPL-2
 Files: arch/arm/crypto/crct10dif-ce-core.S
 Copyright: 2019, Google LLC <ebiggers@google.com>
  2016, Linaro Ltd <ard.biesheuvel@linaro.org>
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: arch/arm/crypto/ghash-ce-core.S
  arch/arm/crypto/ghash-ce-glue.c
@@ -5097,7 +5179,7 @@ License: GPL-2
 Files: arch/arm/mach-davinci/irqs.h
  arch/arm/mach-davinci/psc.h
 Copyright: 2006, Texas Instruments.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/arm/mach-davinci/mux.c
 Copyright: MontaVista Software, Inc. This file is licensed under / 2008, Texas Instruments. / 2003-2005, Nokia Corporation
@@ -5587,7 +5669,7 @@ Copyright: 2009, Sascha Hauer (kernel@pengutronix.de)
 License: GPL-2
 
 Files: arch/arm/mach-imx/mach-pcm037_eet.c
-Copyright: 2009
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/arm/mach-imx/mach-qong.c
@@ -6017,7 +6099,7 @@ License: GPL-2
 
 Files: arch/arm/mach-omap1/board-ams-delta.h
 Copyright: 2006, Jonathan McDowell <noodles@earth.li>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/arm/mach-omap1/board-h2-mmc.c
  arch/arm/mach-omap1/board-h3-mmc.c
@@ -6037,7 +6119,7 @@ Files: arch/arm/mach-omap1/board-h2.h
  arch/arm/mach-omap1/common.h
  arch/arm/mach-omap1/iomap.h
 Copyright: no-info-found
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/arm/mach-omap1/board-h3.c
  arch/arm/mach-omap1/board-nand.c
@@ -6049,7 +6131,7 @@ License: GPL-2
 Files: arch/arm/mach-omap1/board-h3.h
 Copyright: 2004, Texas Instruments, Inc.
  2001, RidgeRun, Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/arm/mach-omap1/board-htcherald.c
 Copyright: 2009, Wing Linux
@@ -6118,11 +6200,11 @@ License: GPL-2
 
 Files: arch/arm/mach-omap1/include/mach/hardware.h
 Copyright: 2001, RidgeRun, Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/arm/mach-omap1/include/mach/io.h
 Copyright: 1997-1999, Russell King
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/arm/mach-omap1/include/mach/irqs.h
 Copyright: Greg Lonnon 2001, / 2009, Texas Instruments
@@ -6146,7 +6228,7 @@ Files: arch/arm/mach-omap1/include/mach/omap1510.h
  arch/arm/mach-omap1/include/mach/omap16xx.h
  arch/arm/mach-omap1/include/mach/omap7xx.h
 Copyright: no-info-found
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/arm/mach-omap1/include/mach/serial.h
 Copyright: 2004-2019, Texas Instruments
@@ -6165,7 +6247,7 @@ Files: arch/arm/mach-omap1/irq.c
  arch/arm/mach-omap1/time.c
  arch/arm/mach-omap1/timer32k.c
 Copyright: 2004, 2005, Nokia Corporation
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/arm/mach-omap1/lcd_dma.c
 Copyright: 2009, Texas Instruments
@@ -6187,11 +6269,11 @@ Files: arch/arm/mach-omap1/pm.c
  arch/arm/mach-omap1/sleep.S
 Copyright: 2002, Monta Vista Software, Inc.
  2001, Cliff Brake <cbrake@accelent.com>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/arm/mach-omap1/pm.h
 Copyright: 2000-2008, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/arm/mach-omap1/pm_bus.c
  arch/arm/mach-omap1/usb.c
@@ -6372,7 +6454,7 @@ License: GPL-2
 
 Files: arch/arm/mach-omap2/common.h
 Copyright: no-info-found
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/arm/mach-omap2/control.h
 Copyright: 2007-2010, Texas Instruments, Inc.
@@ -6414,7 +6496,7 @@ License: GPL-2
 Files: arch/arm/mach-omap2/iomap.h
 Copyright: 2009-2012, Texas Instruments
  1997-1999, Russell King
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/arm/mach-omap2/mcbsp.c
 Copyright: 2008, 2011, Instituto Nokia de Tecnologia
@@ -6586,7 +6668,7 @@ License: GPL-2
 
 Files: arch/arm/mach-pxa/colibri-pxa270-income.c
  arch/arm/mach-pxa/vpac270.c
-Copyright: 2010
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/arm/mach-pxa/corgi.c
@@ -8060,7 +8142,7 @@ License: GPL-2
 Files: arch/arm/xen/grant-table.c
  arch/arm/xen/hypercall.S
 Copyright: no-info-found
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/arm64/Makefile
 Copyright: 1994-2013, 2015, 2016, Russell King
@@ -8088,7 +8170,7 @@ License: GPL-2
 
 Files: arch/arm64/boot/dts/allwinner/*
 Copyright: 2016, ARM Ltd.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm64/boot/dts/allwinner/Makefile
 Copyright: no-info-found
@@ -8096,7 +8178,7 @@ License: GPL-2
 
 Files: arch/arm64/boot/dts/allwinner/axp803.dtsi
 Copyright: 2016, 2017, Icenowy Zheng <icenowy@aosc.xyz>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm64/boot/dts/allwinner/sun50i-a64-amarula-relic.dts
 Copyright: 2018, 2019, Amarula Solutions B.V.
@@ -8106,7 +8188,7 @@ Files: arch/arm64/boot/dts/allwinner/sun50i-a64-nanopi-a64.dts
  arch/arm64/boot/dts/allwinner/sun50i-a64-olinuxino.dts
  arch/arm64/boot/dts/allwinner/sun50i-h5-orangepi-zero-plus2.dts
 Copyright: 2017, Jagan Teki <jteki@openedev.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm64/boot/dts/allwinner/sun50i-a64-oceanic-5205-5inmfd.dts
 Copyright: 2019, Oceanic Systems (UK) Ltd.
@@ -8121,7 +8203,7 @@ License: GPL-2
 Files: arch/arm64/boot/dts/allwinner/sun50i-a64-orangepi-win.dts
 Copyright: 2017, Jagan Teki <jteki@openedev.com>
  2017, 2018, Samuel Holland <samuel@sholland.org>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm64/boot/dts/allwinner/sun50i-a64-pine64-lts.dts
 Copyright: 2002, 2004-2006, 2008, 2010-2019, ARM Ltd.
@@ -8137,7 +8219,7 @@ Files: arch/arm64/boot/dts/allwinner/sun50i-a64-sopine-baseboard.dts
  arch/arm64/boot/dts/allwinner/sun50i-h5-orangepi-prime.dts
 Copyright: 2017, Icenowy Zheng <icenowy@aosc.xyz>
  2016, ARM Ltd.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm64/boot/dts/allwinner/sun50i-a64-teres-i.dts
 Copyright: Harald Geyer <harald@ccbib.org>
@@ -8146,7 +8228,7 @@ License: GPL-2
 Files: arch/arm64/boot/dts/allwinner/sun50i-a64.dtsi
 Copyright: 2016, ARM Ltd.
  2015, Jens Kuske <jenskuske@gmail.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm64/boot/dts/allwinner/sun50i-h5-bananapi-m2-plus-v1.2.dts
  arch/arm64/boot/dts/allwinner/sun50i-h5-bananapi-m2-plus.dts
@@ -8165,11 +8247,11 @@ License: GPL-2
 Files: arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo-plus2.dts
 Copyright: 2017, Antony Antony <antony@phenome.org>
  2016, ARM Ltd.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm64/boot/dts/allwinner/sun50i-h5-nanopi-neo2.dts
 Copyright: 2017, Icenowy Zheng <icenowy@aosc.io>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm64/boot/dts/allwinner/sun50i-h5-orangepi-zero-plus.dts
 Copyright: 2018, Hauke Mehrtens <hauke@hauke-m.de>
@@ -8395,7 +8477,7 @@ License: GPL-2
 
 Files: arch/arm64/boot/dts/cavium/*
 Copyright: 2014, Cavium Inc.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm64/boot/dts/cavium/Makefile
 Copyright: no-info-found
@@ -8516,7 +8598,7 @@ Copyright: 2019, Linaro Ltd.
 License: GPL-2
 
 Files: arch/arm64/boot/dts/freescale/imx8qxp-mek.dts
-Copyright: 2017
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/arm64/boot/dts/hisilicon/*
@@ -8891,7 +8973,7 @@ License: GPL-2+
 Files: arch/arm64/boot/dts/zte/*
 Copyright: 2016, ZTE Corporation.
  2016, Linaro Ltd.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: arch/arm64/boot/dts/zte/Makefile
 Copyright: no-info-found
@@ -8933,7 +9015,7 @@ License: GPL-2
 Files: arch/arm64/crypto/crct10dif-ce-core.S
 Copyright: 2019, Google LLC <ebiggers@google.com>
  2016, Linaro Ltd <ard.biesheuvel@linaro.org>
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: arch/arm64/crypto/nh-neon-core.S
  arch/arm64/crypto/nhpoly1305-neon-glue.c
@@ -9534,7 +9616,7 @@ License: GPL-2
 
 Files: arch/arm64/xen/hypercall.S
 Copyright: no-info-found
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/c6x/boot/dts/dsk6455.dts
  arch/c6x/boot/dts/evmc6457.dts
@@ -10545,7 +10627,7 @@ Copyright: 2005, Milan Jurik, Petr Stehlik of ARAnyM dev team
 License: GPL-2
 
 Files: arch/m68k/fpsp040/*
-Copyright: Motorola, Inc. 1990
+Copyright: 1993, 1994, 2004, 2006, 2007, Motorola Inc.
 License: GPL-2
 
 Files: arch/m68k/fpsp040/Makefile
@@ -10559,6 +10641,42 @@ Files: arch/m68k/fpsp040/Makefile
  arch/m68k/fpsp040/ssin.S
  arch/m68k/fpsp040/stwotox.S
 Copyright: no-info-found
+License: GPL-2
+
+Files: arch/m68k/fpsp040/binstr.S
+ arch/m68k/fpsp040/do_func.S
+ arch/m68k/fpsp040/fpsp.h
+ arch/m68k/fpsp040/gen_except.S
+ arch/m68k/fpsp040/get_op.S
+ arch/m68k/fpsp040/kernel_ex.S
+ arch/m68k/fpsp040/res_func.S
+ arch/m68k/fpsp040/round.S
+ arch/m68k/fpsp040/sacos.S
+ arch/m68k/fpsp040/sasin.S
+ arch/m68k/fpsp040/satan.S
+ arch/m68k/fpsp040/satanh.S
+ arch/m68k/fpsp040/scale.S
+ arch/m68k/fpsp040/scosh.S
+ arch/m68k/fpsp040/sgetem.S
+ arch/m68k/fpsp040/sint.S
+ arch/m68k/fpsp040/skeleton.S
+ arch/m68k/fpsp040/smovecr.S
+ arch/m68k/fpsp040/ssinh.S
+ arch/m68k/fpsp040/stan.S
+ arch/m68k/fpsp040/stanh.S
+ arch/m68k/fpsp040/sto_res.S
+ arch/m68k/fpsp040/tbldo.S
+ arch/m68k/fpsp040/util.S
+ arch/m68k/fpsp040/x_bsun.S
+ arch/m68k/fpsp040/x_fline.S
+ arch/m68k/fpsp040/x_operr.S
+ arch/m68k/fpsp040/x_ovfl.S
+ arch/m68k/fpsp040/x_snan.S
+ arch/m68k/fpsp040/x_store.S
+ arch/m68k/fpsp040/x_unfl.S
+ arch/m68k/fpsp040/x_unimp.S
+ arch/m68k/fpsp040/x_unsupp.S
+Copyright: Motorola, Inc. 1990
 License: GPL-2
 
 Files: arch/m68k/hp300/config.c
@@ -10851,7 +10969,7 @@ License: GPL-2
 
 Files: arch/m68k/math-emu/*
 Copyright: Roman Zippel, 1997.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: arch/m68k/math-emu/Makefile
 Copyright: no-info-found
@@ -11274,17 +11392,17 @@ License: GPL-2
 
 Files: arch/mips/alchemy/common/dbdma.c
 Copyright: 2004, Embedded Edge, LLC
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/alchemy/common/dma.c
  arch/mips/alchemy/common/irq.c
 Copyright: 2005, 2007, Ralf Baechle (ralf@linux-mips.org)
  2000, 2001, 2007, 2008, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/alchemy/common/gpiolib.c
 Copyright: 2007-2009, OpenWrt.org, Florian Fainelli <florian@openwrt.org>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/alchemy/common/platform.c
 Copyright: Embedded Alley Solutions, Inc 2005, / 2004, Matt Porter <mporter@kernel.crashing.org>
@@ -11292,12 +11410,12 @@ License: GPL-2
 
 Files: arch/mips/alchemy/common/power.c
 Copyright: s apply here. / 2001, 2008 MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/alchemy/common/prom.c
  arch/mips/alchemy/common/setup.c
 Copyright: 2000-2008, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/alchemy/common/sleeper.S
 Copyright: 2002, 2004, Embedded Edge, LLC
@@ -11424,13 +11542,13 @@ License: GPL-2
 Files: arch/mips/bcm47xx/irq.c
  arch/mips/bcm47xx/time.c
 Copyright: 2004, Florian Schirmer <jolt@tuxbox.org>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/bcm47xx/prom.c
 Copyright: 2010-2012, Hauke Mehrtens <hauke@hauke-m.de>
  2007, Aurelien Jarno <aurelien@aurel32.net>
  2004, Florian Schirmer <jolt@tuxbox.org>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/bcm47xx/serial.c
 Copyright: 2001-2004, 2007, Aurelien Jarno <aurelien@aurel32.net>
@@ -11442,7 +11560,7 @@ Copyright: 2010-2012, Hauke Mehrtens <hauke@hauke-m.de>
  2006, Michael Buesch <m@bues.ch>
  2006, Felix Fietkau <nbd@openwrt.org>
  2004, Florian Schirmer <jolt@tuxbox.org>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/bcm63xx/*
 Copyright: 2008, Maxime Bizon <mbizon@freebox.fr>
@@ -11529,7 +11647,7 @@ Copyright: 2009, Lemote Inc. & DSLab, Lanzhou University
 License: GPL-2
 
 Files: arch/mips/boot/compressed/calc_vmlinuz_load_addr.c
-Copyright: 2010
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/mips/boot/compressed/decompress.c
@@ -11988,7 +12106,7 @@ Copyright: 2013-2017, Imagination Technologies
 License: GPL-2
 
 Files: arch/mips/include/asm/cmpxchg.h
-Copyright: 2003
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/mips/include/asm/cop2.h
@@ -12260,20 +12378,20 @@ License: GPL-2
 Files: arch/mips/include/asm/mach-au1x00/au1000.h
  arch/mips/include/asm/mach-au1x00/au1000_dma.h
 Copyright: 2000-2008, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/include/asm/mach-au1x00/au1100_mmc.h
 Copyright: 2003, Embedded Edge, LLC.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/include/asm/mach-au1x00/au1xxx_dbdma.h
  arch/mips/include/asm/mach-au1x00/au1xxx_psc.h
 Copyright: 2004, Embedded Edge, LLC
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/include/asm/mach-au1x00/au1xxx_ide.h
 Copyright: 2003-2005, AMD, Personal Connectivity Solutions
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/include/asm/mach-au1x00/gpio-au1000.h
 Copyright: 2009, Manuel Lauss.
@@ -12331,7 +12449,7 @@ Copyright: 2001-2003, Liam Davies (ldavies@agile.tv)
 License: GPL-2
 
 Files: arch/mips/include/asm/mach-cobalt/cpu-feature-overrides.h
-Copyright: 2006
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/mips/include/asm/mach-cobalt/irq.h
@@ -12397,7 +12515,7 @@ Copyright: 99, 1997-2004, 2006, 2007, 2012, 2014, Ralf Baechle <ralf@linux-mips.
 License: GPL-2
 
 Files: arch/mips/include/asm/mach-ip22/cpu-feature-overrides.h
-Copyright: 2003
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/mips/include/asm/mach-ip22/spaces.h
@@ -12407,7 +12525,7 @@ Copyright: 2000, 2002, Maciej W. Rozycki
 License: GPL-2
 
 Files: arch/mips/include/asm/mach-ip27/cpu-feature-overrides.h
-Copyright: 2003
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/mips/include/asm/mach-ip27/irq.h
@@ -12581,7 +12699,7 @@ License: GPL-2
 
 Files: arch/mips/include/asm/mach-netlogic/*
 Copyright: 2003-2014, Broadcom Corporation
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/include/asm/mach-netlogic/cpu-feature-overrides.h
 Copyright: 2011, Netlogic Microsystems
@@ -12613,13 +12731,13 @@ Copyright: 1999, 2000, 2002, 2004, 2005, 2007, 2008, 2010, 2012, MIPS Technologi
 License: GPL-2
 
 Files: arch/mips/include/asm/mach-pmcs-msp71xx/cpu-feature-overrides.h
-Copyright: 2003
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/mips/include/asm/mach-pmcs-msp71xx/msp_gpio_macros.h
  arch/mips/include/asm/mach-pmcs-msp71xx/msp_regops.h
 Copyright: 2005-2207, PMC-Sierra, Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/include/asm/mach-pmcs-msp71xx/msp_int.h
  arch/mips/include/asm/mach-pmcs-msp71xx/msp_regs.h
@@ -12708,12 +12826,12 @@ Files: arch/mips/include/asm/mach-rc32434/ddr.h
  arch/mips/include/asm/mach-rc32434/prom.h
 Copyright: 2008, Florian Fainelli <florian@openwrt.org>
  2002, Ryan Holm <ryan.holmQVist@idt.com>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/include/asm/mach-rc32434/eth.h
 Copyright: 2008, Florian Fainelli <florian@openwrt.org>
  2002, Allend Stichter <allen.stichter@idt.com>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/include/asm/mach-rc32434/irq.h
  arch/mips/include/asm/mach-rc32434/rc32434.h
@@ -12722,7 +12840,7 @@ License: GPL-2
 
 Files: arch/mips/include/asm/mach-rc32434/pci.h
 Copyright: 2004, IDT Inc. (rischelp@idt.com)
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/include/asm/mach-rc32434/rb.h
 Copyright: 2006, Felix Fietkau <nbd@openwrt.org>
@@ -12732,7 +12850,7 @@ License: GPL-2
 Files: arch/mips/include/asm/mach-rc32434/timer.h
 Copyright: 2008, Florian Fainelli <florian@openwrt.org>
  2004, Philip Rischel <rischelp@idt.com>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/include/asm/mach-rc32434/war.h
 Copyright: 99, 1997-2004, 2006, 2007, 2012, 2014, Ralf Baechle <ralf@linux-mips.org>
@@ -12743,7 +12861,7 @@ Copyright: 03-06, 96-99, 1994-2004, 2007, Ralf Baechle
 License: GPL-2
 
 Files: arch/mips/include/asm/mach-rm/cpu-feature-overrides.h
-Copyright: 2003
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/mips/include/asm/mach-rm/war.h
@@ -12755,7 +12873,7 @@ Copyright: 99, 1997-2004, 2006, 2007, 2012, 2014, Ralf Baechle <ralf@linux-mips.
 License: GPL-2
 
 Files: arch/mips/include/asm/mach-sibyte/cpu-feature-overrides.h
-Copyright: 2003
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/mips/include/asm/mach-tx39xx/spaces.h
@@ -12812,17 +12930,17 @@ License: GPL-2
 
 Files: arch/mips/include/asm/netlogic/*
 Copyright: 2003-2011, NetLogic Microsystems, Inc. (NetLogic). All rights
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/include/asm/netlogic/xlp-hal/pcibus.h
 Copyright: 2003-2014, Broadcom Corporation
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/include/asm/netlogic/xlr/bridge.h
  arch/mips/include/asm/netlogic/xlr/flash.h
  arch/mips/include/asm/netlogic/xlr/fmn.h
 Copyright: 2003-2014, Broadcom Corporation
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/include/asm/nile4.h
 Copyright: 1995-2003, Geert Uytterhoeven <geert@linux-m68k.org>
@@ -13066,7 +13184,7 @@ License: GPL-2
 Files: arch/mips/include/asm/txx9/rbtx4927.h
  arch/mips/include/asm/txx9/tx4927.h
 Copyright: 2000-2008, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/include/asm/txx9/rbtx4938.h
 Copyright: MontaVista Software, Inc. This file is licensed under the
@@ -13254,7 +13372,7 @@ Copyright: 96-99, 1995, 2000, Ralf Baechle
 License: GPL-2
 
 Files: arch/mips/jazz/irq.c
-Copyright: 1992-2001, 2003, 
+Copyright: 1992-2001, 2003,
  1991, 1992, Linus Torvalds
 License: GPL-2
 
@@ -13589,7 +13707,7 @@ Copyright: 2006, Ralf Baechle (ralf@linux-mips.org)
 License: GPL-2
 
 Files: arch/mips/kernel/smp-up.c
-Copyright: 2006
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/mips/kernel/smp.c
@@ -13634,7 +13752,8 @@ Files: arch/mips/kvm/*
 Copyright: 1999, 2000, 2002, 2004, 2005, 2007, 2008, 2010, 2012, MIPS Technologies, Inc.
 License: GPL-2
 
-Files: arch/mips/kvm/Kconfig
+Files: arch/mips/kvm/00README.txt
+ arch/mips/kvm/Kconfig
  arch/mips/kvm/Makefile
 Copyright: no-info-found
 License: GPL-2
@@ -14151,7 +14270,7 @@ License: GPL-2
 
 Files: arch/mips/netlogic/common/*
 Copyright: 2003-2011, NetLogic Microsystems, Inc. (NetLogic). All rights
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/netlogic/common/Makefile
 Copyright: no-info-found
@@ -14159,11 +14278,11 @@ License: GPL-2
 
 Files: arch/mips/netlogic/common/reset.S
 Copyright: 2003-2013, Broadcom Corporation.
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/netlogic/xlp/*
 Copyright: 2003-2014, Broadcom Corporation
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/netlogic/xlp/Makefile
 Copyright: no-info-found
@@ -14176,17 +14295,17 @@ License: GPL-2
 
 Files: arch/mips/netlogic/xlp/dt.c
 Copyright: 2003-2013, Broadcom Corporation.
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/netlogic/xlp/nlm_hal.c
  arch/mips/netlogic/xlp/setup.c
  arch/mips/netlogic/xlp/wakeup.c
 Copyright: 2003-2011, NetLogic Microsystems, Inc. (NetLogic). All rights
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/netlogic/xlr/*
 Copyright: 2003-2014, Broadcom Corporation
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/netlogic/xlr/Makefile
 Copyright: no-info-found
@@ -14201,7 +14320,7 @@ License: GPL-2
 Files: arch/mips/netlogic/xlr/setup.c
  arch/mips/netlogic/xlr/wakeup.c
 Copyright: 2003-2011, NetLogic Microsystems, Inc. (NetLogic). All rights
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/oprofile/common.c
 Copyright: 2001, 2005, 2011, MIPS Technologies, Inc.
@@ -14269,7 +14388,7 @@ License: GPL-2
 Files: arch/mips/pci/fixup-jmr3927.c
  arch/mips/pci/fixup-rc32434.c
 Copyright: 2000-2008, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/pci/fixup-lemote2f.c
 Copyright: 2008, Lemote Technology
@@ -14279,17 +14398,17 @@ License: GPL-2
 
 Files: arch/mips/pci/fixup-loongson3.c
 Copyright: 2012, Lemote, Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/pci/fixup-pmcmsp.c
 Copyright: 2005-2007, PMC-Sierra, Inc
  2001, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/pci/fixup-rbtx4927.c
 Copyright: 2001, 2004, MontaVista Software Inc.
  2000, 2001, Toshiba Corporation
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/pci/fixup-rbtx4938.c
 Copyright: MontaVista Software, Inc. This file is licensed under the / 2000-2001, Toshiba Corporation
@@ -14318,7 +14437,7 @@ License: GPL-2
 Files: arch/mips/pci/msi-xlp.c
  arch/mips/pci/pci-xlp.c
 Copyright: 2003-2014, Broadcom Corporation
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/pci/ops-bonito64.c
  arch/mips/pci/ops-gt64xxx_pci0.c
@@ -14348,7 +14467,7 @@ License: GPL-2
 Files: arch/mips/pci/ops-rc32434.c
 Copyright: 2006, Felix Fietkau <nbd@openwrt.org>
  2004, IDT Inc. (rischelp@idt.com)
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/pci/ops-sni.c
 Copyright: 99, 1997-2004, 2006, 2007, 2012, 2014, Ralf Baechle <ralf@linux-mips.org>
@@ -14358,7 +14477,7 @@ Files: arch/mips/pci/ops-tx3927.c
 Copyright: 2004, 2007, Ralf Baechle (ralf@linux-mips.org)
  2001, MontaVista Software Inc.
  2000, 2001, Toshiba Corporation
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/pci/ops-tx4927.c
 Copyright: TOSHIBA CORPORATION 2000-2001, 2004-2007, / MontaVista Software, Inc. / 2004, Ralf Baechle (ralf@linux-mips.org)
@@ -14393,7 +14512,7 @@ License: GPL-2
 
 Files: arch/mips/pci/pci-bcm47xx.c
 Copyright: 2008, Aurelien Jarno <aurelien@aurel32.net>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/pci/pci-generic.c
 Copyright: 2013-2017, Imagination Technologies
@@ -14428,7 +14547,7 @@ License: GPL-2
 
 Files: arch/mips/pci/pci-rc32434.c
 Copyright: 2004, IDT Inc. (rischelp@idt.com)
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/pci/pci-rt2880.c
 Copyright: 2009, 2013, John Crispin <john@phrozen.org>
@@ -14457,7 +14576,7 @@ License: GPL-2
 
 Files: arch/mips/pci/pci-xlr.c
 Copyright: 2003-2011, NetLogic Microsystems, Inc. (NetLogic). All rights
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: arch/mips/pic32/Makefile
 Copyright: 2015-2019, Microchip Technology, Inc.
@@ -14491,7 +14610,7 @@ License: GPL-2
 
 Files: arch/mips/pmcs-msp71xx/*
 Copyright: 2005-2207, PMC-Sierra, Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/pmcs-msp71xx/Kconfig
  arch/mips/pmcs-msp71xx/Makefile
@@ -14511,7 +14630,7 @@ License: GPL-2
 
 Files: arch/mips/pmcs-msp71xx/msp_prom.c
 Copyright: 2000-2008, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/pmcs-msp71xx/msp_setup.c
 Copyright: 2005-2007, PMC-Sierra, Inc
@@ -14602,11 +14721,11 @@ Files: arch/mips/rb532/gpio.c
 Copyright: 2007, Florian Fainelli <florian@openwrt.org>
  2006, Phil Sutter <n0-1@freewrt.org>
  2004, IDT Inc. (rischelp@idt.com)
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/rb532/irq.c
 Copyright: 2000-2008, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/rb532/prom.c
 Copyright: 2007, Gabor Juhos <juhosg@openwrt.org>
@@ -14616,7 +14735,7 @@ License: GPL-2
 
 Files: arch/mips/rb532/serial.c
 Copyright: 2004, IDT Inc. (rischelp@idt.com)
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/rb532/time.c
 Copyright: 1999, 2000, 2002, 2004, 2005, 2007, 2008, 2010, 2012, MIPS Technologies, Inc.
@@ -14852,7 +14971,7 @@ License: GPL-2
 
 Files: arch/mips/txx9/generic/irq_tx4927.c
 Copyright: no-info-found
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/txx9/generic/irq_tx4938.c
  arch/mips/txx9/generic/spi_eeprom.c
@@ -14861,7 +14980,7 @@ License: GPL-2
 
 Files: arch/mips/txx9/generic/mem_tx4927.c
 Copyright: 2000-2008, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/txx9/generic/pci.c
 Copyright: TOSHIBA CORPORATION 2000-2001, 2004-2007, / 2001-2005, MontaVista Software Inc. / 1996, 97, 2001, 04 Ralf Baechle (ralf@linux-mips.org)
@@ -14879,7 +14998,7 @@ License: GPL-2
 
 Files: arch/mips/txx9/jmr3927/*
 Copyright: 2000-2008, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/txx9/jmr3927/Makefile
 Copyright: no-info-found
@@ -14889,11 +15008,11 @@ Files: arch/mips/txx9/jmr3927/setup.c
 Copyright: 2004, 2007, Ralf Baechle (ralf@linux-mips.org)
  2001, MontaVista Software Inc.
  2000, 2001, Toshiba Corporation
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/txx9/rbtx4927/*
 Copyright: 2000-2008, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/txx9/rbtx4927/Makefile
 Copyright: no-info-found
@@ -14904,7 +15023,7 @@ Copyright: 2001, 2002, 2004, MontaVista Software Inc.
  2000, RidgeRun, Inc.
  2000, 2001, Toshiba Corporation
  04, 97, 1996, 2001, Ralf Baechle (ralf@linux-mips.org)
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/mips/txx9/rbtx4938/*
 Copyright: MontaVista Software, Inc. This file is licensed under the / 2000-2001, Toshiba Corporation
@@ -15947,12 +16066,42 @@ Files: arch/parisc/lib/string.S
 Copyright: 1999-2001, 2009, 2015-2019, Helge Deller <deller@gmx.de>
 License: GPL-2
 
-Files: arch/parisc/math-emu/*
+Files: arch/parisc/math-emu/cnv_float.h
+ arch/parisc/math-emu/dbl_float.h
+ arch/parisc/math-emu/decode_exc.c
+ arch/parisc/math-emu/denormal.c
+ arch/parisc/math-emu/dfadd.c
+ arch/parisc/math-emu/dfcmp.c
+ arch/parisc/math-emu/dfdiv.c
+ arch/parisc/math-emu/dfmpy.c
+ arch/parisc/math-emu/dfrem.c
+ arch/parisc/math-emu/dfsqrt.c
+ arch/parisc/math-emu/dfsub.c
+ arch/parisc/math-emu/driver.c
+ arch/parisc/math-emu/fcnvff.c
+ arch/parisc/math-emu/fcnvfu.c
+ arch/parisc/math-emu/fcnvfut.c
+ arch/parisc/math-emu/fcnvfx.c
+ arch/parisc/math-emu/fcnvfxt.c
+ arch/parisc/math-emu/fcnvuf.c
+ arch/parisc/math-emu/fcnvxf.c
+ arch/parisc/math-emu/float.h
+ arch/parisc/math-emu/fmpyfadd.c
+ arch/parisc/math-emu/fpbits.h
+ arch/parisc/math-emu/fpu.h
+ arch/parisc/math-emu/fpudispatch.c
+ arch/parisc/math-emu/frnd.c
+ arch/parisc/math-emu/hppa.h
+ arch/parisc/math-emu/math-emu.h
+ arch/parisc/math-emu/sfadd.c
+ arch/parisc/math-emu/sfcmp.c
+ arch/parisc/math-emu/sfdiv.c
+ arch/parisc/math-emu/sfmpy.c
+ arch/parisc/math-emu/sfrem.c
+ arch/parisc/math-emu/sfsqrt.c
+ arch/parisc/math-emu/sfsub.c
+ arch/parisc/math-emu/sgl_float.h
 Copyright: 2001, Hewlett-Packard (Paul Bame) <bame@debian.org>
-License: GPL-2
-
-Files: arch/parisc/math-emu/Makefile
-Copyright: no-info-found
 License: GPL-2
 
 Files: arch/parisc/mm/fault.c
@@ -16211,7 +16360,7 @@ License: GPL-2
 
 Files: arch/powerpc/boot/dts/fsl/*
 Copyright: 2008-2016, Freescale Semiconductor Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: arch/powerpc/boot/dts/fsl/Makefile
 Copyright: no-info-found
@@ -16274,7 +16423,7 @@ License: GPL-2
 
 Files: arch/powerpc/boot/dts/fsl/kmcent2.dts
  arch/powerpc/boot/dts/fsl/kmcoge4.dts
-Copyright: 2014, 2016, 
+Copyright: 2014, 2016,
  2011, 2014, 2015, Freescale Semiconductor Inc.
 License: GPL-2
 
@@ -16297,7 +16446,7 @@ License: GPL-2
 Files: arch/powerpc/boot/dts/fsl/oca4080.dts
 Copyright: 2014, Prodrive Technologies B.V.
  2009-2011, Freescale Semiconductor Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: arch/powerpc/boot/dts/fsl/p5040ds.dts
  arch/powerpc/boot/dts/fsl/p5040si-post.dtsi
@@ -16779,7 +16928,7 @@ License: GPL-2
 Files: arch/powerpc/include/asm/epapr_hcalls.h
  arch/powerpc/include/asm/fsl_hcalls.h
 Copyright: 2008-2016, Freescale Semiconductor, Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: arch/powerpc/include/asm/exception-64e.h
 Copyright: 2007-2009, Ben. Herrenschmidt (benh@kernel.crashing.org), IBM Corp.
@@ -16807,7 +16956,7 @@ Copyright: 2008, Freescale Semiconductor Inc.
 License: GPL-2
 
 Files: arch/powerpc/include/asm/floppy.h
-Copyright: 1995
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/powerpc/include/asm/fs_pd.h
@@ -17148,7 +17297,7 @@ License: GPL-2
 
 Files: arch/powerpc/include/uapi/asm/epapr_hcalls.h
 Copyright: 2008-2016, Freescale Semiconductor, Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: arch/powerpc/include/uapi/asm/kvm.h
 Copyright: IBM Corp. 2007
@@ -17200,7 +17349,7 @@ Copyright: 2000, 2003-2019, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/kernel/cpu_setup_44x.S
-Copyright: 2007
+Copyright: no-info-found
 License: CC0
 
 Files: arch/powerpc/kernel/cpu_setup_6xx.S
@@ -17636,7 +17785,7 @@ License: GPL-2
 
 Files: arch/powerpc/kvm/book3s.c
  arch/powerpc/kvm/book3s_pr.c
-Copyright: 2009
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/powerpc/kvm/book3s.h
@@ -17707,7 +17856,7 @@ Copyright: Novell Inc 2010
 License: GPL-2
 
 Files: arch/powerpc/kvm/book3s_pr_papr.c
-Copyright: 2011
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/powerpc/kvm/book3s_rtas.c
@@ -18551,7 +18700,7 @@ License: GPL-2
 Files: arch/powerpc/platforms/8xx/mpc86xads.h
  arch/powerpc/platforms/8xx/mpc885ads.h
 Copyright: MontaVista Software, Inc. This file is licensed under the
-License: CC0 and/or GPL-2
+License: CC0 or GPL-2
 
 Files: arch/powerpc/platforms/8xx/mpc86xads_setup.c
  arch/powerpc/platforms/8xx/mpc885ads_setup.c
@@ -23243,7 +23392,7 @@ License: GPL-2
 
 Files: arch/um/include/shared/mem_user.h
 Copyright: 2001, RidgeRun, Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: arch/um/include/shared/os.h
 Copyright: 2015, Thomas Meyer (thomas@m3y3r.de)
@@ -23417,15 +23566,15 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: arch/unicore32/Makefile
-Copyright: 2002
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/unicore32/boot/Makefile
-Copyright: 2001
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/unicore32/boot/compressed/Makefile
-Copyright: 2001
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/unicore32/boot/compressed/piggy.S.in
@@ -23596,7 +23745,7 @@ Files: arch/x86/crypto/aes_ctrby8_avx-x86_64.S
  arch/x86/crypto/sha1_ni_asm.S
  arch/x86/crypto/sha256_ni_asm.S
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: arch/x86/crypto/aesni-intel_asm.S
  arch/x86/crypto/aesni-intel_glue.c
@@ -23609,7 +23758,7 @@ License: GPL-2
 Files: arch/x86/crypto/aesni-intel_avx-x86_64.S
  arch/x86/crypto/crct10dif-pcl-asm_64.S
 Copyright: 2013, 2018, 2019, Intel Corporation
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: arch/x86/crypto/blowfish-x86_64-asm_64.S
  arch/x86/crypto/camellia-x86_64-asm_64.S
@@ -23898,7 +24047,7 @@ Copyright: 1997-2000, 2002, 2008, Ingo Molnar
 License: GPL-2
 
 Files: arch/x86/include/asm/floppy.h
-Copyright: 1995
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/x86/include/asm/fpu/api.h
@@ -24071,7 +24220,7 @@ License: Expat
 Files: arch/x86/include/asm/xen/hypercall.h
  arch/x86/include/asm/xen/hypervisor.h
 Copyright: 2002-2005, K A Fraser
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: arch/x86/include/asm/xen/interface.h
 Copyright: 2004-2006, K A Fraser
@@ -24702,7 +24851,7 @@ Copyright: 2002, Andi Kleen <ak@suse.de>
 License: GPL-2
 
 Files: arch/x86/math-emu/*
-Copyright: 1992-1994, 1997
+Copyright: 1992-1997, 1999
 License: GPL-2
 
 Files: arch/x86/math-emu/Makefile
@@ -24743,6 +24892,19 @@ Files: arch/x86/math-emu/fpu_asm.h
 Copyright: 1992, 1995, 1997
 License: GPL-2
 
+Files: arch/x86/math-emu/fpu_aux.c
+ arch/x86/math-emu/fpu_emu.h
+ arch/x86/math-emu/fpu_etc.c
+ arch/x86/math-emu/get_address.c
+ arch/x86/math-emu/load_store.c
+ arch/x86/math-emu/poly_2xm1.c
+ arch/x86/math-emu/poly_atan.c
+ arch/x86/math-emu/poly_l2.c
+ arch/x86/math-emu/reg_compare.c
+ arch/x86/math-emu/reg_constant.c
+Copyright: 1992-1994, 1997
+License: GPL-2
+
 Files: arch/x86/math-emu/fpu_entry.c
  arch/x86/math-emu/reg_convert.c
  arch/x86/math-emu/reg_ld_str.c
@@ -24754,7 +24916,7 @@ Copyright: 1992, 1994, 1997
 License: GPL-2
 
 Files: arch/x86/math-emu/fpu_tags.c
-Copyright: 1997
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/x86/math-emu/fpu_trig.c
@@ -24778,7 +24940,7 @@ Copyright: 1992-1995
 License: GPL-2
 
 Files: arch/x86/math-emu/reg_divide.c
-Copyright: 1996
+Copyright: no-info-found
 License: GPL-2
 
 Files: arch/x86/math-emu/reg_norm.S
@@ -25509,6 +25671,10 @@ Files: arch/xtensa/variants/test_kc705_hifi/*
 Copyright: 1999-2015, Tensilica Inc.
 License: Expat
 
+Files: block/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: block/badblocks.c
 Copyright: 1999-2019, Intel Corporation.
 License: GPL-2
@@ -25664,6 +25830,10 @@ Files: block/scsi_ioctl.c
 Copyright: 2001, Jens Axboe <axboe@suse.de>
 License: GPL-2
 
+Files: certs/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: certs/blacklist.c
  certs/system_keyring.c
 Copyright: 2001-2019, Red Hat, Inc.
@@ -25741,7 +25911,7 @@ License: GPL-2
 Files: crypto/algif_rng.c
  crypto/keywrap.c
 Copyright: 2014, 2015, Stephan Mueller <smueller@chronox.de>
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: crypto/ansi_cprng.c
 Copyright: Neil Horman <nhorman@tuxdriver.com>
@@ -25811,7 +25981,7 @@ Copyright: Kyle McMartin <kyle@debian.org> / Herbert Valerio Riedel <hvr@hvrlab.
 License: GPL-2
 
 Files: crypto/camellia_generic.c
-Copyright: 2006
+Copyright: no-info-found
 License: GPL-2
 
 Files: crypto/cast5_generic.c
@@ -25906,7 +26076,7 @@ License: GPL-2
 
 Files: crypto/drbg.c
 Copyright: Stephan Mueller <smueller@chronox.de>, 2014
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: crypto/ecc.c
 Copyright: 2019, Vitaly Chikunov <vt@altlinux.org>
@@ -25929,7 +26099,7 @@ License: GPL-2
 
 Files: crypto/fcrypt.c
 Copyright: 2006, Red Hat, Inc.
-License: BSD-3-clause and/or GPL-2+
+License: BSD-3-clause or GPL-2+
 
 Files: crypto/fips.c
 Copyright: 2008, 2009, Neil Horman <nhorman@tuxdriver.com>
@@ -25959,11 +26129,11 @@ License: GPL-2
 
 Files: crypto/jitterentropy-kcapi.c
 Copyright: Stephan Mueller <smueller@chronox.de>, 2015
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: crypto/jitterentropy.c
 Copyright: Stephan Mueller <smueller@chronox.de>, 2015-2019
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: crypto/lrw.c
  crypto/xts.c
@@ -25986,7 +26156,7 @@ License: GPL-2+
 
 Files: crypto/memneq.c
 Copyright: 2013, OpenVPN Technologies, Inc.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: crypto/michael_mic.c
 Copyright: 2004, 2008, Jouni Malinen <j@w1.fi>
@@ -26112,10 +26282,6 @@ Copyright: 1996-2006 Manoj Srivastava
            2006-2009 Bastian Blank <waldi@debian.org>
 License: GPL-2
 
-Files: debian/patches-rt/fs-dcache-use-cpu-chill-in-trylock-loops.patch
-Copyright: 2001-2006, Ian Kent <raven@themaw.net>
-License: GPL-2
-
 Files: debian/patches-rt/spinlock-types-separate-raw.patch
 Copyright: 1996-2006 Manoj Srivastava
            2005-2012 Debian kernel team
@@ -26136,6 +26302,10 @@ License: GPL-2
 
 Files: debian/patches/features/all/drivers-media-dvb-usb-af9005-request_firmware.patch
 Copyright: infringement in distributing
+License: GPL-2
+
+Files: drivers/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/accessibility/braille/braille_console.c
@@ -26758,7 +26928,7 @@ License: GPL-2
 
 Files: drivers/ata/pata_isapnp.c
  drivers/ata/pata_legacy.c
-Copyright: 2005
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/ata/pata_it821x.c
@@ -26772,7 +26942,7 @@ Copyright: 2005-2007, Tower Technologies
 License: GPL-2
 
 Files: drivers/ata/pata_macio.c
-Copyright: 2008
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/ata/pata_mpc52xx.c
@@ -26932,7 +27102,7 @@ License: LGPL-2.1+
 Files: drivers/atm/idt77252.c
  drivers/atm/idt77252.h
 Copyright: 2000, ATecoM GmbH
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/atm/iphase.c
  drivers/atm/iphase.h
@@ -27350,11 +27520,11 @@ License: GPL-2
 Files: drivers/block/xen-blkback/blkback.c
 Copyright: 2005, Christopher Clark
  2003, 2004, Keir Fraser & Steve Hand
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/block/xen-blkback/common.h
 Copyright: no-info-found
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/block/xen-blkback/xenbus.c
 Copyright: 2005, XenSource Ltd
@@ -27363,7 +27533,7 @@ License: GPL-2
 
 Files: drivers/block/xen-blkfront.c
 Copyright: Intel Research Cambridge / 2005, XenSource Ltd / 2005, Christopher Clark / 2004, Christian Limpach / 2004, Andrew Warfield / 2003-2004, Keir Fraser & Steve Hand
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/block/xsysace.c
 Copyright: 2006-2009, Secret Lab Technologies Ltd.
@@ -27851,13 +28021,17 @@ Files: drivers/char/mspec.c
 Copyright: 2001-2006, Silicon Graphics, Inc. All rights
 License: GPL-2
 
-Files: drivers/char/mwave/*
+Files: drivers/char/mwave/3780i.c
+ drivers/char/mwave/3780i.h
+ drivers/char/mwave/mwavedd.c
+ drivers/char/mwave/mwavedd.h
+ drivers/char/mwave/mwavepub.h
+ drivers/char/mwave/smapi.c
+ drivers/char/mwave/smapi.h
+ drivers/char/mwave/tp3780i.c
+ drivers/char/mwave/tp3780i.h
 Copyright: 1999, 2015-2018, IBM Corporation
 License: GPL-2+
-
-Files: drivers/char/mwave/Makefile
-Copyright: no-info-found
-License: GPL-2
 
 Files: drivers/char/nsc_gpio.c
  drivers/char/pc8736x_gpio.c
@@ -27892,7 +28066,7 @@ License: GPL-2
 
 Files: drivers/char/pcmcia/synclink_cs.c
 Copyright: no-info-found
-License: BSD~unspecified and/or GPL
+License: BSD~unspecified or GPL
 
 Files: drivers/char/powernv-op-panel.c
 Copyright: 2016, Suraj Jitindar Singh, IBM Corporation.
@@ -27909,7 +28083,7 @@ License: GPL-2
 
 Files: drivers/char/random.c
 Copyright: Theodore Tso, 1994, 1995, 1996, 1997, 1998, 1999. All / Matt Mackall <mpm@selenic.com>, 2003, 2004, 2005, / 2017, Jason A. Donenfeld <Jason@zx2c4.com>. All
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/char/rtc.c
 Copyright: 1996, Paul Gortmaker
@@ -28493,7 +28667,7 @@ Files: drivers/clk/imx/clk-composite-7ulp.c
  drivers/clk/imx/clk-imx7ulp.c
  drivers/clk/imx/clk-pfdv2.c
  drivers/clk/imx/clk-pllv4.c
-Copyright: 2008, 2017, 
+Copyright: 2008, 2017,
  2004-2007, 2016, Freescale Semiconductor, Inc.
 License: GPL-2
 
@@ -29060,7 +29234,7 @@ License: GPL-2
 
 Files: drivers/clk/sprd/pll.c
  drivers/clk/sprd/pll.h
-Copyright: 2015
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/clk/st/*
@@ -29675,7 +29849,7 @@ License: GPL-2
 
 Files: drivers/clocksource/timer-ti-dm.c
 Copyright: 2010, Texas Instruments Incorporated - http:www.ti.com
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/clocksource/timer-u300.c
 Copyright: 2007-2013, ST-Ericsson AB
@@ -30377,7 +30551,7 @@ License: GPL-2
 
 Files: drivers/crypto/qat/*
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/crypto/qat/Kconfig
  drivers/crypto/qat/Makefile
@@ -30496,7 +30670,7 @@ License: GPL-2
 
 Files: drivers/crypto/vmx/aesp8-ppc.pl
 Copyright: 2006-2017, CRYPTOGAMS<appro@openssl.org>
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: drivers/dax/*
 Copyright: 1999-2019, Intel Corporation.
@@ -30770,7 +30944,7 @@ License: GPL-2
 Files: drivers/dma/fsl_raid.c
  drivers/dma/fsl_raid.h
 Copyright: 2008-2016, Freescale Semiconductor, Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/dma/hsu/*
 Copyright: 2001-2019, Intel Corporation
@@ -30805,7 +30979,7 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/dma/ipu/ipu_idmac.c
-Copyright: 2008, 2017, 
+Copyright: 2008, 2017,
  2004-2007, 2016, Freescale Semiconductor, Inc.
 License: GPL-2
 
@@ -30815,7 +30989,7 @@ Copyright: 2008, Guennadi Liakhovetski, DENX Software Engineering, <lg@denx.de>
 License: GPL-2
 
 Files: drivers/dma/ipu/ipu_irq.c
-Copyright: 2008
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/dma/k3dma.c
@@ -31141,11 +31315,11 @@ Copyright: 2008, 2009, Akamai Technologies, Inc.
 License: GPL
 
 Files: drivers/edac/i5400_edac.c
-Copyright: 2008
+Copyright: no-info-found
 License: GPL
 
 Files: drivers/edac/i7300_edac.c
-Copyright: 2010
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/edac/i7core_edac.c
@@ -31203,7 +31377,7 @@ Copyright: 2005, EADS Astrium
 License: GPL
 
 Files: drivers/edac/sb_edac.c
-Copyright: 2011
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/edac/sifive_edac.c
@@ -31362,7 +31536,7 @@ Copyright: 2010-2012, Hauke Mehrtens <hauke@hauke-m.de>
  2006, Michael Buesch <m@bues.ch>
  2006, Felix Fietkau <nbd@openwrt.org>
  2004, Florian Schirmer <jolt@tuxbox.org>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/firmware/dmi-id.c
 Copyright: 2007, Lennart Poettering
@@ -31546,7 +31720,7 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/firmware/imx/misc.c
-Copyright: 2008, 2017, 
+Copyright: 2008, 2017,
  2004-2007, 2016, Freescale Semiconductor, Inc.
 License: GPL-2
 
@@ -33183,7 +33357,7 @@ Copyright: 2008, Red Hat <mjg@redhat.com>
 License: GPL-2
 
 Files: drivers/gpu/drm/i915/display/intel_overlay.c
-Copyright: 2009
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/gpu/drm/i915/gem/Makefile
@@ -33678,7 +33852,7 @@ Copyright: 2010, Intel Corporation
 License: GPL-2
 
 Files: drivers/gpu/drm/nouveau/include/nvif/object.h
-Copyright: (d));
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/gpu/drm/nouveau/include/nvkm/core/msgqueue.h
@@ -37220,7 +37394,7 @@ License: GPL-2
 
 Files: drivers/i2c/busses/i2c-ismt.c
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/i2c/busses/i2c-jz4780.c
 Copyright: 2015, Imagination Technologies
@@ -37244,7 +37418,7 @@ License: GPL-2
 Files: drivers/i2c/busses/i2c-mlxcpld.c
 Copyright: 2016, Michael Shych <michaels@mellanox.com>
  2016, Mellanox Technologies.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/i2c/busses/i2c-mpc.c
 Copyright: 2003, 2004, Humboldt Solutions Ltd, adrian@humboldt.co.uk.
@@ -37328,7 +37502,7 @@ License: GPL-2
 
 Files: drivers/i2c/busses/i2c-pmcmsp.c
 Copyright: 2005-2207, PMC-Sierra, Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/i2c/busses/i2c-pnx.c
 Copyright: MontaVista Software, Inc. This file is licensed under
@@ -37563,7 +37737,7 @@ License: GPL-2
 Files: drivers/i2c/muxes/i2c-mux-mlxcpld.c
 Copyright: 2016, Michael Shych <michaels@mellanox.com>
  2016, Mellanox Technologies.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/i2c/muxes/i2c-mux-pca9541.c
 Copyright: 2010, 2011, Ericsson AB.
@@ -37635,7 +37809,7 @@ License: GPL-2
 
 Files: drivers/ide/au1xxx-ide.c
 Copyright: 2003-2005, AMD, Personal Connectivity Solutions
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/ide/buddha.c
 Copyright: 1997, 2001, Geert Uytterhoeven and others
@@ -37721,7 +37895,7 @@ License: GPL-2
 
 Files: drivers/ide/ide-cs.c
 Copyright: 1999, David A. Hinds.
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/ide/ide-disk.c
 Copyright: 2003-2005, 2007, Bartlomiej Zolnierkiewicz
@@ -37748,7 +37922,7 @@ Copyright: s. / 2004, 2008-2009, Bartlomiej Zolnierkiewicz
 License: GPL
 
 Files: drivers/ide/ide-io.c
-Copyright: s.
+Copyright: no-info-found
 License: GPL-2+
 
 Files: drivers/ide/ide-iops.c
@@ -37799,7 +37973,7 @@ License: GPL-2
 Files: drivers/ide/it8172.c
 Copyright: 2008, Shane McDonald
  2000, MontaVista Software Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/ide/it8213.c
 Copyright: 2007, Bartlomiej Zolnierkiewicz
@@ -38787,7 +38961,7 @@ Copyright: 2004-2019, Texas Instruments
 License: GPL-2
 
 Files: drivers/iio/light/lv0104cs.c
-Copyright: 2018
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/iio/light/max44009.c
@@ -39038,7 +39212,7 @@ Copyright: 2014, 2017, 2018
 License: GPL-2
 
 Files: drivers/iio/proximity/isl29501.c
-Copyright: 2018
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/iio/proximity/pulsedlight-lidar-lite-v2.c
@@ -39267,7 +39441,7 @@ License: GPL-2
 
 Files: drivers/infiniband/core/nldev.c
 Copyright: 2017, Mellanox Technologies.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/infiniband/core/packer.c
  drivers/infiniband/core/ud_header.c
@@ -39358,7 +39532,7 @@ License: GPL-2
 
 Files: drivers/infiniband/hw/bnxt_re/*
 Copyright: 2016, 2017, Broadcom.
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: drivers/infiniband/hw/bnxt_re/Kconfig
  drivers/infiniband/hw/bnxt_re/Makefile
@@ -39385,7 +39559,7 @@ License: GPL-2
 
 Files: drivers/infiniband/hw/hfi1/*
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/infiniband/hw/hfi1/Kconfig
  drivers/infiniband/hw/hfi1/Makefile
@@ -39654,7 +39828,7 @@ License: GPL-2
 
 Files: drivers/infiniband/sw/rdmavt/*
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/infiniband/sw/rdmavt/Kconfig
  drivers/infiniband/sw/rdmavt/Makefile
@@ -39760,7 +39934,7 @@ License: GPL-2
 
 Files: drivers/infiniband/ulp/opa_vnic/*
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/infiniband/ulp/opa_vnic/Kconfig
 Copyright: no-info-found
@@ -39987,7 +40161,7 @@ License: GPL-2
 
 Files: drivers/input/keyboard/hil_kbd.c
 Copyright: 2001, Brian S. Julin
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/input/keyboard/hilkbd.c
 Copyright: 1999-2007, Helge Deller <deller@gmx.de>
@@ -40283,7 +40457,7 @@ License: GPL-2
 
 Files: drivers/input/misc/hp_sdc_rtc.c
 Copyright: 2001, Brian S. Julin
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/input/misc/ideapad_slidebar.c
 Copyright: 2013, Andrey Moiseev <o2g.org.ru@gmail.com>
@@ -40724,7 +40898,7 @@ Files: drivers/input/serio/hil_mlc.c
  drivers/input/serio/hp_sdc.c
  drivers/input/serio/hp_sdc_mlc.c
 Copyright: 2001, Brian S. Julin
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/input/serio/hyperv-keyboard.c
 Copyright: 2009-2013, 2017-2019, Microsoft Corporation.
@@ -40800,7 +40974,7 @@ License: GPL-2
 
 Files: drivers/input/tablet/gtco.c
 Copyright: 2006, GTCO CalComp
-License: GPL-2 and/or NTP~disclaimer
+License: GPL-2 or NTP~disclaimer
 
 Files: drivers/input/tablet/hanwang.c
 Copyright: 2010, Xing Wei <weixing@hanwang.com.cn>
@@ -40982,7 +41156,7 @@ Copyright: Vojtech Pavlik and Dan Streetman / 2008, Richard Lemon
 License: GPL-2
 
 Files: drivers/input/touchscreen/iqs5xx.c
-Copyright: 2018
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/input/touchscreen/jornada720_ts.c
@@ -41823,7 +41997,7 @@ License: GPL-2
 
 Files: drivers/isdn/mISDN/dsp.h
  drivers/isdn/mISDN/dsp_audio.c
-Copyright: 2002
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/isdn/mISDN/dsp_biquad.h
@@ -41896,7 +42070,7 @@ License: GPL-2
 
 Files: drivers/leds/leds-apu.c
 Copyright: 2017, Alan Mizrahi, alan at mizrahi dot com dot ve
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/leds/leds-as3645a.c
 Copyright: 2011, 2017, Intel Corporation.
@@ -41953,7 +42127,7 @@ Copyright: 2011-2015, Dialog Semiconductor Ltd.
 License: GPL-2
 
 Files: drivers/leds/leds-dac124s085.c
-Copyright: 2008
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/leds/leds-fsg.c
@@ -42034,7 +42208,7 @@ License: GPL-2
 Files: drivers/leds/leds-mlxcpld.c
 Copyright: 2016-2018, Vadim Pasternak <vadimp@mellanox.com>
  2016-2018, Mellanox Technologies.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/leds/leds-mlxreg.c
 Copyright: 2017, 2018, Vadim Pasternak <vadimp@mellanox.com>
@@ -43037,7 +43211,7 @@ License: GPL-2
 
 Files: drivers/media/dvb-frontends/drx39xyj/drxj.c
 Copyright: 2004, 2005, 2007-2010, Trident Microsystems, Inc.
-License: BSD-3-clause and/or GPL-2+
+License: BSD-3-clause or GPL-2+
 
 Files: drivers/media/dvb-frontends/drxd.h
  drivers/media/dvb-frontends/drxd_firm.c
@@ -44274,7 +44448,7 @@ Copyright: 2005, Chris Pascoe <c.pascoe@itee.uq.edu.au>
 License: GPL-2
 
 Files: drivers/media/pci/cx88/cx88.h
-Copyright: 2003
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/media/pci/ddbridge/*
@@ -44448,7 +44622,7 @@ Files: drivers/media/pci/saa7134/saa7134-i2c.c
  drivers/media/pci/saa7134/saa7134-ts.c
  drivers/media/pci/saa7134/saa7134-vbi.c
  drivers/media/pci/saa7134/saa7134.h
-Copyright: 2001
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/media/pci/saa7146/*
@@ -46539,7 +46713,7 @@ License: GPL-2
 
 Files: drivers/media/usb/usbtv/*
 Copyright: 2013, 2016, Lubomir Rintel
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/media/usb/usbtv/Kconfig
  drivers/media/usb/usbtv/Makefile
@@ -46548,7 +46722,7 @@ License: GPL-2
 
 Files: drivers/media/usb/usbtv/usbtv-audio.c
 Copyright: 2013, Federico Simoncelli
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/media/usb/usbvision/*
 Copyright: 1999-2007, Joerg Heckenbach <joerg@heckenbach-aw.de>
@@ -46571,7 +46745,7 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/media/usb/uvc/uvc_debugfs.c
-Copyright: 2011
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/media/usb/uvc/uvc_entity.c
@@ -46583,7 +46757,7 @@ Copyright: 2006-2009
 License: GPL-2
 
 Files: drivers/media/usb/uvc/uvc_metadata.c
-Copyright: 2016
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/media/usb/uvc/uvc_status.c
@@ -47675,7 +47849,7 @@ Files: drivers/misc/mic/scif/scif_nodeqp.h
  drivers/misc/mic/scif/scif_rb.h
  drivers/misc/mic/scif/scif_rma.h
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/misc/ocxl/*
 Copyright: 2001-2008, 2010-2019, IBM Corp.
@@ -48415,7 +48589,7 @@ License: GPL-2
 
 Files: drivers/mtd/ftl.c
 Copyright: 1999, David A. Hinds.
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/mtd/hyperbus/hbmc-am654.c
  drivers/mtd/hyperbus/hyperbus-core.c
@@ -48445,7 +48619,7 @@ License: GPL-2
 
 Files: drivers/mtd/maps/cfi_flagadm.c
 Copyright: 2001, Flaga hf. Medical Devices, Kári Davíðsson <kd@flaga.is>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/mtd/maps/dc21285.c
  drivers/mtd/maps/sa1100-flash.c
@@ -48505,7 +48679,7 @@ License: GPL-2
 
 Files: drivers/mtd/maps/pmcmsp-flash.c
 Copyright: 2005-2207, PMC-Sierra, Inc.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/mtd/maps/pxa2xx-flash.c
 Copyright: (C) 2001, MontaVista Software Inc.
@@ -49113,6 +49287,27 @@ Files: drivers/mux/mmio.c
 Copyright: 2017, Pengutronix, Philipp Zabel <kernel@pengutronix.de>
 License: GPL-2
 
+Files: drivers/net/*
+Copyright: 1993, United States Government as representedthe
+License: GPL-2
+
+Files: drivers/net/Kconfig
+ drivers/net/Makefile
+ drivers/net/Space.c
+ drivers/net/dummy.c
+ drivers/net/ifb.c
+ drivers/net/loopback.c
+ drivers/net/macvtap.c
+ drivers/net/nlmon.c
+ drivers/net/tap.c
+ drivers/net/vsockmon.c
+Copyright: no-info-found
+License: GPL-2
+
+Files: drivers/net/appletalk/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: drivers/net/appletalk/ipddp.c
 Copyright: 1993, United States Government as representedthe
 License: GPL-2
@@ -49134,6 +49329,10 @@ License: GPL-2
 
 Files: drivers/net/arcnet/arcnet.c
 Copyright: was as follows: / 1993, United States Government as representedthe
+License: GPL-2
+
+Files: drivers/net/bonding/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/net/bonding/bond_3ad.c
@@ -49172,6 +49371,10 @@ License: GPL-2
 
 Files: drivers/net/caif/caif_virtio.c
 Copyright: ST-Ericsson AB 2013
+License: GPL-2
+
+Files: drivers/net/can/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/net/can/at91_can.c
@@ -49346,7 +49549,7 @@ Files: drivers/net/can/sja1000/sja1000.c
  drivers/net/can/sja1000/sja1000.h
 Copyright: 2003, Matthias Brukner, Trajet Gmbh, Rebenring 33
  2002-2007, Volkswagen Group Electronic Research
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/can/sja1000/sja1000_isa.c
 Copyright: 2009, 2011, Wolfgang Grandegger <wg@grandegger.com>
@@ -49363,7 +49566,7 @@ License: GPL-2
 
 Files: drivers/net/can/slcan.c
 Copyright: no-info-found
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/net/can/softing/softing_cs.c
  drivers/net/can/softing/softing_fw.c
@@ -49389,7 +49592,7 @@ Copyright: 2015, Gerhard Bertelsmann
  2007, Wolfgang Grandegger <wg@grandegger.com>
  2003, Matthias Brukner, Trajet Gmbh, Rebenring 33
  2002-2007, Volkswagen Group Electronic Research
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/can/ti_hecc.c
 Copyright: 2019, Jeroen Hofstee <jhofstee@victronenergy.com>
@@ -49452,7 +49655,7 @@ License: GPL-2
 
 Files: drivers/net/can/vcan.c
 Copyright: 2002-2017, 2019, Volkswagen Group Electronic Research
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/can/vxcan.c
 Copyright: 2012, 2017, Oliver Hartkopp <socketcan@hartkopp.net>
@@ -49462,6 +49665,10 @@ Files: drivers/net/can/xilinx_can.c
 Copyright: 2017, 2018, Sandvik Mining and Construction Oy
  2012-2014, Xilinx, Inc.
  2009, PetaLogix.
+License: GPL-2
+
+Files: drivers/net/dsa/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/net/dsa/b53/*
@@ -49685,6 +49892,10 @@ Copyright: 2002, David S. Miller (davem@redhat.com)
  1995, Simon "Guru Aleph-Null" Janes
 License: GPL-2
 
+Files: drivers/net/ethernet/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: drivers/net/ethernet/3com/3c509.c
 Copyright: 1993-2000, Donald Becker.
  1993, United States Government as representedthe
@@ -49868,7 +50079,7 @@ License: GPL
 
 Files: drivers/net/ethernet/amd/xgbe/*
 Copyright: 2014-2016, Advanced Micro Devices, Inc.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: drivers/net/ethernet/amd/xgbe/Makefile
 Copyright: no-info-found
@@ -49935,7 +50146,7 @@ License: GPL-2
 
 Files: drivers/net/ethernet/atheros/alx/*
 Copyright: 2008, 2013, Johannes Berg <johannes@sipsolutions.net>
-License: GPL-2+ and/or ISC
+License: GPL-2+ or ISC
 
 Files: drivers/net/ethernet/atheros/alx/Makefile
 Copyright: no-info-found
@@ -50316,7 +50527,7 @@ License: GPL
 
 Files: drivers/net/ethernet/dec/tulip/de4x5.c
 Copyright: 1994, 1995, Digital Equipment Corporation.
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/net/ethernet/dec/tulip/de4x5.h
 Copyright: 1994, Digital Equipment Corporation.
@@ -50403,7 +50614,7 @@ License: GPL-2
 
 Files: drivers/net/ethernet/freescale/dpaa/*
 Copyright: 2008-2016, Freescale Semiconductor Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/net/ethernet/freescale/dpaa/Kconfig
  drivers/net/ethernet/freescale/dpaa/Makefile
@@ -50412,7 +50623,7 @@ License: GPL-2
 
 Files: drivers/net/ethernet/freescale/dpaa/dpaa_ethtool.c
 Copyright: 2008-2016, Freescale Semiconductor, Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/net/ethernet/freescale/dpaa2/*
 Copyright: 2016-2019, NXP
@@ -50468,7 +50679,7 @@ License: GPL-2
 
 Files: drivers/net/ethernet/freescale/fman/*
 Copyright: 2008-2016, Freescale Semiconductor Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/net/ethernet/freescale/fman/Kconfig
  drivers/net/ethernet/freescale/fman/Makefile
@@ -50478,12 +50689,12 @@ License: GPL-2
 Files: drivers/net/ethernet/freescale/fman/fman_keygen.c
  drivers/net/ethernet/freescale/fman/fman_keygen.h
 Copyright: 2017, NXP
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/net/ethernet/freescale/fman/mac.c
  drivers/net/ethernet/freescale/fman/mac.h
 Copyright: 2008-2016, Freescale Semiconductor, Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/net/ethernet/freescale/fs_enet/*
 Copyright: MontaVista Software, Inc. / 2003, Intracom S.A.
@@ -50705,7 +50916,7 @@ Copyright: 2017, Roman Yeryomin <roman@advem.lv>
  2008, Florian Fainelli <florian@openwrt.org>
  2006, Felix Fietkau <nbd@openwrt.org>
  2004, IDT Inc. (rischelp@idt.com)
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/net/ethernet/lantiq_etop.c
 Copyright: 2011, 2013, John Crispin <blogic@openwrt.org>
@@ -51720,10 +51931,14 @@ License: GPL-2
 
 Files: drivers/net/ethernet/xircom/xirc2ps_cs.c
 Copyright: 1997, 1998, Werner Koch (dd9jn)
-License: BSD-3-clause and/or GPL-2+
+License: BSD-3-clause or GPL-2+
 
 Files: drivers/net/ethernet/xscale/ixp4xx_eth.c
 Copyright: 1998-2009, Krzysztof Halasa <khc@pm.waw.pl>
+License: GPL-2
+
+Files: drivers/net/fddi/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/net/fddi/defxx.c
@@ -51761,6 +51976,10 @@ Copyright: 2016, Pablo Neira Ayuso <pablo@netfilter.org>
  2012-2014, sysmocom - s.f.m.c. GmbH
 License: GPL-2
 
+Files: drivers/net/hamradio/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: drivers/net/hamradio/baycom_epp.c
 Copyright: 1998-2000
 License: GPL-2
@@ -51789,15 +52008,27 @@ Files: drivers/net/hamradio/yam.c
 Copyright: 1998, Frederic Rible F1OAT (frible@teaser.fr)
 License: GPL-2
 
+Files: drivers/net/hippi/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: drivers/net/hippi/rrunner.c
 Copyright: 1998-2002, Jes Sorensen, <jes@wildopensource.com>.
 License: GPL
+
+Files: drivers/net/hyperv/*
+Copyright: no-info-found
+License: GPL-2
 
 Files: drivers/net/hyperv/hyperv_net.h
  drivers/net/hyperv/netvsc.c
  drivers/net/hyperv/netvsc_drv.c
  drivers/net/hyperv/rndis_filter.c
 Copyright: 2009-2013, 2017-2019, Microsoft Corporation.
+License: GPL-2
+
+Files: drivers/net/ieee802154/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/net/ieee802154/adf7242.c
@@ -51821,7 +52052,7 @@ License: GPL-2
 
 Files: drivers/net/ieee802154/ca8210.c
 Copyright: 2016, Cascoda, Ltd.
-License: BSD-3-clause and/or GPL-2+
+License: BSD-3-clause or GPL-2+
 
 Files: drivers/net/ieee802154/cc2520.c
 Copyright: 2014, Varka Bhadram <varkab@cdac.in>
@@ -51910,7 +52141,11 @@ License: GPL-2
 Files: drivers/net/ntb_netdev.c
 Copyright: 2015, EMC Corporation.
  2012, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
+
+Files: drivers/net/phy/*
+Copyright: no-info-found
+License: GPL-2
 
 Files: drivers/net/phy/adin.c
 Copyright: 2005-2019, Analog Devices Inc.
@@ -52104,6 +52339,14 @@ Copyright: 2016, Xilinx, Inc.
  2016, Andrew Lunn <andrew@lunn.ch>
 License: GPL-2
 
+Files: drivers/net/plip/*
+Copyright: no-info-found
+License: GPL-2
+
+Files: drivers/net/ppp/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: drivers/net/ppp/bsd_comp.c
 Copyright: was changed, and the change / doesnt clash with the
 License: BSD-4-clause
@@ -52127,6 +52370,10 @@ Files: drivers/net/sb1000.c
 Copyright: 1998, Franco Venturi.
  1994, 1995, Donald Becker.
  1993, United States Government as representedthe
+License: GPL-2
+
+Files: drivers/net/slip/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/net/slip/slhc.c
@@ -52156,6 +52403,10 @@ License: GPL-2
 
 Files: drivers/net/tun.c
 Copyright: 1999-2002, Maxim Krasnyansky <maxk@qualcomm.com>
+License: GPL-2
+
+Files: drivers/net/usb/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/net/usb/aqc111.c
@@ -52207,7 +52458,7 @@ License: GPL-2
 
 Files: drivers/net/usb/cdc_ncm.c
 Copyright: ST-Ericsson 2010-2012
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: drivers/net/usb/cdc_subset.c
  drivers/net/usb/net1080.c
@@ -52242,7 +52493,7 @@ License: GPL-2
 
 Files: drivers/net/usb/ipheth.c
 Copyright: 2009, Diego Giagio <diego@giagio.com>
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/usb/kalmia.c
 Copyright: 2011, Marius Bjoernstad Kotsbak <marius@kotsbak.com>
@@ -52419,6 +52670,10 @@ Copyright: 1998, Alan Cox <alan@lxorguk.ukuu.org.uk>
  1995, David S. Miller (davem@caip.rutgers.edu)
 License: GPL-2
 
+Files: drivers/net/wimax/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: drivers/net/wimax/i2400m/*
 Copyright: 2007, 2008, Intel Corporation.
 License: BSD-3-clause
@@ -52437,6 +52692,10 @@ Files: drivers/net/wimax/i2400m/debug-levels.h
  drivers/net/wimax/i2400m/usb-debug-levels.h
  drivers/net/wimax/i2400m/usb.c
 Copyright: 2005-2008, Intel Corporation <linux-wimax@intel.com>
+License: GPL-2
+
+Files: drivers/net/wireless/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/net/wireless/admtek/adm8211.c
@@ -52764,7 +53023,7 @@ License: ISC
 Files: drivers/net/wireless/ath/carl9170/*
 Copyright: 2009, 2010, Christian Lamparter <chunkeey@googlemail.com>
  2008, Johannes Berg <johannes@sipsolutions.net>
-License: GPL-2+ and/or ISC
+License: GPL-2+ or ISC
 
 Files: drivers/net/wireless/ath/carl9170/Kconfig
  drivers/net/wireless/ath/carl9170/Makefile
@@ -52777,11 +53036,11 @@ Files: drivers/net/wireless/ath/carl9170/cmd.c
  drivers/net/wireless/ath/carl9170/mac.c
  drivers/net/wireless/ath/carl9170/phy.c
 Copyright: 2008, 2013, Johannes Berg <johannes@sipsolutions.net>
-License: GPL-2+ and/or ISC
+License: GPL-2+ or ISC
 
 Files: drivers/net/wireless/ath/carl9170/debug.h
 Copyright: 2010, Christian Lamparter <chunkeey@googlemail.com>
-License: GPL-2+ and/or ISC
+License: GPL-2+ or ISC
 
 Files: drivers/net/wireless/ath/carl9170/fw.c
  drivers/net/wireless/ath/carl9170/fwdesc.h
@@ -52793,12 +53052,12 @@ Files: drivers/net/wireless/ath/carl9170/fwcmd.h
  drivers/net/wireless/ath/carl9170/wlan.h
 Copyright: 2009-2011, Christian Lamparter <chunkeey@googlemail.com>
  2008, Johannes Berg <johannes@sipsolutions.net>
-License: GPL and/or ISC
+License: GPL or ISC
 
 Files: drivers/net/wireless/ath/carl9170/led.c
 Copyright: 2009, 2010, Christian Lamparer <chunkeey@googlemail.com>
  2008, Johannes Berg <johannes@sipsolutions.net>
-License: GPL-2+ and/or ISC
+License: GPL-2+ or ISC
 
 Files: drivers/net/wireless/ath/carl9170/phy.h
 Copyright: 2004-2011, Atheros Communications Inc.
@@ -53141,7 +53400,7 @@ Files: drivers/net/wireless/intel/iwlegacy/4965-calib.c
  drivers/net/wireless/intel/iwlegacy/csr.h
  drivers/net/wireless/intel/iwlegacy/prph.h
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlegacy/Kconfig
  drivers/net/wireless/intel/iwlegacy/Makefile
@@ -53153,7 +53412,7 @@ Copyright: 2018, 2019, Intel Corporation
  2015-2017, Intel Deutschland GmbH
  2013-2015, Intel Mobile Communications GmbH
  2003-2015, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/Kconfig
  drivers/net/wireless/intel/iwlwifi/Makefile
@@ -53169,21 +53428,21 @@ Files: drivers/net/wireless/intel/iwlwifi/cfg/22000.c
  drivers/net/wireless/intel/iwlwifi/cfg/9000.c
 Copyright: 2018, 2019, Intel Corporation
  2015-2017, Intel Deutschland GmbH
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/cfg/7000.c
 Copyright: 2018, 2019, Intel Corporation
  2015-2017, Intel Deutschland GmbH
  2013-2015, Intel Mobile Communications GmbH
  2003-2015, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/cfg/8000.c
 Copyright: 2018, 2019, Intel Corporation
  2016, 2017, Intel Deutschland GmbH
  2014, Intel Corporation.
  2014, 2015, Intel Mobile Communications GmbH
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/dvm/*
 Copyright: 1999-2019, Intel Corporation.
@@ -53198,7 +53457,7 @@ Files: drivers/net/wireless/intel/iwlwifi/dvm/agn.h
  drivers/net/wireless/intel/iwlwifi/dvm/calib.h
  drivers/net/wireless/intel/iwlwifi/dvm/commands.h
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/dvm/debugfs.c
  drivers/net/wireless/intel/iwlwifi/dvm/devices.c
@@ -53231,7 +53490,7 @@ Files: drivers/net/wireless/intel/iwlwifi/fw/acpi.c
  drivers/net/wireless/intel/iwlwifi/fw/runtime.h
 Copyright: 2018, 2019, Intel Corporation
  2015-2017, Intel Deutschland GmbH
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/fw/api/binding.h
  drivers/net/wireless/intel/iwlwifi/fw/api/cmdhdr.h
@@ -53244,20 +53503,20 @@ Files: drivers/net/wireless/intel/iwlwifi/fw/api/binding.h
 Copyright: 2015-2017, Intel Deutschland GmbH
  2013-2015, Intel Mobile Communications GmbH
  2007-2014, 2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/fw/api/dbg-tlv.h
 Copyright: 2013, 2018, 2019, Intel Corporation
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/fw/api/led.h
 Copyright: 2017, Intel Deutschland GmbH
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/fw/api/location.h
 Copyright: 2018, 2019, Intel Corporation
  2015-2017, Intel Deutschland GmbH
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/fw/api/mac.h
  drivers/net/wireless/intel/iwlwifi/fw/api/rs.h
@@ -53265,37 +53524,37 @@ Files: drivers/net/wireless/intel/iwlwifi/fw/api/mac.h
 Copyright: 2018, 2019, Intel Corporation
  2015-2017, Intel Deutschland GmbH
  2005-2015, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/fw/api/nvm-reg.h
 Copyright: 2016-2017, Intel Deutschland GmbH / 2013-2015, Intel Mobile Communications GmbH / 2012-2014, Intel Corporation. / (C) 2018-2019, Intel Corporation
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/fw/debugfs.h
 Copyright: 2015-2017, Intel Deutschland GmbH
  2013-2015, Intel Mobile Communications GmbH
  2007-2014, 2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/fw/error-dump.h
 Copyright: 2018, 2019, Intel Corporation
  2016, 2017, Intel Deutschland GmbH
  2014, Intel Corporation.
  2014, 2015, Intel Mobile Communications GmbH
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/fw/notif-wait.c
  drivers/net/wireless/intel/iwlwifi/fw/notif-wait.h
 Copyright: 2015-2017, Intel Deutschland GmbH
  2007-2014, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/iwl-agn-hw.h
  drivers/net/wireless/intel/iwlwifi/iwl-debug.c
  drivers/net/wireless/intel/iwlwifi/iwl-eeprom-read.h
  drivers/net/wireless/intel/iwlwifi/iwl-phy-db.h
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/iwl-config.h
  drivers/net/wireless/intel/iwlwifi/iwl-fh.h
@@ -53303,19 +53562,19 @@ Files: drivers/net/wireless/intel/iwlwifi/iwl-config.h
 Copyright: 2018, 2019, Intel Corporation
  2015-2017, Intel Deutschland GmbH
  2005-2015, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/iwl-context-info-gen3.h
  drivers/net/wireless/intel/iwlwifi/iwl-dbg-tlv.c
  drivers/net/wireless/intel/iwlwifi/iwl-dbg-tlv.h
  drivers/net/wireless/intel/iwlwifi/iwl-io.h
 Copyright: 2013, 2018, 2019, Intel Corporation
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/iwl-context-info.h
 Copyright: 2018, 2019, Intel Corporation
  2015-2017, Intel Deutschland GmbH
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/iwl-debug.h
  drivers/net/wireless/intel/iwlwifi/iwl-devtrace.c
@@ -53353,38 +53612,38 @@ License: GPL-2
 Files: drivers/net/wireless/intel/iwlwifi/iwl-drv.h
 Copyright: 2013-2015, Intel Mobile Communications GmbH
  2008-2014, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/iwl-eeprom-parse.c
  drivers/net/wireless/intel/iwlwifi/iwl-eeprom-parse.h
 Copyright: 2018, 2019, Intel Corporation
  2013-2015, Intel Mobile Communications GmbH
  2008-2014, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/iwl-eeprom-read.c
  drivers/net/wireless/intel/iwlwifi/iwl-modparams.h
 Copyright: 2018, 2019, Intel Corporation
  2007-2014, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/iwl-io.c
 Copyright: 2015-2016, Intel Deutschland GmbH / 2003-2014, Intel Corporation. / (C) 2018-2019, Intel Corporation
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/iwl-phy-db.c
 Copyright: 2015-2017, Intel Deutschland GmbH
  2007-2014, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/iwl-scd.h
 Copyright: 2014, Intel Mobile Communications GmbH
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/iwl-trans.c
 Copyright: 2016, 2017, Intel Deutschland GmbH
  2015, Intel Mobile Communications GmbH
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/mvm/Makefile
 Copyright: no-info-found
@@ -53393,7 +53652,7 @@ License: GPL-2
 Files: drivers/net/wireless/intel/iwlwifi/mvm/binding.c
 Copyright: 2015-2017, Intel Deutschland GmbH
  2007-2014, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/mvm/coex.c
  drivers/net/wireless/intel/iwlwifi/mvm/debugfs.h
@@ -53401,7 +53660,7 @@ Files: drivers/net/wireless/intel/iwlwifi/mvm/coex.c
  drivers/net/wireless/intel/iwlwifi/mvm/time-event.h
 Copyright: 2013-2015, Intel Mobile Communications GmbH
  2008-2014, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/mvm/debugfs-vif.c
  drivers/net/wireless/intel/iwlwifi/mvm/offloading.c
@@ -53410,20 +53669,20 @@ Files: drivers/net/wireless/intel/iwlwifi/mvm/debugfs-vif.c
 Copyright: 2015-2017, Intel Deutschland GmbH
  2013-2015, Intel Mobile Communications GmbH
  2007-2014, 2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/mvm/ftm-initiator.c
  drivers/net/wireless/intel/iwlwifi/mvm/ftm-responder.c
  drivers/net/wireless/intel/iwlwifi/mvm/rs-fw.c
 Copyright: 2018, 2019, Intel Corporation
  2015-2017, Intel Deutschland GmbH
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/mvm/led.c
 Copyright: 2018, 2019, Intel Corporation
  2015-2017, Intel Deutschland GmbH
  2005-2015, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/mvm/rs.c
  drivers/net/wireless/intel/iwlwifi/mvm/rs.h
@@ -53437,22 +53696,22 @@ Files: drivers/net/wireless/intel/iwlwifi/mvm/sf.c
 Copyright: 2018, 2019, Intel Corporation
  2013-2015, Intel Mobile Communications GmbH
  2008-2014, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/mvm/tdls.c
 Copyright: 2017, Intel Deutschland GmbH / 2014, Intel Mobile Communications GmbH / (C) 2018-2019, Intel Corporation
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/pcie/ctxt-info-gen3.c
 Copyright: 2013, 2018, 2019, Intel Corporation
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/pcie/ctxt-info.c
  drivers/net/wireless/intel/iwlwifi/pcie/trans-gen2.c
  drivers/net/wireless/intel/iwlwifi/pcie/tx-gen2.c
 Copyright: 2018, 2019, Intel Corporation
  2015-2017, Intel Deutschland GmbH
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intersil/hostap/hostap_ap.c
  drivers/net/wireless/intersil/hostap/hostap_hw.c
@@ -53467,7 +53726,7 @@ License: GPL-2
 
 Files: drivers/net/wireless/intersil/orinoco/hermes.c
 Copyright: David Gibson, IBM Corp. 2001-2003. / 2000, David Gibson, Linuxcare Australia.
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/net/wireless/intersil/orinoco/hermes.h
 Copyright: David Gibson, IBM Corp. 2001-2003. / 2000, David Gibson, Linuxcare Australia. / 1999, AbsoluteValue Systems, Inc.
@@ -53477,15 +53736,15 @@ Files: drivers/net/wireless/intersil/orinoco/hermes_dld.c
 Copyright: 2007, David Kilroy
  2002-2005, Pavel Roskin <proski@gnu.org>
  2001-2004, Agere Systems Inc.
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/net/wireless/intersil/orinoco/hermes_dld.h
 Copyright: 2007, David Kilroy
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/net/wireless/intersil/orinoco/main.c
 Copyright: David Gibson, IBM Corporation 2001-2003. / Andreas Neuhaus <andy / 2001, Jean Tourrilhes, HP Labs / 2001, Benjamin Herrenschmidt / 2000, David Gibson, Linuxcare Australia.
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/net/wireless/intersil/orinoco/orinoco_nortel.c
 Copyright: 2003, Christoph Jungegger <disdos@traum404.de>
@@ -53493,11 +53752,11 @@ Copyright: 2003, Christoph Jungegger <disdos@traum404.de>
  2001, Jean Tourrilhes
  2001, Daniel Barlow
  1999, AbsoluteValue Systems, Inc.
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/net/wireless/intersil/orinoco/orinoco_pci.c
 Copyright: David Gibson, IBM Corp. 2002-2003. / 2001, Jean Tourrilhes <jt AT hpl.hp.com> / 2001, Daniel Barlow <dan AT telent.net> / 1999, AbsoluteValue Systems, Inc.
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/net/wireless/intersil/orinoco/orinoco_pci.h
 Copyright: 2005, Pavel Roskin.
@@ -53505,16 +53764,16 @@ License: GPL-2
 
 Files: drivers/net/wireless/intersil/orinoco/orinoco_plx.c
 Copyright: David Gibson, IBM Corp. 2001-2003. / 2001, Daniel Barlow
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/net/wireless/intersil/orinoco/orinoco_tmd.c
 Copyright: 2003, Joerg Dorchain <joerg AT dorchain.net>
  2001, Daniel Barlow
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/net/wireless/intersil/orinoco/orinoco_usb.c
 Copyright: 2003, Manuel Estrada Sainz
-License: GPL-2+ and/or MPL-1.1
+License: GPL-2+ or MPL-1.1
 
 Files: drivers/net/wireless/intersil/orinoco/spectrum_cs.c
 Copyright: Symbol Technologies. / David Gibson, Linuxcare Australia / 2002-2005, Pavel Roskin <proski@gnu.org>
@@ -53664,6 +53923,35 @@ License: GPL-2
 Files: drivers/net/wireless/mac80211_hwsim.h
 Copyright: 2011, Javier Lopez <jlopex@gmail.com>
  2008, Jouni Malinen <j@w1.fi>
+License: GPL-2
+
+Files: drivers/net/wireless/marvell/libertas/*
+Copyright: 2003-2016, 2018, Marvell International Ltd.
+License: GPL-2
+
+Files: drivers/net/wireless/marvell/libertas/Kconfig
+ drivers/net/wireless/marvell/libertas/Makefile
+ drivers/net/wireless/marvell/libertas/cfg.h
+ drivers/net/wireless/marvell/libertas/cmd.c
+ drivers/net/wireless/marvell/libertas/cmdresp.c
+ drivers/net/wireless/marvell/libertas/debugfs.c
+ drivers/net/wireless/marvell/libertas/debugfs.h
+ drivers/net/wireless/marvell/libertas/decl.h
+ drivers/net/wireless/marvell/libertas/defs.h
+ drivers/net/wireless/marvell/libertas/dev.h
+ drivers/net/wireless/marvell/libertas/ethtool.c
+ drivers/net/wireless/marvell/libertas/firmware.c
+ drivers/net/wireless/marvell/libertas/host.h
+ drivers/net/wireless/marvell/libertas/if_usb.c
+ drivers/net/wireless/marvell/libertas/if_usb.h
+ drivers/net/wireless/marvell/libertas/main.c
+ drivers/net/wireless/marvell/libertas/mesh.c
+ drivers/net/wireless/marvell/libertas/mesh.h
+ drivers/net/wireless/marvell/libertas/radiotap.h
+ drivers/net/wireless/marvell/libertas/rx.c
+ drivers/net/wireless/marvell/libertas/tx.c
+ drivers/net/wireless/marvell/libertas/types.h
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/net/wireless/marvell/libertas/cfg.c
@@ -54397,26 +54685,30 @@ Copyright: 2006, 2007, Michael Wu <flamingice@sourmilk.net>
  2005-2007, Ulrich Kunitz <kune@deine-taler.de>
 License: GPL-2
 
+Files: drivers/net/xen-netback/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: drivers/net/xen-netback/common.h
 Copyright: no-info-found
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/net/xen-netback/hash.c
 Copyright: 2016, Citrix Systems Inc.
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/net/xen-netback/interface.c
 Copyright: 2004, 2005, Keir Fraser
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/net/xen-netback/netback.c
 Copyright: 2002-2005, K A Fraser
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/net/xen-netback/rx.c
 Copyright: 2016, Citrix Systems Inc.
  2002-2005, K A Fraser
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/net/xen-netback/xenbus.c
 Copyright: 2005, XenSource Ltd
@@ -54426,7 +54718,7 @@ License: GPL-2
 Files: drivers/net/xen-netfront.c
 Copyright: 2005, XenSource Ltd
  2002-2005, K A Fraser
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/nfc/*
 Copyright: 1999-2019, Intel Corporation.
@@ -54539,16 +54831,16 @@ License: GPL-2
 Files: drivers/ntb/core.c
 Copyright: 2016, 2017, T-Platforms.
  2015, EMC Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/ntb/hw/amd/ntb_hw_amd.c
 Copyright: 2016, T-Platforms.
  2016, Advanced Micro Devices, Inc.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/ntb/hw/amd/ntb_hw_amd.h
 Copyright: 2016, Advanced Micro Devices, Inc.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/ntb/hw/idt/ntb_hw_idt.c
  drivers/ntb/hw/idt/ntb_hw_idt.h
@@ -54557,7 +54849,7 @@ License: BSD~unspecified
 
 Files: drivers/ntb/hw/intel/*
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/ntb/hw/intel/Kconfig
  drivers/ntb/hw/intel/Makefile
@@ -54568,12 +54860,12 @@ Files: drivers/ntb/hw/intel/ntb_hw_gen1.c
 Copyright: 2016, T-Platforms.
  2015, EMC Corporation.
  2012, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/ntb/hw/intel/ntb_hw_intel.h
 Copyright: 2015, EMC Corporation.
  2012, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/ntb/hw/mscc/ntb_hw_switchtec.c
 Copyright: 2016-2019, Microsemi Corporation
@@ -54582,22 +54874,22 @@ License: GPL-2
 Files: drivers/ntb/ntb_transport.c
 Copyright: 2015, EMC Corporation.
  2012, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/ntb/test/ntb_perf.c
 Copyright: 2017, T-Platforms.
  2015, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/ntb/test/ntb_pingpong.c
 Copyright: 2016, 2017, T-Platforms.
  2015, EMC Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/ntb/test/ntb_tool.c
 Copyright: 2017, T-Platforms
  2015, EMC Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/nubus/bus.c
 Copyright: 2005, 2007, 2008, 2014, 2017, Finn Thain
@@ -54955,7 +55247,7 @@ License: GPL-2
 
 Files: drivers/parisc/power.c
 Copyright: 2001-2007, Helge Deller <deller@gmx.de>
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/parisc/sba_iommu.c
 Copyright: 2004, Naresh Kumar Inna <knaresh at india x hp x com>
@@ -54985,7 +55277,7 @@ License: GPL-2
 
 Files: drivers/parport/parport_cs.c
 Copyright: 1999, David A. Hinds.
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/parport/parport_gsc.c
  drivers/parport/parport_gsc.h
@@ -55518,7 +55810,7 @@ Files: drivers/pcmcia/cirrus.h
  drivers/pcmcia/topic.h
  drivers/pcmcia/vg468.h
 Copyright: 1999, David A. Hinds.
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/pcmcia/cs_internal.h
  drivers/pcmcia/ds.c
@@ -55600,7 +55892,7 @@ Files: drivers/pcmcia/sa1100_generic.c
  drivers/pcmcia/sa11xx_base.h
  drivers/pcmcia/soc_common.c
 Copyright: 1999, John G. Dorsey.
-License: GPL and/or MPL-1.1
+License: GPL or MPL-1.1
 
 Files: drivers/pcmcia/sa1111_badge4.c
 Copyright: 2002-2004, Hewlett-Packard Company
@@ -55621,7 +55913,7 @@ License: GPL-2
 Files: drivers/pcmcia/vrc4173_cardu.c
  drivers/pcmcia/vrc4173_cardu.h
 Copyright: 2002, 2003, Yoichi Yuasa <yuasa@linux-mips.org>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/pcmcia/yenta_socket.c
 Copyright: 1991-2006, 2010, 2013, 2014, Linus Torvalds
@@ -56181,7 +56473,7 @@ Copyright: 2018, Pengutronix, Lucas Stach <kernel@pengutronix.de>
 License: GPL-2
 
 Files: drivers/pinctrl/freescale/pinctrl-imx8qm.c
-Copyright: 2008, 2017, 
+Copyright: 2008, 2017,
  2004-2007, 2016, Freescale Semiconductor, Inc.
 License: GPL-2
 
@@ -56885,7 +57177,7 @@ License: GPL-2
 Files: drivers/platform/mellanox/mlxreg-hotplug.c
 Copyright: 2016-2018, Vadim Pasternak <vadimp@mellanox.com>
  2016-2018, Mellanox Technologies.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/platform/mellanox/mlxreg-io.c
 Copyright: 2016-2018, Vadim Pasternak <vadimp@mellanox.com>
@@ -59896,11 +60188,11 @@ License: GPL-2
 Files: drivers/scsi/a100u2w.c
 Copyright: 2003, 2004, Christoph Hellwig
  1994-1998, Initio Corporation
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/scsi/a100u2w.h
 Copyright: 1994-1998, Initio Corporation
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/scsi/a2091.h
 Copyright: 1993, Hamish Macdonald, see a2091.c for more info
@@ -59996,7 +60288,7 @@ License: GPL-2
 
 Files: drivers/scsi/aic7xxx/aic7xxx_93cx6.c
 Copyright: 1995, 1996, Daniel M. Eischen
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/scsi/aic7xxx/aic7xxx_osm.c
 Copyright: 1994, John Aycock
@@ -60022,7 +60314,7 @@ License: GPL-2
 Files: drivers/scsi/aic7xxx/cam.h
 Copyright: 2000, Adaptec Inc.
  1997, Justin T. Gibbs.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/scsi/aic7xxx/queue.h
 Copyright: 1991, 1993, The Regents of the University of California.
@@ -60056,7 +60348,7 @@ License: GPL-2
 
 Files: drivers/scsi/arcmsr/*
 Copyright: 2002-2014, Areca Technology Corporation
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/scsi/arcmsr/Makefile
 Copyright: no-info-found
@@ -60385,7 +60677,7 @@ License: GPL-2
 Files: drivers/scsi/initio.h
 Copyright: 2007, Red Hat <alan@lxorguk.ukuu.org.uk>
  1994-1998, Initio Corporation
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/scsi/ipr.c
  drivers/scsi/ipr.h
@@ -60400,7 +60692,7 @@ License: GPL-2+
 
 Files: drivers/scsi/isci/*
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/scsi/isci/Makefile
 Copyright: no-info-found
@@ -60600,7 +60892,7 @@ License: GPL-2
 Files: drivers/scsi/pcmcia/aha152x_stub.c
  drivers/scsi/pcmcia/qlogic_stub.c
 Copyright: 1999, David A. Hinds.
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/scsi/pcmcia/fdomain_cs.c
 Copyright: 2019, Ondrej Zary
@@ -60961,7 +61253,7 @@ License: GPL-2
 
 Files: drivers/scsi/xen-scsifront.c
 Copyright: 2008, FUJITSU Limited
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/scsi/zorro_esp.c
 Copyright: 2013, Tuomas Vainikka (tuomas.vainikka@aalto.fi) for
@@ -60971,7 +61263,7 @@ License: GPL-2
 
 Files: drivers/sfi/*
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/sfi/Kconfig
  drivers/sfi/Makefile
@@ -61162,7 +61454,7 @@ License: GPL-2
 
 Files: drivers/soc/fsl/qbman/*
 Copyright: 2008-2016, Freescale Semiconductor, Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/soc/fsl/qbman/Kconfig
  drivers/soc/fsl/qbman/Makefile
@@ -61171,7 +61463,7 @@ License: GPL-2
 
 Files: drivers/soc/fsl/qbman/dpaa_sys.c
 Copyright: 2017, NXP Semiconductor, Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/soc/fsl/qe/*
 Copyright: 2002-2016, Freescale Semiconductor, Inc.
@@ -61727,7 +62019,7 @@ Copyright: 2006, Nokia
  2005, David Brownell (ported to 2.6 SPI interface)
  2004, Texas Instruments.
  2003, MontaVista Software Inc. <source@mvista.com>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/spi/spi-pl022.c
 Copyright: 2008-2012, ST-Ericsson AB
@@ -62262,6 +62554,21 @@ Copyright: 2016, Spencer E. Olson <olsonse@umich.edu>
 License: GPL-2+
 
 Files: drivers/staging/comedi/drivers/ni_routing/*
+Copyright: the information as provided by
+License: GPL-2
+
+Files: drivers/staging/comedi/drivers/ni_routing/ni_device_routes.c
+ drivers/staging/comedi/drivers/ni_routing/ni_device_routes.h
+ drivers/staging/comedi/drivers/ni_routing/ni_route_values.c
+ drivers/staging/comedi/drivers/ni_routing/ni_route_values.h
+Copyright: 2016, Spencer E. Olson <olsonse@umich.edu>
+License: GPL-2+
+
+Files: drivers/staging/comedi/drivers/ni_routing/ni_device_routes/*
+Copyright: 2016, Spencer E. Olson <olsonse@umich.edu>
+License: GPL-2+
+
+Files: drivers/staging/comedi/drivers/ni_routing/ni_route_values/*
 Copyright: 2016, Spencer E. Olson <olsonse@umich.edu>
 License: GPL-2+
 
@@ -62434,13 +62741,15 @@ Files: drivers/staging/fieldbus/anybuss/Kconfig
 Copyright: no-info-found
 License: GPL-2
 
-Files: drivers/staging/fsl-dpaa2/ethsw/*
+Files: drivers/staging/fsl-dpaa2/ethsw/Makefile
+ drivers/staging/fsl-dpaa2/ethsw/dpsw-cmd.h
+ drivers/staging/fsl-dpaa2/ethsw/dpsw.c
+ drivers/staging/fsl-dpaa2/ethsw/dpsw.h
+ drivers/staging/fsl-dpaa2/ethsw/ethsw-ethtool.c
+ drivers/staging/fsl-dpaa2/ethsw/ethsw.c
+ drivers/staging/fsl-dpaa2/ethsw/ethsw.h
 Copyright: 2016-2019, NXP
  2013-2017, Freescale Semiconductor Inc.
-License: GPL-2
-
-Files: drivers/staging/fsl-dpaa2/ethsw/TODO
-Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/staging/fwserial/dma_fifo.c
@@ -62938,22 +63247,20 @@ Files: drivers/staging/netlogic/Kconfig
 Copyright: no-info-found
 License: GPL-2
 
-Files: drivers/staging/nvec/*
-Copyright: 2011, The AC100 Kernel Team <ac100@lists.launchpad.net>
-License: GPL-2
-
-Files: drivers/staging/nvec/Kconfig
- drivers/staging/nvec/Makefile
- drivers/staging/nvec/TODO
-Copyright: no-info-found
-License: GPL-2
-
 Files: drivers/staging/nvec/nvec-keytable.h
 Copyright: 2009-2019, NVIDIA Corporation.
 License: GPL-2
 
 Files: drivers/staging/nvec/nvec.c
 Copyright: 2011, The AC100 Kernel Team <ac100@lists.lauchpad.net>
+License: GPL-2
+
+Files: drivers/staging/nvec/nvec.h
+ drivers/staging/nvec/nvec_kbd.c
+ drivers/staging/nvec/nvec_paz00.c
+ drivers/staging/nvec/nvec_power.c
+ drivers/staging/nvec/nvec_ps2.c
+Copyright: 2011, The AC100 Kernel Team <ac100@lists.launchpad.net>
 License: GPL-2
 
 Files: drivers/staging/octeon-usb/octeon-hcd.c
@@ -63102,6 +63409,10 @@ License: GPL-2
 
 Files: drivers/staging/rtl8192e/rtllib_tx.c
 Copyright: 1999-2019, Intel Corporation.
+License: GPL-2
+
+Files: drivers/staging/rtl8192u/copying
+Copyright: 1989-2016, 2018, Free Software Foundation, Inc.
 License: GPL-2
 
 Files: drivers/staging/rtl8192u/ieee80211/ieee80211.h
@@ -63454,16 +63765,29 @@ Files: drivers/staging/wilc1000/wilc_hif.h
 Copyright: 2012-2018, Microchip Technology Inc., and its subsidiaries
 License: GPL-2
 
-Files: drivers/staging/wlan-ng/*
+Files: drivers/staging/wlan-ng/hfa384x.h
+ drivers/staging/wlan-ng/hfa384x_usb.c
+ drivers/staging/wlan-ng/p80211conv.c
+ drivers/staging/wlan-ng/p80211conv.h
+ drivers/staging/wlan-ng/p80211hdr.h
+ drivers/staging/wlan-ng/p80211ioctl.h
+ drivers/staging/wlan-ng/p80211metadef.h
+ drivers/staging/wlan-ng/p80211metastruct.h
+ drivers/staging/wlan-ng/p80211mgmt.h
+ drivers/staging/wlan-ng/p80211msg.h
+ drivers/staging/wlan-ng/p80211netdev.c
+ drivers/staging/wlan-ng/p80211netdev.h
+ drivers/staging/wlan-ng/p80211req.c
+ drivers/staging/wlan-ng/p80211req.h
+ drivers/staging/wlan-ng/p80211types.h
+ drivers/staging/wlan-ng/p80211wep.c
+ drivers/staging/wlan-ng/prism2fw.c
+ drivers/staging/wlan-ng/prism2mgmt.c
+ drivers/staging/wlan-ng/prism2mgmt.h
+ drivers/staging/wlan-ng/prism2mib.c
+ drivers/staging/wlan-ng/prism2sta.c
 Copyright: 1999, 2002, AbsoluteValue Systems, Inc.
-License: GPL and/or MPL-1.1
-
-Files: drivers/staging/wlan-ng/Kconfig
- drivers/staging/wlan-ng/Makefile
- drivers/staging/wlan-ng/cfg80211.c
- drivers/staging/wlan-ng/prism2usb.c
-Copyright: no-info-found
-License: GPL-2
+License: GPL or MPL-1.1
 
 Files: drivers/staging/wusbcore/*
 Copyright: 2001-2019, Intel Corporation
@@ -63749,7 +64073,7 @@ License: GPL-2
 
 Files: drivers/thermal/intel/intel_quark_dts_thermal.c
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/thermal/kirkwood_thermal.c
 Copyright: 2012, 2016, Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
@@ -63913,7 +64237,7 @@ Copyright: 2001-2019, Intel Corporation
 License: GPL-2
 
 Files: drivers/tty/amiserial.c
-Copyright: 1992-2001, 2003, 
+Copyright: 1992-2001, 2003,
  1991, 1992, Linus Torvalds
 License: GPL-2
 
@@ -64005,7 +64329,7 @@ Copyright: 2006-2008, Jiri Slaby <jirislaby@gmail.com>
 License: GPL-2
 
 Files: drivers/tty/n_gsm.c
-Copyright: 2009
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/tty/n_null.c
@@ -64156,7 +64480,7 @@ License: GPL-2
 
 Files: drivers/tty/serial/8250/serial_cs.c
 Copyright: 1999, David A. Hinds.
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: drivers/tty/serial/altera_jtaguart.c
  drivers/tty/serial/altera_uart.c
@@ -64890,7 +65214,7 @@ License: GPL
 
 Files: drivers/usb/dwc2/*
 Copyright: 2004-2016, Synopsys, Inc.
-License: BSD-3-clause and/or GPL-2+
+License: BSD-3-clause or GPL-2+
 
 Files: drivers/usb/dwc2/Kconfig
  drivers/usb/dwc2/Makefile
@@ -64910,7 +65234,7 @@ License: GPL-2
 
 Files: drivers/usb/dwc2/platform.c
 Copyright: Matthijs Kooijman <matthijs@stdin.nl>
-License: BSD-3-clause and/or GPL-2+
+License: BSD-3-clause or GPL-2+
 
 Files: drivers/usb/dwc3/*
 Copyright: 2007-2019, Texas Instruments Incorporated - http:www.ti.com
@@ -65015,7 +65339,7 @@ License: GPL-2
 Files: drivers/usb/gadget/function/f_mass_storage.c
 Copyright: 2009, Samsung Electronics
  2003-2008, Alan Stern
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/usb/gadget/function/f_midi.c
 Copyright: 2011, Daniel Mack <zonque@gmail.com>
@@ -65064,7 +65388,7 @@ Copyright: 2008, Bryan Wu <cooloney@kernel.org>
 License: GPL-2
 
 Files: drivers/usb/gadget/function/f_uac2.c
-Copyright: 2011
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/usb/gadget/function/f_uvc.c
@@ -65076,7 +65400,7 @@ Copyright: 2009, 2010
 License: GPL-2
 
 Files: drivers/usb/gadget/function/ndis.h
-Copyright: ED
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/usb/gadget/function/rndis.c
@@ -65093,7 +65417,7 @@ Copyright: 2011, 2016
 License: GPL-2
 
 Files: drivers/usb/gadget/function/u_audio.h
-Copyright: 2016
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/usb/gadget/function/u_ether.c
@@ -65265,7 +65589,7 @@ Copyright: 2013, Faraday Technology Corporation
 License: GPL-2
 
 Files: drivers/usb/gadget/udc/fsl_mxc_udc.c
-Copyright: 2009
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/usb/gadget/udc/fsl_qe_udc.c
@@ -65796,7 +66120,7 @@ Copyright: 2013, Xenia Ragiadakou
 License: GPL-2
 
 Files: drivers/usb/image/mdc800.c
-Copyright: 1999
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/usb/image/microtek.c
@@ -65857,7 +66181,7 @@ License: GPL-2
 
 Files: drivers/usb/misc/emi26.c
  drivers/usb/misc/emi62.c
-Copyright: 2002
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/usb/misc/ezusb.c
@@ -65907,12 +66231,12 @@ License: GPL-2
 
 Files: drivers/usb/misc/sisusbvga/sisusb_init.c
 Copyright: 2001-2005, Thomas Winischhofer, Vienna, Austria
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: drivers/usb/misc/sisusbvga/sisusb_init.h
  drivers/usb/misc/sisusbvga/sisusb_struct.h
 Copyright: 2001-2005, Thomas Winischhofer, Vienna, Austria
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/usb/misc/trancevibrator.c
 Copyright: 2006, Sam Hocevar <sam@zoy.org>
@@ -66851,7 +67175,7 @@ Copyright: 2012, Free Electrons
 License: GPL-2
 
 Files: drivers/video/backlight/ili922x.c
-Copyright: 2008
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/video/backlight/ili9320.c
@@ -67055,12 +67379,12 @@ Files: drivers/video/fbdev/au1100fb.c
  drivers/video/fbdev/au1100fb.h
 Copyright: 2002, MontaVista Software
  2002, Alchemy Semiconductor
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/video/fbdev/au1200fb.c
  drivers/video/fbdev/au1200fb.h
 Copyright: 2004, 2005, AMD
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: drivers/video/fbdev/broadsheetfb.c
  drivers/video/fbdev/hecubafb.c
@@ -67449,7 +67773,7 @@ Copyright: 2008-2012, 2014-2017, Marvell Technology Group Ltd.
 License: GPL-2
 
 Files: drivers/video/fbdev/mx3fb.c
-Copyright: 2008, 2017, 
+Copyright: 2008, 2017,
  2004-2007, 2016, Freescale Semiconductor, Inc.
 License: GPL-2
 
@@ -67633,7 +67957,7 @@ Copyright: Russell King. / 2004, Jeff Lackey. / 2004, Jean-Frederic Clere. / 200
 License: GPL-2
 
 Files: drivers/video/fbdev/q40fb.c
-Copyright: 2001
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/video/fbdev/s1d13xxxfb.c
@@ -67702,7 +68026,7 @@ License: GPL-2
 
 Files: drivers/video/fbdev/sis/*
 Copyright: 2001-2005, Thomas Winischhofer, Vienna, Austria
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: drivers/video/fbdev/sis/Makefile
 Copyright: no-info-found
@@ -68698,7 +69022,7 @@ License: GPL-2
 Files: drivers/xen/acpi.c
 Copyright: 2011, Yu Ke ke.yu@intel.com
  2011, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/arm-device.c
 Copyright: 2015, Linaro Limited, Shannon Zhao
@@ -68709,7 +69033,7 @@ Copyright: 2010, Daniel Kiper
  2005, Dan M. Smith, IBM Corporation
  2003, B Dragovic
  2003, 2004, M Williamson, K Fraser
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/efi.c
 Copyright: 2014, Oracle Co., Daniel Kiper
@@ -68723,7 +69047,7 @@ License: GPL-2
 
 Files: drivers/xen/events/events_fifo.c
 Copyright: 2013, Citrix Systems R&D ltd.
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: drivers/xen/events/events_internal.h
 Copyright: 2013, Citrix Systems R&D Ltd.
@@ -68732,7 +69056,7 @@ License: GPL-2
 Files: drivers/xen/evtchn.c
 Copyright: 2004, Steven Smith
  2004, 2005, K A Fraser
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/features.c
 Copyright: 2006, Ian Campbell, XenSource Inc.
@@ -68753,12 +69077,12 @@ License: GPL-2
 Files: drivers/xen/grant-table.c
 Copyright: 2005, 2006, Christopher Clark
  2004, 2005, K A Fraser
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/mcelog.c
  drivers/xen/pcpu.c
 Copyright: 2012, Intel Corporation
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/mem-reservation.c
 Copyright: 2018, Oleksandr Andrushchenko, EPAM Systems Inc.
@@ -68797,7 +69121,7 @@ Copyright: 2017, Stefano Stabellini <stefano@aporeto.com>
 License: GPL-2
 
 Files: drivers/xen/swiotlb-xen.c
-Copyright: 2010
+Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/xen/sys-hypervisor.c
@@ -68817,7 +69141,7 @@ Files: drivers/xen/xen-balloon.c
 Copyright: 2005, Dan M. Smith, IBM Corporation
  2003, B Dragovic
  2003, 2004, M Williamson, K Fraser
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/xen-front-pgdir-shbuf.c
 Copyright: 2016-2018, EPAM Systems Inc.
@@ -68825,7 +69149,7 @@ License: GPL-2
 
 Files: drivers/xen/xen-scsiback.c
 Copyright: 2008, FUJITSU Limited
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/xen-stub.c
 Copyright: 2012, Oracle Inc
@@ -68835,38 +69159,38 @@ License: GPL-2
 Files: drivers/xen/xenbus/xenbus.h
 Copyright: 2005, XenSource Ltd.
  2005, Rusty Russell, IBM Corporation
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/xenbus/xenbus_client.c
 Copyright: 2005, XenSource Ltd
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/xenbus/xenbus_comms.c
  drivers/xen/xenbus/xenbus_xs.c
 Copyright: 2005, Rusty Russell, IBM Corporation
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/xenbus/xenbus_dev_frontend.c
 Copyright: 2005, Rusty Russell, IBM Corporation
  2005, Christian Limpach
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/xenbus/xenbus_probe.c
 Copyright: 2005, Rusty Russell, IBM Corporation
  2005, Mike Wray, Hewlett-Packard
  2005, 2006, XenSource Ltd
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/xenbus/xenbus_probe_backend.c
 Copyright: 2007, Solarflare Communications, Inc.
  2005, Rusty Russell, IBM Corporation
  2005, Mike Wray, Hewlett-Packard
  2005, 2006, XenSource Ltd
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/xen/xlate_mmu.c
 Copyright: 2015, Citrix Systems R&D Ltd.
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: drivers/zorro/gen-devlist.c
 Copyright: 1995-2003, Geert Uytterhoeven <geert@linux-m68k.org>
@@ -68886,6 +69210,10 @@ Files: drivers/zorro/zorro-driver.c
  drivers/zorro/zorro-sysfs.c
  drivers/zorro/zorro.c
 Copyright: 1995-2009, Geert Uytterhoeven
+License: GPL-2
+
+Files: fs/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: fs/9p/*
@@ -69729,7 +70057,7 @@ Copyright: 2018, Gao Xiang <gaoxiang25@huawei.com>
 License: GPL-2
 
 Files: fs/eventpoll.c
-Copyright: 2001
+Copyright: no-info-found
 License: GPL-2
 
 Files: fs/exportfs/expfs.c
@@ -69800,7 +70128,7 @@ Copyright: 2001-2003, Andreas Gruenbacher, <a.gruenbacher@computer.org>
 License: GPL-2
 
 Files: fs/ext4/block_validity.c
-Copyright: 2009
+Copyright: no-info-found
 License: GPL-2
 
 Files: fs/ext4/ext4_extents.h
@@ -69923,7 +70251,7 @@ Copyright: 2004, OGAWA Hirofumi
 License: GPL-2
 
 Files: fs/fat/namei_vfat.c
-Copyright: 1995
+Copyright: no-info-found
 License: GPL-2
 
 Files: fs/file.c
@@ -69938,7 +70266,7 @@ License: GPL-2
 Files: fs/freevxfs/*
 Copyright: 2016, Krzysztof Blaszkowski
  2000, 2001, Christoph Hellwig.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: fs/freevxfs/Kconfig
  fs/freevxfs/Makefile
@@ -69953,7 +70281,7 @@ Files: fs/freevxfs/vxfs_bmap.c
  fs/freevxfs/vxfs_olt.h
  fs/freevxfs/vxfs_subr.c
 Copyright: 2000, 2001, Christoph Hellwig.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: fs/fscache/*
 Copyright: 2001-2019, Red Hat, Inc.
@@ -70173,19 +70501,15 @@ Copyright: 1999, 2000, Red Hat Software
 License: GPL-2
 
 Files: fs/jffs2/*
-Copyright: 2001-2010, David Woodhouse <dwmw2@infradead.org>
- 2001-2007, Red Hat, Inc.
-License: GPL-2
+Copyright: 2001-2007, Red Hat, Inc. and others
+License: GPL-2 or GPL-2+
 
 Files: fs/jffs2/Kconfig
  fs/jffs2/Makefile
+ fs/jffs2/README.Locking
  fs/jffs2/TODO
 Copyright: no-info-found
 License: GPL-2
-
-Files: fs/jffs2/LICENCE
-Copyright: 2001-2007, Red Hat, Inc. and others
-License: GPL-2+
 
 Files: fs/jffs2/acl.c
  fs/jffs2/acl.h
@@ -70195,6 +70519,25 @@ Files: fs/jffs2/acl.c
  fs/jffs2/xattr_trusted.c
  fs/jffs2/xattr_user.c
 Copyright: 2006, NEC Corporation
+License: GPL-2
+
+Files: fs/jffs2/background.c
+ fs/jffs2/build.c
+ fs/jffs2/compr_rtime.c
+ fs/jffs2/compr_rubin.c
+ fs/jffs2/compr_zlib.c
+ fs/jffs2/debug.c
+ fs/jffs2/debug.h
+ fs/jffs2/dir.c
+ fs/jffs2/erase.c
+ fs/jffs2/file.c
+ fs/jffs2/fs.c
+ fs/jffs2/gc.c
+ fs/jffs2/ioctl.c
+ fs/jffs2/jffs2_fs_i.h
+ fs/jffs2/jffs2_fs_sb.h
+Copyright: 2001-2010, David Woodhouse <dwmw2@infradead.org>
+ 2001-2007, Red Hat, Inc.
 License: GPL-2
 
 Files: fs/jffs2/compr.c
@@ -70894,7 +71237,7 @@ Copyright: 2001-2019, Red Hat, Inc.
 License: GPL-2
 
 Files: fs/proc/proc_net.c
-Copyright: 2007
+Copyright: no-info-found
 License: GPL-2
 
 Files: fs/proc/proc_tty.c
@@ -70943,7 +71286,7 @@ Copyright: 1999, 2000, Linus Torvalds.
 License: GPL
 
 Files: fs/reiserfs/*
-Copyright: 2000, Hans Reiser, licensing governedreiserfs/README
+Copyright: label on that
 License: GPL-2
 
 Files: fs/reiserfs/Kconfig
@@ -70957,6 +71300,26 @@ Files: fs/reiserfs/Kconfig
  fs/reiserfs/xattr_trusted.c
  fs/reiserfs/xattr_user.c
 Copyright: no-info-found
+License: GPL-2
+
+Files: fs/reiserfs/bitmap.c
+ fs/reiserfs/dir.c
+ fs/reiserfs/do_balan.c
+ fs/reiserfs/file.c
+ fs/reiserfs/fix_node.c
+ fs/reiserfs/ibalance.c
+ fs/reiserfs/inode.c
+ fs/reiserfs/ioctl.c
+ fs/reiserfs/item_ops.c
+ fs/reiserfs/lbalance.c
+ fs/reiserfs/namei.c
+ fs/reiserfs/objectid.c
+ fs/reiserfs/prints.c
+ fs/reiserfs/procfs.c
+ fs/reiserfs/resize.c
+ fs/reiserfs/stree.c
+ fs/reiserfs/super.c
+Copyright: 2000, Hans Reiser, licensing governedreiserfs/README
 License: GPL-2
 
 Files: fs/reiserfs/journal.c
@@ -71028,7 +71391,7 @@ Files: fs/squashfs/decompressor_multi.c
  fs/squashfs/file_cache.c
  fs/squashfs/file_direct.c
  fs/squashfs/page_actor.c
-Copyright: 2013
+Copyright: no-info-found
 License: GPL-2
 
 Files: fs/squashfs/lz4_wrapper.c
@@ -71041,7 +71404,7 @@ License: GPL-2
 
 Files: fs/squashfs/xattr.c
  fs/squashfs/xattr_id.c
-Copyright: 2010
+Copyright: no-info-found
 License: GPL-2
 
 Files: fs/squashfs/xz_wrapper.c
@@ -71195,7 +71558,7 @@ Copyright: 1991-2003, Free Software Foundation, Inc.
 License: LGPL-2+
 
 Files: fs/ufs/*
-Copyright: 1998
+Copyright: no-info-found
 License: GPL-2
 
 Files: fs/ufs/Kconfig
@@ -71205,7 +71568,7 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: fs/ufs/dir.c
-Copyright: 1996
+Copyright: no-info-found
 License: GPL-2
 
 Files: fs/ufs/swab.h
@@ -71404,6 +71767,10 @@ Copyright: 2008, Dave Chinner
  2000-2002, 2005, Silicon Graphics, Inc.
 License: GPL-2
 
+Files: include/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: include/acpi/*
 Copyright: 2000-2019, Intel Corp.
 License: GPL-2
@@ -71520,7 +71887,7 @@ License: GPL-2
 
 Files: include/clocksource/timer-ti-dm.h
 Copyright: 2010, Texas Instruments Incorporated - http:www.ti.com
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: include/crypto/acompress.h
  include/crypto/akcipher.h
@@ -71553,7 +71920,7 @@ License: GPL-2
 
 Files: include/crypto/drbg.h
 Copyright: Stephan Mueller <smueller@chronox.de>, 2014
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: include/crypto/engine.h
 Copyright: 2016, Baolin Wang <baolin.wang@linaro.org>
@@ -71995,7 +72362,7 @@ License: GPL-2
 
 Files: include/dt-bindings/clock/gxbb-aoclkc.h
 Copyright: 2016, BayLibre, SAS.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/dt-bindings/clock/hi3516cv300-clock.h
  include/dt-bindings/clock/hi3519-clock.h
@@ -72047,7 +72414,7 @@ Copyright: 2017, 2018, NXP.
 License: GPL-2
 
 Files: include/dt-bindings/clock/imx7ulp-clock.h
-Copyright: 2008, 2017, 
+Copyright: 2008, 2017,
  2004-2007, 2016, Freescale Semiconductor, Inc.
 License: GPL-2
 
@@ -72321,17 +72688,17 @@ License: GPL-2
 Files: include/dt-bindings/clock/sun4i-a10-ccu.h
  include/dt-bindings/clock/sun7i-a20-ccu.h
 Copyright: 2017, Priit Laes <plaes@plaes.org>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/clock/sun4i-a10-pll2.h
 Copyright: 2012-2015, Maxime Ripard
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/clock/sun50i-a64-ccu.h
  include/dt-bindings/clock/sun8i-a23-a33-ccu.h
  include/dt-bindings/clock/sun8i-h3-ccu.h
 Copyright: 2016, Maxime Ripard <maxime.ripard@free-electrons.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/clock/sun50i-h6-ccu.h
  include/dt-bindings/clock/sun8i-de2.h
@@ -72353,15 +72720,15 @@ Files: include/dt-bindings/clock/sun6i-a31-ccu.h
  include/dt-bindings/clock/sun9i-a80-de.h
  include/dt-bindings/clock/sun9i-a80-usb.h
 Copyright: 2014-2017, Chen-Yu Tsai <wens@csie.org>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/clock/sun8i-r-ccu.h
 Copyright: 2016, 2017, Icenowy Zheng <icenowy@aosc.xyz>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/clock/sun8i-r40-ccu.h
 Copyright: 2017, Icenowy Zheng <icenowy@aosc.io>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/clock/sun8i-tcon-top.h
 Copyright: 2017-2019, Jernej Skrabec <jernej.skrabec@siol.net>
@@ -72370,7 +72737,7 @@ License: GPL-2
 Files: include/dt-bindings/clock/sun8i-v3s-ccu.h
 Copyright: 2016, Maxime Ripard <maxime.ripard@free-electrons.com>
  2016, Icenowy Zheng <icenowy@aosc.xyz>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/clock/xlnx-zynqmp-clk.h
 Copyright: 2007-2019, Xilinx, Inc.
@@ -72391,7 +72758,7 @@ License: GPL-2
 
 Files: include/dt-bindings/dma/axi-dmac.h
 Copyright: no-info-found
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/dma/nbpfaxi.h
 Copyright: 2013, 2014, Renesas Electronics Europe Ltd.
@@ -72399,7 +72766,7 @@ License: GPL-2
 
 Files: include/dt-bindings/dma/sun4i-a10.h
 Copyright: 2012-2015, Maxime Ripard
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/firmware/*
 Copyright: 2016-2019, NXP
@@ -72584,7 +72951,7 @@ License: GPL-2
 
 Files: include/dt-bindings/pinctrl/pads-imx8qm.h
  include/dt-bindings/pinctrl/pads-imx8qxp.h
-Copyright: 2008, 2017, 
+Copyright: 2008, 2017,
  2004-2007, 2016, Freescale Semiconductor, Inc.
 License: GPL-2
 
@@ -72607,7 +72974,7 @@ License: GPL-2
 
 Files: include/dt-bindings/pinctrl/sun4i-a10.h
 Copyright: 2012-2015, Maxime Ripard
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/power/imx7-power.h
 Copyright: 2017, Impinj
@@ -72783,7 +73150,7 @@ License: GPL-2
 
 Files: include/dt-bindings/reset/gxbb-aoclkc.h
 Copyright: 2016, BayLibre, SAS.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/dt-bindings/reset/imx7-reset.h
 Copyright: 2017, Impinj, Inc.
@@ -72823,13 +73190,13 @@ License: GPL-2
 
 Files: include/dt-bindings/reset/sun4i-a10-ccu.h
 Copyright: 2017, Priit Laes <plaes@plaes.org>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/reset/sun50i-a64-ccu.h
  include/dt-bindings/reset/sun8i-a23-a33-ccu.h
  include/dt-bindings/reset/sun8i-h3-ccu.h
 Copyright: 2016, Maxime Ripard <maxime.ripard@free-electrons.com>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/reset/sun50i-h6-ccu.h
  include/dt-bindings/reset/sun8i-de2.h
@@ -72851,20 +73218,20 @@ Files: include/dt-bindings/reset/sun6i-a31-ccu.h
  include/dt-bindings/reset/sun9i-a80-de.h
  include/dt-bindings/reset/sun9i-a80-usb.h
 Copyright: 2014-2017, Chen-Yu Tsai <wens@csie.org>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/reset/sun8i-r-ccu.h
 Copyright: 2016, 2017, Icenowy Zheng <icenowy@aosc.xyz>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/reset/sun8i-r40-ccu.h
 Copyright: 2017, Icenowy Zheng <icenowy@aosc.io>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/reset/sun8i-v3s-ccu.h
 Copyright: 2016, Maxime Ripard <maxime.ripard@free-electrons.com>
  2016, Icenowy Zheng <icenowy@aosc.xyz>
-License: Expat and/or GPL-2+
+License: Expat or GPL-2+
 
 Files: include/dt-bindings/reset/tegra186-reset.h
  include/dt-bindings/reset/tegra194-reset.h
@@ -73258,7 +73625,7 @@ License: GPL-2
 Files: include/linux/can/can-ml.h
 Copyright: 2017, Pengutronix, Marc Kleine-Budde <kernel@pengutronix.de>
  2002-2007, Volkswagen Group Electronic Research
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/linux/can/core.h
 Copyright: 2002-2017, Volkswagen Group Electronic Research
@@ -73698,7 +74065,7 @@ Copyright: Sun Microsystems 2008, / 2002, Intel (eli.kupermann@intel.com, / 2001
 License: GPL-2
 
 Files: include/linux/eventpoll.h
-Copyright: 2001
+Copyright: no-info-found
 License: GPL-2
 
 Files: include/linux/evm.h
@@ -73751,7 +74118,7 @@ License: GPL-2
 
 Files: include/linux/firmware/imx/sci.h
  include/linux/firmware/imx/types.h
-Copyright: 2008, 2017, 
+Copyright: 2008, 2017,
  2004-2007, 2016, Freescale Semiconductor, Inc.
 License: GPL-2
 
@@ -73761,7 +74128,7 @@ Copyright: 2016-2019, NXP
 License: GPL-2
 
 Files: include/linux/firmware/imx/svc/misc.h
-Copyright: 2008, 2017, 
+Copyright: 2008, 2017,
  2004-2007, 2016, Freescale Semiconductor, Inc.
 License: GPL-2
 
@@ -73950,7 +74317,7 @@ Files: include/linux/hil.h
  include/linux/hil_mlc.h
  include/linux/hp_sdc.h
 Copyright: 2001, Brian S. Julin
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: include/linux/hmm.h
 Copyright: 2001, 2005, 2006, 2008-2019, Red Hat Inc.
@@ -74364,7 +74731,7 @@ Copyright: 1998-2000, 2017, Red Hat, Inc
 License: GPL-2
 
 Files: include/linux/jhash.h
-Copyright: 2006
+Copyright: no-info-found
 License: GPL-2
 
 Files: include/linux/jump_label.h
@@ -74509,7 +74876,7 @@ License: GPL-2+
 Files: include/linux/lz4.h
 Copyright: 2016, Sven Schmidt <4sschmid@informatik.uni-hamburg.de>
  2013, LG Electronics, Kyungsik Lee <kyungsik.lee@lge.com>
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: include/linux/lzo.h
 Copyright: 1996-2012, Markus F.X.J. Oberhumer <markus@oberhumer.com>
@@ -74982,7 +75349,7 @@ License: GPL-2
 
 Files: include/linux/mfd/tps65010.h
 Copyright: 2004, Dirk Behme <dirk.behme@de.bosch.com>
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: include/linux/mfd/tps6507x.h
 Copyright: 2009, 2010, RidgeRun (todd.fischer@ridgerun.com)
@@ -75135,7 +75502,7 @@ License: GPL-2
 
 Files: include/linux/mtd/ftl.h
 Copyright: 1999, David A. Hinds.
-License: GPL-2 and/or MPL-1.1
+License: GPL-2 or MPL-1.1
 
 Files: include/linux/mtd/hyperbus.h
 Copyright: 2007-2019, Texas Instruments Incorporated - http:www.ti.com
@@ -75311,12 +75678,12 @@ License: GPL-2
 Files: include/linux/ntb.h
 Copyright: 2016, 2017, T-Platforms.
  2015, EMC Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/linux/ntb_transport.h
 Copyright: 2015, EMC Corporation.
  2012, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/linux/nvme-fc-driver.h
 Copyright: 2016, Avago Technologies
@@ -75397,7 +75764,7 @@ License: GPL-2
 Files: include/linux/parman.h
 Copyright: 2017, Mellanox Technologies.
  2017, Jiri Pirko <jiri@mellanox.com>
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/linux/pata_arasan_cf_data.h
 Copyright: 2009-2015, ST Microelectronics
@@ -75855,13 +76222,13 @@ Copyright: 2001-2019, Intel Corporation
 License: GPL-2
 
 Files: include/linux/platform_data/microchip-ksz.h
-Copyright: 2017
+Copyright: no-info-found
 License: ISC
 
 Files: include/linux/platform_data/mlxreg.h
 Copyright: 2016-2018, Vadim Pasternak <vadimp@mellanox.com>
  2016-2018, Mellanox Technologies.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/linux/platform_data/mmc-esdhc-imx.h
 Copyright: 2010, Wolfram Sang <w.sang@pengutronix.de>
@@ -75892,7 +76259,7 @@ License: GPL-2
 
 Files: include/linux/platform_data/pwm_omap_dmtimer.h
 Copyright: 2010, Texas Instruments Incorporated - http:www.ti.com
-License: BSD~unspecified and/or GPL-2+
+License: BSD~unspecified or GPL-2+
 
 Files: include/linux/platform_data/pxa_sdhci.h
 Copyright: 2010, 2012-2018, Marvell
@@ -75998,7 +76365,7 @@ License: GPL-2
 
 Files: include/linux/platform_data/usb-omap.h
 Copyright: 2012, Texas Instruments Incorporated - http:www.ti.com
-License: BSD~unspecified and/or GPL-2
+License: BSD~unspecified or GPL-2
 
 Files: include/linux/platform_data/usb-pxa3xx-ulpi.h
 Copyright: 2008-2010, CompuLab Ltd.
@@ -76028,7 +76395,7 @@ License: GPL-2
 Files: include/linux/platform_data/x86/mlxcpld.h
 Copyright: 2016, Michael Shych <michaels@mellanox.com>
  2016, Mellanox Technologies.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/linux/platform_data/x86/pmc_atom.h
 Copyright: 1999-2019, Intel Corporation.
@@ -76078,7 +76445,7 @@ License: GPL-2
 
 Files: include/linux/pnfs_osd_xdr.h
 Copyright: 2007, Panasas Inc. [year of first publication]
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/linux/pnp.h
 Copyright: Adam Belay <ambx1@neo.rr.com> / 2008, Hewlett-Packard Development Company, L.P.
@@ -76433,7 +76800,7 @@ Files: include/linux/scif.h
  include/linux/sfi.h
  include/linux/sfi_acpi.h
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/linux/sctp.h
 Copyright: IBM Corp. 2001, 2004 / 2001, Nokia, Inc. / 2001, La Monte H.P. Yarroll / 2001, Intel Corp. / 1999-2001, Motorola, Inc. / 1999-2000, Cisco, Inc.
@@ -76687,7 +77054,7 @@ License: GPL-2
 
 Files: include/linux/sunrpc/bc_xprt.h
 Copyright: 2008, NetApp.
-License: BSD~unspecified and/or GPL-2
+License: BSD~unspecified or GPL-2
 
 Files: include/linux/sunrpc/cache.h
 Copyright: 2002, Neil Brown <neilb@cse.unsw.edu.au>
@@ -76709,12 +77076,12 @@ License: GPL-2
 Files: include/linux/sunrpc/rpc_rdma.h
 Copyright: 2014-2018, Oracle.
  2003-2007, Network Appliance, Inc.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/linux/sunrpc/svc_rdma.h
  include/linux/sunrpc/xprtrdma.h
 Copyright: 2003-2007, Network Appliance, Inc.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/linux/sunrpc/timer.h
 Copyright: 2000-2002, Trond Myklebust <trond.myklebust@fys.uio.no>
@@ -76884,7 +77251,7 @@ License: GPL-2
 
 Files: include/linux/usb/cdc_ncm.h
 Copyright: ST-Ericsson 2010-2012
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: include/linux/usb/composite.h
  include/linux/usb/ehci_def.h
@@ -77003,7 +77370,7 @@ Copyright: 2005, Pete Zaitcev <zaitcev@redhat.com>
 License: GPL-2
 
 Files: include/linux/usbdevice_fs.h
-Copyright: 2000
+Copyright: no-info-found
 License: GPL-2+
 
 Files: include/linux/vbox_utils.h
@@ -77039,7 +77406,7 @@ License: GPL-2
 
 Files: include/linux/videodev2.h
 Copyright: 1999-2012, the contributors
-License: BSD-3-clause and/or GPL-2+
+License: BSD-3-clause or GPL-2+
 
 Files: include/linux/virtio_caif.h
 Copyright: ST-Ericsson AB 2012
@@ -77109,7 +77476,7 @@ License: GPL-2
 
 Files: include/linux/xxhash.h
 Copyright: 2012-2016, Yann Collet.
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: include/linux/yam.h
 Copyright: 1998, Frederic Rible F1OAT (frible@teaser.fr)
@@ -77484,7 +77851,7 @@ License: GPL-2
 
 Files: include/net/6lowpan.h
 Copyright: 2011, Siemens AG
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/net/9p/*
 Copyright: 2008, Eric Van Hensbergen <ericvh@gmail.com>
@@ -77605,7 +77972,7 @@ Copyright: 2012, Michael D. Taht <dave.taht@bufferbloat.net>
  2012, 2015, Eric Dumazet <edumazet@google.com>
  2011, 2012, Van Jacobson <van@pollere.net>
  2011, 2012, Kathleen Nichols <nichols@pollere.com>
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/net/devlink.h
 Copyright: 2016, Mellanox Technologies.
@@ -77815,7 +78182,7 @@ License: GPL-2
 
 Files: include/net/tipc.h
 Copyright: 2014-2017, Ericsson AB
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/net/tls.h
 Copyright: 2016, 2017, Mellanox Technologies.
@@ -77848,7 +78215,7 @@ License: GPL-2
 
 Files: include/rdma/*
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/rdma/ib.h
  include/rdma/ib_marshall.h
@@ -78074,7 +78441,7 @@ License: GPL-2
 
 Files: include/soc/fsl/*
 Copyright: 2008-2016, Freescale Semiconductor, Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: include/soc/fsl/dpaa2-fd.h
  include/soc/fsl/dpaa2-global.h
@@ -78091,7 +78458,7 @@ Copyright: 2002-2016, Freescale Semiconductor, Inc.
 License: GPL-2
 
 Files: include/soc/fsl/qe/immap_qe.h
-Copyright: 2006
+Copyright: no-info-found
 License: GPL-2
 
 Files: include/soc/imx/*
@@ -78711,11 +79078,11 @@ License: GPL-2
 
 Files: include/uapi/linux/can.h
 Copyright: 2002-2017, 2019, Volkswagen Group Electronic Research
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/uapi/linux/can/*
 Copyright: 2002-2017, 2019, Volkswagen Group Electronic Research
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/uapi/linux/can/j1939.h
 Copyright: 2010, 2011, EIA Electronics
@@ -78872,7 +79239,7 @@ Copyright: Sun Microsystems 2008, / 2002, Intel (eli.kupermann@intel.com, / 2001
 License: GPL-2
 
 Files: include/uapi/linux/eventpoll.h
-Copyright: 2001
+Copyright: no-info-found
 License: GPL-2+
 
 Files: include/uapi/linux/fiemap.h
@@ -78902,7 +79269,7 @@ License: GPL-2
 
 Files: include/uapi/linux/fuse.h
 Copyright: 2001-2008, Miklos Szeredi <miklos@szeredi.hu>
-License: BSD-2-clause and/or GPL
+License: BSD-2-clause or GPL
 
 Files: include/uapi/linux/gameport.h
  include/uapi/linux/input.h
@@ -79253,7 +79620,7 @@ Copyright: 2000, 2002, Harald Welte <laforge@gnumonks.org>
 License: GPL-2
 
 Files: include/uapi/linux/netfilter/xt_osf.h
-Copyright: 2003
+Copyright: no-info-found
 License: GPL-2+
 
 Files: include/uapi/linux/netfilter_arp.h
@@ -79438,14 +79805,14 @@ Files: include/uapi/linux/rio_cm_cdev.h
 Copyright: 2015, RapidIO Trade Association
  2015, Prodrive Technologies
  2015, Integrated Device Technology Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: include/uapi/linux/rio_mport_cdev.h
 Copyright: 2015, Texas Instruments Incorporated
  2015, RapidIO Trade Association
  2015, Prodrive Technologies
  2015, 2016, Integrated Device Technology Inc.
-License: BSD-3-clause and/or GPL
+License: BSD-3-clause or GPL
 
 Files: include/uapi/linux/rseq.h
 Copyright: 2015-2018, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>
@@ -79458,7 +79825,7 @@ License: GPL-2
 
 Files: include/uapi/linux/scif_ioctl.h
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/uapi/linux/sctp.h
 Copyright: IBM Corp. 2001, 2004 / 2002, Intel Corp. / 1999-2001, Motorola, Inc. / 1999-2000, Cisco, Inc.
@@ -79558,11 +79925,11 @@ Files: include/uapi/linux/tipc.h
  include/uapi/linux/tipc_config.h
 Copyright: 2004-2008, 2010-2014, Wind River Systems
  1995-2018, Ericsson AB
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/uapi/linux/tipc_netlink.h
 Copyright: 2014-2017, Ericsson AB
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/uapi/linux/tls.h
 Copyright: 2006, 2007, 2011-2019, Mellanox Technologies.
@@ -79630,12 +79997,12 @@ License: GPL-2
 
 Files: include/uapi/linux/v4l2-common.h
 Copyright: 2012, Nokia Corporation
-License: BSD-3-clause and/or GPL-2+
+License: BSD-3-clause or GPL-2+
 
 Files: include/uapi/linux/v4l2-controls.h
  include/uapi/linux/videodev2.h
 Copyright: 1999-2012, the contributors
-License: BSD-3-clause and/or GPL-2+
+License: BSD-3-clause or GPL-2+
 
 Files: include/uapi/linux/v4l2-dv-timings.h
 Copyright: 2012-2016, Hans Verkuil <hans.verkuil@cisco.com>
@@ -79772,7 +80139,7 @@ License: GPL-2
 
 Files: include/uapi/rdma/bnxt_re-abi.h
 Copyright: 2016, 2017, Broadcom.
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: include/uapi/rdma/cxgb3-abi.h
  include/uapi/rdma/cxgb4-abi.h
@@ -79785,14 +80152,13 @@ License: GPL-2
 
 Files: include/uapi/rdma/hfi/*
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: include/uapi/rdma/hns-abi.h
 Copyright: 2014-2019, Hisilicon Limited.
 License: GPL-2
 
 Files: include/uapi/rdma/i40iw-abi.h
- include/uapi/rdma/nes-abi.h
 Copyright: 2006-2016, Intel Corporation.
  2005, Topspin Communications.
  2005, Open Grid Computing, Inc.
@@ -79942,7 +80308,7 @@ License: GPL
 
 Files: include/uapi/xen/*
 Copyright: 2002-2005, K A Fraser
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: include/uapi/xen/gntalloc.h
 Copyright: no-info-found
@@ -79951,7 +80317,7 @@ License: public-domain
 Files: include/uapi/xen/gntdev.h
 Copyright: 2018, Oleksandr Andrushchenko, EPAM Systems Inc.
  2007, D G Murray
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: include/video/atmel_lcdc.h
 Copyright: 2004-2011, 2013-2016, Atmel Corporation
@@ -80103,11 +80469,11 @@ License: GPL-2
 Files: include/xen/acpi.h
 Copyright: 2011, Yu Ke <ke.yu@intel.com>
  2011, Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: include/xen/arm/hypercall.h
 Copyright: no-info-found
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: include/xen/features.h
 Copyright: 2006, Ian Campbell
@@ -80116,7 +80482,7 @@ License: GPL-2
 Files: include/xen/grant_table.h
 Copyright: 2005, 2006, Christopher Clark
  2004, 2005, K A Fraser
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: include/xen/interface/*
 Copyright: 2005, 2006, Keir Fraser <keir@xensource.com>
@@ -80245,11 +80611,15 @@ License: GPL-2
 Files: include/xen/xenbus.h
 Copyright: 2005, XenSource Ltd.
  2005, Rusty Russell, IBM Corporation
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: include/xen/xenbus_dev.h
 Copyright: 2011, Bastian Blank <waldi@debian.org>
-License: Expat and/or GPL-2
+License: Expat or GPL-2
+
+Files: init/*
+Copyright: no-info-found
+License: GPL-2
 
 Files: init/calibrate.c
  init/main.c
@@ -80262,6 +80632,10 @@ License: GPL-2
 
 Files: init/version.c
 Copyright: 1992, 1997, 2002, Theodore Tso
+License: GPL-2
+
+Files: ipc/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: ipc/compat.c
@@ -80281,7 +80655,7 @@ Copyright: 2004, IBM Deutschland Entwicklung GmbH, IBM Corporation
 License: GPL-2
 
 Files: ipc/ipc_sysctl.c
-Copyright: 2007
+Copyright: no-info-found
 License: GPL-2
 
 Files: ipc/mq_sysctl.c
@@ -80322,6 +80696,10 @@ License: GPL-2
 Files: ipc/util.h
 Copyright: 1999, Manfred Spraul <manfred@colorfullife.com>
  1999, Christoph Rohland
+License: GPL-2
+
+Files: kernel/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: kernel/acct.c
@@ -81205,11 +81583,15 @@ Copyright: Jay Lan
 License: GPL-2
 
 Files: kernel/utsname_sysctl.c
-Copyright: 2007
+Copyright: no-info-found
 License: GPL-2
 
 Files: kernel/workqueue.c
 Copyright: 1997-2000, 2002, 2008, Ingo Molnar
+License: GPL-2
+
+Files: lib/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: lib/842/842_compress.c
@@ -81388,7 +81770,7 @@ Copyright: 2006, PathScale, Inc.
 License: GPL-2
 
 Files: lib/kfifo.c
-Copyright: 2009
+Copyright: no-info-found
 License: GPL-2
 
 Files: lib/klist.c
@@ -81518,7 +81900,7 @@ Files: lib/parman.c
  lib/test_parman.c
 Copyright: 2017, Mellanox Technologies.
  2017, Jiri Pirko <jiri@mellanox.com>
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: lib/plist.c
 Copyright: MontaVista Software, Inc. / 2005, Thomas Gleixner <tglx@linutronix.de> / 2002-2003, Intel Corp
@@ -81712,7 +82094,7 @@ License: GPL-2
 
 Files: lib/xxhash.c
 Copyright: 2012-2016, Yann Collet.
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: lib/xz/xz_dec_syms.c
 Copyright: no-info-found
@@ -81739,7 +82121,7 @@ License: GPL-2
 
 Files: lib/zstd/*
 Copyright: 2012-2016, Yann Collet.
-License: BSD-2-clause and/or GPL-2
+License: BSD-2-clause or GPL-2
 
 Files: lib/zstd/Makefile
 Copyright: no-info-found
@@ -81756,6 +82138,10 @@ License: GPL-2
 
 Files: lib/zstd/zstd_opt.h
 Copyright: 2016, -present, Przemyslaw Skibinski, Yann Collet, Facebook, Inc.
+License: GPL-2
+
+Files: mm/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: mm/balloon_compaction.c
@@ -82042,6 +82428,10 @@ Files: mm/zswap.c
 Copyright: 2012, Seth Jennings <sjenning@linux.vnet.ibm.com>
 License: GPL-2
 
+Files: net/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: net/6lowpan/core.c
  net/6lowpan/ndisc.c
 Copyright: 2015, 2016, Pengutronix, Alexander Aring <aar@pengutronix.de>
@@ -82055,7 +82445,7 @@ License: GPL-2
 Files: net/6lowpan/iphc.c
 Copyright: 2011, Siemens AG
  2011, Jon Smirl <jonsmirl@gmail.com>
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: net/802/garp.c
  net/802/stp.c
@@ -82130,7 +82520,7 @@ License: GPL-2
 
 Files: net/9p/trans_xen.c
 Copyright: 2017, Stefano Stabellini <stefano@aporeto.com>
-License: Expat and/or GPL-2
+License: Expat or GPL-2
 
 Files: net/appletalk/atalk_proc.c
 Copyright: Arnaldo Carvalho de Melo <acme@conectiva.com.br>
@@ -82353,7 +82743,7 @@ License: GPL-2
 
 Files: net/can/*
 Copyright: 2002-2017, 2019, Volkswagen Group Electronic Research
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: net/can/Kconfig
  net/can/Makefile
@@ -82669,7 +83059,7 @@ License: GPL-2
 Files: net/ieee802154/6lowpan/core.c
 Copyright: 2011, Siemens AG
  2011, Jon Smirl <jonsmirl@gmail.com>
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: net/ieee802154/core.c
  net/ieee802154/ieee802154.h
@@ -83826,7 +84216,7 @@ Copyright: CC Computer Consultants GmbH, 2007-2008, / 1999-2001, Marc Boucher <m
 License: GPL-2
 
 Files: net/netfilter/xt_osf.c
-Copyright: 2003
+Copyright: no-info-found
 License: GPL-2
 
 Files: net/netfilter/xt_owner.c
@@ -84229,7 +84619,7 @@ Copyright: 2012, Michael D. Taht <dave.taht@bufferbloat.net>
  2012, 2015, Eric Dumazet <edumazet@google.com>
  2011, 2012, Van Jacobson <van@pollere.net>
  2011, 2012, Kathleen Nichols <nichols@pollere.com>
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: net/sched/sch_fq.c
  net/sched/sch_fq_codel.c
@@ -84250,7 +84640,7 @@ Copyright: 2010, 2016, John Fastabend <john.r.fastabend@intel.com>
 License: GPL-2
 
 Files: net/sched/sch_netem.c
-Copyright: ed.
+Copyright: no-info-found
 License: GPL-2
 
 Files: net/sched/sch_pie.c
@@ -84471,7 +84861,7 @@ License: GPL-2
 Files: net/sunrpc/backchannel_rqst.c
 Copyright: 2009, NetApp.
  2007, Network Appliance, Inc.
-License: BSD~unspecified and/or GPL-2
+License: BSD~unspecified or GPL-2
 
 Files: net/sunrpc/cache.c
 Copyright: 2002, Neil Brown <neilb@cse.unsw.edu.au>
@@ -84498,7 +84888,7 @@ License: GPL-2
 
 Files: net/sunrpc/sunrpc.h
 Copyright: 2008, NetApp.
-License: BSD~unspecified and/or GPL-2
+License: BSD~unspecified or GPL-2
 
 Files: net/sunrpc/svc.c
 Copyright: 2006, Silicon Graphics, Inc.
@@ -84517,7 +84907,7 @@ License: GPL-2
 Files: net/sunrpc/xprtrdma/*
 Copyright: 2014-2018, Oracle.
  2003-2007, Network Appliance, Inc.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: net/sunrpc/xprtrdma/Makefile
 Copyright: no-info-found
@@ -84541,7 +84931,7 @@ Files: net/sunrpc/xprtrdma/svc_rdma_recvfrom.c
 Copyright: 2015-2018, Oracle.
  2014, Open Grid Computing, Inc.
  2005-2007, Network Appliance, Inc.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: net/sunrpc/xprtsock.c
 Copyright: 2005, Chuck Lever <cel@netapp.com>
@@ -84558,7 +84948,7 @@ License: GPL-2
 Files: net/tipc/*
 Copyright: 2004-2008, 2010-2014, Wind River Systems
  1995-2018, Ericsson AB
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: net/tipc/Kconfig
  net/tipc/Makefile
@@ -84569,7 +84959,7 @@ Files: net/tipc/bcast.c
 Copyright: 2005, 2010, 2011, Wind River Systems
  2004-2006, 2014-2017, Ericsson AB
  2004, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: net/tipc/diag.c
  net/tipc/trace.c
@@ -84586,23 +84976,23 @@ Files: net/tipc/group.c
  net/tipc/socket.h
  net/tipc/udp_media.c
 Copyright: 2014-2017, Ericsson AB
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: net/tipc/ib_media.c
 Copyright: 2013, Patrick McHardy <kaber@trash.net>
  2005-2008, 2011, Wind River Systems
  2001-2007, Ericsson AB
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: net/tipc/sysctl.c
 Copyright: 2013, Wind River Systems
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: net/tipc/topsrv.c
  net/tipc/topsrv.h
 Copyright: 2017, 2018, Ericsson AB
  2012, 2013, Wind River Systems
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: net/tls/tls_device.c
  net/tls/tls_device_fallback.c
@@ -84813,6 +85203,10 @@ Files: net/xfrm/xfrm_user.c
 Copyright: 1996, 1997, 1999-2004, 2012, David S. Miller (davem@redhat.com)
 License: GPL-2
 
+Files: samples/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: samples/auxdisplay/cfag12864b-example.c
 Copyright: Miguel Ojeda Sandonis
 License: GPL-2
@@ -84955,7 +85349,7 @@ Copyright: Evgeniy Polyakov <zbr@ioremap.net>
 License: GPL-2
 
 Files: samples/connector/ucon.c
-Copyright: 2004
+Copyright: no-info-found
 License: GPL-2
 
 Files: samples/hidraw/hid-example.c
@@ -85002,7 +85396,7 @@ License: GPL-2
 
 Files: samples/mei/mei-amt-version.c
 Copyright: 2005-2019, Intel Corporation.
-License: BSD-3-clause and/or GPL-2
+License: BSD-3-clause or GPL-2
 
 Files: samples/mic/*
 Copyright: 1999-2019, Intel Corporation.
@@ -85057,6 +85451,10 @@ Copyright: 2001-2019, Red Hat, Inc.
 License: GPL-2
 
 Files: samples/vfs/Makefile
+Copyright: no-info-found
+License: GPL-2
+
+Files: scripts/*
 Copyright: no-info-found
 License: GPL-2
 
@@ -85658,6 +86056,10 @@ Files: scripts/unifdef.c
 Copyright: 2002-2011, Tony Finch <dot@dotat.at>
 License: BSD-2-clause
 
+Files: security/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: security/apparmor/*
 Copyright: 2009-2017, Canonical Ltd.
  1998-2008, Novell/SUSE
@@ -85984,6 +86386,10 @@ Copyright: 2011, The Chromium OS Authors.
  2010, Canonical, Ltd.
 License: GPL-2
 
+Files: sound/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: sound/ac97/*
 Copyright: 2008, 2015, 2016, Robert Jarzmik <robert.jarzmik@free.fr>
 License: GPL-2
@@ -86239,7 +86645,7 @@ License: GPL-2
 
 Files: sound/drivers/opl4/*
 Copyright: 2003, Clemens Ladisch <clemens@ladisch.de>
-License: BSD-3-clause and/or GPL-2+
+License: BSD-3-clause or GPL-2+
 
 Files: sound/drivers/opl4/Makefile
 Copyright: 1994-2004, 2006, 2008, Jaroslav Kysela <perex@perex.cz>
@@ -87343,7 +87749,7 @@ Copyright: 2018, Microchip Technology Inc. and its subsidiaries
 License: GPL-2
 
 Files: sound/soc/atmel/mikroe-proto.c
-Copyright: 2013
+Copyright: no-info-found
 License: GPL-2
 
 Files: sound/soc/atmel/sam9x5_wm8731.c
@@ -87954,7 +88360,7 @@ Copyright: 2009-2016, Imagination Technologies Ltd.
 License: GPL-2
 
 Files: sound/soc/codecs/pcm5102a.c
-Copyright: 2013
+Copyright: no-info-found
 License: GPL-2
 
 Files: sound/soc/codecs/pcm512x-i2c.c
@@ -89291,7 +89697,7 @@ License: GPL-2
 
 Files: sound/usb/midi.c
 Copyright: 2002-2009, Clemens Ladisch
-License: BSD-3-clause and/or GPL-2+
+License: BSD-3-clause or GPL-2+
 
 Files: sound/usb/misc/ua101.c
 Copyright: Clemens Ladisch <clemens@ladisch.de>
@@ -89346,6 +89752,10 @@ License: GPL-2
 
 Files: sound/xen/Kconfig
  sound/xen/Makefile
+Copyright: no-info-found
+License: GPL-2
+
+Files: tools/*
 Copyright: no-info-found
 License: GPL-2
 
@@ -89619,7 +90029,7 @@ Copyright: 2012, Sasha Levin <levinsasha928@gmail.com>
 License: GPL-2
 
 Files: tools/include/linux/jhash.h
-Copyright: 2006
+Copyright: no-info-found
 License: GPL-2
 
 Files: tools/include/linux/log2.h
@@ -89735,26 +90145,24 @@ Files: tools/lib/api/fd/array.c
 Copyright: 2012-2015, 2017-2019, Red Hat Inc, Arnaldo Carvalho de Melo <acme@redhat.com>
 License: GPL-2
 
-Files: tools/lib/bpf/*
-Copyright: 2016-2019, Facebook
-License: GPL-2
-
-Files: tools/lib/bpf/Build
- tools/lib/bpf/Makefile
- tools/lib/bpf/libbpf.map
- tools/lib/bpf/libbpf.pc.template
- tools/lib/bpf/str_error.c
- tools/lib/bpf/str_error.h
- tools/lib/bpf/test_libbpf.cpp
-Copyright: no-info-found
-License: GPL-2
-
 Files: tools/lib/bpf/bpf.c
  tools/lib/bpf/bpf.h
 Copyright: 2015, Wang Nan <wangnan0@huawei.com>
  2015, Huawei Inc.
  2013-2015, Alexei Starovoitov <ast@kernel.org>
 License: LGPL-2.1
+
+Files: tools/lib/bpf/bpf_prog_linfo.c
+ tools/lib/bpf/btf.c
+ tools/lib/bpf/btf.h
+ tools/lib/bpf/btf_dump.c
+ tools/lib/bpf/hashmap.c
+ tools/lib/bpf/hashmap.h
+ tools/lib/bpf/libbpf_internal.h
+ tools/lib/bpf/libbpf_util.h
+ tools/lib/bpf/netlink.c
+Copyright: 2016-2019, Facebook
+License: GPL-2
 
 Files: tools/lib/bpf/libbpf.c
 Copyright: 2019, Isovalent, Inc.
@@ -89865,14 +90273,14 @@ Copyright: 2017, Alan Stern <stern@rowland.harvard.edu>
  2016, Luc Maranget <luc.maranget@inria.fr> for Inria
 License: GPL-2
 
-Files: tools/memory-model/scripts/*
+Files: tools/memory-model/scripts/checkalllitmus.sh
+ tools/memory-model/scripts/checklitmus.sh
+ tools/memory-model/scripts/checklitmushist.sh
+ tools/memory-model/scripts/judgelitmus.sh
+ tools/memory-model/scripts/newlitmushist.sh
+ tools/memory-model/scripts/parseargs.sh
+ tools/memory-model/scripts/runlitmushist.sh
 Copyright: IBM Corporation, 2018
-License: GPL-2
-
-Files: tools/memory-model/scripts/checkghlitmus.sh
- tools/memory-model/scripts/cmplitmushist.sh
- tools/memory-model/scripts/initlitmushist.sh
-Copyright: no-info-found
 License: GPL-2
 
 Files: tools/nfsd/*
@@ -90114,6 +90522,12 @@ Copyright: 2009, 2010, Tom Zanussi <tzanussi@gmail.com>
 License: GPL-2
 
 Files: tools/perf/scripts/perl/Perf-Trace-Util/*
+Copyright: 2009, Tom Zanussi <tzanussi@gmail.com>
+License: Artistic or GPL-1+ or GPL-2
+
+Files: tools/perf/scripts/perl/Perf-Trace-Util/Build
+ tools/perf/scripts/perl/Perf-Trace-Util/Makefile.PL
+ tools/perf/scripts/perl/Perf-Trace-Util/typemap
 Copyright: no-info-found
 License: GPL-2
 
@@ -90125,9 +90539,13 @@ Files: tools/perf/scripts/perl/Perf-Trace-Util/Context.xs
 Copyright: 2009, 2010, Tom Zanussi <tzanussi@gmail.com>
 License: GPL-2+
 
+Files: tools/perf/scripts/perl/Perf-Trace-Util/lib/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: tools/perf/scripts/perl/Perf-Trace-Util/lib/Perf/Trace/Context.pm
 Copyright: 2009, Tom Zanussi
-License: Artistic or GPL-1+ and/or GPL-2
+License: Artistic or GPL-1+ or GPL-2
 
 Files: tools/perf/scripts/perl/bin/*
 Copyright: no-info-found
@@ -90478,26 +90896,6 @@ Copyright: 2011, Thomas Renninger <trenn@novell.com> Novell Inc.
  2004-2009, Dominik Brodowski <linux@dominikbrodowski.de>
 License: GPL-2
 
-Files: tools/power/cpupower/po/*
-Copyright: 2007, kavol
-License: GPL-2
-
-Files: tools/power/cpupower/po/de.po
-Copyright: 2004-2009, Dominik Brodowski <linux@dominikbrodowski.net>
-License: GPL-2
-
-Files: tools/power/cpupower/po/fr.po
-Copyright: 2004, THE PACKAGES COPYRIGHT HOLDER
-License: GPL-2
-
-Files: tools/power/cpupower/po/it.po
-Copyright: 2004-2009, This file is distributed under the same license as the cpufrequtils package.
-License: GPL-2
-
-Files: tools/power/cpupower/po/pt.po
-Copyright: 2008, THE cpufrequtilsS COPYRIGHT HOLDER
-License: GPL-2
-
 Files: tools/power/cpupower/utils/cpufreq-info.c
  tools/power/cpupower/utils/cpufreq-set.c
 Copyright: 2003-2009, Dominik Brodowski <linux@dominikbrodowski.de>
@@ -90834,12 +91232,8 @@ Files: tools/testing/selftests/ftrace/ftracetest
 Copyright: Hitachi Ltd., 2014
 License: GPL-2
 
-Files: tools/testing/selftests/futex/*
+Files: tools/testing/selftests/futex/functional/*
 Copyright: International Business Machines Corp., 2009
-License: GPL-2
-
-Files: tools/testing/selftests/futex/Makefile
-Copyright: no-info-found
 License: GPL-2
 
 Files: tools/testing/selftests/futex/functional/Makefile
@@ -90854,6 +91248,14 @@ License: GPL-2
 Files: tools/testing/selftests/futex/functional/futex_wait_private_mapped_file.c
  tools/testing/selftests/futex/functional/futex_wait_uninitialized_heap.c
 Copyright: KOSAKI Motohiro <kosaki.motohiro@jp.fujitsu.com> / FUJITSU LIMITED 2010
+License: GPL-2
+
+Files: tools/testing/selftests/futex/include/*
+Copyright: International Business Machines Corp., 2009
+License: GPL-2
+
+Files: tools/testing/selftests/futex/run.sh
+Copyright: International Business Machines Corp., 2009
 License: GPL-2
 
 Files: tools/testing/selftests/gen_kselftest_tar.sh
@@ -90951,13 +91353,11 @@ Files: tools/testing/selftests/kvm/x86_64/evmcs_test.c
 Copyright: 2001-2019, Red Hat, Inc.
 License: GPL-2
 
-Files: tools/testing/selftests/livepatch/*
+Files: tools/testing/selftests/livepatch/functions.sh
+ tools/testing/selftests/livepatch/test-callbacks.sh
+ tools/testing/selftests/livepatch/test-livepatch.sh
+ tools/testing/selftests/livepatch/test-shadow-vars.sh
 Copyright: 2017, 2018, Joe Lawrence <joe.lawrence@redhat.com>
-License: GPL-2
-
-Files: tools/testing/selftests/livepatch/Makefile
- tools/testing/selftests/livepatch/config
-Copyright: no-info-found
 License: GPL-2
 
 Files: tools/testing/selftests/media_tests/media_dev_allocator.sh
@@ -91517,13 +91917,12 @@ Files: tools/testing/vsock/control.c
 Copyright: 2001-2019, Red Hat, Inc.
 License: GPL-2
 
-Files: tools/thermal/*
+Files: tools/thermal/tmon/pid.c
+ tools/thermal/tmon/sysfs.c
+ tools/thermal/tmon/tmon.c
+ tools/thermal/tmon/tmon.h
+ tools/thermal/tmon/tui.c
 Copyright: 1999-2019, Intel Corporation.
-License: GPL-2
-
-Files: tools/thermal/tmon/Makefile
- tools/thermal/tmon/tmon.8
-Copyright: no-info-found
 License: GPL-2
 
 Files: tools/time/*
@@ -91555,8 +91954,32 @@ Copyright: 2010, Samsung Electronics
  2002, David Brownell
 License: GPL-2
 
+Files: tools/usb/usbip/*
+Copyright: 1989-2016, 2018, Free Software Foundation, Inc.
+License: GPL-2
+
+Files: tools/usb/usbip/AUTHORS
+ tools/usb/usbip/Makefile.am
+ tools/usb/usbip/autogen.sh
+ tools/usb/usbip/cleanup.sh
+ tools/usb/usbip/configure.ac
+Copyright: no-info-found
+License: GPL-2
+
 Files: tools/usb/usbip/INSTALL
 Copyright: 1989-2016, 2018, Free Software Foundation, Inc.
+License: GPL-2
+
+Files: tools/usb/usbip/README
+Copyright: 2011, matt mooney <mfm@muteddisk.com>
+License: GPL-2
+
+Files: tools/usb/usbip/doc/*
+Copyright: no-info-found
+License: GPL-2
+
+Files: tools/usb/usbip/libsrc/*
+Copyright: no-info-found
 License: GPL-2
 
 Files: tools/usb/usbip/libsrc/names.c
@@ -91635,9 +92058,17 @@ Files: tools/wmi/dell-smbios-example.c
 Copyright: 2017, Dell, Inc.
 License: GPL-2
 
+Files: usr/*
+Copyright: no-info-found
+License: GPL-2
+
 Files: usr/gen_initramfs_list.sh
 Copyright: Martin Schlemmer <azarah@nosferatu.za.org> / 2006, Sam Ravnborg <sam@ravnborg.org>
 License: GPL
+
+Files: virt/*
+Copyright: no-info-found
+License: GPL-2
 
 Files: virt/kvm/*
 Copyright: 2001-2019, Red Hat, Inc.
@@ -91723,4 +92154,3 @@ Files: virt/lib/irqbypass.c
 Copyright: 2015, Red Hat, Inc.
  2015, Linaro Ltd.
 License: GPL-2
-
