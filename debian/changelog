@@ -1,6 +1,7 @@
 linux (5.4-1~exp1co1ata2) vcs; urgency=medium
 
   * Add initial Atari gamepad driver (modern and classic)
+  * Add patch-up of the rotational axis value
 
  -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Mon, 28 Jan 2020 16:48:16 +0100
 

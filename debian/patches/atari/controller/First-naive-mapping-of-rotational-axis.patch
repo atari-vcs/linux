@@ -1,0 +1,27 @@
+From: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+Date: Thu, 30 Jan 2020 09:23:43 +0100
+Subject: First naive mapping of rotational axis
+
+Map the rotational value enough to get at least some sensible numbers of
+it (positive when turning clock-wise, negative for anti-clockwise)
+
+Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+---
+ drivers/hid/hid-atari.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/hid/hid-atari.c b/drivers/hid/hid-atari.c
+index 738908a..acda587 100644
+--- a/drivers/hid/hid-atari.c
++++ b/drivers/hid/hid-atari.c
+@@ -156,6 +156,10 @@ static int atari_raw_event(struct hid_device *hdev, struct hid_report *report,
+ 	rd[5] = WRAP(rd[5]);
+ 	rd[6] = WRAP(rd[6]);
+ 
++	if (hdev->product == USB_DEVICE_ID_ATARI_CLASSIC) {
++		rd[9] = (rd[9] & 0x80) ? rd[9] & 0x7f : WRAP(rd[9]);
++	}
++
+ 	return 0;
+ }
+ 

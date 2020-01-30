@@ -149,3 +149,5 @@ apertis/sabrelite/0216-Disable-the-lcd-interface.patch
 atari/controller/Add-driver-for-current-version-of-the-atari-gamepad-firmw.patch
 atari/controller/Correct-PID-of-the-atari-classic-controller.patch
 atari/controller/Add-mapping-for-the-atari-classic-controller.patch
+atari/controller/Map-triggers-to-ABS_RZ-and-ABS_Z.patch
+atari/controller/First-naive-mapping-of-rotational-axis.patch

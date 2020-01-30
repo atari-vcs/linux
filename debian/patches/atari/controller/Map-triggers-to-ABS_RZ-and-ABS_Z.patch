@@ -1,0 +1,30 @@
+From: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+Date: Thu, 30 Jan 2020 09:19:35 +0100
+Subject: Map triggers to ABS_RZ and ABS_Z
+
+Mapping to the HAT 2 axis is specified by gamepad.rst but none of hte
+game engine libraries seem to be able to deal with that. So switch to
+ABS_Z and ABS_RZ like all other common controllers
+
+Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+---
+ drivers/hid/hid-atari.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/hid/hid-atari.c b/drivers/hid/hid-atari.c
+index 667db8d..738908a 100644
+--- a/drivers/hid/hid-atari.c
++++ b/drivers/hid/hid-atari.c
+@@ -94,10 +94,10 @@ static int atari_map_modern(struct hid_device *hdev, struct hid_input *hi,
+ 		int code = usage->hid & HID_USAGE;
+ 		switch (code) {
+ 			case 0xc4:
+-				map_abs (ABS_HAT2X);
++				map_abs (ABS_RZ);
+ 				return 1;
+ 			case 0xc5:
+-				map_abs (ABS_HAT2Y);
++				map_abs (ABS_Z);
+ 				return 1;
+ 		}
+ 	}
