@@ -1,3 +1,12 @@
+linux (5.4.13-2) apertis; urgency=medium
+
+  [ Martyn Welch ]
+  * Turn off rt build
+  * Refresh the automatically detected licensing information
+  * Add patches to fix failure path in imx-drm
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Tue, 04 Feb 2020 18:16:36 +0000
+
 linux (5.4.13-1) unstable; urgency=medium
 
   * New upstream stable update:
