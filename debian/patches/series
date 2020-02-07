@@ -151,3 +151,4 @@ atari/controller/Correct-PID-of-the-atari-classic-controller.patch
 atari/controller/Add-mapping-for-the-atari-classic-controller.patch
 atari/controller/Map-triggers-to-ABS_RZ-and-ABS_Z.patch
 atari/controller/First-naive-mapping-of-rotational-axis.patch
+atari/controller/Add-support-for-rumble-and-leds.patch
