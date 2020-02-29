@@ -1,0 +1,1018 @@
+From: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+Date: Sat, 29 Feb 2020 15:13:17 +0100
+Subject: Adjust for new firmare revisions
+
+Copy the current atari hid driver to hid-atari-obsolete to support older
+hid specifications of the firmware.  The hid-atari driver will only
+support recent firmware versions.
+
+This version brings initial support for classic controller conforming to
+the new specification.
+
+Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+---
+ drivers/hid/Makefile             |   2 +-
+ drivers/hid/hid-atari-obsolete.c | 690 +++++++++++++++++++++++++++++++++++++++
+ drivers/hid/hid-atari.c          | 110 +++----
+ drivers/hid/hid-ids.h            |   8 +-
+ 4 files changed, 741 insertions(+), 69 deletions(-)
+ create mode 100644 drivers/hid/hid-atari-obsolete.c
+
+diff --git a/drivers/hid/Makefile b/drivers/hid/Makefile
+index 79bc3c5..4660334 100644
+--- a/drivers/hid/Makefile
++++ b/drivers/hid/Makefile
+@@ -27,7 +27,7 @@ obj-$(CONFIG_HID_ALPS)		+= hid-alps.o
+ obj-$(CONFIG_HID_ACRUX)		+= hid-axff.o
+ obj-$(CONFIG_HID_APPLE)		+= hid-apple.o
+ obj-$(CONFIG_HID_APPLEIR)	+= hid-appleir.o
+-obj-$(CONFIG_HID_ATARI)		+= hid-atari.o
++obj-$(CONFIG_HID_ATARI)		+= hid-atari.o  hid-atari-obsolete.o
+ obj-$(CONFIG_HID_CREATIVE_SB0540)	+= hid-creative-sb0540.o
+ obj-$(CONFIG_HID_ASUS)		+= hid-asus.o
+ obj-$(CONFIG_HID_AUREAL)	+= hid-aureal.o
+diff --git a/drivers/hid/hid-atari-obsolete.c b/drivers/hid/hid-atari-obsolete.c
+new file mode 100644
+index 0000000..295b041
+--- /dev/null
++++ b/drivers/hid/hid-atari-obsolete.c
+@@ -0,0 +1,690 @@
++// SPDX-License-Identifier: GPL-2.0-or-later
++
++#include <linux/input.h>
++#include <linux/hid.h>
++#include <linux/module.h>
++
++#include "hid-ids.h"
++
++#define map_key(c)	hid_map_usage(hi, usage, bit, max, EV_KEY, (c));
++#define map_abs(c)	hid_map_usage(hi, usage, bit, max, EV_ABS, (c))
++#define map_rel(c)	hid_map_usage(hi, usage, bit, max, EV_REL, (c))
++
++#define ATARI_FF_REPORT 1
++#define ATARI_LED_REPORT 2
++
++
++#define FUJI_LED_AUTO		0x0
++#define FUJI_LED_ON		0x1
++#define FUJI_LED_OFF		0x2
++#define FUJI_LED_SLOW_BLINK	0x3
++#define FUJI_LED_FAST_BLINK	0x4
++
++#define LED_FLAG_GLOBAL_BRIGHTNESS	BIT(0)
++#define LED_FLAG_LEDS			BIT(1)
++#define LED_FLAG_FUJI_LED		BIT(2)
++#define LED_FLAG_FIRMWARE_CONTROL	BIT(7)
++
++/* leds controlled by the host */
++#define LEDS_FIRMWARE_HOST    0
++/* leds controlled by the firmware */
++#define LEDS_FIRMWARE_ENABLE  1
++#define LEDS_FIRMWARE_ENABLED 2
++
++
++
++#define CLASSIC_LEDS 24
++#define MODERN_LEDS 4
++
++struct led_report {
++	__u8 report_id;
++	__u8 flags;
++	__u8 global_brightness;
++	__u8 system_leds;
++	__u8 data[CLASSIC_LEDS];
++} __packed;
++
++struct ff_report {
++	__u8 report_id;
++	__u8 flags;
++	__u8 strong_strength;
++	__u8 strong_on_period;
++	__u8 strong_off_period;
++	__u8 strong_repeat;
++	__u8 weak_strength;
++	__u8 weak_on_period;
++	__u8 weak_off_period;
++	__u8 weak_repeat;
++} __packed;
++
++struct atari_data {
++	struct hid_device *hdev;
++	struct mutex lock;
++
++	struct delayed_work led_worker;
++	bool led_fast_update_scheduled;
++	void *led_report_dma;
++	struct led_classdev fuji_cled;
++	struct led_classdev cleds[CLASSIC_LEDS];
++
++	/* led brightnesses */
++	u8 fuji_led;
++	u8 leds_firmware_control;
++	u8 leds[CLASSIC_LEDS];
++
++	struct work_struct ff_worker;
++	void *ff_report_dma;
++	u8 strong_ff;
++	u8 weak_ff;
++};
++
++static int atari_map_classic(struct hid_device *hdev, struct hid_input *hi,
++		struct hid_field *field, struct hid_usage *usage,
++		unsigned long **bit, int *max)
++{
++	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_BUTTON) {
++		int code = (usage->hid) & HID_USAGE;
++		switch (code) {
++			case 0x1: map_key (BTN_A);
++				return 1;
++			case 0x2: map_key (BTN_B);
++				return 1;
++		}
++		return -1;
++	}
++
++	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_CONSUMER) {
++		int code = usage->hid & HID_USAGE;
++		switch (code) {
++			case 0x040:
++				map_key(BTN_START);
++				return 1;
++			case 0x223:
++				map_key(BTN_MODE);
++				return 1;
++			case 0x224:
++				map_key(BTN_SELECT);
++				return 1;
++		}
++	}
++
++	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_SIMULATION) {
++		return -1;
++	}
++
++	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_GENDESK) {
++		switch (usage->hid) {
++			case HID_GD_HATSWITCH:
++				return 0;
++			case HID_GD_RX:
++				field->flags = HID_MAIN_ITEM_VARIABLE
++					| HID_MAIN_ITEM_RELATIVE;
++				map_rel(REL_X);
++				return 1;
++		}
++		return -1;
++	}
++
++	return 0;
++}
++
++static int atari_map_modern(struct hid_device *hdev, struct hid_input *hi,
++		struct hid_field *field, struct hid_usage *usage,
++		unsigned long **bit, int *max)
++{
++	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_BUTTON) {
++		int code = ((usage->hid - 1) & HID_USAGE);
++		switch (code) {
++			case 0x3: map_key (BTN_WEST);
++				return 1;
++			case 0x4: map_key (BTN_NORTH);
++				return 1;
++		}
++		return 0;
++	}
++
++	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_CONSUMER) {
++		int code = usage->hid & HID_USAGE;
++		switch (code) {
++			case 0x040:
++				map_key(BTN_START);
++				return 1;
++			case 0x223:
++				map_key(BTN_MODE);
++				return 1;
++			case 0x224:
++				map_key(BTN_SELECT);
++				return 1;
++		}
++	}
++
++	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_SIMULATION) {
++		int code = usage->hid & HID_USAGE;
++		switch (code) {
++			case 0xc4:
++				map_abs (ABS_RZ);
++				return 1;
++			case 0xc5:
++				map_abs (ABS_Z);
++				return 1;
++		}
++	}
++
++	/* direct mappings for the right joypad */
++	switch (usage->hid) {
++		case HID_GD_X:
++		case HID_GD_Y:
++			field->logical_minimum = -127;
++			field->logical_maximum = 127;
++			break;
++		case HID_GD_Z:
++			map_abs (ABS_RY);
++			field->logical_minimum = -127;
++			field->logical_maximum = 127;
++			return 1;
++		case HID_GD_RZ:
++			map_abs (ABS_RX);
++			field->logical_minimum = -127;
++			field->logical_maximum = 127;
++			return 1;
++	}
++
++	return 0;
++}
++
++static int atari_mapping(struct hid_device *hdev, struct hid_input *hi,
++		struct hid_field *field, struct hid_usage *usage,
++		unsigned long **bit, int *max)
++{
++	/* Ignore the usage pages other then the first one for now */
++	if (usage->collection_index != 1) {
++		return -1;
++	}
++
++	if (hdev->product == USB_DEVICE_ID_ATARI_CLASSIC)
++		return atari_map_classic(hdev, hi, field, usage, bit, max);
++	else
++		return atari_map_modern(hdev, hi, field, usage, bit, max);
++
++	return 0;
++}
++
++static int atari_raw_event(struct hid_device *hdev, struct hid_report *report,
++		u8 *rd, int size)
++{
++	if (report->id != 1 || size != 10)
++		return 0;
++
++	/* Fix values of analog sticks as we remapped them to -127 .. 127  */
++#define WRAP(val) (((s8)val) - 128)
++	/* left stick */
++	rd[3] = WRAP(rd[3]);
++	rd[4] = WRAP(rd[4]);
++	/* right stick */
++	rd[5] = WRAP(rd[5]);
++	rd[6] = WRAP(rd[6]);
++
++	if (hdev->product == USB_DEVICE_ID_ATARI_CLASSIC) {
++		rd[9] = (rd[9] & 0x80) ? rd[9] & 0x7f : WRAP(rd[9]);
++	}
++
++	return 0;
++}
++
++static void atari_led_worker(struct work_struct *work)
++{
++	struct atari_data *ata = container_of(work,
++					      struct atari_data,
++					      led_worker.work);
++	struct led_report *r = ata->led_report_dma;
++	int ret;
++	int i;
++
++	mutex_lock(&ata->lock);
++	ata->led_fast_update_scheduled = false;
++	r->report_id = ATARI_LED_REPORT;
++	r->flags = LED_FLAG_FUJI_LED;
++	r->system_leds = ata->fuji_led;
++
++	if (!ata->leds_firmware_control) {
++		r->flags |= LED_FLAG_LEDS;
++		for (i = 0; i < CLASSIC_LEDS; i++) {
++			r->data[i] = ata->leds[i];
++		}
++	} else if (ata->leds_firmware_control ==  LEDS_FIRMWARE_ENABLE) {
++		r->flags |= LED_FLAG_FIRMWARE_CONTROL;
++		ata->leds_firmware_control = LEDS_FIRMWARE_ENABLED;
++	}
++	mutex_unlock(&ata->lock);
++
++	ret = hid_hw_output_report (ata->hdev, (__u8 *)r, sizeof(*r));
++	if (ret < 0)
++		hid_warn(ata->hdev, "Failed to send led report...: %d", ret);
++
++	mutex_lock(&ata->lock);
++	/* Workaround the firmware taking back control */
++	if (ata->fuji_led != FUJI_LED_AUTO || !ata->leds_firmware_control)
++		queue_delayed_work (system_wq, &ata->led_worker,
++				    msecs_to_jiffies (2000));
++	mutex_unlock(&ata->lock);
++}
++
++static void atari_schedule_led_update (struct atari_data *ata)
++{
++	mutex_lock(&ata->lock);
++	if (!ata->led_fast_update_scheduled) {
++		mod_delayed_work (system_wq, &ata->led_worker, msecs_to_jiffies (2));
++		ata->led_fast_update_scheduled = true;
++	}
++	mutex_unlock(&ata->lock);
++}
++
++static void atari_fuji_led_set(struct led_classdev *led_dev,
++			       enum led_brightness value)
++{
++	struct device *dev = led_dev->dev->parent;
++	struct atari_data *ata = hid_get_drvdata(to_hid_device(dev));
++
++	mutex_lock(&ata->lock);
++	ata->fuji_led = value > 0 ? FUJI_LED_ON : FUJI_LED_OFF;
++	mutex_unlock(&ata->lock);
++
++	atari_schedule_led_update (ata);
++}
++
++static int atari_fuji_led_set_blink(struct led_classdev *led_dev,
++				     unsigned long *delay_on,
++				     unsigned long *delay_off)
++{
++	struct device *dev = led_dev->dev->parent;
++	struct atari_data *ata = hid_get_drvdata(to_hid_device(dev));
++
++	mutex_lock(&ata->lock);
++	if (!*delay_on || *delay_on > 350) {
++		*delay_on = 500;
++		*delay_off = 500;
++		ata->fuji_led = FUJI_LED_SLOW_BLINK;
++	} else {
++		*delay_on = 200;
++		*delay_off = 200;
++		ata->fuji_led = FUJI_LED_FAST_BLINK;
++	}
++	mutex_unlock(&ata->lock);
++
++	atari_schedule_led_update (ata);
++
++	return 0;
++}
++
++static void atari_led_set(struct led_classdev *led_dev,
++			  enum led_brightness value)
++{
++	struct device *dev = led_dev->dev->parent;
++	struct atari_data *ata = hid_get_drvdata(to_hid_device(dev));
++	int i;
++
++	for (i = 0 ; i < CLASSIC_LEDS ; i++) {
++		if (led_dev == &ata->cleds[i])
++			break;
++	}
++	BUG_ON(i >= CLASSIC_LEDS);
++
++	mutex_lock(&ata->lock);
++	ata->leds_firmware_control = false;
++	ata->leds[i] = value & 0xff;
++	mutex_unlock(&ata->lock);
++
++	atari_schedule_led_update (ata);
++}
++
++static ssize_t firmware_control_show(struct device *led_dev,
++				     struct device_attribute *attr,
++				     char *buf)
++{
++	struct device *dev = led_dev->parent;
++	struct atari_data *ata = hid_get_drvdata(to_hid_device(dev));
++	unsigned int v;
++
++	mutex_lock(&ata->lock);
++	v = ata->fuji_led == FUJI_LED_AUTO;
++	mutex_unlock(&ata->lock);
++
++	return snprintf(buf, PAGE_SIZE, "%u\n", v);
++}
++
++static ssize_t firmware_control_store(struct device *led_dev,
++				      struct device_attribute *attr,
++				      const char *buf,
++				      size_t count)
++{
++	struct device *dev = led_dev->parent;
++	struct atari_data *ata = hid_get_drvdata(to_hid_device(dev));
++	int err;
++	int control;
++
++	err = kstrtouint (buf, 10, &control);
++	if (err)
++		return err;
++	
++	if (control != 0 && control != 1)
++		return -EINVAL;
++	
++	mutex_lock(&ata->lock);
++	ata->fuji_led = control ? FUJI_LED_AUTO : FUJI_LED_OFF;
++	mutex_unlock(&ata->lock);
++
++	atari_schedule_led_update (ata);
++
++	return count;
++}
++
++static DEVICE_ATTR_RW(firmware_control);
++static struct attribute *atari_fuji_led_attrs[] = {
++	&dev_attr_firmware_control.attr,
++	NULL
++};
++
++static const struct attribute_group atari_fuji_led_group = {
++	.attrs = atari_fuji_led_attrs,
++};
++
++static const struct attribute_group *atari_fuji_led_groups[] = {
++	&atari_fuji_led_group,
++	NULL
++};
++
++static int atari_register_fuji_led (struct atari_data *ata)
++{
++	char *name;
++	int ret = 0;
++	struct device *dev = &ata->hdev->dev;
++	size_t name_sz = strlen(dev_name(dev)) + 16;
++	struct led_classdev *led = &ata->fuji_cled;
++
++
++	name = devm_kzalloc (dev, name_sz, GFP_KERNEL);
++	if (name == NULL)
++		return -ENOMEM;
++
++	snprintf(name, name_sz, "%s:white:fuji",  dev_name(dev));
++	led->name = name;
++	led->brightness = 0;
++	led->max_brightness = 1;
++	led->brightness_set = atari_fuji_led_set;
++	led->blink_set = atari_fuji_led_set_blink;
++	led->groups = atari_fuji_led_groups;
++
++	ret = devm_led_classdev_register(dev, led);
++	return ret;
++}
++
++
++static int atari_register_main_led (struct atari_data *ata, int index)
++{
++	char *name;
++	int ret = 0;
++	struct device *dev = &ata->hdev->dev;
++	size_t name_sz = strlen(dev_name(dev)) + 16;
++	struct led_classdev *led = &ata->cleds[index];
++
++	name = devm_kzalloc (dev, name_sz, GFP_KERNEL);
++	if (name == NULL)
++		return -ENOMEM;
++
++	snprintf(name, name_sz, "%s:amber:%02d",  dev_name(dev), index);
++	led->name = name;
++	led->brightness = 0;
++	led->max_brightness = 0xff;
++	led->brightness_set = atari_led_set;
++
++	ret = devm_led_classdev_register(dev, led);
++	return ret;
++}
++
++static ssize_t leds_firmware_control_show(struct device *dev,
++			 struct device_attribute *attr,
++			 char *buf)
++{
++	struct atari_data *ata = hid_get_drvdata(to_hid_device(dev));
++	bool v;
++
++	mutex_lock(&ata->lock);
++	v = ata->leds_firmware_control > 0;
++	mutex_unlock(&ata->lock);
++
++	return snprintf(buf, PAGE_SIZE, "%u\n", v);
++}
++
++static ssize_t leds_firmware_control_store(struct device *dev,
++			 struct device_attribute *attr,
++			 const char *buf,
++			 size_t count)
++{
++	struct atari_data *ata = hid_get_drvdata(to_hid_device(dev));
++	int err;
++	int control;
++
++	err = kstrtouint (buf, 10, &control);
++	if (err)
++		return err;
++	
++	if (control != 0 && control != 1)
++		return -EINVAL;
++	
++	mutex_lock(&ata->lock);
++	ata->leds_firmware_control = control;
++	if (!control) {
++		memset(ata->leds, 0, sizeof(ata->leds));
++	}
++	mutex_unlock(&ata->lock);
++
++	atari_schedule_led_update (ata);
++
++	return count;
++}
++
++static DEVICE_ATTR_RW(leds_firmware_control);
++static struct attribute *atari_leds_attrs[] = {
++	&dev_attr_leds_firmware_control.attr,
++	NULL
++};
++
++static const struct attribute_group atari_leds_group = {
++	.attrs = atari_leds_attrs,
++};
++
++static int atari_register_leds (struct atari_data *ata) {
++	int ret = 0;
++	int i = 0;
++	int nleds = 4;
++
++	INIT_DELAYED_WORK(&ata->led_worker, atari_led_worker);
++	if (ata->hdev->product == USB_DEVICE_ID_ATARI_CLASSIC)
++		nleds = 24;
++
++	ret = atari_register_fuji_led(ata);
++	if (ret)
++		return ret;
++
++	for (i = 0 ; i < nleds ; i++) {
++		ret = atari_register_main_led (ata, i);
++		if (ret != 0)
++			break;
++	}
++
++	/* Default to all leds under firmware control */
++	ata->leds_firmware_control = LEDS_FIRMWARE_ENABLE;
++	ata->fuji_led = FUJI_LED_AUTO;
++
++	return ret;
++}
++
++static void atari_ff_worker(struct work_struct *work)
++{
++	struct atari_data *ata = container_of(work, struct atari_data, ff_worker);
++	struct hid_device *hdev = ata->hdev;
++	struct ff_report *r = ata->ff_report_dma;
++	int ret;
++
++	memset(r, 0, sizeof(*r));
++
++	mutex_lock (&ata->lock);
++	r->report_id = ATARI_FF_REPORT;
++	r->flags = BIT(0) | BIT(1);
++	r->strong_strength = ata->strong_ff;
++	r->weak_strength = ata->weak_ff;
++
++	r->strong_on_period = U8_MAX;
++	r->weak_on_period = U8_MAX;
++
++	r->strong_repeat = 0;
++	r->weak_repeat = 0;
++
++	r->strong_off_period = 0;
++	r->weak_off_period = 0;
++	mutex_unlock (&ata->lock);
++
++	ret = hid_hw_output_report(hdev, (__u8 *)r, sizeof(*r));
++	if (ret < 0)
++		hid_warn(hdev, "failed to send FF report\n");
++}
++
++static int atari_play_effect(struct input_dev *dev, void *data,
++			  struct ff_effect *effect)
++{
++	struct hid_device *hid = input_get_drvdata(dev);
++	struct atari_data *ata = hid_get_drvdata(hid);
++
++	if (effect->type != FF_RUMBLE)
++		return 0;
++
++	/* scale back to 8 bits */
++	mutex_lock (&ata->lock);
++	ata->strong_ff = effect->u.rumble.strong_magnitude >> 8;
++	ata->weak_ff = effect->u.rumble.weak_magnitude >> 8;
++	mutex_unlock (&ata->lock);
++
++	schedule_work(&ata->ff_worker);
++	return 0;
++}
++
++static int atari_init_ff(struct atari_data *ata)
++{
++	struct hid_input *hidinput;
++	struct input_dev *input_dev;
++
++	if (list_empty(&ata->hdev->inputs)) {
++		hid_err(ata->hdev, "no inputs found\n");
++		return -ENODEV;
++	}
++	hidinput = list_entry(ata->hdev->inputs.next, struct hid_input, list);
++	input_dev = hidinput->input;
++
++	INIT_WORK(&ata->ff_worker, atari_ff_worker);
++	ata->ff_report_dma = devm_kzalloc(&ata->hdev->dev,
++					 sizeof(struct ff_report),
++					 GFP_KERNEL);
++	if (ata->ff_report_dma == NULL)
++		return -ENOMEM;
++
++	input_set_capability(input_dev, EV_FF, FF_RUMBLE);
++	return input_ff_create_memless(input_dev, NULL, atari_play_effect);
++}
++
++static int atari_probe(struct hid_device *hdev, const struct hid_device_id *id)
++{
++	int ret;
++	struct atari_data *ata;
++
++	ata = devm_kzalloc(&hdev->dev, sizeof(*ata), GFP_KERNEL);
++	if (ata == NULL)
++		return -ENOMEM;
++	
++	ata->hdev = hdev;
++	mutex_init(&ata->lock);
++	ata->led_report_dma = devm_kzalloc(&hdev->dev,
++					   sizeof(struct led_report),
++					   GFP_KERNEL);
++	if (ata->led_report_dma == NULL)
++		return -ENOMEM;
++
++	hid_set_drvdata(hdev, ata);
++
++	ret = hid_parse(hdev);
++	if (ret) {
++		hid_err(hdev, "parse failed\n");
++		return ret;
++	}
++
++	ret = hid_hw_start(hdev, HID_CONNECT_DEFAULT);
++	if (ret) {
++		hid_err(hdev, "hw start failed\n");
++		return ret;
++	}
++
++	ret = atari_register_leds (ata);
++	if (ret) {
++		hid_err(hdev, "failed to register leds\n");
++		return ret;
++	}
++
++	ret = atari_init_ff (ata);
++	if (ret) {
++		hid_err(hdev, "failed to register ff\n");
++		return ret;
++	}
++
++	ret = sysfs_create_group (&hdev->dev.kobj, &atari_leds_group);
++	if (ret < 0) {
++		hid_err(hdev, "error creating sysfs attrs\n");
++		return ret;
++	}
++
++	/* Synchronize the leds state */
++	atari_schedule_led_update (ata);
++	return ret;
++}
++
++static void atari_remove(struct hid_device *hdev)
++{
++	struct atari_data *ata = hid_get_drvdata(hdev);
++	int i;
++
++	cancel_work_sync(&ata->ff_worker);
++
++	sysfs_remove_group (&ata->hdev->dev.kobj, &atari_leds_group);
++
++	devm_led_classdev_unregister(&hdev->dev, &ata->fuji_cled);
++	for (i = 0 ; i < CLASSIC_LEDS; i++) {
++		if (ata->cleds[i].name == NULL)
++			break;
++		devm_led_classdev_unregister(&hdev->dev, &ata->cleds[i]);
++	}
++	cancel_delayed_work_sync(&ata->led_worker);
++
++	hid_hw_stop(hdev);
++}
++
++static const struct hid_device_id atari_devices[] = {
++	{ HID_USB_DEVICE(USB_VENDOR_ID_ATARI,
++		USB_DEVICE_ID_ATARI_MODERN_OBSOLETE), },
++	{ HID_USB_DEVICE(USB_VENDOR_ID_ATARI,
++		USB_DEVICE_ID_ATARI_CLASSIC_OBSOLETE), },
++	{ }
++};
++MODULE_DEVICE_TABLE(hid, atari_devices);
++
++static struct hid_driver atari_driver = {
++	.name		= "atari-obsolete",
++	.id_table	= atari_devices,
++	.input_mapping	= atari_mapping,
++	.raw_event	= atari_raw_event,
++	.probe		= atari_probe,
++	.remove		= atari_remove,
++};
++
++module_hid_driver(atari_driver);
++
++MODULE_AUTHOR("Sjoerd Simons");
++MODULE_DESCRIPTION("Atari game controllers (obsolete firmware)");
++MODULE_LICENSE("GPL");
+diff --git a/drivers/hid/hid-atari.c b/drivers/hid/hid-atari.c
+index fb1bcc2..1dee66b 100644
+--- a/drivers/hid/hid-atari.c
++++ b/drivers/hid/hid-atari.c
+@@ -12,7 +12,7 @@
+ 
+ #define ATARI_FF_REPORT 1
+ #define ATARI_LED_REPORT 2
+-
++#define ATARI_REQUEST_REPORT 3
+ 
+ #define FUJI_LED_AUTO		0x0
+ #define FUJI_LED_ON		0x1
+@@ -20,10 +20,7 @@
+ #define FUJI_LED_SLOW_BLINK	0x3
+ #define FUJI_LED_FAST_BLINK	0x4
+ 
+-#define LED_FLAG_GLOBAL_BRIGHTNESS	BIT(0)
+-#define LED_FLAG_LEDS			BIT(1)
+-#define LED_FLAG_FUJI_LED		BIT(2)
+-#define LED_FLAG_FIRMWARE_CONTROL	BIT(7)
++#define LED_FLAGS_HOST_CONTROL	BIT(0)
+ 
+ /* leds controlled by the host */
+ #define LEDS_FIRMWARE_HOST    0
+@@ -31,22 +28,19 @@
+ #define LEDS_FIRMWARE_ENABLE  1
+ #define LEDS_FIRMWARE_ENABLED 2
+ 
+-
+-
+ #define CLASSIC_LEDS 24
+ #define MODERN_LEDS 4
+ 
+ struct led_report {
+ 	__u8 report_id;
+-	__u8 flags;
++	__u8 firmware_control;
+ 	__u8 global_brightness;
+-	__u8 system_leds;
+ 	__u8 data[CLASSIC_LEDS];
++	__u8 fuji_led;
+ } __packed;
+ 
+ struct ff_report {
+ 	__u8 report_id;
+-	__u8 flags;
+ 	__u8 strong_strength;
+ 	__u8 strong_on_period;
+ 	__u8 strong_off_period;
+@@ -68,6 +62,7 @@ struct atari_data {
+ 	struct led_classdev cleds[CLASSIC_LEDS];
+ 
+ 	/* led brightnesses */
++	u8 fuji_led_mode;
+ 	u8 fuji_led;
+ 	u8 leds_firmware_control;
+ 	u8 leds[CLASSIC_LEDS];
+@@ -79,20 +74,9 @@ struct atari_data {
+ };
+ 
+ static int atari_map_classic(struct hid_device *hdev, struct hid_input *hi,
+-		struct hid_field *field, struct hid_usage *usage,
+-		unsigned long **bit, int *max)
++			     struct hid_field *field, struct hid_usage *usage,
++			     unsigned long **bit, int *max)
+ {
+-	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_BUTTON) {
+-		int code = (usage->hid) & HID_USAGE;
+-		switch (code) {
+-			case 0x1: map_key (BTN_A);
+-				return 1;
+-			case 0x2: map_key (BTN_B);
+-				return 1;
+-		}
+-		return -1;
+-	}
+-
+ 	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_CONSUMER) {
+ 		int code = usage->hid & HID_USAGE;
+ 		switch (code) {
+@@ -108,22 +92,11 @@ static int atari_map_classic(struct hid_device *hdev, struct hid_input *hi,
+ 		}
+ 	}
+ 
+-	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_SIMULATION) {
+-		return -1;
++	if (usage->hid == HID_GD_DIAL) {
++		map_abs (ABS_RUDDER);
++		return 1;
+ 	}
+ 
+-	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_GENDESK) {
+-		switch (usage->hid) {
+-			case HID_GD_HATSWITCH:
+-				return 0;
+-			case HID_GD_RX:
+-				field->flags = HID_MAIN_ITEM_VARIABLE
+-					| HID_MAIN_ITEM_RELATIVE;
+-				map_rel(REL_X);
+-				return 1;
+-		}
+-		return -1;
+-	}
+ 
+ 	return 0;
+ }
+@@ -209,28 +182,30 @@ static int atari_mapping(struct hid_device *hdev, struct hid_input *hi,
+ 	return 0;
+ }
+ 
+-static int atari_raw_event(struct hid_device *hdev, struct hid_report *report,
+-		u8 *rd, int size)
++static int atari_mapped(struct hid_device *hdev, struct hid_input *hi,
++		struct hid_field *field, struct hid_usage *usage,
++		unsigned long **bit, int *max)
+ {
+-	if (report->id != 1 || size != 10)
+-		return 0;
+-
+-	/* Fix values of analog sticks as we remapped them to -127 .. 127  */
+-#define WRAP(val) (((s8)val) - 128)
+-	/* left stick */
+-	rd[3] = WRAP(rd[3]);
+-	rd[4] = WRAP(rd[4]);
+-	/* right stick */
+-	rd[5] = WRAP(rd[5]);
+-	rd[6] = WRAP(rd[6]);
+-
+-	if (hdev->product == USB_DEVICE_ID_ATARI_CLASSIC) {
+-		rd[9] = (rd[9] & 0x80) ? rd[9] & 0x7f : WRAP(rd[9]);
++	/* No default values for dial to prevent fuzz & flat being set */
++	if (usage->hid == HID_GD_DIAL) {
++		set_bit(usage->type, hi->input->evbit);
++		input_set_abs_params(hi->input, usage->code,
++				field->logical_minimum,
++				field->logical_maximum,
++				0, 0);
++		return -1;
+ 	}
+ 
+ 	return 0;
+ }
+ 
++
++static int atari_raw_event(struct hid_device *hdev, struct hid_report *report,
++		u8 *rd, int size)
++{
++	return 0;
++}
++
+ static void atari_led_worker(struct work_struct *work)
+ {
+ 	struct atari_data *ata = container_of(work,
+@@ -241,18 +216,19 @@ static void atari_led_worker(struct work_struct *work)
+ 	int i;
+ 
+ 	mutex_lock(&ata->lock);
++
+ 	ata->led_fast_update_scheduled = false;
+ 	r->report_id = ATARI_LED_REPORT;
+-	r->flags = LED_FLAG_FUJI_LED;
+-	r->system_leds = ata->fuji_led;
++	r->firmware_control = 0x0 | (ata->fuji_led_mode << 1);
++	r->global_brightness = 0xff;
++	r->fuji_led = ata->fuji_led;
+ 
+ 	if (!ata->leds_firmware_control) {
+-		r->flags |= LED_FLAG_LEDS;
++		r->firmware_control |= 0x1;
+ 		for (i = 0; i < CLASSIC_LEDS; i++) {
+ 			r->data[i] = ata->leds[i];
+ 		}
+ 	} else if (ata->leds_firmware_control ==  LEDS_FIRMWARE_ENABLE) {
+-		r->flags |= LED_FLAG_FIRMWARE_CONTROL;
+ 		ata->leds_firmware_control = LEDS_FIRMWARE_ENABLED;
+ 	}
+ 	mutex_unlock(&ata->lock);
+@@ -263,7 +239,7 @@ static void atari_led_worker(struct work_struct *work)
+ 
+ 	mutex_lock(&ata->lock);
+ 	/* Workaround the firmware taking back control */
+-	if (ata->fuji_led != FUJI_LED_AUTO || !ata->leds_firmware_control)
++	if (ata->fuji_led_mode != FUJI_LED_AUTO || !ata->leds_firmware_control)
+ 		queue_delayed_work (system_wq, &ata->led_worker,
+ 				    msecs_to_jiffies (2000));
+ 	mutex_unlock(&ata->lock);
+@@ -286,7 +262,8 @@ static void atari_fuji_led_set(struct led_classdev *led_dev,
+ 	struct atari_data *ata = hid_get_drvdata(to_hid_device(dev));
+ 
+ 	mutex_lock(&ata->lock);
+-	ata->fuji_led = value > 0 ? FUJI_LED_ON : FUJI_LED_OFF;
++	ata->fuji_led_mode = value ? FUJI_LED_ON : FUJI_LED_OFF;
++	ata->fuji_led = value;
+ 	mutex_unlock(&ata->lock);
+ 
+ 	atari_schedule_led_update (ata);
+@@ -303,11 +280,11 @@ static int atari_fuji_led_set_blink(struct led_classdev *led_dev,
+ 	if (!*delay_on || *delay_on > 350) {
+ 		*delay_on = 500;
+ 		*delay_off = 500;
+-		ata->fuji_led = FUJI_LED_SLOW_BLINK;
++		ata->fuji_led_mode = FUJI_LED_SLOW_BLINK;
+ 	} else {
+ 		*delay_on = 200;
+ 		*delay_off = 200;
+-		ata->fuji_led = FUJI_LED_FAST_BLINK;
++		ata->fuji_led_mode = FUJI_LED_FAST_BLINK;
+ 	}
+ 	mutex_unlock(&ata->lock);
+ 
+@@ -370,7 +347,7 @@ static ssize_t firmware_control_store(struct device *led_dev,
+ 		return -EINVAL;
+ 	
+ 	mutex_lock(&ata->lock);
+-	ata->fuji_led = control ? FUJI_LED_AUTO : FUJI_LED_OFF;
++	ata->fuji_led_mode = control ? FUJI_LED_AUTO : FUJI_LED_OFF;
+ 	mutex_unlock(&ata->lock);
+ 
+ 	atari_schedule_led_update (ata);
+@@ -409,7 +386,7 @@ static int atari_register_fuji_led (struct atari_data *ata)
+ 	snprintf(name, name_sz, "%s:white:fuji",  dev_name(dev));
+ 	led->name = name;
+ 	led->brightness = 0;
+-	led->max_brightness = 1;
++	led->max_brightness = 255;
+ 	led->brightness_set = atari_fuji_led_set;
+ 	led->blink_set = atari_fuji_led_set_blink;
+ 	led->groups = atari_fuji_led_groups;
+@@ -514,7 +491,7 @@ static int atari_register_leds (struct atari_data *ata) {
+ 
+ 	/* Default to all leds under firmware control */
+ 	ata->leds_firmware_control = LEDS_FIRMWARE_ENABLE;
+-	ata->fuji_led = FUJI_LED_AUTO;
++	ata->fuji_led_mode = FUJI_LED_AUTO;
+ 
+ 	return ret;
+ }
+@@ -530,7 +507,6 @@ static void atari_ff_worker(struct work_struct *work)
+ 
+ 	mutex_lock (&ata->lock);
+ 	r->report_id = ATARI_FF_REPORT;
+-	r->flags = BIT(0) | BIT(1);
+ 	r->strong_strength = ata->strong_ff;
+ 	r->weak_strength = ata->weak_ff;
+ 
+@@ -642,6 +618,7 @@ static int atari_probe(struct hid_device *hdev, const struct hid_device_id *id)
+ 
+ 	/* Synchronize the leds state */
+ 	atari_schedule_led_update (ata);
++
+ 	return ret;
+ }
+ 
+@@ -678,6 +655,7 @@ static struct hid_driver atari_driver = {
+ 	.name		= "atari",
+ 	.id_table	= atari_devices,
+ 	.input_mapping	= atari_mapping,
++	.input_mapped	= atari_mapped,
+ 	.raw_event	= atari_raw_event,
+ 	.probe		= atari_probe,
+ 	.remove		= atari_remove,
+@@ -685,6 +663,6 @@ static struct hid_driver atari_driver = {
+ 
+ module_hid_driver(atari_driver);
+ 
+-MODULE_AUTHOR("Sjoerd Simons");
++MODULE_AUTHOR("Sjoerd Simons <sjoerd.simons@collabora.co.uk>");
+ MODULE_DESCRIPTION("Atari game controllers");
+ MODULE_LICENSE("GPL");
+diff --git a/drivers/hid/hid-ids.h b/drivers/hid/hid-ids.h
+index 472d3d9..d49b6f0 100644
+--- a/drivers/hid/hid-ids.h
++++ b/drivers/hid/hid-ids.h
+@@ -196,8 +196,12 @@
+ #define USB_DEVICE_ID_ASUSTEK_FX503VD_KEYBOARD	0x1869
+ 
+ #define USB_VENDOR_ID_ATARI		0x3250
+-#define USB_DEVICE_ID_ATARI_MODERN	0x102b
+-#define USB_DEVICE_ID_ATARI_CLASSIC	0x101b
++#define USB_DEVICE_ID_ATARI_MODERN	0x1002
++#define USB_DEVICE_ID_ATARI_CLASSIC	0x1001
++
++/* To be removed */
++#define USB_DEVICE_ID_ATARI_MODERN_OBSOLETE	0x102b
++#define USB_DEVICE_ID_ATARI_CLASSIC_OBSOLETE	0x101b
+ 
+ #define USB_VENDOR_ID_ATEN		0x0557
+ #define USB_DEVICE_ID_ATEN_UC100KM	0x2004

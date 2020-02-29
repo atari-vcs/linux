@@ -1,3 +1,9 @@
+linux (5.4-1~exp1co1ata4) vcs; urgency=medium
+
+  * Support new firmware complying to recent specification
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Sat, 29 Feb 2020 23:39:01 +0100
+
 linux (5.4-1~exp1co1ata3) vcs; urgency=medium
 
   * Add support for atari controller rumble and leds
