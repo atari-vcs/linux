@@ -1,0 +1,112 @@
+From bc861502de7173152a8008d73da3a2beb93ee972 Mon Sep 17 00:00:00 2001
+From: Ezequiel Garcia <ezequiel@collabora.com>
+Date: Tue, 21 Jan 2020 19:43:15 -0300
+Subject: [PATCH 2/2] drm/imx: Fix probe oops
+
+Currently, there's a scenario where the driver oopses
+following a defered probe:
+
+  imx-drm display-subsystem: failed to bind ldb (ops imx_ldb_ops [imx_ldb]): -517
+  imx-drm display-subsystem: failed to bind ldb (ops imx_ldb_driver_exit [imx_ldb]): -517
+  8<--- cut here ---
+  Unable to handle kernel paging request at virtual address 636f7343
+  [..]
+  PC is at drm_mode_object_unregister+0x14/0x94 [drm]
+  LR is at drm_crtc_cleanup+0x50/0x10c [drm]
+
+The above is a typical use-after-free issue, caused by unbinding
+components before calling drm_mode_config_cleanup.
+
+Fix this by using the newly introduced component_bind_all_or_cleanup,
+making sure drm_mode_config_cleanup is called before unbinding
+the components.
+
+With this commit the driver fails to load, but the kernel
+no longer oopses:
+
+  imx-drm display-subsystem: bound imx-ipuv3-crtc.3 (ops imx_drm_exit [imxdrm])
+  imx-drm display-subsystem: bound imx-ipuv3-crtc.6 (ops imx_drm_exit [imxdrm])
+  imx-drm display-subsystem: bound imx-ipuv3-crtc.7 (ops imx_drm_exit [imxdrm])
+  imx-drm display-subsystem: failed to bind 120000.hdmi (ops dw_hdmi_imx_platform_driver_exit [dw_hdmi_imx]): -517
+  imx-drm display-subsystem: master bind failed: -517
+
+Signed-off-by: Ezequiel Garcia <ezequiel@collabora.com>
+[Martyn Welch: Integrated change from Ezequiel that fixes the issue...]
+Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+---
+ drivers/gpu/drm/imx/imx-drm-core.c | 19 ++++++++++++-------
+ drivers/gpu/drm/imx/ipuv3-plane.c  |  3 ++-
+ 2 files changed, 14 insertions(+), 8 deletions(-)
+
+diff --git a/drivers/gpu/drm/imx/imx-drm-core.c b/drivers/gpu/drm/imx/imx-drm-core.c
+index da87c70e413b..de78b9c41c3f 100644
+--- a/drivers/gpu/drm/imx/imx-drm-core.c
++++ b/drivers/gpu/drm/imx/imx-drm-core.c
+@@ -194,6 +194,11 @@ static int compare_of(struct device *dev, void *data)
+ 	return dev->of_node == np;
+ }
+ 
++static void unbind_cleanup(void *data)
++{
++        drm_mode_config_cleanup((struct drm_device *)data);
++}
++
+ static int imx_drm_bind(struct device *dev)
+ {
+ 	struct drm_device *drm;
+@@ -230,14 +235,13 @@ static int imx_drm_bind(struct device *dev)
+ 
+ 	drm_mode_config_init(drm);
+ 
+-	ret = drm_vblank_init(drm, MAX_CRTC);
+-	if (ret)
+-		goto err_kms;
+-
+ 	dev_set_drvdata(dev, drm);
+ 
+-	/* Now try and bind all our sub-components */
+-	ret = component_bind_all(dev, drm);
++	ret = component_bind_all_or_cleanup(dev, drm, unbind_cleanup);
++	if (ret)
++		goto err_free;
++
++	ret = drm_vblank_init(drm, drm->mode_config.num_crtc);
+ 	if (ret)
+ 		goto err_kms;
+ 
+@@ -265,9 +269,10 @@ static int imx_drm_bind(struct device *dev)
+ 
+ err_poll_fini:
+ 	drm_kms_helper_poll_fini(drm);
+-	component_unbind_all(drm->dev, drm);
+ err_kms:
+ 	drm_mode_config_cleanup(drm);
++	component_unbind_all(drm->dev, drm);
++err_free:
+ 	drm_dev_put(drm);
+ 
+ 	return ret;
+diff --git a/drivers/gpu/drm/imx/ipuv3-plane.c b/drivers/gpu/drm/imx/ipuv3-plane.c
+index 28826c0aa24a..8f35e181402e 100644
+--- a/drivers/gpu/drm/imx/ipuv3-plane.c
++++ b/drivers/gpu/drm/imx/ipuv3-plane.c
+@@ -152,6 +152,8 @@ void ipu_plane_put_resources(struct ipu_plane *ipu_plane)
+ 		ipu_idmac_put(ipu_plane->ipu_ch);
+ 	if (!IS_ERR_OR_NULL(ipu_plane->alpha_ch))
+ 		ipu_idmac_put(ipu_plane->alpha_ch);
++
++	kfree(ipu_plane);
+ }
+ 
+ int ipu_plane_get_resources(struct ipu_plane *ipu_plane)
+@@ -269,7 +271,6 @@ static void ipu_plane_destroy(struct drm_plane *plane)
+ 	DRM_DEBUG_KMS("[%d] %s\n", __LINE__, __func__);
+ 
+ 	drm_plane_cleanup(plane);
+-	kfree(ipu_plane);
+ }
+ 
+ static void ipu_plane_state_reset(struct drm_plane *plane)
+-- 
+2.24.1
+

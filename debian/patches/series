@@ -71,6 +71,7 @@ bugfix/arm/arm-mm-export-__sync_icache_dcache-for-xen-privcmd.patch
 bugfix/powerpc/powerpc-boot-fix-missing-crc32poly.h-when-building-with-kernel_xz.patch
 bugfix/arm64/arm64-acpi-Add-fixup-for-HPE-m400-quirks.patch
 bugfix/x86/x86-32-disable-3dnow-in-generic-config.patch
+bugfix/ppc64el/libbpf-fix-readelf-output-parsing-on-powerpc-with-re.patch
 
 # Arch features
 features/mips/MIPS-Loongson-3-Add-Loongson-LS3A-RS780E-1-way-machi.patch
@@ -126,6 +127,9 @@ bugfix/all/tools-lib-api-fs-fs.c-fix-misuse-of-strncpy.patch
 bugfix/all/usbip-fix-misuse-of-strncpy.patch
 bugfix/all/usbip-network-fix-unaligned-member-access.patch
 bugfix/all/tools-perf-pmu-events-fix-reproducibility.patch
+bugfix/all/0001-libtraceevent-Fix-header-installation.patch
+bugfix/all/0004-libtraceevent-allow-custom-libdir-path.patch
+bugfix/all/0005-libtraceevent-Add-dependency-on-libdl.patch
 
 # wireless: Disable regulatory.db direct loading (until we sort out signing)
 debian/wireless-disable-regulatory.db-direct-loading.patch
@@ -146,6 +150,10 @@ apparmor/0002-UBUNTU-SAUCE-apparmor-userspace-queries.patch
 apertis/sabreai-audio/0001-cs42xx8-i2c-Fix-module-auto-loading.patch
 apertis/sabreai-audio/0002-Hack-hardcode-to-sample-rates-usable-on-sabre-AI.patch
 apertis/sabrelite/0216-Disable-the-lcd-interface.patch
+apertis/sabrelite/0103-ARM-dts-imx6qdl-Enable-egalax-touch-screen.patch
+apertis/component-Add-an-API-to-cleanup-before-unbind.patch
+apertis/drm-imx-Fix-probe-oops.patch
+
 atari/controller/Add-driver-for-current-version-of-the-atari-gamepad-firmw.patch
 atari/controller/Correct-PID-of-the-atari-classic-controller.patch
 atari/controller/Add-mapping-for-the-atari-classic-controller.patch
