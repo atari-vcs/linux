@@ -153,3 +153,7 @@ atari/controller/Map-triggers-to-ABS_RZ-and-ABS_Z.patch
 atari/controller/First-naive-mapping-of-rotational-axis.patch
 atari/controller/Add-support-for-rumble-and-leds.patch
 atari/controller/Adjust-for-new-firmare-revisions.patch
+atari/controller/Add-support-for-controller-battery-level.patch
+atari/controller/Correct-classic-controller-backwards-compatibility.patch
+atari/controller/Map-X-Box-one-controller-to-gamepad.rst.patch
+atari/controller/Add-modern-controller-support-more-features.patch

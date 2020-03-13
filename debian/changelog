@@ -1,3 +1,15 @@
+linux (5.4-1~exp1co1ata5) vcs; urgency=medium
+
+  * Support new specification Modern controller firmware
+  * Support leds as per the new specification
+  * Export atari controller firmware version and mac address
+  * Expose sysfs knobs to switch atari controller into xbox and calibration
+    mode
+  * Add support for reading battery of atari controllers
+  * Add mapping for xbox one controller via bluetooth
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Fri, 13 Mar 2020 16:23:03 +0100
+
 linux (5.4-1~exp1co1ata4) vcs; urgency=medium
 
   * Support new firmware complying to recent specification

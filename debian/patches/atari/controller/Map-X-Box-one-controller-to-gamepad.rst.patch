@@ -1,0 +1,180 @@
+From: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+Date: Fri, 13 Mar 2020 15:56:26 +0100
+Subject: Map X-Box one controller to gamepad.rst
+
+Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+---
+ drivers/hid/hid-microsoft.c | 104 ++++++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 100 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/hid/hid-microsoft.c b/drivers/hid/hid-microsoft.c
+index 2d8b589..0652a5e 100644
+--- a/drivers/hid/hid-microsoft.c
++++ b/drivers/hid/hid-microsoft.c
+@@ -26,7 +26,7 @@
+ #define MS_NOGET		BIT(4)
+ #define MS_DUPLICATE_USAGES	BIT(5)
+ #define MS_SURFACE_DIAL		BIT(6)
+-#define MS_QUIRK_FF		BIT(7)
++#define MS_XBOX			BIT(7)
+ 
+ struct ms_data {
+ 	unsigned long quirks;
+@@ -182,6 +182,67 @@ static int ms_surface_dial_quirk(struct hid_input *hi, struct hid_field *field,
+ 	return 0;
+ }
+ 
++#define map_key(c)	hid_map_usage(hi, usage, bit, max, EV_KEY, (c));
++#define map_abs(c)	hid_map_usage(hi, usage, bit, max, EV_ABS, (c))
++static int ms_xbox_quirk(struct hid_input *hi, struct hid_field *field,
++		struct hid_usage *usage, unsigned long **bit, int *max)
++{
++	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_BUTTON) {
++		int code = ((usage->hid - 1) & HID_USAGE);
++		switch (code) {
++			case 0x3: map_key (BTN_WEST);
++				return 1;
++			case 0x4: map_key (BTN_NORTH);
++				return 1;
++			case 0x2:
++			case 0x5:
++			case 0x8:
++			case 0x9:
++				return -1;
++		}
++		return 0;
++	}
++
++	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_CONSUMER) {
++		int code = usage->hid & HID_USAGE;
++		switch (code) {
++			case 0x040:
++				map_key(BTN_START);
++				return 1;
++			case 0x223:
++				map_key(BTN_MODE);
++				return 1;
++			case 0x224:
++				map_key(BTN_SELECT);
++				return 1;
++		}
++	}
++
++	if ((usage->hid & HID_USAGE_PAGE) == HID_UP_SIMULATION) {
++		int code = usage->hid & HID_USAGE;
++		switch (code) {
++			case 0xc4:
++				map_abs (ABS_RZ);
++				return 1;
++			case 0xc5:
++				map_abs (ABS_Z);
++				return 1;
++		}
++	}
++
++	/* direct mappings for the right joypad */
++	switch (usage->hid) {
++		case HID_GD_Z:
++			map_abs (ABS_RX);
++			return 1;
++		case HID_GD_RZ:
++			map_abs (ABS_RY);
++			return 1;
++	}
++
++	return 0;
++}
++
+ static int ms_input_mapping(struct hid_device *hdev, struct hid_input *hi,
+ 		struct hid_field *field, struct hid_usage *usage,
+ 		unsigned long **bit, int *max)
+@@ -206,6 +267,12 @@ static int ms_input_mapping(struct hid_device *hdev, struct hid_input *hi,
+ 			return ret;
+ 	}
+ 
++	if (quirks & MS_XBOX) {
++		int ret = ms_xbox_quirk(hi, field, usage, bit, max);
++		if (ret)
++			return ret;
++	}
++
+ 	return 0;
+ }
+ 
+@@ -222,6 +289,22 @@ static int ms_input_mapped(struct hid_device *hdev, struct hid_input *hi,
+ 	return 0;
+ }
+ 
++static int ms_input_configured (struct hid_device *hdev, struct hid_input *hi)
++{
++	struct ms_data *ms = hid_get_drvdata(hdev);
++	unsigned long quirks = ms->quirks;
++
++	if (!(quirks & MS_XBOX))
++		return 0;
++
++	input_set_abs_params(hi->input, ABS_X, -32768, 32767, 255, 4096);
++	input_set_abs_params(hi->input, ABS_Y, -32768, 32767, 255, 4096);
++	input_set_abs_params(hi->input, ABS_RX, -32768, 32767, 255, 4096);
++	input_set_abs_params(hi->input, ABS_RX, -32768, 32767, 255, 4096);
++
++	return 0;
++}
++
+ static int ms_event(struct hid_device *hdev, struct hid_field *field,
+ 		struct hid_usage *usage, __s32 value)
+ {
+@@ -278,6 +361,18 @@ static int ms_event(struct hid_device *hdev, struct hid_field *field,
+ 		return 1;
+ 	}
+ 
++	if (quirks & MS_XBOX) {
++		switch (usage->hid) {
++			case HID_GD_X:
++			case HID_GD_Y:
++			case HID_GD_Z:
++			case HID_GD_RZ:
++				input_report_abs (input, usage->code,
++					value - 32768);
++			return 1;
++		}
++	}
++
+ 	return 0;
+ }
+ 
+@@ -339,7 +434,7 @@ static int ms_init_ff(struct hid_device *hdev)
+ 	hidinput = list_entry(hdev->inputs.next, struct hid_input, list);
+ 	input_dev = hidinput->input;
+ 
+-	if (!(ms->quirks & MS_QUIRK_FF))
++	if (!(ms->quirks & MS_XBOX))
+ 		return 0;
+ 
+ 	ms->hdev = hdev;
+@@ -359,7 +454,7 @@ static void ms_remove_ff(struct hid_device *hdev)
+ {
+ 	struct ms_data *ms = hid_get_drvdata(hdev);
+ 
+-	if (!(ms->quirks & MS_QUIRK_FF))
++	if (!(ms->quirks & MS_XBOX))
+ 		return;
+ 
+ 	cancel_work_sync(&ms->ff_worker);
+@@ -450,7 +545,7 @@ static const struct hid_device_id ms_devices[] = {
+ 	{ HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_MICROSOFT, 0x091B),
+ 		.driver_data = MS_SURFACE_DIAL },
+ 	{ HID_BLUETOOTH_DEVICE(USB_VENDOR_ID_MICROSOFT, USB_DEVICE_ID_MS_XBOX_ONE_S_CONTROLLER),
+-		.driver_data = MS_QUIRK_FF },
++		.driver_data = MS_XBOX },
+ 	{ }
+ };
+ MODULE_DEVICE_TABLE(hid, ms_devices);
+@@ -461,6 +556,7 @@ static struct hid_driver ms_driver = {
+ 	.report_fixup = ms_report_fixup,
+ 	.input_mapping = ms_input_mapping,
+ 	.input_mapped = ms_input_mapped,
++	.input_configured = ms_input_configured,
+ 	.event = ms_event,
+ 	.probe = ms_probe,
+ 	.remove = ms_remove,

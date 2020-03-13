@@ -1,0 +1,26 @@
+From: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+Date: Fri, 13 Mar 2020 15:25:58 +0100
+Subject: Correct classic controller backwards compatibility
+
+The obsolete classic controller driver checked the new PID for the
+classic controller to decide on the mapping; causing it not be correctly
+mapped.
+
+Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+---
+ drivers/hid/hid-atari-obsolete.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/hid/hid-atari-obsolete.c b/drivers/hid/hid-atari-obsolete.c
+index 295b041..65798b0 100644
+--- a/drivers/hid/hid-atari-obsolete.c
++++ b/drivers/hid/hid-atari-obsolete.c
+@@ -201,7 +201,7 @@ static int atari_mapping(struct hid_device *hdev, struct hid_input *hi,
+ 		return -1;
+ 	}
+ 
+-	if (hdev->product == USB_DEVICE_ID_ATARI_CLASSIC)
++	if (hdev->product == USB_DEVICE_ID_ATARI_CLASSIC_OBSOLETE)
+ 		return atari_map_classic(hdev, hi, field, usage, bit, max);
+ 	else
+ 		return atari_map_modern(hdev, hi, field, usage, bit, max);

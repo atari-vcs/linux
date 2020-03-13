@@ -1,0 +1,141 @@
+From: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+Date: Sun, 1 Mar 2020 00:38:53 +0100
+Subject: Add support for controller battery level
+
+Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+---
+ drivers/hid/hid-atari.c | 89 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 89 insertions(+)
+
+diff --git a/drivers/hid/hid-atari.c b/drivers/hid/hid-atari.c
+index 1dee66b..c6e3286 100644
+--- a/drivers/hid/hid-atari.c
++++ b/drivers/hid/hid-atari.c
+@@ -31,6 +31,8 @@
+ #define CLASSIC_LEDS 24
+ #define MODERN_LEDS 4
+ 
++#define BATTERY_ERROR 0x7f
++
+ struct led_report {
+ 	__u8 report_id;
+ 	__u8 firmware_control;
+@@ -71,6 +73,12 @@ struct atari_data {
+ 	void *ff_report_dma;
+ 	u8 strong_ff;
+ 	u8 weak_ff;
++
++	/* power supply */
++	struct power_supply *battery;
++	struct power_supply_desc battery_desc;
++	int battery_status;
++	uint8_t battery_capacity;
+ };
+ 
+ static int atari_map_classic(struct hid_device *hdev, struct hid_input *hi,
+@@ -203,6 +211,26 @@ static int atari_mapped(struct hid_device *hdev, struct hid_input *hi,
+ static int atari_raw_event(struct hid_device *hdev, struct hid_report *report,
+ 		u8 *rd, int size)
+ {
++	struct atari_data *ata = hid_get_drvdata(hdev);
++
++	if (report->id == 2 && size == 2) {
++		u8 charging = rd[1] >> 7;
++		u8 capacity = rd[1] & 0x7f;
++
++		ata->battery_capacity = capacity;
++		if (capacity == BATTERY_ERROR)
++			ata->battery_status = POWER_SUPPLY_STATUS_UNKNOWN;
++		else if (!charging) {
++			ata->battery_status = POWER_SUPPLY_STATUS_DISCHARGING;
++		} else {
++			ata->battery_status =
++				(capacity == 100) ? POWER_SUPPLY_STATUS_FULL
++						  : POWER_SUPPLY_STATUS_CHARGING;
++		}
++
++		power_supply_changed(ata->battery);
++	}
++
+ 	return 0;
+ }
+ 
+@@ -567,10 +595,47 @@ static int atari_init_ff(struct atari_data *ata)
+ 	return input_ff_create_memless(input_dev, NULL, atari_play_effect);
+ }
+ 
++static int atari_battery_get_property(struct power_supply *psy,
++				       enum power_supply_property prop,
++				       union power_supply_propval *val)
++{
++	struct atari_data *ata = power_supply_get_drvdata(psy);
++	switch (prop) {
++		case POWER_SUPPLY_PROP_PRESENT:
++			val->intval = (ata->battery_capacity != BATTERY_ERROR);
++			break;
++		case POWER_SUPPLY_PROP_CAPACITY:
++			if (ata->battery_capacity != BATTERY_ERROR)
++				val->intval = ata->battery_capacity;
++			else
++				val->intval = 0;
++			break;
++		case POWER_SUPPLY_PROP_STATUS:
++			val->intval = ata->battery_status;
++			break;
++		case POWER_SUPPLY_PROP_SCOPE:
++			val->intval = POWER_SUPPLY_SCOPE_DEVICE;
++			break;
++		default:
++			return -EINVAL;
++	}
++
++	return 0;
++}
++
++static enum power_supply_property atari_battery_props[] = {
++	POWER_SUPPLY_PROP_PRESENT,
++	POWER_SUPPLY_PROP_CAPACITY,
++	POWER_SUPPLY_PROP_STATUS,
++	POWER_SUPPLY_PROP_SCOPE,
++};
++
++
+ static int atari_probe(struct hid_device *hdev, const struct hid_device_id *id)
+ {
+ 	int ret;
+ 	struct atari_data *ata;
++	struct power_supply_config psy_cfg = { };
+ 
+ 	ata = devm_kzalloc(&hdev->dev, sizeof(*ata), GFP_KERNEL);
+ 	if (ata == NULL)
+@@ -619,6 +684,30 @@ static int atari_probe(struct hid_device *hdev, const struct hid_device_id *id)
+ 	/* Synchronize the leds state */
+ 	atari_schedule_led_update (ata);
+ 
++	/* power supply */
++	ata->battery_desc.name = devm_kasprintf (&hdev->dev,
++						 GFP_KERNEL,
++						 "atari-%s-battery",
++						 dev_name(&hdev->dev));
++
++	ata->battery_desc.properties = atari_battery_props,
++	ata->battery_desc.num_properties = ARRAY_SIZE(atari_battery_props),
++	ata->battery_desc.get_property = atari_battery_get_property,
++	ata->battery_desc.type = POWER_SUPPLY_TYPE_BATTERY,
++
++	ata->battery_status = POWER_SUPPLY_STATUS_UNKNOWN;
++	ata->battery_capacity = BATTERY_ERROR;
++
++	psy_cfg.drv_data = ata;
++
++	ata->battery = devm_power_supply_register(&hdev->dev,
++						  &ata->battery_desc,
++						  &psy_cfg);
++	if (IS_ERR(ata->battery)) {
++		return PTR_ERR(ata->battery);
++	}
++	power_supply_powers(ata->battery, &hdev->dev);
++
+ 	return ret;
+ }
+ 
