@@ -165,3 +165,4 @@ atari/controller/Add-support-for-controller-battery-level.patch
 atari/controller/Correct-classic-controller-backwards-compatibility.patch
 atari/controller/Map-X-Box-one-controller-to-gamepad.rst.patch
 atari/controller/Add-modern-controller-support-more-features.patch
+atari/bugfix/drm-amdgpu-allow-direct-upload-save-restore-list-for-rave.patch

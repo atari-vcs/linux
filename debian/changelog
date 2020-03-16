@@ -1,3 +1,10 @@
+linux (5.4.13-2ata2) UNRELEASED; urgency=medium
+
+  * atari/bugfix/drm-amdgpu-allow-direct-upload-save-restore-list-for-rave.patch
+    + Grab bugfix from newer stable queue to fix cold boot
+
+ -- Sjoerd Simons <sjoerd@collabora.com>  Mon, 16 Mar 2020 21:31:21 +0100
+
 linux (5.4.13-2ata1) vcs; urgency=medium
 
   * Update to 5.4.13 from Apertis
