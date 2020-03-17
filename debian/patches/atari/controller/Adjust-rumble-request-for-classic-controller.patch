@@ -1,0 +1,56 @@
+From: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+Date: Tue, 17 Mar 2020 16:41:55 +0100
+Subject: Adjust rumble request for classic controller
+
+The specification for the classic controller has only 4 (rather then 8)
+bytes for rumble as it only has one motor; Adjust the driver to assume
+that.
+
+Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+---
+ drivers/hid/hid-atari.c | 21 ++++++++++-----------
+ 1 file changed, 10 insertions(+), 11 deletions(-)
+
+diff --git a/drivers/hid/hid-atari.c b/drivers/hid/hid-atari.c
+index 6ce8ff8..ba9c618 100644
+--- a/drivers/hid/hid-atari.c
++++ b/drivers/hid/hid-atari.c
+@@ -626,8 +626,10 @@ static void atari_ff_worker(struct work_struct *work)
+ 						  HID_OUTPUT_REPORT,
+ 						  ATARI_FF_REPORT);
+ 	s32 *values = r->field[0]->value;
++	int count = r->field[0]->report_count;
+ 
+-	if (r == NULL || values == NULL || r->field[0]->report_count != 8) {
++	if (r == NULL || values == NULL
++		|| (count != 4 && count != 8)) {
+ 		hid_warn(ata->hdev, "Incorrect ff output report");
+ 		return;
+ 	}
+@@ -635,19 +637,16 @@ static void atari_ff_worker(struct work_struct *work)
+ 	mutex_lock (&ata->lock);
+ 
+ 	values[0] = ata->strong_ff;
+-	values[4] = ata->weak_ff;
+-
+-	/* duration */
+ 	values[1] = U8_MAX;
+-	values[5] = U8_MAX;
+-
+-	/* repeat */
+ 	values[2] = 0;
+-	values[6] = 0;
+-
+-	/* off */
+ 	values[3] = 0;
+-	values[7] = 0;
++
++	if (count == 8) {
++		values[4] = ata->weak_ff;
++		values[5] = U8_MAX;
++		values[6] = 0;
++		values[7] = 0;
++	}
+ 
+ 	mutex_unlock (&ata->lock);
+ 

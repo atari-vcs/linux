@@ -1,3 +1,10 @@
+linux (5.4.13-2ata3) vcs; urgency=medium
+
+  * Fix atari controller sysfs entries (xbox, calibration mode)
+  * Adjust rumble report for classic controller
+
+ -- Sjoerd Simons <sjoerd@collabora.com>  Tue, 17 Mar 2020 16:47:52 +0100
+
 linux (5.4.13-2ata2) vcs; urgency=medium
 
   * atari/bugfix/drm-amdgpu-allow-direct-upload-save-restore-list-for-rave.patch
