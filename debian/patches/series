@@ -154,3 +154,8 @@ apertis/sabrelite/0103-ARM-dts-imx6qdl-Enable-egalax-touch-screen.patch
 
 apertis/component-Add-an-API-to-cleanup-before-unbind.patch
 apertis/drm-imx-Fix-probe-oops.patch
+
+# Apertis fixes for UML
+apertis/um-ubd-Prevent-buffer-overrun-on-command-completion.patch
+apertis/um-ubd-Retry-buffer-read-on-any-kind-of-error.patch
+apertis/um-ubd-Submit-all-data-segments-as-a-single-command.patch

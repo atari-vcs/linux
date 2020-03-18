@@ -1,0 +1,34 @@
+From: Gabriel Krisman Bertazi <krisman@collabora.com>
+Date: Mon, 16 Mar 2020 20:45:07 -0400
+Subject: um: ubd: Retry buffer read on any kind of error
+
+Should bulk_req_safe_read return an error, we want to retry the read,
+otherwise, even though no IO will be done, os_write_file might still end
+up writing garbage to the pipe.
+
+Cc: Martyn Welch <martyn.welch@collabora.com>
+Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
+---
+ arch/um/drivers/ubd_kern.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/arch/um/drivers/ubd_kern.c b/arch/um/drivers/ubd_kern.c
+index 0f5d0a6..d259f07 100644
+--- a/arch/um/drivers/ubd_kern.c
++++ b/arch/um/drivers/ubd_kern.c
+@@ -1591,11 +1591,11 @@ int io_thread(void *arg)
+ 			&io_remainder_size,
+ 			UBD_REQ_BUFFER_SIZE
+ 		);
+-		if (n < 0) {
+-			if (n == -EAGAIN) {
++		if (n <= 0) {
++			if (n == -EAGAIN)
+ 				ubd_read_poll(-1);
+-				continue;
+-			}
++
++			continue;
+ 		}
+ 
+ 		for (count = 0; count < n/sizeof(struct io_thread_req *); count++) {
