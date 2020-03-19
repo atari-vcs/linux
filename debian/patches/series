@@ -168,3 +168,4 @@ atari/controller/Add-modern-controller-support-more-features.patch
 atari/bugfix/drm-amdgpu-allow-direct-upload-save-restore-list-for-rave.patch
 atari/controller/Atari-Correct-sysfs-store-return.patch
 atari/controller/Adjust-rumble-request-for-classic-controller.patch
+atari/controller/Support-old-HID-xbox-controlled-HID-ids.patch

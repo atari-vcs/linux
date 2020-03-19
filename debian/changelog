@@ -1,3 +1,10 @@
+linux (5.4.13-2ata4) vcs; urgency=medium
+
+  * Add support for the older XBOX one HIDs as get exposed by the XBOX
+    controller when pairing with the vcs.
+
+ -- Sjoerd Simons <sjoerd@collabora.com>  Thu, 19 Mar 2020 09:06:00 +0100
+
 linux (5.4.13-2ata3) vcs; urgency=medium
 
   * Fix atari controller sysfs entries (xbox, calibration mode)
