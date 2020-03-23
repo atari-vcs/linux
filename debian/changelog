@@ -1,3 +1,10 @@
+linux (5.4.13-2ata5) vcs; urgency=medium
+
+  * Swith atari hid from user SET_REPORT to output reports for better
+    controller firmware compatibility.
+
+ -- Sjoerd Simons <sjoerd@collabora.com>  Mon, 23 Mar 2020 09:46:46 +0100
+
 linux (5.4.13-2ata4) vcs; urgency=medium
 
   * Add support for the older XBOX one HIDs as get exposed by the XBOX

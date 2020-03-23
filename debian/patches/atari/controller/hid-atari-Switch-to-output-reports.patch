@@ -1,0 +1,221 @@
+From: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+Date: Mon, 23 Mar 2020 09:45:06 +0100
+Subject: hid: atari: Switch to output reports
+
+Rather then using SET_REPORT which the firmware doesn't seem to
+correctly implement on bluetooth yet use normal output reports which it
+does implement.
+
+Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+---
+ drivers/hid/hid-atari.c | 127 +++++++++++++++++++++++++++++-------------------
+ 1 file changed, 76 insertions(+), 51 deletions(-)
+
+diff --git a/drivers/hid/hid-atari.c b/drivers/hid/hid-atari.c
+index ba9c618..7da14c7 100644
+--- a/drivers/hid/hid-atari.c
++++ b/drivers/hid/hid-atari.c
+@@ -38,6 +38,30 @@
+ 
+ #define BATTERY_ERROR 0x7f
+ 
++struct led_report {
++	__u8 report_id;
++	__u8 flags;
++	__u8 fuji_led;
++	__u8 leds[0];
++} __packed;
++
++struct ff_engine {
++	__u8 strength;
++	__u8 on_period;
++	__u8 off_period;
++	__u8 repeat;
++} __packed;
++
++struct ff_report {
++	__u8 report_id;
++	struct ff_engine engine[0];
++} __packed;
++
++struct request_report {
++	__u8 report_id;
++	__u8 request;
++} __packed;
++
+ struct atari_data {
+ 	struct hid_device *hdev;
+ 	struct mutex lock;
+@@ -67,6 +91,13 @@ struct atari_data {
+ 	struct power_supply_desc battery_desc;
+ 	int battery_status;
+ 	uint8_t battery_capacity;
++
++	/* report storage */
++	struct ff_report *ff_report_dma;
++	size_t ff_report_size;
++	struct led_report *led_report_dma;
++	size_t led_report_size;
++	struct request_report *request_report_dma;
+ };
+ 
+ static int atari_map_classic(struct hid_device *hdev, struct hid_input *hi,
+@@ -231,49 +262,33 @@ static struct hid_report *atari_find_report (struct hid_device *hdev,
+ }
+ 
+ static void atari_send_request (struct atari_data *ata, uint8_t request) {
+-	struct hid_report *r = atari_find_report (ata->hdev,
+-						  HID_OUTPUT_REPORT,
+-						  ATARI_REQUEST_REPORT);
+-	s32 *values = r->field[0]->value;
+-	int i;
+-
+-	if (r == NULL || values == NULL || r->field[0]->report_count < 8) {
+-		hid_warn(ata->hdev, "Incorrect request output report");
+-		return;
+-	}
++	struct request_report *r = ata->request_report_dma;
+ 
+-	for (i = 0 ; i < 8; i++)
+-		values[i] = request & BIT(i) ? 1 : 0;
++	r->report_id = ATARI_REQUEST_REPORT;
++	r->request = request;
+ 
+-	hid_hw_request(ata->hdev, r, HID_REQ_SET_REPORT);
++	hid_hw_output_report (ata->hdev, (__u8 *) r, sizeof(*r));
+ }
+ 
+ static void atari_update_leds (struct atari_data *ata)
+ {
+-	struct hid_report *r = atari_find_report (ata->hdev,
+-						  HID_OUTPUT_REPORT,
+-						  ATARI_LED_REPORT);
+-	s32 *values = r->field[0]->value;
++	struct led_report *r = ata->led_report_dma;
+ 	int i;
+ 
+-	if (r == NULL || values == NULL || r->field[0]->report_count != ata->nleds + 2) {
+-		hid_warn(ata->hdev, "Incorrect led output report");
+-		return;
+-	}
+-
+-	values[0] = ata->fuji_led_mode << 1
+-		    | (ata->leds_firmware_control ? 0 : 1);
+-	values[1] = ata->fuji_led;
++	r->report_id = ATARI_LED_REPORT;
++	r->flags = ata->fuji_led_mode << 1
++		   | (ata->leds_firmware_control ? 0 : 1);
++	r->fuji_led = ata->fuji_led;
+ 
+ 	if (!ata->leds_firmware_control) {
+ 		for (i = 0; i < ata->nleds; i++) {
+-			values[i + 2] = ata->leds[i];
++			r->leds[i] = ata->leds[i];
+ 		}
+ 	} else if (ata->leds_firmware_control ==  LEDS_FIRMWARE_ENABLE) {
+ 		ata->leds_firmware_control = LEDS_FIRMWARE_ENABLED;
+ 	}
+ 
+-	hid_hw_request(ata->hdev, r, HID_REQ_SET_REPORT);
++	hid_hw_output_report (ata->hdev, (__u8 *) r, ata->led_report_size);
+ }
+ 
+ static void atari_led_worker(struct work_struct *work)
+@@ -601,6 +616,11 @@ static int atari_register_leds (struct atari_data *ata) {
+ 	if (ata->hdev->product == USB_DEVICE_ID_ATARI_CLASSIC)
+ 		ata->nleds = 24;
+ 
++	ata->led_report_size = sizeof (struct led_report) + ata->nleds;
++	ata->led_report_dma = devm_kzalloc(&ata->hdev->dev,
++					   ata->led_report_size,
++					   GFP_KERNEL);
++
+ 	ret = atari_register_fuji_led(ata);
+ 	if (ret)
+ 		return ret;
+@@ -622,35 +642,26 @@ static void atari_ff_worker(struct work_struct *work)
+ {
+ 	struct atari_data *ata = container_of(work, struct atari_data, ff_worker);
+ 	struct hid_device *hdev = ata->hdev;
+-	struct hid_report *r = atari_find_report (hdev,
+-						  HID_OUTPUT_REPORT,
+-						  ATARI_FF_REPORT);
+-	s32 *values = r->field[0]->value;
+-	int count = r->field[0]->report_count;
+-
+-	if (r == NULL || values == NULL
+-		|| (count != 4 && count != 8)) {
+-		hid_warn(ata->hdev, "Incorrect ff output report");
+-		return;
+-	}
++	struct ff_report *r = ata->ff_report_dma;
++	int i;
+ 
+ 	mutex_lock (&ata->lock);
+-
+-	values[0] = ata->strong_ff;
+-	values[1] = U8_MAX;
+-	values[2] = 0;
+-	values[3] = 0;
+-
+-	if (count == 8) {
+-		values[4] = ata->weak_ff;
+-		values[5] = U8_MAX;
+-		values[6] = 0;
+-		values[7] = 0;
++	r->report_id = ATARI_FF_REPORT;
++
++	r->engine[0].strength = ata->strong_ff;
++	r->engine[0].on_period = U8_MAX;
++	r->engine[0].off_period = 0;
++	r->engine[0].repeat = 0;
++
++	if (hdev->product == USB_DEVICE_ID_ATARI_MODERN) {
++		r->engine[1].strength = ata->weak_ff;
++		r->engine[1].on_period = U8_MAX;
++		r->engine[1].off_period = 0;
++		r->engine[1].repeat = 0;
+ 	}
+ 
+ 	mutex_unlock (&ata->lock);
+-
+-	hid_hw_request(ata->hdev, r, HID_REQ_SET_REPORT);
++	hid_hw_output_report (hdev, (__u8 *) r, ata->ff_report_size);
+ }
+ 
+ static int atari_play_effect(struct input_dev *dev, void *data,
+@@ -676,6 +687,7 @@ static int atari_init_ff(struct atari_data *ata)
+ {
+ 	struct hid_input *hidinput;
+ 	struct input_dev *input_dev;
++	int n_rumble = 1;
+ 
+ 	if (list_empty(&ata->hdev->inputs)) {
+ 		hid_err(ata->hdev, "no inputs found\n");
+@@ -684,6 +696,15 @@ static int atari_init_ff(struct atari_data *ata)
+ 	hidinput = list_entry(ata->hdev->inputs.next, struct hid_input, list);
+ 	input_dev = hidinput->input;
+ 
++	if (ata->hdev->product == USB_DEVICE_ID_ATARI_MODERN)
++		n_rumble = 2;
++
++	ata->ff_report_size = sizeof(struct ff_report)
++			      + n_rumble * sizeof(struct ff_engine);
++	ata->ff_report_dma = devm_kzalloc(&ata->hdev->dev,
++					 ata->ff_report_size,
++					 GFP_KERNEL);
++
+ 	INIT_WORK(&ata->ff_worker, atari_ff_worker);
+ 	input_set_capability(input_dev, EV_FF, FF_RUMBLE);
+ 
+@@ -794,6 +815,10 @@ static int atari_probe(struct hid_device *hdev, const struct hid_device_id *id)
+ 	}
+ 	power_supply_powers(ata->battery, &hdev->dev);
+ 
++	ata->request_report_dma = devm_kzalloc(&ata->hdev->dev,
++					       sizeof(struct led_report),
++					       GFP_KERNEL);
++
+ 	hid_device_io_start (hdev);
+ 
+ 	/* Get current state of controls */

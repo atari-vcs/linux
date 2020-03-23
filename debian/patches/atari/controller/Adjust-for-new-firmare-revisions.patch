@@ -998,7 +998,7 @@ index fb1bcc2..1dee66b 100644
  MODULE_DESCRIPTION("Atari game controllers");
  MODULE_LICENSE("GPL");
 diff --git a/drivers/hid/hid-ids.h b/drivers/hid/hid-ids.h
-index 472d3d9..d49b6f0 100644
+index 6327037..0c7cbc5 100644
 --- a/drivers/hid/hid-ids.h
 +++ b/drivers/hid/hid-ids.h
 @@ -196,8 +196,12 @@

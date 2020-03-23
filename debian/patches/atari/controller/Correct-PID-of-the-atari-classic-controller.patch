@@ -7,7 +7,7 @@ Subject: Correct PID of the atari classic controller
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/hid/hid-ids.h b/drivers/hid/hid-ids.h
-index befbe28..472d3d9 100644
+index 1576862..6327037 100644
 --- a/drivers/hid/hid-ids.h
 +++ b/drivers/hid/hid-ids.h
 @@ -197,7 +197,7 @@
