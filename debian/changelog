@@ -1,3 +1,12 @@
+linux (5.4.19-1co1) apertis; urgency=medium
+
+  * Apertis specific changes
+    - Turn off rt build
+    - Refresh the automatically detected licensing information
+    - Add patches to fix failure path in imx-drm
+
+ -- Ritesh Raj Sarraf <ritesh.sarraf@collabora.com>  Fri, 27 Mar 2020 20:03:02 +0530
+
 linux (5.4.19-1) unstable; urgency=medium
 
   * New upstream stable update:
