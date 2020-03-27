@@ -2,7 +2,7 @@
 installer: false
 
 [abi]
-abiname: 3
+abiname: 4
 ignore-changes:
  __cpuhp_*
  bpf_analyzer
