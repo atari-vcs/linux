@@ -1,8 +1,11 @@
-linux (5.4.13-2ata6) UNRELEASED; urgency=medium
+linux (5.4.13-2ata6) vcs; urgency=medium
 
   * Improve initial atari report handling
+  * debian/config/config: Disable BT_HCIBTUSB_RTL to avoid loading firmware
+    into realtek device as the current versions from linux-firmware seem
+    broken.
 
- -- Sjoerd Simons <sjoerd@collabora.com>  Mon, 30 Mar 2020 21:17:48 +0200
+ -- Sjoerd Simons <sjoerd@collabora.com>  Mon, 30 Mar 2020 21:22:27 +0200
 
 linux (5.4.13-2ata5) vcs; urgency=medium
 
