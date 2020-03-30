@@ -1,3 +1,9 @@
+linux (5.4.19-1co2) apertis; urgency=medium
+
+  * Fix kernel warning in ubd driver
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Mon, 30 Mar 2020 15:37:04 +0100
+
 linux (5.4.19-1co1) apertis; urgency=medium
 
   * Apertis specific changes
