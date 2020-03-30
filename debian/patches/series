@@ -170,3 +170,4 @@ atari/controller/Atari-Correct-sysfs-store-return.patch
 atari/controller/Adjust-rumble-request-for-classic-controller.patch
 atari/controller/Support-old-HID-xbox-controlled-HID-ids.patch
 atari/controller/hid-atari-Switch-to-output-reports.patch
+atari/controller/hid-atari-Fix-initial-info-and-ongoing-info.patch

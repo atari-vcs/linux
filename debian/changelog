@@ -1,3 +1,9 @@
+linux (5.4.13-2ata6) UNRELEASED; urgency=medium
+
+  * Improve initial atari report handling
+
+ -- Sjoerd Simons <sjoerd@collabora.com>  Mon, 30 Mar 2020 21:17:48 +0200
+
 linux (5.4.13-2ata5) vcs; urgency=medium
 
   * Swith atari hid from user SET_REPORT to output reports for better
