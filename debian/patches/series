@@ -156,8 +156,8 @@ apertis/component-Add-an-API-to-cleanup-before-unbind.patch
 apertis/drm-imx-Fix-probe-oops.patch
 
 # Apertis fixes for UML
-apertis/um-ubd-Prevent-buffer-overrun-on-command-completion.patch
-apertis/um-ubd-Retry-buffer-read-on-any-kind-of-error.patch
-apertis/um-ubd-Submit-all-data-segments-as-a-single-command.patch
-apertis/um-vector-Avoid-NULL-ptr-deference-if-transport-is-u.patch
-apertis/WIP-Port-UML-random-to-hwrng-core.patch
+apertis/uml/um-ubd-Prevent-buffer-overrun-on-command-completion.patch
+apertis/uml/um-ubd-Retry-buffer-read-on-any-kind-of-error.patch
+apertis/uml/um-ubd-Submit-all-data-segments-as-a-single-command.patch
+apertis/uml/um-vector-Avoid-NULL-ptr-deference-if-transport-is-u.patch
+apertis/uml/WIP-Port-UML-random-to-hwrng-core.patch
