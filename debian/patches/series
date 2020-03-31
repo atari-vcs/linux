@@ -159,3 +159,5 @@ apertis/drm-imx-Fix-probe-oops.patch
 apertis/um-ubd-Prevent-buffer-overrun-on-command-completion.patch
 apertis/um-ubd-Retry-buffer-read-on-any-kind-of-error.patch
 apertis/um-ubd-Submit-all-data-segments-as-a-single-command.patch
+apertis/um-vector-Avoid-NULL-ptr-deference-if-transport-is-u.patch
+apertis/WIP-Port-UML-random-to-hwrng-core.patch
