@@ -1,3 +1,9 @@
+linux (5.4.19-1co3) apertis; urgency=medium
+
+  * Apply user mode linux fixes from Sjoerd
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Tue, 31 Mar 2020 12:37:58 +0100
+
 linux (5.4.19-1co2) apertis; urgency=medium
 
   * Fix kernel warning in ubd driver
