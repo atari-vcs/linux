@@ -171,3 +171,4 @@ atari/controller/Adjust-rumble-request-for-classic-controller.patch
 atari/controller/Support-old-HID-xbox-controlled-HID-ids.patch
 atari/controller/hid-atari-Switch-to-output-reports.patch
 atari/controller/hid-atari-Fix-initial-info-and-ongoing-info.patch
+atari/controller/hid-microsoft-xbox-Correct-range-of-ABS_RY.patch

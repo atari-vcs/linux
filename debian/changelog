@@ -1,3 +1,9 @@
+linux (5.4.13-2ata7) vcs; urgency=medium
+
+  * Update range for RY axis on xbox
+
+ -- Sjoerd Simons <sjoerd@collabora.com>  Fri, 03 Apr 2020 16:02:28 +0200
+
 linux (5.4.13-2ata6) vcs; urgency=medium
 
   * Improve initial atari report handling

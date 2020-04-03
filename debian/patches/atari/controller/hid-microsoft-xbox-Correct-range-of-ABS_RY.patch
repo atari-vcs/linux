@@ -1,0 +1,22 @@
+From: Sjoerd Simons <sjoerd@collabora.com>
+Date: Fri, 3 Apr 2020 15:36:33 +0200
+Subject: hid-microsoft: xbox: Correct range of ABS_RY
+
+Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+---
+ drivers/hid/hid-microsoft.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/hid/hid-microsoft.c b/drivers/hid/hid-microsoft.c
+index fbd253f..80e1b73 100644
+--- a/drivers/hid/hid-microsoft.c
++++ b/drivers/hid/hid-microsoft.c
+@@ -354,7 +354,7 @@ static int ms_input_configured (struct hid_device *hdev, struct hid_input *hi)
+ 	input_set_abs_params(hi->input, ABS_X, -32768, 32767, 255, 4096);
+ 	input_set_abs_params(hi->input, ABS_Y, -32768, 32767, 255, 4096);
+ 	input_set_abs_params(hi->input, ABS_RX, -32768, 32767, 255, 4096);
+-	input_set_abs_params(hi->input, ABS_RX, -32768, 32767, 255, 4096);
++	input_set_abs_params(hi->input, ABS_RY, -32768, 32767, 255, 4096);
+ 
+ 	return 0;
+ }
