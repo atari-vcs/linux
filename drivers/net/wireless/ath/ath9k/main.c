@@ -809,7 +809,7 @@ static void ath9k_tx(struct ieee80211_hw *hw,
 
 	if (ath_tx_start(hw, skb, &txctl) != 0) {
 		ath_dbg(common, XMIT, "TX failed\n");
-		TX_STAT_INC(txctl.txq->axq_qnum, txfailed);
+		TX_STAT_INC(sc, txctl.txq->axq_qnum, txfailed);
 		goto exit;
 	}
 
@@ -1456,6 +1456,9 @@ static int ath9k_config(struct ieee80211_hw *hw, u32 changed)
 		ctx->offchannel = !!(conf->flags & IEEE80211_CONF_OFFCHANNEL);
 		ath_chanctx_set_channel(sc, ctx, &hw->conf.chandef);
 	}
+
+	if (changed & IEEE80211_CONF_CHANGE_POWER)
+		ath9k_set_txpower(sc, NULL);
 
 	mutex_unlock(&sc->mutex);
 	ath9k_ps_restore(sc);
@@ -2392,7 +2395,8 @@ out:
 	return ret;
 }
 
-static int ath9k_cancel_remain_on_channel(struct ieee80211_hw *hw)
+static int ath9k_cancel_remain_on_channel(struct ieee80211_hw *hw,
+					  struct ieee80211_vif *vif)
 {
 	struct ath_softc *sc = hw->priv;
 	struct ath_common *common = ath9k_hw_common(sc->sc_ah);
