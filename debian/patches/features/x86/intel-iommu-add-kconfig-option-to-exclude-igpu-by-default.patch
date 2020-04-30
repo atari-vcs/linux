@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Wed, 21 Aug 2019 00:32:16 +0100
 Subject: intel-iommu: Add Kconfig option to exclude iGPU by default
+
 Bug-Debian: https://bugs.debian.org/935270
 Bug-Kali: https://bugs.kali.org/view.php?id=5644
 
@@ -13,10 +14,14 @@ corresponding to "on", "off", and "on,intgpu_off".
 
 Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 ---
-Index: debian-kernel/drivers/iommu/Kconfig
-===================================================================
---- debian-kernel.orig/drivers/iommu/Kconfig
-+++ debian-kernel/drivers/iommu/Kconfig
+ drivers/iommu/Kconfig       | 28 +++++++++++++++++++++-------
+ drivers/iommu/intel-iommu.c |  9 +++------
+ 2 files changed, 24 insertions(+), 13 deletions(-)
+
+diff --git a/drivers/iommu/Kconfig b/drivers/iommu/Kconfig
+index e3842ea..afe6205 100644
+--- a/drivers/iommu/Kconfig
++++ b/drivers/iommu/Kconfig
 @@ -213,14 +213,28 @@ config INTEL_IOMMU_SVM
  	  to access DMA resources through process address space by
  	  means of a Process Address Space ID (PASID).
@@ -53,11 +58,11 @@ Index: debian-kernel/drivers/iommu/Kconfig
  
  config INTEL_IOMMU_BROKEN_GFX_WA
  	bool "Workaround broken graphics drivers (going away soon)"
-Index: debian-kernel/drivers/iommu/intel-iommu.c
-===================================================================
---- debian-kernel.orig/drivers/iommu/intel-iommu.c
-+++ debian-kernel/drivers/iommu/intel-iommu.c
-@@ -354,18 +354,14 @@ static int intel_iommu_attach_device(str
+diff --git a/drivers/iommu/intel-iommu.c b/drivers/iommu/intel-iommu.c
+index caf99dd..32e066b 100644
+--- a/drivers/iommu/intel-iommu.c
++++ b/drivers/iommu/intel-iommu.c
+@@ -354,18 +354,14 @@ static int intel_iommu_attach_device(struct iommu_domain *domain,
  static phys_addr_t intel_iommu_iova_to_phys(struct iommu_domain *domain,
  					    dma_addr_t iova);
  
@@ -78,7 +83,7 @@ Index: debian-kernel/drivers/iommu/intel-iommu.c
  static int dmar_forcedac;
  static int intel_iommu_strict;
  static int intel_iommu_superpage = 1;
-@@ -446,6 +442,7 @@ static int __init intel_iommu_setup(char
+@@ -446,6 +442,7 @@ static int __init intel_iommu_setup(char *str)
  	while (*str) {
  		if (!strncmp(str, "on", 2)) {
  			dmar_disabled = 0;

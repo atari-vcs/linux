@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Tue, 26 Jun 2018 16:59:01 +0100
 Subject: Export symbols needed by Android drivers
+
 Bug-Debian: https://bugs.debian.org/901492
 
 We want to enable use of the Android ashmem and binder drivers to
@@ -9,7 +10,6 @@ resources and increase security attack surface on systems that don't
 need them.
 
 Export the currently un-exported symbols they depend on.
-
 ---
  fs/file.c           | 5 +++++
  kernel/fork.c       | 1 +
@@ -22,9 +22,11 @@ Export the currently un-exported symbols they depend on.
  security/security.c | 4 ++++
  9 files changed, 17 insertions(+)
 
+diff --git a/fs/file.c b/fs/file.c
+index 3da91a1..fbb6f55 100644
 --- a/fs/file.c
 +++ b/fs/file.c
-@@ -409,6 +409,7 @@ struct files_struct *get_files_struct(st
+@@ -409,6 +409,7 @@ struct files_struct *get_files_struct(struct task_struct *task)
  
  	return files;
  }
@@ -32,7 +34,7 @@ Export the currently un-exported symbols they depend on.
  
  void put_files_struct(struct files_struct *files)
  {
-@@ -421,6 +422,7 @@ void put_files_struct(struct files_struc
+@@ -421,6 +422,7 @@ void put_files_struct(struct files_struct *files)
  		kmem_cache_free(files_cachep, files);
  	}
  }
@@ -40,7 +42,7 @@ Export the currently un-exported symbols they depend on.
  
  void reset_files_struct(struct files_struct *files)
  {
-@@ -533,6 +535,7 @@ out:
+@@ -534,6 +536,7 @@ int __alloc_fd(struct files_struct *files,
  	spin_unlock(&files->file_lock);
  	return error;
  }
@@ -48,7 +50,7 @@ Export the currently un-exported symbols they depend on.
  
  static int alloc_fd(unsigned start, unsigned flags)
  {
-@@ -606,6 +609,7 @@ void __fd_install(struct files_struct *f
+@@ -607,6 +610,7 @@ void __fd_install(struct files_struct *files, unsigned int fd,
  	rcu_assign_pointer(fdt->fd[fd], file);
  	rcu_read_unlock_sched();
  }
@@ -56,7 +58,7 @@ Export the currently un-exported symbols they depend on.
  
  void fd_install(unsigned int fd, struct file *file)
  {
-@@ -668,6 +672,7 @@ out_unlock:
+@@ -669,6 +673,7 @@ int __close_fd_get_file(unsigned int fd, struct file **res)
  	*res = NULL;
  	return -ENOENT;
  }
@@ -64,9 +66,11 @@ Export the currently un-exported symbols they depend on.
  
  void do_close_on_exec(struct files_struct *files)
  {
+diff --git a/kernel/fork.c b/kernel/fork.c
+index 755d816..f052cf0 100644
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
-@@ -1085,6 +1085,7 @@ void mmput_async(struct mm_struct *mm)
+@@ -1117,6 +1117,7 @@ void mmput_async(struct mm_struct *mm)
  		schedule_work(&mm->async_put_work);
  	}
  }
@@ -74,9 +78,11 @@ Export the currently un-exported symbols they depend on.
  #endif
  
  /**
+diff --git a/kernel/sched/core.c b/kernel/sched/core.c
+index 8dacda4..ba049993 100644
 --- a/kernel/sched/core.c
 +++ b/kernel/sched/core.c
-@@ -3943,6 +3943,7 @@ int can_nice(const struct task_struct *p
+@@ -4559,6 +4559,7 @@ int can_nice(const struct task_struct *p, const int nice)
  	return (nice_rlim <= task_rlimit(p, RLIMIT_NICE) ||
  		capable(CAP_SYS_NICE));
  }
@@ -84,9 +90,11 @@ Export the currently un-exported symbols they depend on.
  
  #ifdef __ARCH_WANT_SYS_NICE
  
+diff --git a/kernel/signal.c b/kernel/signal.c
+index bcd46f5..7ccda8c 100644
 --- a/kernel/signal.c
 +++ b/kernel/signal.c
-@@ -1353,6 +1353,7 @@ struct sighand_struct *__lock_task_sigha
+@@ -1391,6 +1391,7 @@ struct sighand_struct *__lock_task_sighand(struct task_struct *tsk,
  
  	return sighand;
  }
@@ -94,9 +102,11 @@ Export the currently un-exported symbols they depend on.
  
  /*
   * send signal info to all the members of a group
+diff --git a/kernel/task_work.c b/kernel/task_work.c
+index 0fef395..9233b20 100644
 --- a/kernel/task_work.c
 +++ b/kernel/task_work.c
-@@ -40,6 +40,7 @@ task_work_add(struct task_struct *task,
+@@ -40,6 +40,7 @@ task_work_add(struct task_struct *task, struct callback_head *work, bool notify)
  		set_notify_resume(task);
  	return 0;
  }
@@ -104,9 +114,11 @@ Export the currently un-exported symbols they depend on.
  
  /**
   * task_work_cancel - cancel a pending work added by task_work_add()
+diff --git a/mm/memory.c b/mm/memory.c
+index cb7c940..10d1cfe 100644
 --- a/mm/memory.c
 +++ b/mm/memory.c
-@@ -1364,6 +1364,7 @@ void zap_page_range(struct vm_area_struc
+@@ -1340,6 +1340,7 @@ void zap_page_range(struct vm_area_struct *vma, unsigned long start,
  	mmu_notifier_invalidate_range_end(&range);
  	tlb_finish_mmu(&tlb, start, range.end);
  }
@@ -114,9 +126,11 @@ Export the currently un-exported symbols they depend on.
  
  /**
   * zap_page_range_single - remove user pages in a given range
+diff --git a/mm/shmem.c b/mm/shmem.c
+index 312e311..24d0f63 100644
 --- a/mm/shmem.c
 +++ b/mm/shmem.c
-@@ -3992,6 +3992,7 @@ int shmem_zero_setup(struct vm_area_stru
+@@ -4195,6 +4195,7 @@ int shmem_zero_setup(struct vm_area_struct *vma)
  
  	return 0;
  }
@@ -124,9 +138,11 @@ Export the currently un-exported symbols they depend on.
  
  /**
   * shmem_read_mapping_page_gfp - read into page cache, using specified page allocation flags.
+diff --git a/mm/vmalloc.c b/mm/vmalloc.c
+index 61bdbaf..d5e8d7e 100644
 --- a/mm/vmalloc.c
 +++ b/mm/vmalloc.c
-@@ -1295,6 +1295,7 @@ int map_kernel_range_noflush(unsigned lo
+@@ -1963,6 +1963,7 @@ int map_kernel_range_noflush(unsigned long addr, unsigned long size,
  {
  	return vmap_page_range_noflush(addr, addr + size, prot, pages);
  }
@@ -134,7 +150,7 @@ Export the currently un-exported symbols they depend on.
  
  /**
   * unmap_kernel_range_noflush - unmap kernel VM area
-@@ -1435,6 +1436,7 @@ struct vm_struct *get_vm_area(unsigned l
+@@ -2104,6 +2105,7 @@ struct vm_struct *get_vm_area(unsigned long size, unsigned long flags)
  				  NUMA_NO_NODE, GFP_KERNEL,
  				  __builtin_return_address(0));
  }
@@ -142,9 +158,11 @@ Export the currently un-exported symbols they depend on.
  
  struct vm_struct *get_vm_area_caller(unsigned long size, unsigned long flags,
  				const void *caller)
+diff --git a/security/security.c b/security/security.c
+index 1bc000f..a75749a 100644
 --- a/security/security.c
 +++ b/security/security.c
-@@ -247,24 +247,28 @@ int security_binder_set_context_mgr(stru
+@@ -674,24 +674,28 @@ int security_binder_set_context_mgr(struct task_struct *mgr)
  {
  	return call_int_hook(binder_set_context_mgr, 0, mgr);
  }

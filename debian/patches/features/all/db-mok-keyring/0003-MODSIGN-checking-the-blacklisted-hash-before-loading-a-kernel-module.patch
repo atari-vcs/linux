@@ -2,6 +2,7 @@ From: "Lee, Chun-Yi" <joeyli.kernel@gmail.com>
 Date: Tue, 13 Mar 2018 18:38:02 +0800
 Subject: [PATCH 3/4] MODSIGN: checking the blacklisted hash before loading a
  kernel module
+
 Origin: https://lore.kernel.org/patchwork/patch/933175/
 
 This patch adds the logic for checking the kernel module's hash
@@ -21,11 +22,11 @@ Cc: James Bottomley <James.Bottomley@HansenPartnership.com>
 Signed-off-by: "Lee, Chun-Yi" <jlee@suse.com>
 [Rebased by Luca Boccassi]
 ---
- kernel/module_signing.c | 59 +++++++++++++++++++++++++++++++++++++++--
+ kernel/module_signing.c | 59 +++++++++++++++++++++++++++++++++++++++++++++++--
  1 file changed, 57 insertions(+), 2 deletions(-)
 
 diff --git a/kernel/module_signing.c b/kernel/module_signing.c
-index 9d9fc678c91d..0f041a21f418 100644
+index 9d9fc67..0f041a2 100644
 --- a/kernel/module_signing.c
 +++ b/kernel/module_signing.c
 @@ -12,15 +12,62 @@
@@ -117,6 +118,3 @@ index 9d9fc678c91d..0f041a21f418 100644
 +
 +	return ret;
  }
--- 
-2.23.0
-

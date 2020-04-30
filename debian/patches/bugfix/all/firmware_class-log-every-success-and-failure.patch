@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
+Date: Sun, 9 Dec 2012 16:02:00 +0000
 Subject: firmware_class: Log every success and failure against given device
-Date: Sun, 09 Dec 2012 16:02:00 +0000
+
 Forwarded: no
 
 The hundreds of users of request_firmware() have nearly as many
@@ -22,12 +23,14 @@ NOTE: hw-detect will depend on the "firmware: failed to load %s (%d)\n"
 format to detect missing firmware.
 ---
  drivers/base/firmware_loader/fallback.c |  2 +-
- drivers/base/firmware_loader/main.c     | 15 ++++++++-------
- 2 files changed, 9 insertions(+), 8 deletions(-)
+ drivers/base/firmware_loader/main.c     | 16 ++++++++--------
+ 2 files changed, 9 insertions(+), 9 deletions(-)
 
+diff --git a/drivers/base/firmware_loader/fallback.c b/drivers/base/firmware_loader/fallback.c
+index 62ee90b..199f39a 100644
 --- a/drivers/base/firmware_loader/fallback.c
 +++ b/drivers/base/firmware_loader/fallback.c
-@@ -557,7 +557,7 @@ static int fw_load_from_user_helper(stru
+@@ -557,7 +557,7 @@ static int fw_load_from_user_helper(struct firmware *firmware,
  	if (opt_flags & FW_OPT_NOWAIT) {
  		timeout = usermodehelper_read_lock_wait(timeout);
  		if (!timeout) {
@@ -36,9 +39,11 @@ format to detect missing firmware.
  				name);
  			return -EBUSY;
  		}
+diff --git a/drivers/base/firmware_loader/main.c b/drivers/base/firmware_loader/main.c
+index bf44c79..5ef70df 100644
 --- a/drivers/base/firmware_loader/main.c
 +++ b/drivers/base/firmware_loader/main.c
-@@ -496,14 +496,12 @@ fw_get_filesystem_firmware(struct device
+@@ -496,14 +496,12 @@ fw_get_filesystem_firmware(struct device *device, struct fw_priv *fw_priv,
  		rc = kernel_read_file_from_path(path, &buffer, &size,
  						msize, id);
  		if (rc) {
@@ -57,7 +62,7 @@ format to detect missing firmware.
  		if (decompress) {
  			dev_dbg(device, "f/w decompressing %s\n",
  				fw_priv->fw_name);
-@@ -516,8 +514,6 @@ fw_get_filesystem_firmware(struct device
+@@ -516,8 +514,6 @@ fw_get_filesystem_firmware(struct device *device, struct fw_priv *fw_priv,
  				continue;
  			}
  		} else {
@@ -66,7 +71,7 @@ format to detect missing firmware.
  			if (!fw_priv->data)
  				fw_priv->data = buffer;
  			fw_priv->size = size;
-@@ -527,6 +523,10 @@ fw_get_filesystem_firmware(struct device
+@@ -527,6 +523,10 @@ fw_get_filesystem_firmware(struct device *device, struct fw_priv *fw_priv,
  	}
  	__putname(path);
  

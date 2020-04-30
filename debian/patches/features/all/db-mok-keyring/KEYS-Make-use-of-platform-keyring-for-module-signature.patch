@@ -2,6 +2,7 @@ From: Robert Holmes <robeholmes@gmail.com>
 Date: Tue, 23 Apr 2019 07:39:29 +0000
 Subject: [PATCH] KEYS: Make use of platform keyring for module signature
  verify
+
 Bug-Debian: https://bugs.debian.org/935945
 Origin: https://src.fedoraproject.org/rpms/kernel/raw/master/f/KEYS-Make-use-of-platform-keyring-for-module-signature.patch
 
@@ -16,12 +17,14 @@ were not successfully verified.
 Signed-off-by: Robert Holmes <robeholmes@gmail.com>
 Signed-off-by: Jeremy Cline <jcline@redhat.com>
 ---
- kernel/module_signing.c | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
+ kernel/module_signing.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
+diff --git a/kernel/module_signing.c b/kernel/module_signing.c
+index 5d800f1..80b90a4 100644
 --- a/kernel/module_signing.c
 +++ b/kernel/module_signing.c
-@@ -135,6 +135,13 @@ int mod_verify_sig(const void *mod, stru
+@@ -93,6 +93,13 @@ int mod_verify_sig(const void *mod, struct load_info *info)
  				      VERIFYING_MODULE_SIGNATURE,
  				      NULL, NULL);
  	pr_devel("verify_pkcs7_signature() = %d\n", ret);

@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Sat, 20 Apr 2013 15:52:02 +0100
 Subject: viafb: Autoload on OLPC XO 1.5 only
+
 Bug-Debian: https://bugs.debian.org/705788
 Forwarded: no
 
@@ -12,11 +13,15 @@ much.
 However, this driver is required for console support on the XO 1.5.
 We need to allow it to be autoloaded on this model only, and then
 un-blacklist it in udev.
-
 ---
+ drivers/video/fbdev/via/via-core.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/video/fbdev/via/via-core.c b/drivers/video/fbdev/via/via-core.c
+index ffa2ca2..b771e29 100644
 --- a/drivers/video/fbdev/via/via-core.c
 +++ b/drivers/video/fbdev/via/via-core.c
-@@ -753,7 +753,14 @@ static struct pci_device_id via_pci_tabl
+@@ -710,7 +710,14 @@ static const struct pci_device_id via_pci_table[] = {
  	  .driver_data = UNICHROME_VX900 },
  	{ }
  };

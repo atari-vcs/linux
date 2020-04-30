@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Mon, 12 Feb 2018 23:59:26 +0000
 Subject: x86: Make x32 syscall support conditional on a kernel parameter
+
 Bug-Debian: https://bugs.debian.org/708070
 Forwarded: https://lore.kernel.org/lkml/1415245982.3398.53.camel@decadent.org.uk/T/#u
 
@@ -19,14 +20,16 @@ Kconfig parameter to set its default value and a kernel parameter
 
 Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 ---
- Documentation/admin-guide/kernel-parameters.txt |    4 ++
- arch/x86/Kconfig                                |    8 ++++
- arch/x86/entry/common.c                         |    3 +
- arch/x86/entry/syscall_64.c                     |   46 ++++++++++++++++++++++++
- arch/x86/include/asm/elf.h                      |    4 +-
- arch/x86/include/asm/syscall.h                  |   13 ++++++
+ Documentation/admin-guide/kernel-parameters.txt |  4 +++
+ arch/x86/Kconfig                                |  8 +++++
+ arch/x86/entry/common.c                         |  3 +-
+ arch/x86/entry/syscall_64.c                     | 46 +++++++++++++++++++++++++
+ arch/x86/include/asm/elf.h                      |  4 ++-
+ arch/x86/include/asm/syscall.h                  | 13 +++++++
  6 files changed, 76 insertions(+), 2 deletions(-)
 
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index bfe89bc..7ca8092 100644
 --- a/Documentation/admin-guide/kernel-parameters.txt
 +++ b/Documentation/admin-guide/kernel-parameters.txt
 @@ -4711,6 +4711,10 @@
@@ -40,6 +43,8 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  	sysfs.deprecated=0|1 [KNL]
  			Enable/disable old style sysfs layout for old udev
  			on older distributions. When this option is enabled
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 8ef8513..96a82d3 100644
 --- a/arch/x86/Kconfig
 +++ b/arch/x86/Kconfig
 @@ -2946,6 +2946,14 @@ config COMPAT_32
@@ -57,9 +62,11 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  config COMPAT
  	def_bool y
  	depends on IA32_EMULATION || X86_X32
+diff --git a/arch/x86/entry/common.c b/arch/x86/entry/common.c
+index 3f8e226..e4d0cdf 100644
 --- a/arch/x86/entry/common.c
 +++ b/arch/x86/entry/common.c
-@@ -289,7 +289,8 @@ __visible void do_syscall_64(unsigned lo
+@@ -289,7 +289,8 @@ __visible void do_syscall_64(unsigned long nr, struct pt_regs *regs)
  		nr = array_index_nospec(nr, NR_syscalls);
  		regs->ax = sys_call_table[nr](regs);
  #ifdef CONFIG_X86_X32_ABI
@@ -69,6 +76,8 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  			  (nr & ~__X32_SYSCALL_BIT) < X32_NR_syscalls)) {
  		nr = array_index_nospec(nr & ~__X32_SYSCALL_BIT,
  					X32_NR_syscalls);
+diff --git a/arch/x86/entry/syscall_64.c b/arch/x86/entry/syscall_64.c
+index adf619a..cf450e0 100644
 --- a/arch/x86/entry/syscall_64.c
 +++ b/arch/x86/entry/syscall_64.c
 @@ -4,6 +4,9 @@
@@ -81,7 +90,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  #include <linux/syscalls.h>
  #include <asm/asm-offsets.h>
  #include <asm/syscall.h>
-@@ -53,4 +56,47 @@ asmlinkage const sys_call_ptr_t x32_sys_
+@@ -53,4 +56,47 @@ asmlinkage const sys_call_ptr_t x32_sys_call_table[__NR_syscall_x32_max+1] = {
  #undef __SYSCALL_64
  #undef __SYSCALL_X32
  
@@ -129,6 +138,8 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 +arch_param_cb(x32, &x32_param_ops, NULL, 0444);
 +
  #endif
+diff --git a/arch/x86/include/asm/elf.h b/arch/x86/include/asm/elf.h
+index 69c0f89..4cfc179 100644
 --- a/arch/x86/include/asm/elf.h
 +++ b/arch/x86/include/asm/elf.h
 @@ -11,6 +11,7 @@
@@ -149,6 +160,8 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  
  #if __USER32_DS != __USER_DS
  # error "The following code assumes __USER32_DS == __USER_DS"
+diff --git a/arch/x86/include/asm/syscall.h b/arch/x86/include/asm/syscall.h
+index 8db3fdb..704f7fc 100644
 --- a/arch/x86/include/asm/syscall.h
 +++ b/arch/x86/include/asm/syscall.h
 @@ -13,6 +13,7 @@
@@ -159,7 +172,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  #include <asm/asm-offsets.h>	/* For NR_syscalls */
  #include <asm/thread_info.h>	/* for TS_COMPAT */
  #include <asm/unistd.h>
-@@ -40,6 +41,18 @@ extern const sys_call_ptr_t ia32_sys_cal
+@@ -40,6 +41,18 @@ extern const sys_call_ptr_t ia32_sys_call_table[];
  extern const sys_call_ptr_t x32_sys_call_table[];
  #endif
  

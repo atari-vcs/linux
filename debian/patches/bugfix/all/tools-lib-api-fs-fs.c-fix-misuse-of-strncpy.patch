@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Thu, 19 Jul 2018 23:36:52 +0100
 Subject: tools/lib/api/fs/fs.c: Fix misuse of strncpy()
+
 Bug-Debian: https://bugs.debian.org/897802
 Forwarded: https://lore.kernel.org/lkml/20180721021026.GQ14131@decadent.org.uk/T/
 
@@ -18,6 +19,11 @@ terminated.  Use strlcpy() instead.
 
 Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 ---
+ tools/lib/api/fs/fs.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/tools/lib/api/fs/fs.c b/tools/lib/api/fs/fs.c
+index 7aba824..52cad93 100644
 --- a/tools/lib/api/fs/fs.c
 +++ b/tools/lib/api/fs/fs.c
 @@ -12,6 +12,7 @@
@@ -28,7 +34,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  
  #include "fs.h"
  #include "debug-internal.h"
-@@ -219,7 +220,7 @@ static bool fs__env_override(struct fs *
+@@ -219,7 +220,7 @@ static bool fs__env_override(struct fs *fs)
  		return false;
  
  	fs->found = true;

@@ -1,6 +1,8 @@
 From: David Howells <dhowells@redhat.com>
 Date: Mon, 18 Feb 2019 12:45:03 +0000
-Subject: [28/30] efi: Add an EFI_SECURE_BOOT flag to indicate secure boot mode
+Subject: [28/30] efi: Add an EFI_SECURE_BOOT flag to indicate secure boot
+ mode
+
 Origin: https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/linux-fs.git/commit?id=a5d70c55c603233c192b375f72116a395909da28
 
 UEFI machines can be booted in Secure Boot mode.  Add an EFI_SECURE_BOOT
@@ -15,13 +17,15 @@ Signed-off-by: David Howells <dhowells@redhat.com>
 Reviewed-by: Ard Biesheuvel <ard.biesheuvel@linaro.org>
 cc: linux-efi@vger.kernel.org
 ---
- arch/x86/kernel/setup.c           | 14 +----------
+ arch/x86/kernel/setup.c           | 14 +-------------
  drivers/firmware/efi/Makefile     |  1 +
- drivers/firmware/efi/secureboot.c | 39 +++++++++++++++++++++++++++++++
- include/linux/efi.h               | 16 ++++++++-----
+ drivers/firmware/efi/secureboot.c | 39 +++++++++++++++++++++++++++++++++++++++
+ include/linux/efi.h               | 16 ++++++++++------
  4 files changed, 51 insertions(+), 19 deletions(-)
  create mode 100644 drivers/firmware/efi/secureboot.c
 
+diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
+index 77ea96b..d10f427 100644
 --- a/arch/x86/kernel/setup.c
 +++ b/arch/x86/kernel/setup.c
 @@ -1179,19 +1179,7 @@ void __init setup_arch(char **cmdline_p)
@@ -45,9 +49,11 @@ cc: linux-efi@vger.kernel.org
  
  	reserve_initrd();
  
+diff --git a/drivers/firmware/efi/Makefile b/drivers/firmware/efi/Makefile
+index 4ac2de4d..195b078 100644
 --- a/drivers/firmware/efi/Makefile
 +++ b/drivers/firmware/efi/Makefile
-@@ -24,6 +24,7 @@ obj-$(CONFIG_EFI_FAKE_MEMMAP)		+= fake_m
+@@ -24,6 +24,7 @@ obj-$(CONFIG_EFI_FAKE_MEMMAP)		+= fake_mem.o
  obj-$(CONFIG_EFI_BOOTLOADER_CONTROL)	+= efibc.o
  obj-$(CONFIG_EFI_TEST)			+= test/
  obj-$(CONFIG_EFI_DEV_PATH_PARSER)	+= dev-path-parser.o
@@ -55,6 +61,9 @@ cc: linux-efi@vger.kernel.org
  obj-$(CONFIG_APPLE_PROPERTIES)		+= apple-properties.o
  obj-$(CONFIG_EFI_RCI2_TABLE)		+= rci2-table.o
  
+diff --git a/drivers/firmware/efi/secureboot.c b/drivers/firmware/efi/secureboot.c
+new file mode 100644
+index 00000000..bf16cfb6
 --- /dev/null
 +++ b/drivers/firmware/efi/secureboot.c
 @@ -0,0 +1,39 @@
@@ -97,9 +106,11 @@ cc: linux-efi@vger.kernel.org
 +		}
 +	}
 +}
+diff --git a/include/linux/efi.h b/include/linux/efi.h
+index d87acf6..728eab8 100644
 --- a/include/linux/efi.h
 +++ b/include/linux/efi.h
-@@ -1202,6 +1202,14 @@ extern int __init efi_setup_pcdp_console
+@@ -1202,6 +1202,14 @@ extern int __init efi_setup_pcdp_console(char *);
  #define EFI_DBG			8	/* Print additional debug info at runtime */
  #define EFI_NX_PE_DATA		9	/* Can runtime data regions be mapped non-executable? */
  #define EFI_MEM_ATTR		10	/* Did firmware publish an EFI_MEMORY_ATTRIBUTES table? */
@@ -114,7 +125,7 @@ cc: linux-efi@vger.kernel.org
  
  #ifdef CONFIG_EFI
  /*
-@@ -1212,6 +1220,7 @@ static inline bool efi_enabled(int featu
+@@ -1212,6 +1220,7 @@ static inline bool efi_enabled(int feature)
  	return test_bit(feature, &efi.flags) != 0;
  }
  extern void efi_reboot(enum reboot_mode reboot_mode, const char *__unused);
@@ -130,7 +141,7 @@ cc: linux-efi@vger.kernel.org
  #endif
  
  extern int efi_status_to_err(efi_status_t status);
-@@ -1616,12 +1626,6 @@ static inline bool efi_runtime_disabled(
+@@ -1630,12 +1640,6 @@ static inline bool efi_runtime_disabled(void) { return true; }
  extern void efi_call_virt_check_flags(unsigned long flags, const char *call);
  extern unsigned long efi_call_virt_save_flags(void);
  

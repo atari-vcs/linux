@@ -14,8 +14,12 @@ currently enables CONFIG_X86_USE_3D_NOW which will cause the kernel to
 crash on CPUs without the AMD-specific 3D-Now instructions.
 
 Make CONFIG_X86_USE_3DNOW depend on CONFIG_X86_GENERIC being disabled.
-
 ---
+ arch/x86/Kconfig.cpu | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/x86/Kconfig.cpu b/arch/x86/Kconfig.cpu
+index 8e29c99..5d425e7 100644
 --- a/arch/x86/Kconfig.cpu
 +++ b/arch/x86/Kconfig.cpu
 @@ -337,7 +337,7 @@ config X86_USE_PPRO_CHECKSUM

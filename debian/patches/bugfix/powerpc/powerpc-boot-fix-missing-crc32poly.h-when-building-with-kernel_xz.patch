@@ -1,6 +1,7 @@
 From: Krzysztof Kozlowski <krzk@kernel.org>
 Date: Wed, 29 Aug 2018 09:32:23 +0200
 Subject: powerpc/boot: Fix missing crc32poly.h when building with KERNEL_XZ
+
 Origin: https://patchwork.ozlabs.org/patch/963258/
 
 After commit faa16bc404d7 ("lib: Use existing define with
@@ -25,10 +26,10 @@ Tested-by: Michal Kubecek <mkubecek@suse.cz>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/arch/powerpc/boot/Makefile b/arch/powerpc/boot/Makefile
-index 0fb96c26136f..ba4182fb185d 100644
+index dfbd7f2..21aa98f 100644
 --- a/arch/powerpc/boot/Makefile
 +++ b/arch/powerpc/boot/Makefile
-@@ -63,7 +63,7 @@ ifeq ($(call cc-option-yn, -fstack-protector),y)
+@@ -65,7 +65,7 @@ ifeq ($(call cc-option-yn, -fstack-protector),y)
  BOOTCFLAGS	+= -fno-stack-protector
  endif
  

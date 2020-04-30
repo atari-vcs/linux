@@ -139,6 +139,7 @@ debian/overlayfs-permit-mounts-in-userns.patch
 
 # ABI maintenance
 debian/Revert-cpupower-Revert-library-ABI-changes-from-comm.patch
+
 # AppArmor
 apparmor/0001-apparmor-patch-to-provide-compatibility-with-v2.x-ne.patch
 apparmor/0002-apparmor-af_unix-mediation.patch

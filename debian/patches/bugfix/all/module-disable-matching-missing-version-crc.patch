@@ -1,15 +1,21 @@
 From: Ben Hutchings <ben@decadent.org.uk>
-Date: Fri, 02 Dec 2016 23:06:18 +0000
+Date: Fri, 2 Dec 2016 23:06:18 +0000
 Subject: module: Disable matching missing version CRC
+
 Forwarded: not-needed
 
 This partly reverts commit cd3caefb4663e3811d37cc2afad3cce642d60061.
 We want to fail closed if a symbol version CRC is missing, as the
 alternative may allow subverting module signing.
 ---
+ kernel/module.c | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/kernel/module.c b/kernel/module.c
+index cb09a5f..17c78a5 100644
 --- a/kernel/module.c
 +++ b/kernel/module.c
-@@ -1313,9 +1313,8 @@ static int check_version(const struct lo
+@@ -1330,9 +1330,8 @@ static int check_version(const struct load_info *info,
  		goto bad_version;
  	}
  

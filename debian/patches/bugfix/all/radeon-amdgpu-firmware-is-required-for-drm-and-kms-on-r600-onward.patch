@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
+Date: Tue, 8 Jan 2013 03:25:52 +0000
 Subject: radeon, amdgpu: Firmware is required for DRM and KMS on R600 onward
-Date: Tue, 08 Jan 2013 03:25:52 +0000
+
 Bug-Debian: https://bugs.debian.org/607194
 Bug-Debian: https://bugs.debian.org/607471
 Bug-Debian: https://bugs.debian.org/610851
@@ -22,16 +23,15 @@ and/or system memory may be corrupted, or the display may stay black.
 Therefore, perform a basic check for the existence of
 /lib/firmware/{radeon,amdgpu} when a device is probed, and abort if it
 is missing, except for the pre-R600 case.
-
 ---
- drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c | 29 ++++++++++++++++++++++++
- drivers/gpu/drm/radeon/radeon_drv.c     | 30 +++++++++++++++++++++++++
+ drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c | 29 +++++++++++++++++++++++++++++
+ drivers/gpu/drm/radeon/radeon_drv.c     | 30 ++++++++++++++++++++++++++++++
  2 files changed, 59 insertions(+)
 
-Index: debian-kernel/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-===================================================================
---- debian-kernel.orig/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-+++ debian-kernel/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
+diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
+index bb9a277..cac8c23 100644
+--- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
++++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
 @@ -36,6 +36,8 @@
  #include <linux/vga_switcheroo.h>
  #include <drm/drm_probe_helper.h>
@@ -41,7 +41,7 @@ Index: debian-kernel/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
  
  #include "amdgpu.h"
  #include "amdgpu_irq.h"
-@@ -1030,6 +1032,28 @@ MODULE_DEVICE_TABLE(pci, pciidlist);
+@@ -1032,6 +1034,28 @@ MODULE_DEVICE_TABLE(pci, pciidlist);
  
  static struct drm_driver kms_driver;
  
@@ -70,7 +70,7 @@ Index: debian-kernel/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
  static int amdgpu_pci_probe(struct pci_dev *pdev,
  			    const struct pci_device_id *ent)
  {
-@@ -1083,6 +1107,11 @@ static int amdgpu_pci_probe(struct pci_d
+@@ -1085,6 +1109,11 @@ static int amdgpu_pci_probe(struct pci_dev *pdev,
  	}
  #endif
  
@@ -82,10 +82,10 @@ Index: debian-kernel/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
  	/* Get rid of things like offb */
  	ret = drm_fb_helper_remove_conflicting_pci_framebuffers(pdev, 0, "amdgpudrmfb");
  	if (ret)
-Index: debian-kernel/drivers/gpu/drm/radeon/radeon_drv.c
-===================================================================
---- debian-kernel.orig/drivers/gpu/drm/radeon/radeon_drv.c
-+++ debian-kernel/drivers/gpu/drm/radeon/radeon_drv.c
+diff --git a/drivers/gpu/drm/radeon/radeon_drv.c b/drivers/gpu/drm/radeon/radeon_drv.c
+index 4528f4d..ebc916e 100644
+--- a/drivers/gpu/drm/radeon/radeon_drv.c
++++ b/drivers/gpu/drm/radeon/radeon_drv.c
 @@ -48,6 +48,8 @@
  #include <drm/drm_probe_helper.h>
  #include <drm/drm_vblank.h>
@@ -124,7 +124,7 @@ Index: debian-kernel/drivers/gpu/drm/radeon/radeon_drv.c
  static int radeon_pci_probe(struct pci_dev *pdev,
  			    const struct pci_device_id *ent)
  {
-@@ -360,6 +384,12 @@ static int radeon_pci_probe(struct pci_d
+@@ -360,6 +384,12 @@ static int radeon_pci_probe(struct pci_dev *pdev,
  	if (vga_switcheroo_client_probe_defer(pdev))
  		return -EPROBE_DEFER;
  

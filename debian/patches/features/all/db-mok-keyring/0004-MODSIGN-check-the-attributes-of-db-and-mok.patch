@@ -1,6 +1,7 @@
 From: "Lee, Chun-Yi" <joeyli.kernel@gmail.com>
 Date: Tue, 13 Mar 2018 18:38:03 +0800
 Subject: [PATCH 4/4] MODSIGN: check the attributes of db and mok
+
 Origin: https://lore.kernel.org/patchwork/patch/933176/
 
 That's better for checking the attributes of db and mok variables
@@ -23,12 +24,14 @@ Signed-off-by: "Lee, Chun-Yi" <jlee@suse.com>
 [Rebased by Luca Boccassi]
 [bwh: Forward-ported to 5.0: adjust filename, context]
 ---
- .../platform_certs/load_uefi.c | 35 +++++++++++++++++++++++------------
- 1 file changed, 23 insertions(+), 12 deletions(-)
+ security/integrity/platform_certs/load_uefi.c | 25 +++++++++++++++++++------
+ 1 file changed, 19 insertions(+), 6 deletions(-)
 
+diff --git a/security/integrity/platform_certs/load_uefi.c b/security/integrity/platform_certs/load_uefi.c
+index 5a06f11..bbc08e9 100644
 --- a/security/integrity/platform_certs/load_uefi.c
 +++ b/security/integrity/platform_certs/load_uefi.c
-@@ -39,12 +39,14 @@ static __init bool uefi_check_ignore_db(
+@@ -39,12 +39,14 @@ static __init bool uefi_check_ignore_db(void)
   * Get a certificate list blob from the named EFI variable.
   */
  static __init int get_cert_list(efi_char16_t *name, efi_guid_t *guid,
@@ -44,7 +47,7 @@ Signed-off-by: "Lee, Chun-Yi" <jlee@suse.com>
  
  	status = efi.get_variable(name, guid, NULL, &lsize, &tmpdb);
  	if (status == EFI_NOT_FOUND) {
-@@ -62,12 +64,19 @@ static __init int get_cert_list(efi_char
+@@ -62,12 +64,19 @@ static __init int get_cert_list(efi_char16_t *name, efi_guid_t *guid,
  	if (!db)
  		return -ENOMEM;
  

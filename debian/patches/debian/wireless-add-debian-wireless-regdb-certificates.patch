@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Fri, 13 Apr 2018 20:10:28 +0100
 Subject: wireless: Add Debian wireless-regdb certificates
+
 Forwarded: not-needed
 
 This hex dump is generated using:
@@ -10,8 +11,14 @@ This hex dump is generated using:
         openssl x509 -in $cert -outform der;
     done
 } | hexdump -v -e '1/1 "0x%.2x," "\n"' > net/wireless/certs/debian.hex
-
 ---
+ net/wireless/certs/debian.hex | 944 ++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 944 insertions(+)
+ create mode 100644 net/wireless/certs/debian.hex
+
+diff --git a/net/wireless/certs/debian.hex b/net/wireless/certs/debian.hex
+new file mode 100644
+index 00000000..a94ce0f
 --- /dev/null
 +++ b/net/wireless/certs/debian.hex
 @@ -0,0 +1,944 @@

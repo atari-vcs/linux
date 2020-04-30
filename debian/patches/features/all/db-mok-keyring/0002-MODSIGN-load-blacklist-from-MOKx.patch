@@ -1,6 +1,7 @@
 From: "Lee, Chun-Yi" <joeyli.kernel@gmail.com>
 Date: Tue, 13 Mar 2018 18:38:01 +0800
 Subject: [PATCH 2/4] MODSIGN: load blacklist from MOKx
+
 Origin: https://lore.kernel.org/patchwork/patch/933177/
 
 This patch adds the logic to load the blacklisted hash and
@@ -13,9 +14,11 @@ Signed-off-by: "Lee, Chun-Yi" <jlee@suse.com>
 [Rebased by Luca Boccassi]
 [bwh: Forward-ported to 5.0: adjust filename]
 ---
- security/integrity/platform_certs/load_uefi.c | 16 +++++++++++++---
- 1 file changed, 13 insertions(+), 3 deletions(-)
+ security/integrity/platform_certs/load_uefi.c | 18 +++++++++++++++---
+ 1 file changed, 15 insertions(+), 3 deletions(-)
 
+diff --git a/security/integrity/platform_certs/load_uefi.c b/security/integrity/platform_certs/load_uefi.c
+index f72aa3e..5a06f11 100644
 --- a/security/integrity/platform_certs/load_uefi.c
 +++ b/security/integrity/platform_certs/load_uefi.c
 @@ -149,8 +149,8 @@ static int __init load_uefi_certs(void)

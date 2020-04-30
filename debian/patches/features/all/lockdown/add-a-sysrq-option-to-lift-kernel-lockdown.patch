@@ -1,6 +1,7 @@
 From: Kyle McMartin <kyle@redhat.com>
 Date: Mon, 18 Feb 2019 12:44:57 +0000
 Subject: [02/30] Add a SysRq option to lift kernel lockdown
+
 Origin: https://git.kernel.org/pub/scm/linux/kernel/git/dhowells/linux-fs.git/commit?id=a420ebff9e6d0153119096706918e3925ea860fc
 
 Make an option to provide a sysrq key that will lift the kernel lockdown,
@@ -20,16 +21,18 @@ cc: x86@kernel.org
    as a bool
  - Adjust filenames, context]
 ---
- arch/x86/include/asm/setup.h |    2 +
- drivers/input/misc/uinput.c  |    1 
- drivers/tty/sysrq.c          |   19 +++++++++++-----
- include/linux/input.h        |    5 ++++
- include/linux/sysrq.h        |    8 ++++++-
- kernel/debug/kdb/kdb_main.c  |    2 -
- security/lockdown/Kconfig    |    9 +++++++
- security/lockdown/lockdown.c |   49 ++++++++++++++++++++++++++++++++++++++++++-
+ arch/x86/include/asm/setup.h |  2 ++
+ drivers/input/misc/uinput.c  |  1 +
+ drivers/tty/sysrq.c          | 19 +++++++++++------
+ include/linux/input.h        |  5 +++++
+ include/linux/sysrq.h        |  8 +++++++-
+ kernel/debug/kdb/kdb_main.c  |  2 +-
+ security/lockdown/Kconfig    |  9 ++++++++
+ security/lockdown/lockdown.c | 49 +++++++++++++++++++++++++++++++++++++++++++-
  8 files changed, 86 insertions(+), 9 deletions(-)
 
+diff --git a/arch/x86/include/asm/setup.h b/arch/x86/include/asm/setup.h
+index ed8ec01..8daf633 100644
 --- a/arch/x86/include/asm/setup.h
 +++ b/arch/x86/include/asm/setup.h
 @@ -9,6 +9,8 @@
@@ -41,9 +44,11 @@ cc: x86@kernel.org
  #ifdef __i386__
  
  #include <linux/pfn.h>
+diff --git a/drivers/input/misc/uinput.c b/drivers/input/misc/uinput.c
+index 002654e..5a50e13 100644
 --- a/drivers/input/misc/uinput.c
 +++ b/drivers/input/misc/uinput.c
-@@ -353,6 +353,7 @@ static int uinput_create_device(struct u
+@@ -357,6 +357,7 @@ static int uinput_create_device(struct uinput_device *udev)
  		dev->flush = uinput_dev_flush;
  	}
  
@@ -51,9 +56,11 @@ cc: x86@kernel.org
  	dev->event = uinput_dev_event;
  
  	input_set_drvdata(udev->dev, udev);
+diff --git a/drivers/tty/sysrq.c b/drivers/tty/sysrq.c
+index 573b205..7cc95a8b 100644
 --- a/drivers/tty/sysrq.c
 +++ b/drivers/tty/sysrq.c
-@@ -480,6 +480,7 @@ static struct sysrq_key_op *sysrq_key_ta
+@@ -480,6 +480,7 @@ static struct sysrq_key_op *sysrq_key_table[36] = {
  	/* x: May be registered on mips for TLB dump */
  	/* x: May be registered on ppc/powerpc for xmon */
  	/* x: May be registered on sparc64 for global PMU dump */
@@ -61,7 +68,7 @@ cc: x86@kernel.org
  	NULL,				/* x */
  	/* y: May be registered on sparc64 for global register dump */
  	NULL,				/* y */
-@@ -523,7 +524,7 @@ static void __sysrq_put_key_op(int key,
+@@ -523,7 +524,7 @@ static void __sysrq_put_key_op(int key, struct sysrq_key_op *op_p)
                  sysrq_key_table[i] = op_p;
  }
  
@@ -70,7 +77,7 @@ cc: x86@kernel.org
  {
  	struct sysrq_key_op *op_p;
  	int orig_log_level;
-@@ -546,11 +547,15 @@ void __handle_sysrq(int key, bool check_
+@@ -546,11 +547,15 @@ void __handle_sysrq(int key, bool check_mask)
  
          op_p = __sysrq_get_key_op(key);
          if (op_p) {
@@ -87,7 +94,7 @@ cc: x86@kernel.org
  			pr_info("%s\n", op_p->action_msg);
  			console_loglevel = orig_log_level;
  			op_p->handler(key);
-@@ -585,7 +590,7 @@ void __handle_sysrq(int key, bool check_
+@@ -585,7 +590,7 @@ void __handle_sysrq(int key, bool check_mask)
  void handle_sysrq(int key)
  {
  	if (sysrq_on())
@@ -96,7 +103,7 @@ cc: x86@kernel.org
  }
  EXPORT_SYMBOL(handle_sysrq);
  
-@@ -665,7 +670,7 @@ static void sysrq_do_reset(struct timer_
+@@ -665,7 +670,7 @@ static void sysrq_do_reset(struct timer_list *t)
  static void sysrq_handle_reset_request(struct sysrq_state *state)
  {
  	if (state->reset_requested)
@@ -105,7 +112,7 @@ cc: x86@kernel.org
  
  	if (sysrq_reset_downtime_ms)
  		mod_timer(&state->keyreset_timer,
-@@ -818,8 +823,10 @@ static bool sysrq_handle_keypress(struct
+@@ -818,8 +823,10 @@ static bool sysrq_handle_keypress(struct sysrq_state *sysrq,
  
  	default:
  		if (sysrq->active && value && value != 2) {
@@ -117,7 +124,7 @@ cc: x86@kernel.org
  		}
  		break;
  	}
-@@ -1102,7 +1109,7 @@ static ssize_t write_sysrq_trigger(struc
+@@ -1102,7 +1109,7 @@ static ssize_t write_sysrq_trigger(struct file *file, const char __user *buf,
  
  		if (get_user(c, buf))
  			return -EFAULT;
@@ -126,6 +133,8 @@ cc: x86@kernel.org
  	}
  
  	return count;
+diff --git a/include/linux/input.h b/include/linux/input.h
+index 94f277c..8539afa 100644
 --- a/include/linux/input.h
 +++ b/include/linux/input.h
 @@ -48,6 +48,7 @@ enum input_clock_type {
@@ -154,6 +163,8 @@ cc: x86@kernel.org
  /*
   * Verify that we are in sync with input_device_id mod_devicetable.h #defines
   */
+diff --git a/include/linux/sysrq.h b/include/linux/sysrq.h
+index 8c71874..7de1f08 100644
 --- a/include/linux/sysrq.h
 +++ b/include/linux/sysrq.h
 @@ -29,6 +29,8 @@
@@ -179,9 +190,11 @@ cc: x86@kernel.org
  int register_sysrq_key(int key, struct sysrq_key_op *op);
  int unregister_sysrq_key(int key, struct sysrq_key_op *op);
  struct sysrq_key_op *__sysrq_get_key_op(int key);
+diff --git a/kernel/debug/kdb/kdb_main.c b/kernel/debug/kdb/kdb_main.c
+index 4567fe9..d05142e 100644
 --- a/kernel/debug/kdb/kdb_main.c
 +++ b/kernel/debug/kdb/kdb_main.c
-@@ -1981,7 +1981,7 @@ static int kdb_sr(int argc, const char *
+@@ -1981,7 +1981,7 @@ static int kdb_sr(int argc, const char **argv)
  		return KDB_ARGCOUNT;
  
  	kdb_trap_printk++;
@@ -190,6 +203,8 @@ cc: x86@kernel.org
  	kdb_trap_printk--;
  
  	return 0;
+diff --git a/security/lockdown/Kconfig b/security/lockdown/Kconfig
+index 628a87d..0f4b889 100644
 --- a/security/lockdown/Kconfig
 +++ b/security/lockdown/Kconfig
 @@ -60,3 +60,12 @@ config LOCK_DOWN_IN_EFI_SECURE_BOOT
@@ -205,6 +220,8 @@ cc: x86@kernel.org
 +	help
 +	  Allow the lockdown on a kernel to be lifted, by pressing a SysRq key
 +	  combination on a wired keyboard.
+diff --git a/security/lockdown/lockdown.c b/security/lockdown/lockdown.c
+index 01b6040..3b6a764 100644
 --- a/security/lockdown/lockdown.c
 +++ b/security/lockdown/lockdown.c
 @@ -13,8 +13,14 @@
@@ -223,7 +240,7 @@ cc: x86@kernel.org
  
  static const char *const lockdown_reasons[LOCKDOWN_CONFIDENTIALITY_MAX+1] = {
  	[LOCKDOWN_NONE] = "none",
-@@ -189,3 +195,44 @@ DEFINE_LSM(lockdown) = {
+@@ -190,3 +196,44 @@ DEFINE_LSM(lockdown) = {
  	.name = "lockdown",
  	.init = lockdown_lsm_init,
  };
