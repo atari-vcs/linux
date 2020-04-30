@@ -1,3 +1,9 @@
+linux (5.4.35-1) apertis; urgency=medium
+
+  * Update to Linux stable v5.4.35
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Thu, 30 Apr 2020 12:01:52 +0100
+
 linux (5.4.19-1co3) apertis; urgency=medium
 
   * Apply user mode linux fixes from Sjoerd
