@@ -13,15 +13,17 @@ Cc: James Bottomley <James.Bottomley@HansenPartnership.com>
 Signed-off-by: "Lee, Chun-Yi" <jlee@suse.com>
 [Rebased by Luca Boccassi]
 [bwh: Forward-ported to 5.0: adjust filename]
+[martyn.welch@collabora.com: Adjusted for 5.4.35]
+Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
 ---
- security/integrity/platform_certs/load_uefi.c | 18 +++++++++++++++---
- 1 file changed, 15 insertions(+), 3 deletions(-)
+ security/integrity/platform_certs/load_uefi.c | 21 ++++++++++++++++++---
+ 1 file changed, 18 insertions(+), 3 deletions(-)
 
 diff --git a/security/integrity/platform_certs/load_uefi.c b/security/integrity/platform_certs/load_uefi.c
-index f72aa3e..5a06f11 100644
+index 94f4455..a81aeb6 100644
 --- a/security/integrity/platform_certs/load_uefi.c
 +++ b/security/integrity/platform_certs/load_uefi.c
-@@ -149,8 +149,8 @@ static int __init load_uefi_certs(void)
+@@ -144,8 +144,8 @@ static int __init load_uefi_certs(void)
  {
  	efi_guid_t secure_var = EFI_IMAGE_SECURITY_DATABASE_GUID;
  	efi_guid_t mok_var = EFI_SHIM_LOCK_GUID;
@@ -29,10 +31,10 @@ index f72aa3e..5a06f11 100644
 -	unsigned long dbsize = 0, dbxsize = 0, moksize = 0;
 +	void *db = NULL, *dbx = NULL, *mok = NULL, *mokx = NULL;
 +	unsigned long dbsize = 0, dbxsize = 0, moksize = 0, mokxsize = 0;
+ 	efi_status_t status;
  	int rc = 0;
  
- 	if (!efi.get_variable)
-@@ -185,7 +185,7 @@ static int __init load_uefi_certs(void)
+@@ -187,7 +187,7 @@ static int __init load_uefi_certs(void)
  		kfree(dbx);
  	}
  
@@ -41,14 +43,17 @@ index f72aa3e..5a06f11 100644
  	if (!efi_enabled(EFI_SECURE_BOOT))
  		return 0;
  
-@@ -200,6 +200,18 @@ static int __init load_uefi_certs(void)
+@@ -205,6 +205,21 @@ static int __init load_uefi_certs(void)
  		kfree(mok);
  	}
  
-+	rc = get_cert_list(L"MokListXRT", &mok_var, &mokxsize, &mokx);
-+	if (rc < 0) {
-+		pr_info("MODSIGN: Couldn't get UEFI MokListXRT\n");
-+	} else if (mokxsize != 0) {
++	mokx = get_cert_list(L"MokListXRT", &mok_var, &mokxsize, &status);
++	if (!mokx) {
++		if (status == EFI_NOT_FOUND)
++			pr_debug("MokListXRT variable wasn't found\n");
++		else
++			pr_info("MODSIGN: Couldn't get UEFI MokListXRT\n");
++	} else {
 +		rc = parse_efi_signature_list("UEFI:mokx",
 +					      mokx, mokxsize,
 +					      get_handler_for_dbx);

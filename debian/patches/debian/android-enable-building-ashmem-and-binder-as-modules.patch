@@ -89,7 +89,7 @@ index 14bd9c6..c202aa4 100644
 +ashmem_linux-y				+= ashmem.o
  obj-$(CONFIG_ANDROID_VSOC)		+= vsoc.o
 diff --git a/drivers/staging/android/ashmem.c b/drivers/staging/android/ashmem.c
-index 74d497d..fbbe467 100644
+index c669535..da70482 100644
 --- a/drivers/staging/android/ashmem.c
 +++ b/drivers/staging/android/ashmem.c
 @@ -24,6 +24,7 @@
@@ -100,7 +100,7 @@ index 74d497d..fbbe467 100644
  #include "ashmem.h"
  
  #define ASHMEM_NAME_PREFIX "dev/ashmem/"
-@@ -925,3 +926,5 @@ static int __init ashmem_init(void)
+@@ -953,3 +954,5 @@ static int __init ashmem_init(void)
  	return ret;
  }
  device_initcall(ashmem_init);

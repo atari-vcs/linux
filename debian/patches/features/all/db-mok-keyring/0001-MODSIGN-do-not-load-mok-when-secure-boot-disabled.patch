@@ -16,22 +16,27 @@ Cc: James Bottomley <James.Bottomley@HansenPartnership.com>
 Signed-off-by: "Lee, Chun-Yi" <jlee@suse.com>
 [Rebased by Luca Boccassi]
 [bwh: Forward-ported to 5.0: adjust filename]
+[martyn.welch@collabora.com: Adjusted for 5.4.35]
+Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
 ---
- security/integrity/platform_certs/load_uefi.c | 26 +++++++++++++++-----------
- 1 file changed, 15 insertions(+), 11 deletions(-)
+ security/integrity/platform_certs/load_uefi.c | 32 +++++++++++++++------------
+ 1 file changed, 18 insertions(+), 14 deletions(-)
 
 diff --git a/security/integrity/platform_certs/load_uefi.c b/security/integrity/platform_certs/load_uefi.c
-index 21201be..f72aa3e 100644
+index 020fc7a..94f4455 100644
 --- a/security/integrity/platform_certs/load_uefi.c
 +++ b/security/integrity/platform_certs/load_uefi.c
-@@ -173,17 +173,6 @@ static int __init load_uefi_certs(void)
+@@ -172,20 +172,6 @@ static int __init load_uefi_certs(void)
  		}
  	}
  
--	rc = get_cert_list(L"MokListRT", &mok_var, &moksize, &mok);
--	if (rc < 0) {
--		pr_info("Couldn't get UEFI MokListRT\n");
--	} else if (moksize != 0) {
+-	mok = get_cert_list(L"MokListRT", &mok_var, &moksize, &status);
+-	if (!mok) {
+-		if (status == EFI_NOT_FOUND)
+-			pr_debug("MokListRT variable wasn't found\n");
+-		else
+-			pr_info("Couldn't get UEFI MokListRT\n");
+-	} else {
 -		rc = parse_efi_signature_list("UEFI:MokListRT",
 -					      mok, moksize, get_handler_for_db);
 -		if (rc)
@@ -39,10 +44,10 @@ index 21201be..f72aa3e 100644
 -		kfree(mok);
 -	}
 -
- 	rc = get_cert_list(L"dbx", &secure_var, &dbxsize, &dbx);
- 	if (rc < 0) {
- 		pr_info("Couldn't get UEFI dbx list\n");
-@@ -196,6 +185,21 @@ static int __init load_uefi_certs(void)
+ 	dbx = get_cert_list(L"dbx", &secure_var, &dbxsize, &status);
+ 	if (!dbx) {
+ 		if (status == EFI_NOT_FOUND)
+@@ -201,6 +187,24 @@ static int __init load_uefi_certs(void)
  		kfree(dbx);
  	}
  
@@ -50,10 +55,13 @@ index 21201be..f72aa3e 100644
 +	if (!efi_enabled(EFI_SECURE_BOOT))
 +		return 0;
 +
-+	rc = get_cert_list(L"MokListRT", &mok_var, &moksize, &mok);
-+	if (rc < 0) {
-+		pr_info("Couldn't get UEFI MokListRT\n");
-+	} else if (moksize != 0) {
++	mok = get_cert_list(L"MokListRT", &mok_var, &moksize, &status);
++	if (!mok) {
++		if (status == EFI_NOT_FOUND)
++			pr_debug("MokListRT variable wasn't found\n");
++		else
++			pr_info("Couldn't get UEFI MokListRT\n");
++	} else {
 +		rc = parse_efi_signature_list("UEFI:MokListRT",
 +					      mok, moksize, get_handler_for_db);
 +		if (rc)

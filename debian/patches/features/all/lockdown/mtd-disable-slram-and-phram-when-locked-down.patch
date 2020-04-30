@@ -23,10 +23,10 @@ Cc: linux-mtd@lists.infradead.org
  2 files changed, 13 insertions(+), 2 deletions(-)
 
 diff --git a/drivers/mtd/devices/phram.c b/drivers/mtd/devices/phram.c
-index 931e5c2..d902ba9 100644
+index b50ec7e..1988b21 100644
 --- a/drivers/mtd/devices/phram.c
 +++ b/drivers/mtd/devices/phram.c
-@@ -294,7 +294,11 @@ static int phram_param_call(const char *val, const struct kernel_param *kp)
+@@ -297,7 +297,11 @@ static int phram_param_call(const char *val, const struct kernel_param *kp)
  #endif
  }
  

@@ -11,7 +11,7 @@ It broke feature detection that was working just fine for us.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/perf/Makefile.config b/tools/perf/Makefile.config
-index 46f7fba..7f3428c 100644
+index 9832aff..3ffc75d 100644
 --- a/tools/perf/Makefile.config
 +++ b/tools/perf/Makefile.config
 @@ -43,7 +43,7 @@ ifeq ($(SRCARCH),x86)

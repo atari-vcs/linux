@@ -67,7 +67,7 @@ index 3da91a1..fbb6f55 100644
  void do_close_on_exec(struct files_struct *files)
  {
 diff --git a/kernel/fork.c b/kernel/fork.c
-index 755d816..f052cf0 100644
+index 27c0ef3..f77b505 100644
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
 @@ -1117,6 +1117,7 @@ void mmput_async(struct mm_struct *mm)
@@ -79,10 +79,10 @@ index 755d816..f052cf0 100644
  
  /**
 diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-index 8dacda4..ba049993 100644
+index 195d001..2597ff4 100644
 --- a/kernel/sched/core.c
 +++ b/kernel/sched/core.c
-@@ -4559,6 +4559,7 @@ int can_nice(const struct task_struct *p, const int nice)
+@@ -4563,6 +4563,7 @@ int can_nice(const struct task_struct *p, const int nice)
  	return (nice_rlim <= task_rlimit(p, RLIMIT_NICE) ||
  		capable(CAP_SYS_NICE));
  }
@@ -91,10 +91,10 @@ index 8dacda4..ba049993 100644
  #ifdef __ARCH_WANT_SYS_NICE
  
 diff --git a/kernel/signal.c b/kernel/signal.c
-index bcd46f5..7ccda8c 100644
+index 7d3d35e..45589c0 100644
 --- a/kernel/signal.c
 +++ b/kernel/signal.c
-@@ -1391,6 +1391,7 @@ struct sighand_struct *__lock_task_sighand(struct task_struct *tsk,
+@@ -1396,6 +1396,7 @@ struct sighand_struct *__lock_task_sighand(struct task_struct *tsk,
  
  	return sighand;
  }
@@ -139,7 +139,7 @@ index 312e311..24d0f63 100644
  /**
   * shmem_read_mapping_page_gfp - read into page cache, using specified page allocation flags.
 diff --git a/mm/vmalloc.c b/mm/vmalloc.c
-index 61bdbaf..d5e8d7e 100644
+index 7d05834..4a25900 100644
 --- a/mm/vmalloc.c
 +++ b/mm/vmalloc.c
 @@ -1963,6 +1963,7 @@ int map_kernel_range_noflush(unsigned long addr, unsigned long size,

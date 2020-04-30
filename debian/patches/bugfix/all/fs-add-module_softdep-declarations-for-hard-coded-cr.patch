@@ -19,20 +19,20 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  5 files changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/fs/btrfs/super.c b/fs/btrfs/super.c
-index abcd93a..936b1f0 100644
+index aea2420..2d1729c 100644
 --- a/fs/btrfs/super.c
 +++ b/fs/btrfs/super.c
-@@ -2463,4 +2463,4 @@ late_initcall(init_btrfs_fs);
+@@ -2465,4 +2465,4 @@ late_initcall(init_btrfs_fs);
  module_exit(exit_btrfs_fs)
  
  MODULE_LICENSE("GPL");
 -MODULE_SOFTDEP("pre: crc32c");
 +MODULE_SOFTDEP("pre: crypto-crc32c");
 diff --git a/fs/ext4/super.c b/fs/ext4/super.c
-index 66162b4..6984758 100644
+index 53d4c67a..c60ed0a 100644
 --- a/fs/ext4/super.c
 +++ b/fs/ext4/super.c
-@@ -6197,6 +6197,6 @@ static void __exit ext4_exit_fs(void)
+@@ -6246,6 +6246,6 @@ static void __exit ext4_exit_fs(void)
  MODULE_AUTHOR("Remy Card, Stephen Tweedie, Andrew Morton, Andreas Dilger, Theodore Ts'o and others");
  MODULE_DESCRIPTION("Fourth Extended Filesystem");
  MODULE_LICENSE("GPL");
@@ -41,20 +41,20 @@ index 66162b4..6984758 100644
  module_init(ext4_init_fs)
  module_exit(ext4_exit_fs)
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index ea8dbf1..bcef239 100644
+index 5e1d4d9..4b5b967 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -3786,4 +3786,5 @@ module_exit(exit_f2fs_fs)
+@@ -3790,4 +3790,5 @@ module_exit(exit_f2fs_fs)
  MODULE_AUTHOR("Samsung Electronics's Praesto Team");
  MODULE_DESCRIPTION("Flash Friendly File System");
  MODULE_LICENSE("GPL");
 +MODULE_SOFTDEP("pre: crypto-crc32");
  
 diff --git a/fs/jbd2/journal.c b/fs/jbd2/journal.c
-index ef485f8..ec37616 100644
+index c1ce280..603acf2 100644
 --- a/fs/jbd2/journal.c
 +++ b/fs/jbd2/journal.c
-@@ -2727,6 +2727,7 @@ static void __exit journal_exit(void)
+@@ -2723,6 +2723,7 @@ static void __exit journal_exit(void)
  }
  
  MODULE_LICENSE("GPL");
@@ -63,10 +63,10 @@ index ef485f8..ec37616 100644
  module_exit(journal_exit);
  
 diff --git a/fs/nfsd/nfsctl.c b/fs/nfsd/nfsctl.c
-index 11b42c5..c8cd73b 100644
+index d77c526..340b6b7 100644
 --- a/fs/nfsd/nfsctl.c
 +++ b/fs/nfsd/nfsctl.c
-@@ -1574,5 +1574,8 @@ static void __exit exit_nfsd(void)
+@@ -1575,5 +1575,8 @@ static void __exit exit_nfsd(void)
  
  MODULE_AUTHOR("Olaf Kirch <okir@monad.swb.de>");
  MODULE_LICENSE("GPL");

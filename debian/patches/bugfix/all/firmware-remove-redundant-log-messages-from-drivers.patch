@@ -9,6 +9,10 @@ many other log messages can be removed from drivers.
 
 This will probably need to be split up into multiple patches prior to
 upstream submission.
+
+
+[martyn.welch@collabora.com: Tweaked for v5.4.35]
+Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
 ---
  arch/x86/kernel/cpu/microcode/amd.c                |  4 +---
  drivers/atm/ambassador.c                           |  4 +---
@@ -156,7 +160,7 @@ upstream submission.
  sound/pci/cs46xx/cs46xx_lib.c                      |  5 +---
  sound/pci/echoaudio/echoaudio.c                    |  5 +---
  sound/pci/emu10k1/emu10k1_main.c                   |  4 +---
- sound/pci/hda/hda_intel.c                          |  4 +---
+ sound/pci/hda/hda_intel.c                          |  3 +--
  sound/pci/korg1212/korg1212.c                      |  1 -
  sound/pci/mixart/mixart_hwdep.c                    |  5 +---
  sound/pci/pcxhr/pcxhr_hwdep.c                      |  6 +----
@@ -164,7 +168,7 @@ upstream submission.
  sound/pci/rme9652/hdsp.c                           |  5 +---
  sound/soc/codecs/wm2000.c                          |  4 +---
  sound/usb/6fire/firmware.c                         |  4 ----
- 154 files changed, 144 insertions(+), 653 deletions(-)
+ 154 files changed, 144 insertions(+), 652 deletions(-)
 
 diff --git a/arch/x86/kernel/cpu/microcode/amd.c b/arch/x86/kernel/cpu/microcode/amd.c
 index a0e52bd..8a6aab3 100644
@@ -199,10 +203,10 @@ index c039b8a..e28b965 100644
    /* First record contains just the start address */
    rec = (const struct ihex_binrec *)fw->data;
 diff --git a/drivers/atm/fore200e.c b/drivers/atm/fore200e.c
-index f1a5002..003d41f 100644
+index 8fbd36e..eda13f9 100644
 --- a/drivers/atm/fore200e.c
 +++ b/drivers/atm/fore200e.c
-@@ -2414,10 +2414,9 @@ static int fore200e_load_and_start_fw(struct fore200e *fore200e)
+@@ -2425,10 +2425,9 @@ static int fore200e_load_and_start_fw(struct fore200e *fore200e)
      int err;
  
      sprintf(buf, "%s%s", fore200e->bus->proc_name, FW_EXT);
@@ -335,10 +339,10 @@ index 06749e2..27cd3e4 100644
  		printk(KERN_ERR "Bogus length %d in image \"%s\"\n",
  		       fw->size, fw_name);
 diff --git a/drivers/dma/imx-sdma.c b/drivers/dma/imx-sdma.c
-index c27e206..48c0698 100644
+index 67736c8..ec3956f 100644
 --- a/drivers/dma/imx-sdma.c
 +++ b/drivers/dma/imx-sdma.c
-@@ -1727,11 +1727,8 @@ static void sdma_load_firmware(const struct firmware *fw, void *context)
+@@ -1728,11 +1728,8 @@ static void sdma_load_firmware(const struct firmware *fw, void *context)
  	const struct sdma_script_start_addrs *addr;
  	unsigned short *ram_code;
  
@@ -369,10 +373,10 @@ index b5ef1d2..cb0d2fa4 100644
  	size = 0;
  	where = 0;
 diff --git a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-index c578deb..a40536f 100644
+index c71606a..3378873 100644
 --- a/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
 +++ b/drivers/gpu/drm/nouveau/nvkm/engine/gr/gf100.c
-@@ -2099,10 +2099,8 @@ gf100_gr_ctor_fw_legacy(struct gf100_gr *gr, const char *fwname,
+@@ -2125,10 +2125,8 @@ gf100_gr_ctor_fw_legacy(struct gf100_gr *gr, const char *fwname,
  	if (ret) {
  		snprintf(f, sizeof(f), "nouveau/%s", fwname);
  		ret = request_firmware(&fw, f, device->dev);
@@ -874,10 +878,10 @@ index 2327fe6..8440de7 100644
  	if (firmware->size != CX23885_FIRM_IMAGE_SIZE) {
  		pr_err("ERROR: Firmware size mismatch (have %zu, expected %d)\n",
 diff --git a/drivers/media/pci/cx23885/cx23885-cards.c b/drivers/media/pci/cx23885/cx23885-cards.c
-index 8644205..2b495a7 100644
+index 8e5a2c5..e623eb5 100644
 --- a/drivers/media/pci/cx23885/cx23885-cards.c
 +++ b/drivers/media/pci/cx23885/cx23885-cards.c
-@@ -2415,10 +2415,7 @@ void cx23885_card_setup(struct cx23885_dev *dev)
+@@ -2439,10 +2439,7 @@ void cx23885_card_setup(struct cx23885_dev *dev)
  			cinfo.rev, filename);
  
  		ret = request_firmware(&fw, filename, &dev->pci->dev);
@@ -1797,10 +1801,10 @@ index b85603e..59de1c4 100644
  	if (ctx->blob->size < sizeof(struct b43_fw_header))
  		goto err_format;
 diff --git a/drivers/net/wireless/broadcom/b43legacy/main.c b/drivers/net/wireless/broadcom/b43legacy/main.c
-index 4325e91..dc7c94c 100644
+index 8b6b657..ceb4319 100644
 --- a/drivers/net/wireless/broadcom/b43legacy/main.c
 +++ b/drivers/net/wireless/broadcom/b43legacy/main.c
-@@ -1522,11 +1522,8 @@ static int do_request_fw(struct b43legacy_wldev *dev,
+@@ -1523,11 +1523,8 @@ static int do_request_fw(struct b43legacy_wldev *dev,
  	} else {
  		err = request_firmware(fw, path, dev->dev->dev);
  	}
@@ -1840,10 +1844,10 @@ index 6188275..c8485a3 100644
  		    wl->fw.fw_hdr[i]->size / (sizeof(struct firmware_hdr));
  	}
 diff --git a/drivers/net/wireless/intel/ipw2x00/ipw2100.c b/drivers/net/wireless/intel/ipw2x00/ipw2100.c
-index 8dfbaff..1d56cd3 100644
+index a162146..e3a2d01 100644
 --- a/drivers/net/wireless/intel/ipw2x00/ipw2100.c
 +++ b/drivers/net/wireless/intel/ipw2x00/ipw2100.c
-@@ -8392,12 +8392,8 @@ static int ipw2100_get_firmware(struct ipw2100_priv *priv,
+@@ -8393,12 +8393,8 @@ static int ipw2100_get_firmware(struct ipw2100_priv *priv,
  
  	rc = request_firmware(&fw->fw_entry, fw_name, &priv->pci_dev->dev);
  
@@ -1858,10 +1862,10 @@ index 8dfbaff..1d56cd3 100644
  		       fw->fw_entry->size);
  
 diff --git a/drivers/net/wireless/intel/ipw2x00/ipw2200.c b/drivers/net/wireless/intel/ipw2x00/ipw2200.c
-index ed0f0653..c5c7a85 100644
+index ac5f797..10ed230 100644
 --- a/drivers/net/wireless/intel/ipw2x00/ipw2200.c
 +++ b/drivers/net/wireless/intel/ipw2x00/ipw2200.c
-@@ -3396,10 +3396,8 @@ static int ipw_get_fw(struct ipw_priv *priv,
+@@ -3397,10 +3397,8 @@ static int ipw_get_fw(struct ipw_priv *priv,
  
  	/* ask firmware_class module to get the boot firmware off disk */
  	rc = request_firmware(raw, name, &priv->pci_dev->dev);
@@ -1874,10 +1878,10 @@ index ed0f0653..c5c7a85 100644
  	if ((*raw)->size < sizeof(*fw)) {
  		IPW_ERROR("%s is too small (%zd)\n", name, (*raw)->size);
 diff --git a/drivers/net/wireless/intel/iwlegacy/3945-mac.c b/drivers/net/wireless/intel/iwlegacy/3945-mac.c
-index 4fbcc7f..f34b4a2 100644
+index e2e9c3e..5235f8d 100644
 --- a/drivers/net/wireless/intel/iwlegacy/3945-mac.c
 +++ b/drivers/net/wireless/intel/iwlegacy/3945-mac.c
-@@ -1838,7 +1838,6 @@ il3945_read_ucode(struct il_priv *il)
+@@ -1839,7 +1839,6 @@ il3945_read_ucode(struct il_priv *il)
  		sprintf(buf, "%s%u%s", name_pre, idx, ".ucode");
  		ret = request_firmware(&ucode_raw, buf, &il->pci_dev->dev);
  		if (ret < 0) {
@@ -1935,10 +1939,10 @@ index 400a352..2559f7f 100644
  		fw_entry = orinoco_cached_fw_get(priv, false);
  
 diff --git a/drivers/net/wireless/intersil/orinoco/orinoco_usb.c b/drivers/net/wireless/intersil/orinoco/orinoco_usb.c
-index 8c79b96..1007939 100644
+index e753f43..e000142 100644
 --- a/drivers/net/wireless/intersil/orinoco/orinoco_usb.c
 +++ b/drivers/net/wireless/intersil/orinoco/orinoco_usb.c
-@@ -1674,7 +1674,6 @@ static int ezusb_probe(struct usb_interface *interface,
+@@ -1675,7 +1675,6 @@ static int ezusb_probe(struct usb_interface *interface,
  		if (ezusb_firmware_download(upriv, &firmware) < 0)
  			goto error;
  	} else {
@@ -2290,7 +2294,7 @@ index 2f9213b..73e877b 100644
  		goto out;
  	}
 diff --git a/drivers/scsi/ipr.c b/drivers/scsi/ipr.c
-index 079c04b..3ce768e 100644
+index 7a57b61..5e95f21 100644
 --- a/drivers/scsi/ipr.c
 +++ b/drivers/scsi/ipr.c
 @@ -4091,10 +4091,8 @@ static ssize_t ipr_store_update_fw(struct device *dev,
@@ -2681,7 +2685,7 @@ index 4d30095..e217999 100644
  		goto out;
  	}
 diff --git a/drivers/usb/serial/io_edgeport.c b/drivers/usb/serial/io_edgeport.c
-index 5737add..e8dca85 100644
+index 4cca0b8..81a9679 100644
 --- a/drivers/usb/serial/io_edgeport.c
 +++ b/drivers/usb/serial/io_edgeport.c
 @@ -375,11 +375,8 @@ static void update_edgeport_E2PROM(struct edgeport_serial *edge_serial)
@@ -2905,21 +2909,19 @@ index 8c1e968..a95c405 100644
  	/* ID, should read & 0x7f = 0x55 when FPGA programmed. */
  	snd_emu1010_fpga_read(emu, EMU_HANA_ID, &reg);
 diff --git a/sound/pci/hda/hda_intel.c b/sound/pci/hda/hda_intel.c
-index 85beb17..83fd5cc4 100644
+index 72bbfed..393ef3d 100644
 --- a/sound/pci/hda/hda_intel.c
 +++ b/sound/pci/hda/hda_intel.c
-@@ -1978,10 +1978,8 @@ static void azx_firmware_cb(const struct firmware *fw, void *context)
- 	struct azx *chip = card->private_data;
- 	struct pci_dev *pci = chip->pci;
+@@ -1983,8 +1983,7 @@ static void azx_firmware_cb(const struct firmware *fw, void *context)
  
--	if (!fw) {
--		dev_err(card->dev, "Cannot load firmware, aborting\n");
-+	if (!fw)
- 		goto error;
--	}
- 
- 	chip->fw = fw;
+ 	if (fw)
+ 		chip->fw = fw;
+-	else
+-		dev_err(card->dev, "Cannot load firmware, continue without patching\n");
++
  	if (!chip->disabled) {
+ 		/* continue probing */
+ 		azx_probe_continue(chip);
 diff --git a/sound/pci/korg1212/korg1212.c b/sound/pci/korg1212/korg1212.c
 index 0d81eac..bd96550 100644
 --- a/sound/pci/korg1212/korg1212.c

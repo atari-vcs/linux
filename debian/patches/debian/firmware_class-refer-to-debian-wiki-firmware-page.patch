@@ -39,7 +39,7 @@ index 5ef70df..f5bf263 100644
  	return rc;
  }
 diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-index cac8c23..46677cd 100644
+index 5940840..b07811f 100644
 --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
 +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
 @@ -1111,6 +1111,7 @@ static int amdgpu_pci_probe(struct pci_dev *pdev,
@@ -51,10 +51,10 @@ index cac8c23..46677cd 100644
  	}
  
 diff --git a/drivers/gpu/drm/radeon/radeon_drv.c b/drivers/gpu/drm/radeon/radeon_drv.c
-index ebc916e..9d25094 100644
+index 0c9da7a..28a632e 100644
 --- a/drivers/gpu/drm/radeon/radeon_drv.c
 +++ b/drivers/gpu/drm/radeon/radeon_drv.c
-@@ -387,6 +387,7 @@ static int radeon_pci_probe(struct pci_dev *pdev,
+@@ -389,6 +389,7 @@ static int radeon_pci_probe(struct pci_dev *pdev,
  	if ((ent->driver_data & RADEON_FAMILY_MASK) >= CHIP_R600 &&
  	    !radeon_firmware_installed()) {
  		DRM_ERROR("radeon kernel modesetting for R600 or later requires firmware installed\n");

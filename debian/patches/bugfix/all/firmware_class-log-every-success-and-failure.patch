@@ -27,7 +27,7 @@ format to detect missing firmware.
  2 files changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/base/firmware_loader/fallback.c b/drivers/base/firmware_loader/fallback.c
-index 62ee90b..199f39a 100644
+index 70efbb2..58f731d 100644
 --- a/drivers/base/firmware_loader/fallback.c
 +++ b/drivers/base/firmware_loader/fallback.c
 @@ -557,7 +557,7 @@ static int fw_load_from_user_helper(struct firmware *firmware,

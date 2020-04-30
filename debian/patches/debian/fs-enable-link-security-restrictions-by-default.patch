@@ -12,7 +12,7 @@ This reverts commit 561ec64ae67ef25cac8d72bb9c4bfc955edfd415
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/fs/namei.c b/fs/namei.c
-index bd1c0ca..cde9ab7 100644
+index 5b5759d..311da29 100644
 --- a/fs/namei.c
 +++ b/fs/namei.c
 @@ -877,8 +877,8 @@ static inline void put_link(struct nameidata *nd)

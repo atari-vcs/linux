@@ -12,7 +12,7 @@ sources.
  1 file changed, 5 insertions(+)
 
 diff --git a/scripts/Makefile.build b/scripts/Makefile.build
-index a9e4795..3d12c67 100644
+index 24a33c0..1ffc6d8 100644
 --- a/scripts/Makefile.build
 +++ b/scripts/Makefile.build
 @@ -191,6 +191,11 @@ cmd_record_mcount = $(if $(findstring $(strip $(CC_FLAGS_FTRACE)),$(_c_flags)),

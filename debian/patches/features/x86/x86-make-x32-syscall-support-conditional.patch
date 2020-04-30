@@ -29,10 +29,10 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  6 files changed, 76 insertions(+), 2 deletions(-)
 
 diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index bfe89bc..7ca8092 100644
+index 1f4c61a..3e507a0 100644
 --- a/Documentation/admin-guide/kernel-parameters.txt
 +++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -4711,6 +4711,10 @@
+@@ -4715,6 +4715,10 @@
  
  	switches=	[HW,M68k]
  
