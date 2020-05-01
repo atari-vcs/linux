@@ -1,3 +1,30 @@
+linux (4.19.98-1+deb10u1co1) apertis; urgency=medium
+
+  * Merge from Debian Buster. Remaining Apertis changes:
+    + apertis: sabrelite: Add patch to disable the lcd display by default
+    + Re-add configuration for 64 bit Renesas platforms
+    + Disable the rt flavours for armhf and arm64 as well
+    + Revert abiname bump
+    + Disable the module ABI check
+    + Add default apertis gbp.conf
+    + Widen the binnmu match for Apertis builds
+    + Disable rt flavours
+    + Disable build of udeb packages
+    + Disable signed templates
+    + Disable cloud images
+    + Install dtbs in /boot
+    + d/p/apparmor: Add latest upstream apparmor patches
+      + Including fix to enforce denied dbus transations
+    + arm64: Add configuration for the 64 bit Renesas platforms
+    + armhf: Add configuration for the i.MX6 platform
+      + Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+      + Disable XEN
+      + Add configuration options needed for Audio and USB on Sabre AI boards
+    + armhf: d/p/apertis/sabreai-audio: Add fixes for loading and using the
+      audio on i.MX6 Sabre AI boards
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Fri, 01 May 2020 16:54:00 +0100
+
 linux (4.19.98-1+deb10u1) buster-security; urgency=high
 
   * [x86] KVM: nVMX: Don't emulate instructions in guest mode (CVE-2020-2732)
