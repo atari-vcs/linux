@@ -45,6 +45,7 @@ struct uas_dev_info {
 	struct scsi_cmnd *cmnd[MAX_CMNDS];
 	spinlock_t lock;
 	struct work_struct work;
+	struct work_struct scan_work;      /* for async scanning */
 };
 
 enum {
@@ -112,6 +113,17 @@ static void uas_do_work(struct work_struct *work)
 	}
 out:
 	spin_unlock_irqrestore(&devinfo->lock, flags);
+}
+
+static void uas_scan_work(struct work_struct *work)
+{
+	struct uas_dev_info *devinfo =
+		container_of(work, struct uas_dev_info, scan_work);
+	struct Scsi_Host *shost = usb_get_intfdata(devinfo->intf);
+
+	dev_dbg(&devinfo->intf->dev, "starting scan\n");
+	scsi_scan_host(shost);
+	dev_dbg(&devinfo->intf->dev, "scan complete\n");
 }
 
 static void uas_add_work(struct uas_cmd_info *cmdinfo)
@@ -368,24 +380,18 @@ static void uas_data_cmplt(struct urb *urb)
 	struct scsi_cmnd *cmnd = urb->context;
 	struct uas_cmd_info *cmdinfo = (void *)&cmnd->SCp;
 	struct uas_dev_info *devinfo = (void *)cmnd->device->hostdata;
-	struct scsi_data_buffer *sdb = NULL;
+	struct scsi_data_buffer *sdb = &cmnd->sdb;
 	unsigned long flags;
 	int status = urb->status;
 
 	spin_lock_irqsave(&devinfo->lock, flags);
 
 	if (cmdinfo->data_in_urb == urb) {
-		sdb = scsi_in(cmnd);
 		cmdinfo->state &= ~DATA_IN_URB_INFLIGHT;
 		cmdinfo->data_in_urb = NULL;
 	} else if (cmdinfo->data_out_urb == urb) {
-		sdb = scsi_out(cmnd);
 		cmdinfo->state &= ~DATA_OUT_URB_INFLIGHT;
 		cmdinfo->data_out_urb = NULL;
-	}
-	if (sdb == NULL) {
-		WARN_ON_ONCE(1);
-		goto out;
 	}
 
 	if (devinfo->resetting)
@@ -401,9 +407,9 @@ static void uas_data_cmplt(struct urb *urb)
 		if (status != -ENOENT && status != -ECONNRESET && status != -ESHUTDOWN)
 			uas_log_cmd_state(cmnd, "data cmplt err", status);
 		/* error: no data transfered */
-		sdb->resid = sdb->length;
+		scsi_set_resid(cmnd, sdb->length);
 	} else {
-		sdb->resid = sdb->length - urb->actual_length;
+		scsi_set_resid(cmnd, sdb->length - urb->actual_length);
 	}
 	uas_try_complete(cmnd, __func__);
 out:
@@ -426,8 +432,7 @@ static struct urb *uas_alloc_data_urb(struct uas_dev_info *devinfo, gfp_t gfp,
 	struct usb_device *udev = devinfo->udev;
 	struct uas_cmd_info *cmdinfo = (void *)&cmnd->SCp;
 	struct urb *urb = usb_alloc_urb(0, gfp);
-	struct scsi_data_buffer *sdb = (dir == DMA_FROM_DEVICE)
-		? scsi_in(cmnd) : scsi_out(cmnd);
+	struct scsi_data_buffer *sdb = &cmnd->sdb;
 	unsigned int pipe = (dir == DMA_FROM_DEVICE)
 		? devinfo->data_in_pipe : devinfo->data_out_pipe;
 
@@ -878,6 +883,7 @@ static struct scsi_host_template uas_host_template = {
 	.this_id = -1,
 	.sg_tablesize = SG_NONE,
 	.skip_settle_delay = 1,
+	.dma_boundary = PAGE_SIZE - 1,
 };
 
 #define UNUSUAL_DEV(id_vendor, id_product, bcdDeviceMin, bcdDeviceMax, \
@@ -989,6 +995,7 @@ static int uas_probe(struct usb_interface *intf, const struct usb_device_id *id)
 	init_usb_anchor(&devinfo->data_urbs);
 	spin_lock_init(&devinfo->lock);
 	INIT_WORK(&devinfo->work, uas_do_work);
+	INIT_WORK(&devinfo->scan_work, uas_scan_work);
 
 	result = uas_configure_endpoints(devinfo);
 	if (result)
@@ -1005,7 +1012,9 @@ static int uas_probe(struct usb_interface *intf, const struct usb_device_id *id)
 	if (result)
 		goto free_streams;
 
-	scsi_scan_host(shost);
+	/* Submit the delayed_work for SCSI-device scanning */
+	schedule_work(&devinfo->scan_work);
+
 	return result;
 
 free_streams:
@@ -1173,6 +1182,12 @@ static void uas_disconnect(struct usb_interface *intf)
 	usb_kill_anchored_urbs(&devinfo->data_urbs);
 	uas_zap_pending(devinfo, DID_NO_CONNECT);
 
+	/*
+	 * Prevent SCSI scanning (if it hasn't started yet)
+	 * or wait for the SCSI-scanning routine to stop.
+	 */
+	cancel_work_sync(&devinfo->scan_work);
+
 	scsi_remove_host(shost);
 	uas_free_streams(devinfo);
 	scsi_host_put(shost);
@@ -1215,5 +1230,6 @@ static struct usb_driver uas_driver = {
 module_usb_driver(uas_driver);
 
 MODULE_LICENSE("GPL");
+MODULE_IMPORT_NS(USB_STORAGE);
 MODULE_AUTHOR(
 	"Hans de Goede <hdegoede@redhat.com>, Matthew Wilcox and Sarah Sharp");

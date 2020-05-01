@@ -14,6 +14,7 @@
  *	      serial8250_register_8250_port() ports
  */
 
+#include <linux/acpi.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/ioport.h>
@@ -130,12 +131,8 @@ static irqreturn_t serial8250_interrupt(int irq, void *dev_id)
 
 		l = l->next;
 
-		if (l == i->head && pass_counter++ > PASS_LIMIT) {
-			/* If we hit this, we're dead. */
-			printk_ratelimited(KERN_ERR
-				"serial8250: too much work for irq%d\n", irq);
+		if (l == i->head && pass_counter++ > PASS_LIMIT)
 			break;
-		}
 	} while (l != end);
 
 	spin_unlock(&i->lock);
@@ -177,7 +174,7 @@ static int serial_link_irq_chain(struct uart_8250_port *up)
 	struct hlist_head *h;
 	struct hlist_node *n;
 	struct irq_info *i;
-	int ret, irq_flags = up->port.flags & UPF_SHARE_IRQ ? IRQF_SHARED : 0;
+	int ret;
 
 	mutex_lock(&hash_mutex);
 
@@ -212,9 +209,8 @@ static int serial_link_irq_chain(struct uart_8250_port *up)
 		INIT_LIST_HEAD(&up->list);
 		i->head = &up->list;
 		spin_unlock_irq(&i->lock);
-		irq_flags |= up->port.irqflags;
 		ret = request_irq(up->port.irq, serial8250_interrupt,
-				  irq_flags, up->port.name, i);
+				  up->port.irqflags, up->port.name, i);
 		if (ret < 0)
 			serial_do_unlink(i, up);
 	}
@@ -986,6 +982,8 @@ int serial8250_register_8250_port(struct uart_8250_port *up)
 
 	uart = serial8250_find_match_or_unused(&up->port);
 	if (uart && uart->port.type != PORT_8250_CIR) {
+		struct mctrl_gpios *gpios;
+
 		if (uart->port.dev)
 			uart_remove_one_port(&serial8250_reg, &uart->port);
 
@@ -1019,6 +1017,20 @@ int serial8250_register_8250_port(struct uart_8250_port *up)
 
 		if (up->port.flags & UPF_FIXED_TYPE)
 			uart->port.type = up->port.type;
+
+		/*
+		 * Only call mctrl_gpio_init(), if the device has no ACPI
+		 * companion device
+		 */
+		if (!has_acpi_companion(uart->port.dev)) {
+			gpios = mctrl_gpio_init(&uart->port, 0);
+			if (IS_ERR(gpios)) {
+				ret = PTR_ERR(gpios);
+				goto out_unlock;
+			} else {
+				uart->gpios = gpios;
+			}
+		}
 
 		serial8250_set_defaults(uart);
 
@@ -1086,6 +1098,7 @@ int serial8250_register_8250_port(struct uart_8250_port *up)
 		}
 	}
 
+out_unlock:
 	mutex_unlock(&serial_mutex);
 
 	return ret;

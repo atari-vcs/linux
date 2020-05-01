@@ -1,9 +1,6 @@
+// SPDX-License-Identifier: GPL-2.0-only
 /*
  *  Copyright (C) 2014 ARM Limited
- *
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License version 2 as
- * published by the Free Software Foundation.
  */
 
 #include <linux/cpu.h>
@@ -407,7 +404,7 @@ static int swp_handler(struct pt_regs *regs, u32 instr)
 
 	/* Check access in reasonable access range for both SWP and SWPB */
 	user_ptr = (const void __user *)(unsigned long)(address & ~3);
-	if (!access_ok(VERIFY_WRITE, user_ptr, 4)) {
+	if (!access_ok(user_ptr, 4)) {
 		pr_debug("SWP{B} emulation: access to 0x%08x not allowed!\n",
 			address);
 		goto fault;
@@ -604,7 +601,7 @@ static struct undef_hook setend_hooks[] = {
 	},
 	{
 		/* Thumb mode */
-		.instr_mask	= 0x0000fff7,
+		.instr_mask	= 0xfffffff7,
 		.instr_val	= 0x0000b650,
 		.pstate_mask	= (PSR_AA32_T_BIT | PSR_AA32_MODE_MASK),
 		.pstate_val	= (PSR_AA32_T_BIT | PSR_AA32_MODE_USR),

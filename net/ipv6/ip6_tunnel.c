@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0-or-later
 /*
  *	IPv6 tunneling device
  *	Linux INET6 implementation
@@ -10,12 +11,6 @@
  *      linux/net/ipv6/sit.c and linux/net/ipv4/ipip.c
  *
  *      RFC 2473
- *
- *	This program is free software; you can redistribute it and/or
- *      modify it under the terms of the GNU General Public License
- *      as published by the Free Software Foundation; either version
- *      2 of the License, or (at your option) any later version.
- *
  */
 
 #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
@@ -421,7 +416,7 @@ __u16 ip6_tnl_parse_tlv_enc_lim(struct sk_buff *skb, __u8 *raw)
 				break;
 			optlen = 8;
 		} else if (nexthdr == NEXTHDR_AUTH) {
-			optlen = (hdr->hdrlen + 2) << 2;
+			optlen = ipv6_authlen(hdr);
 		} else {
 			optlen = ipv6_optlen(hdr);
 		}
@@ -1882,10 +1877,8 @@ static int ip6_tnl_dev_init(struct net_device *dev)
 	if (err)
 		return err;
 	ip6_tnl_link_config(t);
-	if (t->parms.collect_md) {
-		dev->features |= NETIF_F_NETNS_LOCAL;
+	if (t->parms.collect_md)
 		netif_keep_dst(dev);
-	}
 	return 0;
 }
 
