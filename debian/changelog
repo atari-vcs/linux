@@ -1,3 +1,17 @@
+linux (4.19.98-1+deb10u1) buster-security; urgency=high
+
+  * [x86] KVM: nVMX: Don't emulate instructions in guest mode (CVE-2020-2732)
+  * do_last(): fetch directory ->i_mode and ->i_uid before it's too late
+    (CVE-2020-8428)
+  * vfs: fix do_last() regression
+  * vhost: Check docket sk_family instead of call getname (CVE-2020-10942)
+  * mm: mempolicy: require at least one nodeid for MPOL_PREFERRED
+    (CVE-2020-11565)
+  * [s390x] mm: fix page table upgrade vs 2ndary address mode accesses
+    (CVE-2020-11884)
+
+ -- Salvatore Bonaccorso <carnil@debian.org>  Mon, 27 Apr 2020 07:05:39 +0200
+
 linux (4.19.98-1co1) apertis; urgency=medium
 
   * Merge from Debian Buster. Remaining Apertis changes:
