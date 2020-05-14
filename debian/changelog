@@ -1,3 +1,10 @@
+linux (5.4.35-2) apertis; urgency=medium
+
+  * Add missing dependency on libcap-dev
+  * Add libcap LDLIBS when building turbostat
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Thu, 14 May 2020 20:33:02 +0100
+
 linux (5.4.35-1) apertis; urgency=medium
 
   * Update to Linux stable v5.4.35
