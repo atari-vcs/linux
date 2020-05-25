@@ -1,6 +1,24 @@
-linux (5.4.41-0~co1) UNRELEASED; urgency=medium
+linux (5.4.41-0~co1) apertis; urgency=medium
 
   * Update to Linux stable v5.4.41
+  * Apertis specific changes:
+    - apparmor: patch to provide compatibility with v2.x net
+    - UBUNTU SAUCE: apparmor: fix apparmor mediating locking
+    - apparmor: af_unix mediation
+    - UBUNTU: SAUCE: apparmor: userspace queries
+    - apparmor: fix use after free in sk_peer_label
+    - component: Add an API to cleanup before unbind
+    - drm/imx: Fix probe oops
+    - Hack: hardcode to sample rates usable on sabre AI
+    - cs42xx8-i2c: Fix module auto-loading
+    - ARM: dts: imx6qdl: Enable egalax touch screen
+    - Disable the lcd interface
+    - um: ubd: Submit all data segments as a single command
+    - um: ubd: Retry buffer read on any kind of error
+    - um: vector: Avoid NULL ptr deference if transport is unset
+    - WIP: Port UML random to hwrng core
+  * Dropping Debian patches (merged in new upstream stable):
+    - libbpf-fix-readelf-output-parsing-on-powerpc-with-re.patch
 
  -- Martyn Welch <martyn.welch@collabora.com>  Mon, 25 May 2020 12:25:54 +0100
 
