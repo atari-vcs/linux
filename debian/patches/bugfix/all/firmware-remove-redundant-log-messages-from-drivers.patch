@@ -2380,10 +2380,10 @@ index c855d01..9b8d6de 100644
  	/* Validating firmware blob */
  	if (qla82xx_validate_firmware_blob(vha,
 diff --git a/drivers/scsi/qla2xxx/qla_os.c b/drivers/scsi/qla2xxx/qla_os.c
-index 06037e3..03ea9e3 100644
+index 03d272a..ca092d3 100644
 --- a/drivers/scsi/qla2xxx/qla_os.c
 +++ b/drivers/scsi/qla2xxx/qla_os.c
-@@ -6815,8 +6815,6 @@ qla2x00_request_firmware(scsi_qla_host_t *vha)
+@@ -6814,8 +6814,6 @@ qla2x00_request_firmware(scsi_qla_host_t *vha)
  		goto out;
  
  	if (request_firmware(&blob->fw, blob->name, &ha->pdev->dev)) {
@@ -2909,7 +2909,7 @@ index 8c1e968..a95c405 100644
  	/* ID, should read & 0x7f = 0x55 when FPGA programmed. */
  	snd_emu1010_fpga_read(emu, EMU_HANA_ID, &reg);
 diff --git a/sound/pci/hda/hda_intel.c b/sound/pci/hda/hda_intel.c
-index 72bbfed..393ef3d 100644
+index 6124415..cb559c8 100644
 --- a/sound/pci/hda/hda_intel.c
 +++ b/sound/pci/hda/hda_intel.c
 @@ -1983,8 +1983,7 @@ static void azx_firmware_cb(const struct firmware *fw, void *context)

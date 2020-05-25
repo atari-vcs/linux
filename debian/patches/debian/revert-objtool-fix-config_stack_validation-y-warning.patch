@@ -11,7 +11,7 @@ a pre-built objtool.
  1 file changed, 11 insertions(+), 11 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index f3e20d7..6c91555 100644
+index e6fe52a..a5b46e3 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -995,17 +995,6 @@ export mod_sign_cmd

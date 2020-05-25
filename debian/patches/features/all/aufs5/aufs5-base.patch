@@ -51,10 +51,10 @@ index fe6fa5d..854ce5d 100644
  M:	Miguel Ojeda Sandonis <miguel.ojeda.sandonis@gmail.com>
  S:	Maintained
 diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index ef6e251..a5c78e0 100644
+index 57ed6b7..d0c30cb 100644
 --- a/drivers/block/loop.c
 +++ b/drivers/block/loop.c
-@@ -748,6 +748,24 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
+@@ -749,6 +749,24 @@ static int loop_change_fd(struct loop_device *lo, struct block_device *bdev,
  	return error;
  }
  

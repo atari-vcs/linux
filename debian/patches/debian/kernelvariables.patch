@@ -20,7 +20,7 @@ use of $(ARCH) needs to be moved after this.
  1 file changed, 24 insertions(+), 25 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 71f504d..f3e20d7 100644
+index 3b76c65..e6fe52a 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -359,31 +359,6 @@ include scripts/subarch.include

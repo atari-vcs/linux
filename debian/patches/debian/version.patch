@@ -17,7 +17,7 @@ are set.
  6 files changed, 34 insertions(+), 11 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 6055a94..71f504d 100644
+index a8c772b..3b76c65 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -1104,7 +1104,8 @@ scripts: scripts_basic scripts_dtc

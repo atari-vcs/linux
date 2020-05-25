@@ -79,10 +79,10 @@ index 27c0ef3..f77b505 100644
  
  /**
 diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-index 195d001..2597ff4 100644
+index e99d326..206a11a 100644
 --- a/kernel/sched/core.c
 +++ b/kernel/sched/core.c
-@@ -4563,6 +4563,7 @@ int can_nice(const struct task_struct *p, const int nice)
+@@ -4558,6 +4558,7 @@ int can_nice(const struct task_struct *p, const int nice)
  	return (nice_rlim <= task_rlimit(p, RLIMIT_NICE) ||
  		capable(CAP_SYS_NICE));
  }
@@ -91,7 +91,7 @@ index 195d001..2597ff4 100644
  #ifdef __ARCH_WANT_SYS_NICE
  
 diff --git a/kernel/signal.c b/kernel/signal.c
-index 7d3d35e..45589c0 100644
+index 595a36a..7a9592b 100644
 --- a/kernel/signal.c
 +++ b/kernel/signal.c
 @@ -1396,6 +1396,7 @@ struct sighand_struct *__lock_task_sighand(struct task_struct *tsk,
@@ -127,7 +127,7 @@ index cb7c940..10d1cfe 100644
  /**
   * zap_page_range_single - remove user pages in a given range
 diff --git a/mm/shmem.c b/mm/shmem.c
-index 312e311..24d0f63 100644
+index e71b15d..4d4010c 100644
 --- a/mm/shmem.c
 +++ b/mm/shmem.c
 @@ -4195,6 +4195,7 @@ int shmem_zero_setup(struct vm_area_struct *vma)
@@ -139,10 +139,10 @@ index 312e311..24d0f63 100644
  /**
   * shmem_read_mapping_page_gfp - read into page cache, using specified page allocation flags.
 diff --git a/mm/vmalloc.c b/mm/vmalloc.c
-index 7d05834..4a25900 100644
+index ad4d00b..b08cf57c 100644
 --- a/mm/vmalloc.c
 +++ b/mm/vmalloc.c
-@@ -1963,6 +1963,7 @@ int map_kernel_range_noflush(unsigned long addr, unsigned long size,
+@@ -1964,6 +1964,7 @@ int map_kernel_range_noflush(unsigned long addr, unsigned long size,
  {
  	return vmap_page_range_noflush(addr, addr + size, prot, pages);
  }
@@ -150,7 +150,7 @@ index 7d05834..4a25900 100644
  
  /**
   * unmap_kernel_range_noflush - unmap kernel VM area
-@@ -2104,6 +2105,7 @@ struct vm_struct *get_vm_area(unsigned long size, unsigned long flags)
+@@ -2105,6 +2106,7 @@ struct vm_struct *get_vm_area(unsigned long size, unsigned long flags)
  				  NUMA_NO_NODE, GFP_KERNEL,
  				  __builtin_return_address(0));
  }
