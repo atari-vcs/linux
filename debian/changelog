@@ -1,3 +1,10 @@
+linux (5.4.13-2ata8) vcs; urgency=medium
+
+  * Sync atari controller info on probe to get reliable firmware version and
+    mac address.
+
+ -- Sjoerd Simons <sjoerd@collabora.com>  Wed, 03 Jun 2020 14:17:06 +0200
+
 linux (5.4.13-2ata7) vcs; urgency=medium
 
   * Update range for RY axis on xbox

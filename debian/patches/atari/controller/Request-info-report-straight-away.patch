@@ -1,0 +1,49 @@
+From: Sjoerd Simons <sjoerd@collabora.com>
+Date: Wed, 3 Jun 2020 12:08:03 +0200
+Subject: Request info report straight away
+
+When probing directly request the info report such that the firmware
+version and bluetooth mac address are always synchronised.
+
+Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+---
+ drivers/hid/hid-atari.c | 16 +++++++++++++++-
+ 1 file changed, 15 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/hid/hid-atari.c b/drivers/hid/hid-atari.c
+index a7fb1b2..2a3a443 100644
+--- a/drivers/hid/hid-atari.c
++++ b/drivers/hid/hid-atari.c
+@@ -14,6 +14,10 @@
+ #define ATARI_LED_REPORT 2
+ #define ATARI_REQUEST_REPORT 3
+ 
++#define ATARI_INPUT_CONTROL_REPORT 1
++#define ATARI_INPUT_POWER_REPORT 2
++#define ATARI_INPUT_INFO_REPORT 3
++
+ #define FUJI_LED_AUTO		0x0
+ #define FUJI_LED_ON		0x1
+ #define FUJI_LED_OFF		0x2
+@@ -829,10 +833,20 @@ static int atari_probe(struct hid_device *hdev, const struct hid_device_id *id)
+ 
+ 	/* Get current state of controls */
+ 	hid_hw_request(hdev,
+-		atari_find_report(hdev, HID_INPUT_REPORT, 1),
++		       atari_find_report(hdev,
++					 HID_INPUT_REPORT,
++					 ATARI_INPUT_CONTROL_REPORT),
+ 		HID_REQ_GET_REPORT);
+ 	hid_hw_wait (ata->hdev);
+ 
++	/* Synchronize bluetooth and version info straight away */
++	hid_hw_request(hdev,
++		       atari_find_report(hdev,
++					 HID_INPUT_REPORT,
++					 ATARI_INPUT_INFO_REPORT),
++		       HID_REQ_GET_REPORT);
++	hid_hw_wait (ata->hdev);
++
+ 	/* request update on battery status and controller info */
+ 	atari_send_request (ata, ATARI_REQUEST_BATTERY_STATUS
+ 				 | ATARI_REQUEST_CONTROLLER_INFO);
