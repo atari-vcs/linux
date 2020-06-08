@@ -173,3 +173,4 @@ atari/controller/hid-atari-Switch-to-output-reports.patch
 atari/controller/hid-atari-Fix-initial-info-and-ongoing-info.patch
 atari/controller/hid-microsoft-xbox-Correct-range-of-ABS_RY.patch
 atari/controller/Request-info-report-straight-away.patch
+atari/controller/atari-hid-Return-EAGAIN-if-there-is-no-valid-info-yet.patch

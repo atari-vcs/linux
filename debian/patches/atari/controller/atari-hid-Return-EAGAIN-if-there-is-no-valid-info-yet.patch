@@ -1,0 +1,41 @@
+From: Sjoerd Simons <sjoerd@collabora.com>
+Date: Mon, 8 Jun 2020 12:06:23 +0200
+Subject: atari-hid: Return -EAGAIN if there is no valid info yet
+
+Let the information sysfs entry return -EAGAIN if the information wasn't
+retrieved yet rather then a dummy entry.
+
+Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+---
+ drivers/hid/hid-atari.c | 11 +++++++----
+ 1 file changed, 7 insertions(+), 4 deletions(-)
+
+diff --git a/drivers/hid/hid-atari.c b/drivers/hid/hid-atari.c
+index 2a3a443..cebb8f9 100644
+--- a/drivers/hid/hid-atari.c
++++ b/drivers/hid/hid-atari.c
+@@ -529,10 +529,10 @@ static ssize_t fw_version_show(struct device *dev,
+ {
+ 	struct atari_data *ata = hid_get_drvdata(to_hid_device(dev));
+ 
+-	return snprintf(buf, PAGE_SIZE, "%x.%x.%x\n",
+-			ata->version >> 8,
+-			ata->version >> 4 & 0xf,
+-			ata->version & 0xf);
++	if (ata->version == 0)
++		return -EAGAIN;
++
++	return snprintf(buf, PAGE_SIZE, "%04x\n", ata->version);
+ }
+ 
+ static ssize_t bdaddr_show(struct device *dev,
+@@ -541,6 +541,9 @@ static ssize_t bdaddr_show(struct device *dev,
+ {
+ 	struct atari_data *ata = hid_get_drvdata(to_hid_device(dev));
+ 
++	if (ata->bdaddr[0] == 0)
++		return -EAGAIN;
++
+ 	return snprintf(buf, PAGE_SIZE, "%02x:%02x:%02x:%02x:%02x:%02x\n",
+ 		        ata->bdaddr[0],
+ 		        ata->bdaddr[1],
