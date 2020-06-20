@@ -38,7 +38,7 @@ index ff23fcf..fad407f 100644
  clean-files := capability_names.h rlim_names.h net_names.h
 diff --git a/security/apparmor/af_unix.c b/security/apparmor/af_unix.c
 new file mode 100644
-index 00000000..54b3796
+index 0000000..54b3796
 --- /dev/null
 +++ b/security/apparmor/af_unix.c
 @@ -0,0 +1,652 @@
@@ -695,10 +695,10 @@ index 00000000..54b3796
 +	return error;
 +}
 diff --git a/security/apparmor/apparmorfs.c b/security/apparmor/apparmorfs.c
-index aeb0344..f3080dc 100644
+index 9305ca0..6e80794 100644
 --- a/security/apparmor/apparmorfs.c
 +++ b/security/apparmor/apparmorfs.c
-@@ -2259,6 +2259,11 @@ static struct aa_sfs_entry aa_sfs_entry_ns[] = {
+@@ -2378,6 +2378,11 @@ static struct aa_sfs_entry aa_sfs_entry_ns[] = {
  	{ }
  };
  
@@ -710,7 +710,7 @@ index aeb0344..f3080dc 100644
  static struct aa_sfs_entry aa_sfs_entry_query_label[] = {
  	AA_SFS_FILE_STRING("perms", "allow deny audit quiet"),
  	AA_SFS_FILE_BOOLEAN("data",		1),
-@@ -2283,6 +2288,7 @@ static struct aa_sfs_entry aa_sfs_entry_features[] = {
+@@ -2402,6 +2407,7 @@ static struct aa_sfs_entry aa_sfs_entry_features[] = {
  	AA_SFS_DIR("caps",			aa_sfs_entry_caps),
  	AA_SFS_DIR("ptrace",			aa_sfs_entry_ptrace),
  	AA_SFS_DIR("signal",			aa_sfs_entry_signal),
@@ -719,7 +719,7 @@ index aeb0344..f3080dc 100644
  	{ }
  };
 diff --git a/security/apparmor/file.c b/security/apparmor/file.c
-index 4c1b05e..8aa7af5 100644
+index f1caf36..ccc4e02 100644
 --- a/security/apparmor/file.c
 +++ b/security/apparmor/file.c
 @@ -12,6 +12,7 @@
@@ -742,7 +742,7 @@ index 4c1b05e..8aa7af5 100644
  	if (request & ~perms->allow)
 diff --git a/security/apparmor/include/af_unix.h b/security/apparmor/include/af_unix.h
 new file mode 100644
-index 00000000..d1b7f23
+index 0000000..d1b7f23
 --- /dev/null
 +++ b/security/apparmor/include/af_unix.h
 @@ -0,0 +1,114 @@
@@ -861,7 +861,7 @@ index 00000000..d1b7f23
 +
 +#endif /* __AA_AF_UNIX_H */
 diff --git a/security/apparmor/include/net.h b/security/apparmor/include/net.h
-index 74768db..4ff96fa0 100644
+index 74768db..4ff96fa 100644
 --- a/security/apparmor/include/net.h
 +++ b/security/apparmor/include/net.h
 @@ -49,6 +49,7 @@
@@ -883,10 +883,10 @@ index 74768db..4ff96fa0 100644
  		__e = DEF_FN;			\
  	}					\
 diff --git a/security/apparmor/include/path.h b/security/apparmor/include/path.h
-index 35a8295e..de80003 100644
+index 44a7945..44592cd 100644
 --- a/security/apparmor/include/path.h
 +++ b/security/apparmor/include/path.h
-@@ -14,6 +14,7 @@
+@@ -13,6 +13,7 @@
  
  enum path_flags {
  	PATH_IS_DIR = 0x1,		/* path is a directory */
@@ -916,13 +916,13 @@ index f904105..f1c9cdc 100644
  
  /**
 diff --git a/security/apparmor/lsm.c b/security/apparmor/lsm.c
-index ec3a928..8682f58 100644
+index 66a8504..5c8b9ab 100644
 --- a/security/apparmor/lsm.c
 +++ b/security/apparmor/lsm.c
-@@ -21,9 +21,11 @@
- #include <linux/user_namespace.h>
+@@ -22,9 +22,11 @@
  #include <linux/netfilter_ipv4.h>
  #include <linux/netfilter_ipv6.h>
+ #include <linux/zlib.h>
 +#include <net/af_unix.h>
  #include <net/sock.h>
  #include <uapi/linux/mount.h>
@@ -931,7 +931,7 @@ index ec3a928..8682f58 100644
  #include "include/apparmor.h"
  #include "include/apparmorfs.h"
  #include "include/audit.h"
-@@ -779,6 +781,7 @@ static void apparmor_sk_free_security(struct sock *sk)
+@@ -792,6 +794,7 @@ static void apparmor_sk_free_security(struct sock *sk)
  	SK_CTX(sk) = NULL;
  	aa_put_label(ctx->label);
  	aa_put_label(ctx->peer);
@@ -939,9 +939,9 @@ index ec3a928..8682f58 100644
  	kfree(ctx);
  }
  
-@@ -793,6 +796,99 @@ static void apparmor_sk_clone_security(const struct sock *sk,
- 
- 	new->label = aa_get_label(ctx->label);
+@@ -811,6 +814,99 @@ static void apparmor_sk_clone_security(const struct sock *sk,
+ 	if (new->peer)
+ 		aa_put_label(new->peer);
  	new->peer = aa_get_label(ctx->peer);
 +	new->path = ctx->path;
 +	path_get(&new->path);
@@ -1039,7 +1039,7 @@ index ec3a928..8682f58 100644
  }
  
  /**
-@@ -1038,11 +1134,25 @@ static int apparmor_socket_sock_rcv_skb(struct sock *sk, struct sk_buff *skb)
+@@ -1056,11 +1152,25 @@ static int apparmor_socket_sock_rcv_skb(struct sock *sk, struct sk_buff *skb)
  
  static struct aa_label *sk_peer_label(struct sock *sk)
  {
@@ -1065,7 +1065,7 @@ index ec3a928..8682f58 100644
  	return ERR_PTR(-ENOPROTOOPT);
  }
  
-@@ -1189,6 +1299,9 @@ static struct security_hook_list apparmor_hooks[] __lsm_ro_after_init = {
+@@ -1207,6 +1317,9 @@ static struct security_hook_list apparmor_hooks[] __lsm_ro_after_init = {
  	LSM_HOOK_INIT(sk_free_security, apparmor_sk_free_security),
  	LSM_HOOK_INIT(sk_clone_security, apparmor_sk_clone_security),
  
@@ -1168,10 +1168,10 @@ index 1d8f5ff..297589c 100644
  
  #ifdef CONFIG_NETWORK_SECMARK
 diff --git a/security/apparmor/policy_unpack.c b/security/apparmor/policy_unpack.c
-index c094252..2bb248a 100644
+index b9dcd53..525ca81 100644
 --- a/security/apparmor/policy_unpack.c
 +++ b/security/apparmor/policy_unpack.c
-@@ -315,13 +315,13 @@ static bool unpack_u16(struct aa_ext *e, u16 *data, const char *name)
+@@ -318,13 +318,13 @@ static bool unpack_u16(struct aa_ext *e, u16 *data, const char *name)
  {
  	if (unpack_nameX(e, AA_U16, name)) {
  		if (!inbounds(e, sizeof(u16)))

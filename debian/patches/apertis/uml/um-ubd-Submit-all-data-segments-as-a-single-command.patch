@@ -95,7 +95,7 @@ Signed-off-by: Gabriel Krisman Bertazi <krisman@collabora.com>
  1 file changed, 114 insertions(+), 76 deletions(-)
 
 diff --git a/arch/um/drivers/ubd_kern.c b/arch/um/drivers/ubd_kern.c
-index d259f07..6b2a8372d 100644
+index eae8c83..5a624c0 100644
 --- a/arch/um/drivers/ubd_kern.c
 +++ b/arch/um/drivers/ubd_kern.c
 @@ -47,18 +47,23 @@
@@ -127,7 +127,7 @@ index d259f07..6b2a8372d 100644
  };
  
  
-@@ -524,12 +529,7 @@ static void ubd_handler(void)
+@@ -525,12 +530,7 @@ static void ubd_handler(void)
  				blk_queue_max_write_zeroes_sectors(io_req->req->q, 0);
  				blk_queue_flag_clear(QUEUE_FLAG_DISCARD, io_req->req->q);
  			}
@@ -141,7 +141,7 @@ index d259f07..6b2a8372d 100644
  			kfree(io_req);
  		}
  	}
-@@ -945,6 +945,7 @@ static int ubd_add(int n, char **error_out)
+@@ -946,6 +946,7 @@ static int ubd_add(int n, char **error_out)
  	blk_queue_write_cache(ubd_dev->queue, true, false);
  
  	blk_queue_max_segments(ubd_dev->queue, MAX_SG);
@@ -149,7 +149,7 @@ index d259f07..6b2a8372d 100644
  	err = ubd_disk_register(UBD_MAJOR, ubd_dev->size, n, &ubd_gendisk[n]);
  	if(err){
  		*error_out = "Failed to register device";
-@@ -1288,37 +1289,73 @@ static void cowify_bitmap(__u64 io_offset, int length, unsigned long *cow_mask,
+@@ -1289,37 +1290,73 @@ static void cowify_bitmap(__u64 io_offset, int length, unsigned long *cow_mask,
  	*cow_offset += bitmap_offset;
  }
  
@@ -237,7 +237,7 @@ index d259f07..6b2a8372d 100644
  
  	io_req->req = req;
  	if (dev->cow.file)
-@@ -1326,26 +1363,42 @@ static int ubd_queue_one_vec(struct blk_mq_hw_ctx *hctx, struct request *req,
+@@ -1327,26 +1364,42 @@ static int ubd_queue_one_vec(struct blk_mq_hw_ctx *hctx, struct request *req,
  	else
  		io_req->fds[0] = dev->fd;
  	io_req->error = 0;
@@ -295,7 +295,7 @@ index d259f07..6b2a8372d 100644
  
  	ret = os_write_file(thread_fd, &io_req, sizeof(io_req));
  	if (ret != sizeof(io_req)) {
-@@ -1356,22 +1409,6 @@ static int ubd_queue_one_vec(struct blk_mq_hw_ctx *hctx, struct request *req,
+@@ -1357,22 +1410,6 @@ static int ubd_queue_one_vec(struct blk_mq_hw_ctx *hctx, struct request *req,
  	return ret;
  }
  
@@ -318,7 +318,7 @@ index d259f07..6b2a8372d 100644
  static blk_status_t ubd_queue_rq(struct blk_mq_hw_ctx *hctx,
  				 const struct blk_mq_queue_data *bd)
  {
-@@ -1384,17 +1421,12 @@ static blk_status_t ubd_queue_rq(struct blk_mq_hw_ctx *hctx,
+@@ -1385,17 +1422,12 @@ static blk_status_t ubd_queue_rq(struct blk_mq_hw_ctx *hctx,
  	spin_lock_irq(&ubd_dev->lock);
  
  	switch (req_op(req)) {
@@ -337,7 +337,7 @@ index d259f07..6b2a8372d 100644
  		break;
  	default:
  		WARN_ON_ONCE(1);
-@@ -1482,26 +1514,27 @@ static int map_error(int error_code)
+@@ -1483,26 +1515,27 @@ static int map_error(int error_code)
   * will result in unpredictable behaviour and/or crashes.
   */
  
@@ -371,7 +371,7 @@ index d259f07..6b2a8372d 100644
  	__u64 off;
  
  	/* FLUSH is really a special case, we cannot "case" it with others */
-@@ -1512,21 +1545,22 @@ static void do_io(struct io_thread_req *req)
+@@ -1513,21 +1546,22 @@ static void do_io(struct io_thread_req *req)
  		return;
  	}
  
@@ -399,7 +399,7 @@ index d259f07..6b2a8372d 100644
  
  		switch (req_op(req->req)) {
  		case REQ_OP_READ:
-@@ -1566,7 +1600,8 @@ static void do_io(struct io_thread_req *req)
+@@ -1567,7 +1601,8 @@ static void do_io(struct io_thread_req *req)
  		start = end;
  	} while(start < nsectors);
  
@@ -409,7 +409,7 @@ index d259f07..6b2a8372d 100644
  }
  
  /* Changed in start_io_thread, which is serialized by being called only
-@@ -1579,7 +1614,7 @@ static int io_count = 0;
+@@ -1580,7 +1615,7 @@ static int io_count = 0;
  
  int io_thread(void *arg)
  {
@@ -418,7 +418,7 @@ index d259f07..6b2a8372d 100644
  
  	os_fix_helper_signals();
  
-@@ -1599,8 +1634,11 @@ int io_thread(void *arg)
+@@ -1600,8 +1635,11 @@ int io_thread(void *arg)
  		}
  
  		for (count = 0; count < n/sizeof(struct io_thread_req *); count++) {

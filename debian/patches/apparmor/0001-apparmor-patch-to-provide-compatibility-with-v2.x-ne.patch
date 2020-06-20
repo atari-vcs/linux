@@ -22,10 +22,10 @@ Signed-off-by: John Johansen <john.johansen@canonical.com>
  7 files changed, 92 insertions(+), 10 deletions(-)
 
 diff --git a/security/apparmor/apparmorfs.c b/security/apparmor/apparmorfs.c
-index 90d2167..aeb0344 100644
+index f6a3ecf..9305ca0 100644
 --- a/security/apparmor/apparmorfs.c
 +++ b/security/apparmor/apparmorfs.c
-@@ -2275,6 +2275,7 @@ static struct aa_sfs_entry aa_sfs_entry_features[] = {
+@@ -2394,6 +2394,7 @@ static struct aa_sfs_entry aa_sfs_entry_features[] = {
  	AA_SFS_DIR("domain",			aa_sfs_entry_domain),
  	AA_SFS_DIR("file",			aa_sfs_entry_file),
  	AA_SFS_DIR("network_v8",		aa_sfs_entry_network),
@@ -34,7 +34,7 @@ index 90d2167..aeb0344 100644
  	AA_SFS_DIR("namespaces",		aa_sfs_entry_ns),
  	AA_SFS_FILE_U64("capability",		VFS_CAP_FLAGS_MASK),
 diff --git a/security/apparmor/include/apparmor.h b/security/apparmor/include/apparmor.h
-index 6b7e6e1..70de525 100644
+index 1fbabdb..5870de2 100644
 --- a/security/apparmor/include/apparmor.h
 +++ b/security/apparmor/include/apparmor.h
 @@ -20,7 +20,7 @@
@@ -146,7 +146,7 @@ index d8afc39..1d8f5ff 100644
  
  	return aa_check_perms(profile, &perms, request, sa, audit_net_cb);
 diff --git a/security/apparmor/policy.c b/security/apparmor/policy.c
-index 0635571..58ff956 100644
+index 269f2f5..e43c386 100644
 --- a/security/apparmor/policy.c
 +++ b/security/apparmor/policy.c
 @@ -222,6 +222,7 @@ void aa_free_profile(struct aa_profile *profile)
@@ -158,10 +158,10 @@ index 0635571..58ff956 100644
  	for (i = 0; i < profile->xattr_count; i++)
  		kzfree(profile->xattrs[i]);
 diff --git a/security/apparmor/policy_unpack.c b/security/apparmor/policy_unpack.c
-index 8cfc949..c094252 100644
+index 2d743c0..b9dcd53 100644
 --- a/security/apparmor/policy_unpack.c
 +++ b/security/apparmor/policy_unpack.c
-@@ -33,7 +33,7 @@
+@@ -34,7 +34,7 @@
  
  #define v5	5	/* base version */
  #define v6	6	/* per entry policydb mediation check */
@@ -170,7 +170,7 @@ index 8cfc949..c094252 100644
  #define v8	8	/* full network masking */
  
  /*
-@@ -311,6 +311,19 @@ static bool unpack_u8(struct aa_ext *e, u8 *data, const char *name)
+@@ -314,6 +314,19 @@ static bool unpack_u8(struct aa_ext *e, u8 *data, const char *name)
  	return 0;
  }
  
@@ -190,7 +190,7 @@ index 8cfc949..c094252 100644
  static bool unpack_u32(struct aa_ext *e, u32 *data, const char *name)
  {
  	void *pos = e->pos;
-@@ -673,7 +686,7 @@ static struct aa_profile *unpack_profile(struct aa_ext *e, char **ns_name)
+@@ -676,7 +689,7 @@ static struct aa_profile *unpack_profile(struct aa_ext *e, char **ns_name)
  	struct aa_profile *profile = NULL;
  	const char *tmpname, *tmpns = NULL, *name = NULL;
  	const char *info = "failed to unpack profile";
@@ -199,7 +199,7 @@ index 8cfc949..c094252 100644
  	struct rhashtable_params params = { 0 };
  	char *key = NULL;
  	struct aa_data *data;
-@@ -816,6 +829,43 @@ static struct aa_profile *unpack_profile(struct aa_ext *e, char **ns_name)
+@@ -819,6 +832,43 @@ static struct aa_profile *unpack_profile(struct aa_ext *e, char **ns_name)
  		goto fail;
  	}
  

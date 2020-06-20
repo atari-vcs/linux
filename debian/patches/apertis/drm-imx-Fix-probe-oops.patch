@@ -86,7 +86,7 @@ index da87c70..de78b9c 100644
  
  	return ret;
 diff --git a/drivers/gpu/drm/imx/ipuv3-plane.c b/drivers/gpu/drm/imx/ipuv3-plane.c
-index 28826c0..8f35e18 100644
+index 6776ebb..2598b5c 100644
 --- a/drivers/gpu/drm/imx/ipuv3-plane.c
 +++ b/drivers/gpu/drm/imx/ipuv3-plane.c
 @@ -152,6 +152,8 @@ void ipu_plane_put_resources(struct ipu_plane *ipu_plane)

@@ -37,7 +37,7 @@ index 9f0ab34..3e676ac 100644
  	},
  	.ops = &cs42xx8_dai_ops,
 diff --git a/sound/soc/fsl/fsl-asoc-card.c b/sound/soc/fsl/fsl-asoc-card.c
-index 39ea9bd..b7c90bb 100644
+index bb33601..d5209ca 100644
 --- a/sound/soc/fsl/fsl-asoc-card.c
 +++ b/sound/soc/fsl/fsl-asoc-card.c
 @@ -548,6 +548,7 @@ static int fsl_asoc_card_probe(struct platform_device *pdev)

@@ -9,10 +9,10 @@ Signed-off-by: John Johansen <john.johansen@canonical.com>
  1 file changed, 7 insertions(+), 4 deletions(-)
 
 diff --git a/security/apparmor/lsm.c b/security/apparmor/lsm.c
-index 8682f58..40ebede 100644
+index 5c8b9ab..3d75db5 100644
 --- a/security/apparmor/lsm.c
 +++ b/security/apparmor/lsm.c
-@@ -1136,9 +1136,10 @@ static struct aa_label *sk_peer_label(struct sock *sk)
+@@ -1154,9 +1154,10 @@ static struct aa_label *sk_peer_label(struct sock *sk)
  {
  	struct sock *peer_sk;
  	struct aa_sk_ctx *ctx = SK_CTX(sk);
@@ -24,7 +24,7 @@ index 8682f58..40ebede 100644
  
  	if (sk->sk_family != PF_UNIX)
  		return ERR_PTR(-ENOPROTOOPT);
-@@ -1146,14 +1147,15 @@ static struct aa_label *sk_peer_label(struct sock *sk)
+@@ -1164,14 +1165,15 @@ static struct aa_label *sk_peer_label(struct sock *sk)
  	/* check for sockpair peering which does not go through
  	 * security_unix_stream_connect
  	 */
@@ -43,7 +43,7 @@ index 8682f58..40ebede 100644
  }
  
  /**
-@@ -1197,6 +1199,7 @@ static int apparmor_socket_getpeersec_stream(struct socket *sock,
+@@ -1215,6 +1217,7 @@ static int apparmor_socket_getpeersec_stream(struct socket *sock,
  
  	}
  

@@ -15,10 +15,10 @@ Signed-off-by: Seth Forshee <seth.forshee@canonical.com>
  2 files changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/security/apparmor/apparmorfs.c b/security/apparmor/apparmorfs.c
-index f3080dc..9c6b5c2 100644
+index 6e80794..448577a 100644
 --- a/security/apparmor/apparmorfs.c
 +++ b/security/apparmor/apparmorfs.c
-@@ -625,7 +625,7 @@ static void profile_query_cb(struct aa_profile *profile, struct aa_perms *perms,
+@@ -656,7 +656,7 @@ static void profile_query_cb(struct aa_profile *profile, struct aa_perms *perms,
  			tmp = aa_compute_fperms(dfa, state, &cond);
  		}
  	} else if (profile->policy.dfa) {
