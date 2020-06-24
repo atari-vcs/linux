@@ -18,6 +18,7 @@ static const struct usb_device_id mt76x2u_device_table[] = {
 	{ USB_DEVICE(0x7392, 0xb711) },	/* Edimax EW 7722 UAC */
 	{ USB_DEVICE(0x0846, 0x9053) },	/* Netgear A6210 */
 	{ USB_DEVICE(0x045e, 0x02e6) },	/* XBox One Wireless Adapter */
+	{ USB_DEVICE(0x045e, 0x02fe) },	/* XBox One Wireless Adapter */
 	{ },
 };
 
@@ -25,6 +26,8 @@ static int mt76x2u_probe(struct usb_interface *intf,
 			 const struct usb_device_id *id)
 {
 	static const struct mt76_driver_ops drv_ops = {
+		.drv_flags = MT_DRV_SW_RX_AIRTIME,
+		.survey_flags = SURVEY_INFO_TIME_TX,
 		.update_survey = mt76x02_update_channel,
 		.tx_prepare_skb = mt76x02u_tx_prepare_skb,
 		.tx_complete_skb = mt76x02u_tx_complete_skb,
@@ -52,7 +55,7 @@ static int mt76x2u_probe(struct usb_interface *intf,
 	usb_set_intfdata(intf, dev);
 
 	mt76x02u_init_mcu(mdev);
-	err = mt76u_init(mdev, intf);
+	err = mt76u_init(mdev, intf, false);
 	if (err < 0)
 		goto err;
 
@@ -71,6 +74,7 @@ static int mt76x2u_probe(struct usb_interface *intf,
 
 err:
 	ieee80211_free_hw(mt76_hw(dev));
+	mt76u_deinit(&dev->mt76);
 	usb_set_intfdata(intf, NULL);
 	usb_put_dev(udev);
 
@@ -83,9 +87,10 @@ static void mt76x2u_disconnect(struct usb_interface *intf)
 	struct mt76x02_dev *dev = usb_get_intfdata(intf);
 	struct ieee80211_hw *hw = mt76_hw(dev);
 
-	set_bit(MT76_REMOVED, &dev->mt76.state);
+	set_bit(MT76_REMOVED, &dev->mphy.state);
 	ieee80211_unregister_hw(hw);
 	mt76x2u_cleanup(dev);
+	mt76u_deinit(&dev->mt76);
 
 	ieee80211_free_hw(hw);
 	usb_set_intfdata(intf, NULL);

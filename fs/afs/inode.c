@@ -34,8 +34,7 @@ static noinline void dump_vnode(struct afs_vnode *vnode, struct afs_vnode *paren
 {
 	static unsigned long once_only;
 
-	pr_warn("kAFS: AFS vnode with undefined type %u\n",
-		vnode->status.type);
+	pr_warn("kAFS: AFS vnode with undefined type %u\n", vnode->status.type);
 	pr_warn("kAFS: A=%d m=%o s=%llx v=%llx\n",
 		vnode->status.abort_code,
 		vnode->status.mode,
@@ -131,7 +130,7 @@ static int afs_inode_init_from_status(struct afs_vnode *vnode, struct key *key,
 	default:
 		dump_vnode(vnode, parent_vnode);
 		write_sequnlock(&vnode->cb_lock);
-		return afs_protocol_error(NULL, -EBADMSG, afs_eproto_file_type);
+		return afs_protocol_error(NULL, afs_eproto_file_type);
 	}
 
 	afs_set_i_size(vnode, status->size);
@@ -171,16 +170,17 @@ static void afs_apply_status(struct afs_fs_cursor *fc,
 	struct timespec64 t;
 	umode_t mode;
 	bool data_changed = false;
+	bool change_size = false;
 
 	BUG_ON(test_bit(AFS_VNODE_UNSET, &vnode->flags));
 
 	if (status->type != vnode->status.type) {
-		pr_warning("Vnode %llx:%llx:%x changed type %u to %u\n",
-			   vnode->fid.vid,
-			   vnode->fid.vnode,
-			   vnode->fid.unique,
-			   status->type, vnode->status.type);
-		afs_protocol_error(NULL, -EBADMSG, afs_eproto_bad_status);
+		pr_warn("Vnode %llx:%llx:%x changed type %u to %u\n",
+			vnode->fid.vid,
+			vnode->fid.vnode,
+			vnode->fid.unique,
+			status->type, vnode->status.type);
+		afs_protocol_error(NULL, afs_eproto_bad_status);
 		return;
 	}
 
@@ -226,6 +226,7 @@ static void afs_apply_status(struct afs_fs_cursor *fc,
 		} else {
 			set_bit(AFS_VNODE_ZAP_DATA, &vnode->flags);
 		}
+		change_size = true;
 	} else if (vnode->status.type == AFS_FTYPE_DIR) {
 		/* Expected directory change is handled elsewhere so
 		 * that we can locally edit the directory and save on a
@@ -233,11 +234,19 @@ static void afs_apply_status(struct afs_fs_cursor *fc,
 		 */
 		if (test_bit(AFS_VNODE_DIR_VALID, &vnode->flags))
 			data_changed = false;
+		change_size = true;
 	}
 
 	if (data_changed) {
 		inode_set_iversion_raw(&vnode->vfs_inode, status->data_version);
-		afs_set_i_size(vnode, status->size);
+
+		/* Only update the size if the data version jumped.  If the
+		 * file is being modified locally, then we might have our own
+		 * idea of what the size should be that's not the same as
+		 * what's on the server.
+		 */
+		if (change_size)
+			afs_set_i_size(vnode, status->size);
 	}
 }
 

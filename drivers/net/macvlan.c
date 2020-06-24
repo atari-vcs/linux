@@ -334,6 +334,8 @@ static void macvlan_process_broadcast(struct work_struct *w)
 		if (src)
 			dev_put(src->dev);
 		consume_skb(skb);
+
+		cond_resched();
 	}
 }
 
@@ -444,6 +446,10 @@ static rx_handler_result_t macvlan_handle_frame(struct sk_buff **pskb)
 	unsigned int len = 0;
 	int ret;
 	rx_handler_result_t handle_res;
+
+	/* Packets from dev_loopback_xmit() do not have L2 header, bail out */
+	if (unlikely(skb->pkt_type == PACKET_LOOPBACK))
+		return RX_HANDLER_PASS;
 
 	port = macvlan_port_get_rcu(skb->dev);
 	if (is_multicast_ether_addr(eth->h_dest)) {
@@ -1037,8 +1043,8 @@ static int macvlan_ethtool_get_ts_info(struct net_device *dev,
 	const struct ethtool_ops *ops = real_dev->ethtool_ops;
 	struct phy_device *phydev = real_dev->phydev;
 
-	if (phydev && phydev->drv && phydev->drv->ts_info) {
-		 return phydev->drv->ts_info(phydev, info);
+	if (phy_has_tsinfo(phydev)) {
+		return phy_ts_info(phydev, info);
 	} else if (ops->get_ts_info) {
 		return ops->get_ts_info(real_dev, info);
 	} else {
@@ -1702,7 +1708,7 @@ static int macvlan_device_event(struct notifier_block *unused,
 						struct macvlan_dev,
 						list);
 
-		if (macvlan_sync_address(vlan->dev, dev->dev_addr))
+		if (vlan && macvlan_sync_address(vlan->dev, dev->dev_addr))
 			return NOTIFY_BAD;
 
 		break;

@@ -867,10 +867,6 @@ static int prepare_uprobe(struct uprobe *uprobe, struct file *file,
 	if (ret)
 		goto out;
 
-	/* uprobe_write_opcode() assumes we don't cross page boundary */
-	BUG_ON((uprobe->offset & ~PAGE_MASK) +
-			UPROBE_SWBP_INSN_SIZE > PAGE_SIZE);
-
 	smp_wmb(); /* pairs with the smp_rmb() in handle_swbp() */
 	set_bit(UPROBE_COPY_INSN, &uprobe->flags);
 
@@ -1166,6 +1162,15 @@ static int __uprobe_register(struct inode *inode, loff_t offset,
 	if (offset > i_size_read(inode))
 		return -EINVAL;
 
+	/*
+	 * This ensures that copy_from_page(), copy_to_page() and
+	 * __update_ref_ctr() can't cross page boundary.
+	 */
+	if (!IS_ALIGNED(offset, UPROBE_SWBP_INSN_SIZE))
+		return -EINVAL;
+	if (!IS_ALIGNED(ref_ctr_offset, sizeof(short)))
+		return -EINVAL;
+
  retry:
 	uprobe = alloc_uprobe(inode, offset, ref_ctr_offset);
 	if (!uprobe)
@@ -1457,7 +1462,7 @@ static int xol_add_vma(struct mm_struct *mm, struct xol_area *area)
 		/* Try to map as high as possible, this is only a hint. */
 		area->vaddr = get_unmapped_area(NULL, TASK_SIZE - PAGE_SIZE,
 						PAGE_SIZE, 0, 0);
-		if (area->vaddr & ~PAGE_MASK) {
+		if (IS_ERR_VALUE(area->vaddr)) {
 			ret = area->vaddr;
 			goto fail;
 		}
@@ -2013,6 +2018,9 @@ static int is_trap_at_addr(struct mm_struct *mm, unsigned long vaddr)
 	struct page *page;
 	uprobe_opcode_t opcode;
 	int result;
+
+	if (WARN_ON_ONCE(!IS_ALIGNED(vaddr, UPROBE_SWBP_INSN_SIZE)))
+		return -EINVAL;
 
 	pagefault_disable();
 	result = __get_user(opcode, (uprobe_opcode_t __user *)vaddr);

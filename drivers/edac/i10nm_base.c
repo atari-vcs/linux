@@ -123,10 +123,10 @@ static int i10nm_get_all_munits(void)
 }
 
 static const struct x86_cpu_id i10nm_cpuids[] = {
-	{ X86_VENDOR_INTEL, 6, INTEL_FAM6_ATOM_TREMONT_D, 0, 0 },
-	{ X86_VENDOR_INTEL, 6, INTEL_FAM6_ICELAKE_X, 0, 0 },
-	{ X86_VENDOR_INTEL, 6, INTEL_FAM6_ICELAKE_D, 0, 0 },
-	{ }
+	X86_MATCH_INTEL_FAM6_MODEL(ATOM_TREMONT_D,	NULL),
+	X86_MATCH_INTEL_FAM6_MODEL(ICELAKE_X,		NULL),
+	X86_MATCH_INTEL_FAM6_MODEL(ICELAKE_D,		NULL),
+	{}
 };
 MODULE_DEVICE_TABLE(x86cpu, i10nm_cpuids);
 
@@ -154,15 +154,14 @@ static int i10nm_get_dimm_config(struct mem_ctl_info *mci)
 
 		ndimms = 0;
 		for (j = 0; j < I10NM_NUM_DIMMS; j++) {
-			dimm = EDAC_DIMM_PTR(mci->layers, mci->dimms,
-					     mci->n_layers, i, j, 0);
+			dimm = edac_get_dimm(mci, i, j, 0);
 			mtr = I10NM_GET_DIMMMTR(imc, i, j);
 			mcddrtcfg = I10NM_GET_MCDDRTCFG(imc, i, j);
 			edac_dbg(1, "dimmmtr 0x%x mcddrtcfg 0x%x (mc%d ch%d dimm%d)\n",
 				 mtr, mcddrtcfg, imc->mc, i, j);
 
 			if (IS_DIMM_PRESENT(mtr))
-				ndimms += skx_get_dimm_info(mtr, 0, dimm,
+				ndimms += skx_get_dimm_info(mtr, 0, 0, dimm,
 							    imc, i, j);
 			else if (IS_NVDIMM_PRESENT(mcddrtcfg, j))
 				ndimms += skx_get_nvdimm_info(dimm, imc, i, j,

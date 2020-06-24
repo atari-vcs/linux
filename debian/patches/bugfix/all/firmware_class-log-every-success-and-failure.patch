@@ -22,8 +22,8 @@ NOTE: hw-detect will depend on the "firmware: failed to load %s (%d)\n"
 format to detect missing firmware.
 ---
  drivers/base/firmware_loader/fallback.c |  2 +-
- drivers/base/firmware_loader/main.c     | 15 ++++++++-------
- 2 files changed, 9 insertions(+), 8 deletions(-)
+ drivers/base/firmware_loader/main.c     | 17 ++++++++---------
+ 2 files changed, 9 insertions(+), 10 deletions(-)
 
 --- a/drivers/base/firmware_loader/fallback.c
 +++ b/drivers/base/firmware_loader/fallback.c
@@ -38,9 +38,9 @@ format to detect missing firmware.
  		}
 --- a/drivers/base/firmware_loader/main.c
 +++ b/drivers/base/firmware_loader/main.c
-@@ -496,14 +496,12 @@ fw_get_filesystem_firmware(struct device
- 		rc = kernel_read_file_from_path(path, &buffer, &size,
- 						msize, id);
+@@ -498,15 +498,12 @@ fw_get_filesystem_firmware(struct device
+ 		rc = kernel_read_file_from_path_initns(path, &buffer,
+ 						       &size, msize, id);
  		if (rc) {
 -			if (rc != -ENOENT)
 -				dev_warn(device, "loading %s failed with error %d\n",
@@ -52,12 +52,13 @@ format to detect missing firmware.
 +				path, rc);
  			continue;
  		}
+-		dev_dbg(device, "Loading firmware from %s\n", path);
 +		dev_info(device, "firmware: direct-loading firmware %s\n",
 +			 fw_priv->fw_name);
  		if (decompress) {
  			dev_dbg(device, "f/w decompressing %s\n",
  				fw_priv->fw_name);
-@@ -516,8 +514,6 @@ fw_get_filesystem_firmware(struct device
+@@ -519,8 +516,6 @@ fw_get_filesystem_firmware(struct device
  				continue;
  			}
  		} else {
@@ -66,7 +67,7 @@ format to detect missing firmware.
  			if (!fw_priv->data)
  				fw_priv->data = buffer;
  			fw_priv->size = size;
-@@ -527,6 +523,10 @@ fw_get_filesystem_firmware(struct device
+@@ -530,6 +525,10 @@ fw_get_filesystem_firmware(struct device
  	}
  	__putname(path);
  

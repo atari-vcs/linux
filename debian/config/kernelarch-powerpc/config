@@ -154,9 +154,9 @@ CONFIG_BT_HCIVHCI=m
 ## file: drivers/char/Kconfig
 ##
 CONFIG_PRINTER=m
-CONFIG_NVRAM=y
 CONFIG_DTLK=m
 CONFIG_APPLICOM=m
+CONFIG_NVRAM=y
 
 ##
 ## file: drivers/char/agp/Kconfig
@@ -187,10 +187,6 @@ CONFIG_CPU_FREQ_PMAC=y
 ##
 CONFIG_DRM=m
 CONFIG_DRM_RADEON=m
-CONFIG_DRM_TDFX=m
-CONFIG_DRM_R128=m
-CONFIG_DRM_MGA=m
-# CONFIG_DRM_SIS is not set
 
 ##
 ## file: drivers/gpu/drm/i2c/Kconfig
@@ -277,7 +273,7 @@ CONFIG_I2C_HYDRA=m
 #. This isn't auto-loaded (#713943)
 CONFIG_I2C_POWERMAC=y
 CONFIG_I2C_MPC=m
-CONFIG_I2C_PARPORT_LIGHT=m
+CONFIG_I2C_PARPORT=m
 CONFIG_I2C_PCA_ISA=m
 CONFIG_SCx200_ACB=m
 
@@ -341,13 +337,6 @@ CONFIG_INPUT_TOUCHSCREEN=y
 ## file: drivers/isdn/Kconfig
 ##
 CONFIG_ISDN=y
-
-##
-## file: drivers/isdn/capi/Kconfig
-##
-CONFIG_ISDN_CAPI=m
-CONFIG_ISDN_CAPI_CAPI20=m
-CONFIG_ISDN_CAPI_MIDDLEWARE=y
 
 ##
 ## file: drivers/macintosh/Kconfig
@@ -489,11 +478,6 @@ CONFIG_SUNDANCE_MMIO=y
 ## file: drivers/net/ethernet/fujitsu/Kconfig
 ##
 CONFIG_PCMCIA_FMVJ18X=m
-
-##
-## file: drivers/net/ethernet/hp/Kconfig
-##
-# CONFIG_HP100 is not set
 
 ##
 ## file: drivers/net/ethernet/intel/Kconfig
@@ -702,17 +686,6 @@ CONFIG_PCMCIA_AHA152X=m
 CONFIG_PCMCIA_NINJA_SCSI=m
 CONFIG_PCMCIA_QLOGIC=m
 CONFIG_PCMCIA_SYM53C500=m
-
-##
-## file: drivers/staging/isdn/avm/Kconfig
-##
-CONFIG_CAPI_AVM=y
-CONFIG_ISDN_DRV_AVMB1_B1PCI=m
-CONFIG_ISDN_DRV_AVMB1_B1PCIV4=y
-CONFIG_ISDN_DRV_AVMB1_B1PCMCIA=m
-CONFIG_ISDN_DRV_AVMB1_AVM_CS=m
-CONFIG_ISDN_DRV_AVMB1_T1PCI=m
-CONFIG_ISDN_DRV_AVMB1_C4=m
 
 ##
 ## file: drivers/tty/Kconfig
