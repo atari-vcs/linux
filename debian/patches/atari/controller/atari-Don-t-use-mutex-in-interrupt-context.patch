@@ -1,0 +1,47 @@
+From: Sjoerd Simons <sjoerd@collabora.com>
+Date: Mon, 29 Jun 2020 15:13:31 +0200
+Subject: atari: Don't use mutex in interrupt context
+
+The FF memless drivers sometimes calls the play_effect callback from
+interrupt context, which means mutex's can't be used (as they might
+schedule when contended).
+
+As the values being set and read are one word, assuming they're atomic
+is fine and the mutex is not strictly needed.
+
+Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+---
+ drivers/hid/hid-atari.c | 4 ----
+ 1 file changed, 4 deletions(-)
+
+diff --git a/drivers/hid/hid-atari.c b/drivers/hid/hid-atari.c
+index cebb8f9..08769cc 100644
+--- a/drivers/hid/hid-atari.c
++++ b/drivers/hid/hid-atari.c
+@@ -653,7 +653,6 @@ static void atari_ff_worker(struct work_struct *work)
+ 	struct hid_device *hdev = ata->hdev;
+ 	struct ff_report *r = ata->ff_report_dma;
+ 
+-	mutex_lock (&ata->lock);
+ 	r->report_id = ATARI_FF_REPORT;
+ 
+ 	r->engine[0].strength = ata->strong_ff;
+@@ -668,7 +667,6 @@ static void atari_ff_worker(struct work_struct *work)
+ 		r->engine[1].repeat = 0;
+ 	}
+ 
+-	mutex_unlock (&ata->lock);
+ 	hid_hw_output_report (hdev, (__u8 *) r, ata->ff_report_size);
+ }
+ 
+@@ -682,10 +680,8 @@ static int atari_play_effect(struct input_dev *dev, void *data,
+ 		return 0;
+ 
+ 	/* scale back to 8 bits */
+-	mutex_lock (&ata->lock);
+ 	ata->strong_ff = effect->u.rumble.strong_magnitude >> 8;
+ 	ata->weak_ff = effect->u.rumble.weak_magnitude >> 8;
+-	mutex_unlock (&ata->lock);
+ 
+ 	schedule_work(&ata->ff_worker);
+ 	return 0;
