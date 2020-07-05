@@ -1,3 +1,11 @@
+linux (5.7.6-1co1) apertis; urgency=medium
+
+  * Refresh Apertis patches for 5.7.6
+  * Revert compilation to gcc-8 on all architectures
+  * Regenerate automatic rules due gcc-8
+
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Sun, 05 Jul 2020 23:06:49 +0300
+
 linux (5.7.6-1) unstable; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_5.7
