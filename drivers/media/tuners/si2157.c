@@ -75,23 +75,22 @@ static int si2157_init(struct dvb_frontend *fe)
 	struct si2157_cmd cmd;
 	const struct firmware *fw;
 	const char *fw_name;
-	unsigned int uitmp, chip_id;
+	unsigned int chip_id, xtal_trim;
 
 	dev_dbg(&client->dev, "\n");
 
-	/* Returned IF frequency is garbage when firmware is not running */
-	memcpy(cmd.args, "\x15\x00\x06\x07", 4);
+	/* Try to get Xtal trim property, to verify tuner still running */
+	memcpy(cmd.args, "\x15\x00\x04\x02", 4);
 	cmd.wlen = 4;
 	cmd.rlen = 4;
 	ret = si2157_cmd_execute(client, &cmd);
-	if (ret)
-		goto err;
 
-	uitmp = cmd.args[2] << 0 | cmd.args[3] << 8;
-	dev_dbg(&client->dev, "if_frequency kHz=%u\n", uitmp);
+	xtal_trim = cmd.args[2] | (cmd.args[3] << 8);
 
-	if (uitmp == dev->if_frequency / 1000)
+	if (ret == 0 && xtal_trim < 16)
 		goto warm;
+
+	dev->if_frequency = 0; /* we no longer know current tuner state */
 
 	/* power up */
 	if (dev->chiptype == SI2157_CHIPTYPE_SI2146) {
@@ -116,6 +115,11 @@ static int si2157_init(struct dvb_frontend *fe)
 		ret = si2157_cmd_execute(client, &cmd);
 		if (ret)
 			goto err;
+	}
+
+	if (dev->dont_load_firmware) {
+		dev_info(&client->dev, "device is buggy, skipping firmware download\n");
+		goto skip_fw_download;
 	}
 
 	/* query chip revision */
@@ -440,6 +444,7 @@ static int si2157_probe(struct i2c_client *client,
 	i2c_set_clientdata(client, dev);
 	dev->fe = cfg->fe;
 	dev->inversion = cfg->inversion;
+	dev->dont_load_firmware = cfg->dont_load_firmware;
 	dev->if_port = cfg->if_port;
 	dev->chiptype = (u8)id->driver_data;
 	dev->if_frequency = 5000000; /* default value of property 0x0706 */

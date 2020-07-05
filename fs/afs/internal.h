@@ -81,7 +81,7 @@ enum afs_call_state {
  * List of server addresses.
  */
 struct afs_addr_list {
-	struct rcu_head		rcu;		/* Must be first */
+	struct rcu_head		rcu;
 	refcount_t		usage;
 	u32			version;	/* Version */
 	unsigned char		max_addrs;
@@ -115,9 +115,9 @@ struct afs_call {
 	struct afs_vnode	*lvnode;	/* vnode being locked */
 	void			*request;	/* request data (first part) */
 	struct address_space	*mapping;	/* Pages being written from */
-	struct iov_iter		iter;		/* Buffer iterator */
-	struct iov_iter		*_iter;		/* Iterator currently in use */
-	union {	/* Convenience for ->iter */
+	struct iov_iter		def_iter;	/* Default buffer/data iterator */
+	struct iov_iter		*iter;		/* Iterator currently in use */
+	union {	/* Convenience for ->def_iter */
 		struct kvec	kvec[1];
 		struct bio_vec	bvec[1];
 	};
@@ -161,6 +161,7 @@ struct afs_call {
 	bool			upgrade;	/* T to request service upgrade */
 	bool			have_reply_time; /* T if have got reply_time */
 	bool			intr;		/* T if interruptible */
+	bool			unmarshalling_error; /* T if an unmarshalling error occurred */
 	u16			service_id;	/* Actual service ID (after upgrade) */
 	unsigned int		debug_id;	/* Trace ID */
 	u32			operation_ID;	/* operation ID for an incoming call */
@@ -533,12 +534,10 @@ struct afs_server {
 		u32		abort_code;
 		u32		cm_epoch;
 		short		error;
-		bool		have_result;
 		bool		responded:1;
 		bool		is_yfs:1;
 		bool		not_yfs:1;
 		bool		local_failure:1;
-		bool		no_epoch:1;
 		bool		cm_probed:1;
 		bool		said_rebooted:1;
 		bool		said_inconsistent:1;
@@ -934,6 +933,12 @@ extern int afs_fetch_data(struct afs_vnode *, struct key *, struct afs_read *);
 extern int afs_page_filler(void *, struct page *);
 extern void afs_put_read(struct afs_read *);
 
+static inline struct afs_read *afs_get_read(struct afs_read *req)
+{
+	refcount_inc(&req->usage);
+	return req;
+}
+
 /*
  * flock.c
  */
@@ -1124,7 +1129,7 @@ extern void afs_flat_call_destructor(struct afs_call *);
 extern void afs_send_empty_reply(struct afs_call *);
 extern void afs_send_simple_reply(struct afs_call *, const void *, size_t);
 extern int afs_extract_data(struct afs_call *, bool);
-extern int afs_protocol_error(struct afs_call *, int, enum afs_eproto_cause);
+extern int afs_protocol_error(struct afs_call *, enum afs_eproto_cause);
 
 static inline void afs_set_fc_call(struct afs_call *call, struct afs_fs_cursor *fc)
 {
@@ -1136,7 +1141,7 @@ static inline void afs_extract_begin(struct afs_call *call, void *buf, size_t si
 {
 	call->kvec[0].iov_base = buf;
 	call->kvec[0].iov_len = size;
-	iov_iter_kvec(&call->iter, READ, call->kvec, 1, size);
+	iov_iter_kvec(&call->def_iter, READ, call->kvec, 1, size);
 }
 
 static inline void afs_extract_to_tmp(struct afs_call *call)
@@ -1151,7 +1156,7 @@ static inline void afs_extract_to_tmp64(struct afs_call *call)
 
 static inline void afs_extract_discard(struct afs_call *call, size_t size)
 {
-	iov_iter_discard(&call->iter, READ, size);
+	iov_iter_discard(&call->def_iter, READ, size);
 }
 
 static inline void afs_extract_to_buf(struct afs_call *call, size_t size)

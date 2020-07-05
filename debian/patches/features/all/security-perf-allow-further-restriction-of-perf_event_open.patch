@@ -1,7 +1,6 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Mon, 11 Jan 2016 15:23:55 +0000
 Subject: security,perf: Allow further restriction of perf_event_open
-
 Forwarded: https://lkml.org/lkml/2016/1/11/587
 
 When kernel.perf_event_open is set to 3 (or greater), disallow all
@@ -22,10 +21,10 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  3 files changed, 22 insertions(+)
 
 diff --git a/include/linux/perf_event.h b/include/linux/perf_event.h
-index 68ccc5b..a7565ea 100644
+index 6d4c22aee384..e9c8c4e0cc5b 100644
 --- a/include/linux/perf_event.h
 +++ b/include/linux/perf_event.h
-@@ -1241,6 +1241,11 @@ extern int perf_cpu_time_max_percent_handler(struct ctl_table *table, int write,
+@@ -1270,6 +1270,11 @@ extern int perf_cpu_time_max_percent_handler(struct ctl_table *table, int write,
  int perf_event_max_stack_handler(struct ctl_table *table, int write,
  				 void __user *buffer, size_t *lenp, loff_t *ppos);
  
@@ -34,11 +33,11 @@ index 68ccc5b..a7565ea 100644
 +	return sysctl_perf_event_paranoid > 2;
 +}
 +
- static inline bool perf_paranoid_tracepoint_raw(void)
- {
- 	return sysctl_perf_event_paranoid > -1;
+ /* Access to perf_event_open(2) syscall. */
+ #define PERF_SECURITY_OPEN		0
+ 
 diff --git a/kernel/events/core.c b/kernel/events/core.c
-index 7382fc9..92e79f5 100644
+index 4ff86d57f9e5..4bc23d47ec07 100644
 --- a/kernel/events/core.c
 +++ b/kernel/events/core.c
 @@ -398,8 +398,13 @@ static cpumask_var_t perf_online_mask;
@@ -55,18 +54,18 @@ index 7382fc9..92e79f5 100644
  
  /* Minimum for 512 kiB + 1 user control page */
  int sysctl_perf_event_mlock __read_mostly = 512 + (PAGE_SIZE / 1024); /* 'free' kiB per user */
-@@ -10913,6 +10918,9 @@ SYSCALL_DEFINE5(perf_event_open,
+@@ -11170,6 +11175,9 @@ SYSCALL_DEFINE5(perf_event_open,
  	if (flags & ~PERF_FLAG_ALL)
  		return -EINVAL;
  
 +	if (perf_paranoid_any() && !capable(CAP_SYS_ADMIN))
 +		return -EACCES;
 +
- 	err = perf_copy_attr(attr_uptr, &attr);
+ 	/* Do we allow access to perf_event_open(2) ? */
+ 	err = security_perf_event_open(&attr, PERF_SECURITY_OPEN);
  	if (err)
- 		return err;
 diff --git a/security/Kconfig b/security/Kconfig
-index 2a1a2d3..c66f43a 100644
+index 2a1a2d396228..c66f43a36dbe 100644
 --- a/security/Kconfig
 +++ b/security/Kconfig
 @@ -19,6 +19,15 @@ config SECURITY_DMESG_RESTRICT
@@ -85,3 +84,6 @@ index 2a1a2d3..c66f43a 100644
  config SECURITY
  	bool "Enable different security models"
  	depends on SYSFS
+-- 
+2.24.0
+

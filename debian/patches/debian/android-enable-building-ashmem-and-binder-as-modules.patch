@@ -1,7 +1,6 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Fri, 22 Jun 2018 17:27:00 +0100
 Subject: android: Enable building ashmem and binder as modules
-
 Bug-Debian: https://bugs.debian.org/901492
 
 We want to enable use of the Android ashmem and binder drivers to
@@ -22,8 +21,6 @@ need them.
  drivers/staging/android/ashmem.c | 3 +++
  6 files changed, 12 insertions(+), 7 deletions(-)
 
-diff --git a/drivers/android/Kconfig b/drivers/android/Kconfig
-index 6fdf2ab..329ec99 100644
 --- a/drivers/android/Kconfig
 +++ b/drivers/android/Kconfig
 @@ -9,7 +9,7 @@ config ANDROID
@@ -35,8 +32,6 @@ index 6fdf2ab..329ec99 100644
  	depends on MMU
  	default n
  	---help---
-diff --git a/drivers/android/Makefile b/drivers/android/Makefile
-index c9d3d0c9..55411d9 100644
 --- a/drivers/android/Makefile
 +++ b/drivers/android/Makefile
 @@ -1,6 +1,7 @@
@@ -50,8 +45,6 @@ index c9d3d0c9..55411d9 100644
 +binder_linux-y := binder.o binder_alloc.o
 +binder_linux-$(CONFIG_ANDROID_BINDERFS)	+= binderfs.o
 +binder_linux-$(CONFIG_ANDROID_BINDER_IPC_SELFTEST) += binder_alloc_selftest.o
-diff --git a/drivers/android/binder_alloc.c b/drivers/android/binder_alloc.c
-index 7067d55..247da8d 100644
 --- a/drivers/android/binder_alloc.c
 +++ b/drivers/android/binder_alloc.c
 @@ -38,7 +38,7 @@ enum {
@@ -63,8 +56,6 @@ index 7067d55..247da8d 100644
  		   uint, 0644);
  
  #define binder_alloc_debug(mask, x...) \
-diff --git a/drivers/staging/android/Kconfig b/drivers/staging/android/Kconfig
-index d6d605d..afe9085 100644
 --- a/drivers/staging/android/Kconfig
 +++ b/drivers/staging/android/Kconfig
 @@ -4,7 +4,7 @@ menu "Android"
@@ -76,20 +67,15 @@ index d6d605d..afe9085 100644
  	depends on SHMEM
  	help
  	  The ashmem subsystem is a new shared memory allocator, similar to
-diff --git a/drivers/staging/android/Makefile b/drivers/staging/android/Makefile
-index 14bd9c6..c202aa4 100644
 --- a/drivers/staging/android/Makefile
 +++ b/drivers/staging/android/Makefile
-@@ -3,5 +3,6 @@ ccflags-y += -I$(src)			# needed for trace events
+@@ -3,4 +3,5 @@ ccflags-y += -I$(src)			# needed for tra
  
  obj-y					+= ion/
  
 -obj-$(CONFIG_ASHMEM)			+= ashmem.o
 +obj-$(CONFIG_ASHMEM)			+= ashmem_linux.o
 +ashmem_linux-y				+= ashmem.o
- obj-$(CONFIG_ANDROID_VSOC)		+= vsoc.o
-diff --git a/drivers/staging/android/ashmem.c b/drivers/staging/android/ashmem.c
-index c669535..da70482 100644
 --- a/drivers/staging/android/ashmem.c
 +++ b/drivers/staging/android/ashmem.c
 @@ -24,6 +24,7 @@
@@ -100,7 +86,7 @@ index c669535..da70482 100644
  #include "ashmem.h"
  
  #define ASHMEM_NAME_PREFIX "dev/ashmem/"
-@@ -953,3 +954,5 @@ static int __init ashmem_init(void)
+@@ -953,3 +954,5 @@ out:
  	return ret;
  }
  device_initcall(ashmem_init);

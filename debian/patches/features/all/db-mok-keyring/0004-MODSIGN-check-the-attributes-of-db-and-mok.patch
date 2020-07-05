@@ -1,7 +1,6 @@
 From: "Lee, Chun-Yi" <joeyli.kernel@gmail.com>
 Date: Tue, 13 Mar 2018 18:38:03 +0800
 Subject: [PATCH 4/4] MODSIGN: check the attributes of db and mok
-
 Origin: https://lore.kernel.org/patchwork/patch/933176/
 
 That's better for checking the attributes of db and mok variables
@@ -22,18 +21,16 @@ Cc: Josh Boyer <jwboyer@fedoraproject.org>
 Cc: James Bottomley <James.Bottomley@HansenPartnership.com>
 Signed-off-by: "Lee, Chun-Yi" <jlee@suse.com>
 [Rebased by Luca Boccassi]
-[bwh: Forward-ported to 5.0: adjust filename, context]
-[martyn.welch@collabora.com: Adjusted for 5.4.35]
-Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+[bwh: Forward-ported to 5.5.9:
+ - get_cert_list() takes a pointer to status and returns the cert list
+ - Adjust filename, context]
 ---
- security/integrity/platform_certs/load_uefi.c | 25 +++++++++++++++++++------
- 1 file changed, 19 insertions(+), 6 deletions(-)
+ .../platform_certs/load_uefi.c | 35 +++++++++++++++++++++++------------
+ 1 file changed, 23 insertions(+), 12 deletions(-)
 
-diff --git a/security/integrity/platform_certs/load_uefi.c b/security/integrity/platform_certs/load_uefi.c
-index a81aeb6..59a7165 100644
 --- a/security/integrity/platform_certs/load_uefi.c
 +++ b/security/integrity/platform_certs/load_uefi.c
-@@ -39,11 +39,13 @@ static __init bool uefi_check_ignore_db(void)
+@@ -35,11 +35,13 @@ static __init bool uefi_check_ignore_db(
   * Get a certificate list blob from the named EFI variable.
   */
  static __init void *get_cert_list(efi_char16_t *name, efi_guid_t *guid,
@@ -48,7 +45,7 @@ index a81aeb6..59a7165 100644
  
  	*status = efi.get_variable(name, guid, NULL, &lsize, &tmpdb);
  	if (*status == EFI_NOT_FOUND)
-@@ -58,12 +60,19 @@ static __init void *get_cert_list(efi_char16_t *name, efi_guid_t *guid,
+@@ -54,12 +56,20 @@ static __init void *get_cert_list(efi_ch
  	if (!db)
  		return NULL;
  
@@ -64,12 +61,13 @@ index a81aeb6..59a7165 100644
 +	    (neg_attr && (attr & neg_attr))) {
 +		kfree(db);
 +		pr_err("Error reading db var attributes: 0x%016x\n", attr);
-+		return -1;
++		*status = EFI_SECURITY_VIOLATION;
++		return NULL;
 +	}
  
  	*size = lsize;
  	return db;
-@@ -156,7 +165,8 @@ static int __init load_uefi_certs(void)
+@@ -86,7 +96,8 @@ static int __init load_uefi_certs(void)
  	 * an error if we can't get them.
  	 */
  	if (!uefi_check_ignore_db()) {
@@ -79,7 +77,7 @@ index a81aeb6..59a7165 100644
  		if (!db) {
  			if (status == EFI_NOT_FOUND)
  				pr_debug("MODSIGN: db variable wasn't found\n");
-@@ -172,7 +182,8 @@ static int __init load_uefi_certs(void)
+@@ -102,7 +113,8 @@ static int __init load_uefi_certs(void)
  		}
  	}
  
@@ -89,23 +87,23 @@ index a81aeb6..59a7165 100644
  	if (!dbx) {
  		if (status == EFI_NOT_FOUND)
  			pr_debug("dbx variable wasn't found\n");
-@@ -191,7 +202,8 @@ static int __init load_uefi_certs(void)
+@@ -121,7 +133,8 @@ static int __init load_uefi_certs(void)
  	if (!efi_enabled(EFI_SECURE_BOOT))
  		return 0;
  
 -	mok = get_cert_list(L"MokListRT", &mok_var, &moksize, &status);
-+	mok = get_cert_list(L"MokListRT", &mok_var, &moksize, &status, 0,
-+			    EFI_VARIABLE_NON_VOLATILE);
++	mok = get_cert_list(L"MokListRT", &mok_var, &moksize, &status,
++				0, EFI_VARIABLE_NON_VOLATILE);
  	if (!mok) {
  		if (status == EFI_NOT_FOUND)
  			pr_debug("MokListRT variable wasn't found\n");
-@@ -205,7 +217,8 @@ static int __init load_uefi_certs(void)
+@@ -135,7 +148,8 @@ static int __init load_uefi_certs(void)
  		kfree(mok);
  	}
  
 -	mokx = get_cert_list(L"MokListXRT", &mok_var, &mokxsize, &status);
-+	mokx = get_cert_list(L"MokListXRT", &mok_var, &mokxsize, &status, 0,
-+			     EFI_VARIABLE_NON_VOLATILE);
++	mokx = get_cert_list(L"MokListXRT", &mok_var, &mokxsize, &status,
++				0, EFI_VARIABLE_NON_VOLATILE);
  	if (!mokx) {
  		if (status == EFI_NOT_FOUND)
  			pr_debug("MokListXRT variable wasn't found\n");

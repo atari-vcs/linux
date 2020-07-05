@@ -702,6 +702,12 @@ static const struct of_device_id cpg_mssr_match[] = {
 		.data = &r8a774a1_cpg_mssr_info,
 	},
 #endif
+#ifdef CONFIG_CLK_R8A774B1
+	{
+		.compatible = "renesas,r8a774b1-cpg-mssr",
+		.data = &r8a774b1_cpg_mssr_info,
+	},
+#endif
 #ifdef CONFIG_CLK_R8A774C0
 	{
 		.compatible = "renesas,r8a774c0-cpg-mssr",
@@ -743,9 +749,15 @@ static const struct of_device_id cpg_mssr_match[] = {
 		.data = &r8a7795_cpg_mssr_info,
 	},
 #endif
-#ifdef CONFIG_CLK_R8A7796
+#ifdef CONFIG_CLK_R8A77960
 	{
 		.compatible = "renesas,r8a7796-cpg-mssr",
+		.data = &r8a7796_cpg_mssr_info,
+	},
+#endif
+#ifdef CONFIG_CLK_R8A77961
+	{
+		.compatible = "renesas,r8a77961-cpg-mssr",
 		.data = &r8a7796_cpg_mssr_info,
 	},
 #endif
@@ -800,7 +812,8 @@ static int cpg_mssr_suspend_noirq(struct device *dev)
 	/* Save module registers with bits under our control */
 	for (reg = 0; reg < ARRAY_SIZE(priv->smstpcr_saved); reg++) {
 		if (priv->smstpcr_saved[reg].mask)
-			priv->smstpcr_saved[reg].val =
+			priv->smstpcr_saved[reg].val = priv->stbyctrl ?
+				readb(priv->base + STBCR(reg)) :
 				readl(priv->base + SMSTPCR(reg));
 	}
 
@@ -860,8 +873,9 @@ static int cpg_mssr_resume_noirq(struct device *dev)
 		}
 
 		if (!i)
-			dev_warn(dev, "Failed to enable SMSTP %p[0x%x]\n",
-				 priv->base + SMSTPCR(reg), oldval & mask);
+			dev_warn(dev, "Failed to enable %s%u[0x%x]\n",
+				 priv->stbyctrl ? "STB" : "SMSTP", reg,
+				 oldval & mask);
 	}
 
 	return 0;

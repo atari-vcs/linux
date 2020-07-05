@@ -1,7 +1,6 @@
 From: "Lee, Chun-Yi" <joeyli.kernel@gmail.com>
 Date: Tue, 13 Mar 2018 18:38:01 +0800
 Subject: [PATCH 2/4] MODSIGN: load blacklist from MOKx
-
 Origin: https://lore.kernel.org/patchwork/patch/933177/
 
 This patch adds the logic to load the blacklisted hash and
@@ -12,18 +11,16 @@ Cc: Josh Boyer <jwboyer@fedoraproject.org>
 Cc: James Bottomley <James.Bottomley@HansenPartnership.com>
 Signed-off-by: "Lee, Chun-Yi" <jlee@suse.com>
 [Rebased by Luca Boccassi]
-[bwh: Forward-ported to 5.0: adjust filename]
-[martyn.welch@collabora.com: Adjusted for 5.4.35]
-Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+[bwh: Forward-ported to 5.5.9:
+ - get_cert_list() takes a pointer to status and returns the cert list
+ - Adjust filename]
 ---
- security/integrity/platform_certs/load_uefi.c | 21 ++++++++++++++++++---
- 1 file changed, 18 insertions(+), 3 deletions(-)
+ security/integrity/platform_certs/load_uefi.c | 16 +++++++++++++---
+ 1 file changed, 13 insertions(+), 3 deletions(-)
 
-diff --git a/security/integrity/platform_certs/load_uefi.c b/security/integrity/platform_certs/load_uefi.c
-index 94f4455..a81aeb6 100644
 --- a/security/integrity/platform_certs/load_uefi.c
 +++ b/security/integrity/platform_certs/load_uefi.c
-@@ -144,8 +144,8 @@ static int __init load_uefi_certs(void)
+@@ -74,8 +74,8 @@ static int __init load_uefi_certs(void)
  {
  	efi_guid_t secure_var = EFI_IMAGE_SECURITY_DATABASE_GUID;
  	efi_guid_t mok_var = EFI_SHIM_LOCK_GUID;
@@ -34,7 +31,7 @@ index 94f4455..a81aeb6 100644
  	efi_status_t status;
  	int rc = 0;
  
-@@ -187,7 +187,7 @@ static int __init load_uefi_certs(void)
+@@ -117,7 +117,7 @@ static int __init load_uefi_certs(void)
  		kfree(dbx);
  	}
  
@@ -43,7 +40,7 @@ index 94f4455..a81aeb6 100644
  	if (!efi_enabled(EFI_SECURE_BOOT))
  		return 0;
  
-@@ -205,6 +205,21 @@ static int __init load_uefi_certs(void)
+@@ -135,6 +135,21 @@ static int __init load_uefi_certs(void)
  		kfree(mok);
  	}
  
@@ -52,7 +49,7 @@ index 94f4455..a81aeb6 100644
 +		if (status == EFI_NOT_FOUND)
 +			pr_debug("MokListXRT variable wasn't found\n");
 +		else
-+			pr_info("MODSIGN: Couldn't get UEFI MokListXRT\n");
++			pr_info("Couldn't get UEFI MokListXRT\n");
 +	} else {
 +		rc = parse_efi_signature_list("UEFI:mokx",
 +					      mokx, mokxsize,

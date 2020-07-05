@@ -1448,13 +1448,13 @@ static struct clk_hw *bcm2835_register_clock(struct bcm2835_cprman *cprman,
 	return &clock->hw;
 }
 
-static struct clk *bcm2835_register_gate(struct bcm2835_cprman *cprman,
+static struct clk_hw *bcm2835_register_gate(struct bcm2835_cprman *cprman,
 					 const struct bcm2835_gate_data *data)
 {
-	return clk_register_gate(cprman->dev, data->name, data->parent,
-				 CLK_IGNORE_UNUSED | CLK_SET_RATE_GATE,
-				 cprman->regs + data->ctl_reg,
-				 CM_GATE_BIT, 0, &cprman->regs_lock);
+	return clk_hw_register_gate(cprman->dev, data->name, data->parent,
+				    CLK_IGNORE_UNUSED | CLK_SET_RATE_GATE,
+				    cprman->regs + data->ctl_reg,
+				    CM_GATE_BIT, 0, &cprman->regs_lock);
 }
 
 typedef struct clk_hw *(*bcm2835_clk_register)(struct bcm2835_cprman *cprman,
@@ -2192,7 +2192,6 @@ static int bcm2835_clk_probe(struct platform_device *pdev)
 	struct device *dev = &pdev->dev;
 	struct clk_hw **hws;
 	struct bcm2835_cprman *cprman;
-	struct resource *res;
 	const struct bcm2835_clk_desc *desc;
 	const size_t asize = ARRAY_SIZE(clk_desc_array);
 	const struct cprman_plat_data *pdata;
@@ -2211,8 +2210,7 @@ static int bcm2835_clk_probe(struct platform_device *pdev)
 
 	spin_lock_init(&cprman->regs_lock);
 	cprman->dev = dev;
-	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
-	cprman->regs = devm_ioremap_resource(dev, res);
+	cprman->regs = devm_platform_ioremap_resource(pdev, 0);
 	if (IS_ERR(cprman->regs))
 		return PTR_ERR(cprman->regs);
 

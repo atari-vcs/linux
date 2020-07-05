@@ -36,18 +36,16 @@ enum hl_device_status hl_device_status(struct hl_device *hdev)
 		status = HL_DEVICE_STATUS_OPERATIONAL;
 
 	return status;
-};
+}
 
 static void hpriv_release(struct kref *ref)
 {
 	struct hl_fpriv *hpriv;
 	struct hl_device *hdev;
-	struct hl_ctx *ctx;
 
 	hpriv = container_of(ref, struct hl_fpriv, refcount);
 
 	hdev = hpriv->hdev;
-	ctx = hpriv->ctx;
 
 	put_pid(hpriv->taskpid);
 
@@ -720,7 +718,7 @@ disable_device:
 	return rc;
 }
 
-static void device_kill_open_processes(struct hl_device *hdev)
+static int device_kill_open_processes(struct hl_device *hdev)
 {
 	u16 pending_total, pending_cnt;
 	struct hl_fpriv	*hpriv;
@@ -773,9 +771,7 @@ static void device_kill_open_processes(struct hl_device *hdev)
 		ssleep(1);
 	}
 
-	if (!list_empty(&hdev->fpriv_list))
-		dev_crit(hdev->dev,
-			"Going to hard reset with open user contexts\n");
+	return list_empty(&hdev->fpriv_list) ? 0 : -EBUSY;
 }
 
 static void device_hard_reset_pending(struct work_struct *work)
@@ -891,12 +887,23 @@ again:
 	/* Go over all the queues, release all CS and their jobs */
 	hl_cs_rollback_all(hdev);
 
-	/* Kill processes here after CS rollback. This is because the process
-	 * can't really exit until all its CSs are done, which is what we
-	 * do in cs rollback
-	 */
-	if (from_hard_reset_thread)
-		device_kill_open_processes(hdev);
+	if (hard_reset) {
+		/* Kill processes here after CS rollback. This is because the
+		 * process can't really exit until all its CSs are done, which
+		 * is what we do in cs rollback
+		 */
+		rc = device_kill_open_processes(hdev);
+		if (rc) {
+			dev_crit(hdev->dev,
+				"Failed to kill all open processes, stopping hard reset\n");
+			goto out_err;
+		}
+
+		/* Flush the Event queue workers to make sure no other thread is
+		 * reading or writing to registers during the reset
+		 */
+		flush_workqueue(hdev->eq_wq);
+	}
 
 	/* Release kernel context */
 	if ((hard_reset) && (hl_ctx_put(hdev->kernel_ctx) == 1))
@@ -1371,7 +1378,9 @@ void hl_device_fini(struct hl_device *hdev)
 	 * can't really exit until all its CSs are done, which is what we
 	 * do in cs rollback
 	 */
-	device_kill_open_processes(hdev);
+	rc = device_kill_open_processes(hdev);
+	if (rc)
+		dev_crit(hdev->dev, "Failed to kill all open processes\n");
 
 	hl_cb_pool_fini(hdev);
 

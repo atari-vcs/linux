@@ -1,7 +1,6 @@
 From: "Lee, Chun-Yi" <joeyli.kernel@gmail.com>
 Date: Tue, 13 Mar 2018 18:37:59 +0800
 Subject: [PATCH 1/5] MODSIGN: do not load mok when secure boot disabled
-
 Origin: https://lore.kernel.org/patchwork/patch/933173/
 
 The mok can not be trusted when the secure boot is disabled. Which
@@ -15,18 +14,16 @@ Cc: Josh Boyer <jwboyer@fedoraproject.org>
 Cc: James Bottomley <James.Bottomley@HansenPartnership.com>
 Signed-off-by: "Lee, Chun-Yi" <jlee@suse.com>
 [Rebased by Luca Boccassi]
-[bwh: Forward-ported to 5.0: adjust filename]
-[martyn.welch@collabora.com: Adjusted for 5.4.35]
-Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+[bwh: Forward-ported to 5.5.9:
+ - get_cert_list() takes a pointer to status and returns the cert list
+ - Adjust filename]
 ---
- security/integrity/platform_certs/load_uefi.c | 32 +++++++++++++++------------
- 1 file changed, 18 insertions(+), 14 deletions(-)
+ security/integrity/platform_certs/load_uefi.c | 26 +++++++++++++++-----------
+ 1 file changed, 15 insertions(+), 11 deletions(-)
 
-diff --git a/security/integrity/platform_certs/load_uefi.c b/security/integrity/platform_certs/load_uefi.c
-index 020fc7a..94f4455 100644
 --- a/security/integrity/platform_certs/load_uefi.c
 +++ b/security/integrity/platform_certs/load_uefi.c
-@@ -172,20 +172,6 @@ static int __init load_uefi_certs(void)
+@@ -102,20 +102,6 @@ static int __init load_uefi_certs(void)
  		}
  	}
  
@@ -47,7 +44,7 @@ index 020fc7a..94f4455 100644
  	dbx = get_cert_list(L"dbx", &secure_var, &dbxsize, &status);
  	if (!dbx) {
  		if (status == EFI_NOT_FOUND)
-@@ -201,6 +187,24 @@ static int __init load_uefi_certs(void)
+@@ -131,6 +117,24 @@ static int __init load_uefi_certs(void)
  		kfree(dbx);
  	}
  

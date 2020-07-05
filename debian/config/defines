@@ -2,7 +2,7 @@
 installer: false
 
 [abi]
-abiname: 4
+abiname: 1
 ignore-changes:
  __cpuhp_*
  bpf_analyzer
@@ -153,6 +153,7 @@ part-long-up: This kernel is not suitable for SMP (multi-processor,
 
 [image]
 initramfs-generators: initramfs-tools initramfs-fallback
+breaks: wireless-regdb (<< 2019.06.03-1~)
 recommends: apparmor
 
 [relations]
