@@ -175,3 +175,6 @@ atari/controller/hid-microsoft-xbox-Correct-range-of-ABS_RY.patch
 atari/controller/Request-info-report-straight-away.patch
 atari/controller/atari-hid-Return-EAGAIN-if-there-is-no-valid-info-yet.patch
 atari/controller/atari-Don-t-use-mutex-in-interrupt-context.patch
+atari/bugfix/drm-amd-display-Stop-if-retimer-is-not-available.patch
+atari/bugfix/usb-xhci-apply-suspend-quirks-to-AMD-XHCI-controller.patch
+atari/bugfix/usb-xhci-workaround-css-timeout-setting-hce-amd.patch
