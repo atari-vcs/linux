@@ -1,12 +1,18 @@
-From: Frederik Schüler <fs@debian.org>
-Date: Fri, 05 Jan 2007 15:55:24 +0000
+From: =?utf-8?q?Frederik_Sch=C3=BCler?= <fs@debian.org>
+Date: Fri, 5 Jan 2007 15:55:24 +0000
 Subject: Add removal patches for: 3c359, smctr, keyspan, cops
-Forwarded: not-needed
 
-diff -ruN a/drivers/net/appletalk/Kconfig b/drivers/net/appletalk/Kconfig
---- a/drivers/net/appletalk/Kconfig	2006-11-29 21:57:37.000000000 +0000
-+++ b/drivers/net/appletalk/Kconfig	2007-01-05 15:34:44.000000000 +0000
-@@ -49,32 +49,6 @@
+Forwarded: not-needed
+---
+ drivers/net/appletalk/Kconfig  | 26 --------------------------
+ drivers/net/appletalk/Makefile |  1 -
+ 2 files changed, 27 deletions(-)
+
+diff --git a/drivers/net/appletalk/Kconfig b/drivers/net/appletalk/Kconfig
+index af509b0..0d2a7da 100644
+--- a/drivers/net/appletalk/Kconfig
++++ b/drivers/net/appletalk/Kconfig
+@@ -50,32 +50,6 @@ config LTPC
  	  This driver is experimental, which means that it may not work.
  	  See the file <file:Documentation/networking/ltpc.txt>.
  
@@ -39,10 +45,11 @@ diff -ruN a/drivers/net/appletalk/Kconfig b/drivers/net/appletalk/Kconfig
  config IPDDP
  	tristate "Appletalk-IP driver support"
  	depends on DEV_APPLETALK && ATALK
-diff -ruN a/drivers/net/appletalk/Makefile b/drivers/net/appletalk/Makefile
---- a/drivers/net/appletalk/Makefile	2006-11-29 21:57:37.000000000 +0000
-+++ b/drivers/net/appletalk/Makefile	2007-01-05 15:34:11.000000000 +0000
-@@ -3,5 +3,4 @@
+diff --git a/drivers/net/appletalk/Makefile b/drivers/net/appletalk/Makefile
+index 903da33..7482020 100644
+--- a/drivers/net/appletalk/Makefile
++++ b/drivers/net/appletalk/Makefile
+@@ -4,5 +4,4 @@
  #
  
  obj-$(CONFIG_IPDDP) += ipddp.o

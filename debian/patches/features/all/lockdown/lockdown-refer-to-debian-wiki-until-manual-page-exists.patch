@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Sun, 21 Apr 2019 00:17:13 +0100
 Subject: lockdown: Refer to Debian wiki until manual page exists
+
 Forwarded: not-needed
 
 The lockdown denial log message currently refers to a
@@ -8,11 +9,15 @@ The lockdown denial log message currently refers to a
 That manual page hasn't been accepted by the man-pages project and
 doesn't even seem to have been submitted yet.  For now, refer to the
 Debian wiki.
-
 ---
+ security/lockdown/lockdown.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/security/lockdown/lockdown.c b/security/lockdown/lockdown.c
+index 2409f06..886a235 100644
 --- a/security/lockdown/lockdown.c
 +++ b/security/lockdown/lockdown.c
-@@ -53,7 +53,7 @@ int lock_kernel_down(const char *where,
+@@ -62,7 +62,7 @@ int lock_kernel_down(const char *where, enum lockdown_reason level)
  		return -EPERM;
  
  	kernel_locked_down = level;
@@ -21,7 +26,7 @@ Debian wiki.
  		  where);
  	return 0;
  }
-@@ -87,7 +87,7 @@ static int lockdown_is_locked_down(enum
+@@ -96,7 +96,7 @@ static int lockdown_is_locked_down(enum lockdown_reason what)
  
  	if (kernel_locked_down >= what) {
  		if (lockdown_reasons[what])

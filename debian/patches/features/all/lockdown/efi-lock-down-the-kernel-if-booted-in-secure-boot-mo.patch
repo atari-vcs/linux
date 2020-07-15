@@ -13,13 +13,15 @@ description:
 
 Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 ---
- arch/x86/kernel/setup.c           |    4 ++--
- drivers/firmware/efi/secureboot.c |    3 +++
- include/linux/security.h          |    6 ++++++
- security/lockdown/Kconfig         |   15 +++++++++++++++
- security/lockdown/lockdown.c      |    2 +-
+ arch/x86/kernel/setup.c           |  4 ++--
+ drivers/firmware/efi/secureboot.c |  3 +++
+ include/linux/security.h          |  6 ++++++
+ security/lockdown/Kconfig         | 15 +++++++++++++++
+ security/lockdown/lockdown.c      |  2 +-
  5 files changed, 27 insertions(+), 3 deletions(-)
 
+diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
+index d10f427..d9dd91c 100644
 --- a/arch/x86/kernel/setup.c
 +++ b/arch/x86/kernel/setup.c
 @@ -1027,6 +1027,8 @@ void __init setup_arch(char **cmdline_p)
@@ -40,6 +42,8 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  	reserve_initrd();
  
  	acpi_table_upgrade();
+diff --git a/drivers/firmware/efi/secureboot.c b/drivers/firmware/efi/secureboot.c
+index bf16cfb6..b56f262 100644
 --- a/drivers/firmware/efi/secureboot.c
 +++ b/drivers/firmware/efi/secureboot.c
 @@ -15,6 +15,7 @@
@@ -50,7 +54,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  
  /*
   * Decide what to do when UEFI secure boot mode is enabled.
-@@ -28,6 +29,8 @@ void __init efi_set_secure_boot(enum efi
+@@ -28,6 +29,8 @@ void __init efi_set_secure_boot(enum efi_secureboot_mode mode)
  			break;
  		case efi_secureboot_mode_enabled:
  			set_bit(EFI_SECURE_BOOT, &efi.flags);
@@ -59,9 +63,11 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  			pr_info("Secure boot enabled\n");
  			break;
  		default:
+diff --git a/include/linux/security.h b/include/linux/security.h
+index fd02276..5f23bf7 100644
 --- a/include/linux/security.h
 +++ b/include/linux/security.h
-@@ -442,6 +442,7 @@ int security_inode_notifysecctx(struct i
+@@ -445,6 +445,7 @@ int security_inode_notifysecctx(struct inode *inode, void *ctx, u32 ctxlen);
  int security_inode_setsecctx(struct dentry *dentry, void *ctx, u32 ctxlen);
  int security_inode_getsecctx(struct inode *inode, void **ctx, u32 *ctxlen);
  int security_locked_down(enum lockdown_reason what);
@@ -69,7 +75,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  #else /* CONFIG_SECURITY */
  
  static inline int call_blocking_lsm_notifier(enum lsm_event event, void *data)
-@@ -1263,6 +1264,11 @@ static inline int security_locked_down(e
+@@ -1272,6 +1273,11 @@ static inline int security_locked_down(enum lockdown_reason what)
  {
  	return 0;
  }
@@ -81,9 +87,11 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  #endif	/* CONFIG_SECURITY */
  
  #ifdef CONFIG_SECURITY_NETWORK
+diff --git a/security/lockdown/Kconfig b/security/lockdown/Kconfig
+index e84ddf4..628a87d 100644
 --- a/security/lockdown/Kconfig
 +++ b/security/lockdown/Kconfig
-@@ -45,3 +45,18 @@ config LOCK_DOWN_KERNEL_FORCE_CONFIDENTI
+@@ -45,3 +45,18 @@ config LOCK_DOWN_KERNEL_FORCE_CONFIDENTIALITY
  	 disabled.
  
  endchoice
@@ -102,9 +110,11 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 +
 +	  Enabling this option results in kernel lockdown being
 +	  triggered in confidentiality mode if EFI Secure Boot is set.
+diff --git a/security/lockdown/lockdown.c b/security/lockdown/lockdown.c
+index 3f38583..c460c87 100644
 --- a/security/lockdown/lockdown.c
 +++ b/security/lockdown/lockdown.c
-@@ -47,7 +47,7 @@ static enum lockdown_reason lockdown_lev
+@@ -50,7 +50,7 @@ static const enum lockdown_reason lockdown_levels[] = {LOCKDOWN_NONE,
  /*
   * Put the kernel into lock-down mode.
   */

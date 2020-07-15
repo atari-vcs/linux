@@ -1,6 +1,8 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Sat, 20 Nov 2010 02:24:55 +0000
-Subject: [PATCH] decnet: Disable auto-loading as mitigation against local exploits
+Subject: [PATCH] decnet: Disable auto-loading as mitigation against local
+ exploits
+
 Forwarded: not-needed
 
 Recent review has revealed several bugs in obscure protocol
@@ -16,12 +18,14 @@ module explicitly.  Therefore disable auto-loading.
 
 Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 ---
- net/decnet/af_decnet.c |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ net/decnet/af_decnet.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/net/decnet/af_decnet.c b/net/decnet/af_decnet.c
+index 3349ea81..f89f852 100644
 --- a/net/decnet/af_decnet.c
 +++ b/net/decnet/af_decnet.c
-@@ -2359,7 +2359,7 @@ static const struct proto_ops dn_proto_o
+@@ -2338,7 +2338,7 @@ static const struct proto_ops dn_proto_ops = {
  MODULE_DESCRIPTION("The Linux DECnet Network Protocol");
  MODULE_AUTHOR("Linux DECnet Project Team");
  MODULE_LICENSE("GPL");

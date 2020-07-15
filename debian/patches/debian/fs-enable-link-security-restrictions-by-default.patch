@@ -1,15 +1,21 @@
 From: Ben Hutchings <ben@decadent.org.uk>
+Date: Fri, 2 Nov 2012 05:32:06 +0000
 Subject: fs: Enable link security restrictions by default
-Date: Fri, 02 Nov 2012 05:32:06 +0000
+
 Bug-Debian: https://bugs.debian.org/609455
 Forwarded: not-needed
 
 This reverts commit 561ec64ae67ef25cac8d72bb9c4bfc955edfd415
 ('VFS: don't do protected {sym,hard}links by default').
+---
+ fs/namei.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
+diff --git a/fs/namei.c b/fs/namei.c
+index 5b5759d..311da29 100644
 --- a/fs/namei.c
 +++ b/fs/namei.c
-@@ -885,8 +885,8 @@ static inline void put_link(struct namei
+@@ -877,8 +877,8 @@ static inline void put_link(struct nameidata *nd)
  		path_put(&last->link);
  }
  

@@ -1,14 +1,21 @@
 From: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Date: Wed, 15 Jul 2020 16:00:08 +0100
 Subject: [sh4] Fix uImage build
+
 Bug-Debian: https://bugs.debian.org/569034
 Forwarded: not-needed
 
 [bwh: This was added without a description, but I think it is done
  only to avoid a build-dependency on u-boot-tools.]
+---
+ arch/sh/Makefile | 1 -
+ 1 file changed, 1 deletion(-)
 
+diff --git a/arch/sh/Makefile b/arch/sh/Makefile
+index b4a86f2..185702f 100644
 --- a/arch/sh/Makefile
 +++ b/arch/sh/Makefile
-@@ -75,7 +75,6 @@
+@@ -89,7 +89,6 @@ OBJCOPYFLAGS	:= -O binary -R .note -R .note.gnu.build-id -R .comment \
  
  # Give the various platforms the opportunity to set default image types
  defaultimage-$(CONFIG_SUPERH32)			:= zImage

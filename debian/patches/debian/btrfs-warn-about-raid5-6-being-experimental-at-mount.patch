@@ -1,6 +1,7 @@
 From: Adam Borowski <kilobyte@angband.pl>
 Date: Tue, 28 Mar 2017 16:55:05 +0200
 Subject: btrfs: warn about RAID5/6 being experimental at mount time
+
 Bug-Debian: https://bugs.debian.org/863290
 Origin: https://bugs.debian.org/863290#5
 
@@ -12,12 +13,14 @@ produce nice red background which should get the point across.
 Signed-off-by: Adam Borowski <kilobyte@angband.pl>
 [bwh: Also add_taint() so this is flagged in bug reports]
 ---
- fs/btrfs/disk-io.c | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ fs/btrfs/disk-io.c | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
+diff --git a/fs/btrfs/disk-io.c b/fs/btrfs/disk-io.c
+index 273d1cc..e0afedd 100644
 --- a/fs/btrfs/disk-io.c
 +++ b/fs/btrfs/disk-io.c
-@@ -3060,6 +3060,15 @@ retry_root_backup:
+@@ -3150,6 +3150,15 @@ int open_ctree(struct super_block *sb,
  		btrfs_set_and_info(fs_info, SSD, "enabling ssd optimizations");
  	}
  

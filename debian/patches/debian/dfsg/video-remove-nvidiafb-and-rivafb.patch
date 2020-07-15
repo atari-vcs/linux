@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Sat, 2 Jun 2012 19:53:38 +0100
 Subject: video: Remove nvidiafb and rivafb
+
 Bug-Debian: https://bugs.debian.org/383481
 Forwarded: no
 
@@ -11,11 +12,16 @@ This is arguably not the preferred form for modification.
 These drivers are also largely redundant with nouveau.  The RIVA 128
 (NV3) is not supported by nouveau but is about 15 years old and
 probably discontinued 10 years ago.
-
 ---
+ drivers/video/fbdev/Kconfig  | 93 --------------------------------------------
+ drivers/video/fbdev/Makefile |  2 -
+ 2 files changed, 95 deletions(-)
+
+diff --git a/drivers/video/fbdev/Kconfig b/drivers/video/fbdev/Kconfig
+index 1e70e83..4d4895b 100644
 --- a/drivers/video/fbdev/Kconfig
 +++ b/drivers/video/fbdev/Kconfig
-@@ -866,99 +866,6 @@ config FB_ATMEL
+@@ -870,99 +870,6 @@ config FB_ATMEL
  	help
  	  This enables support for the AT91 LCD Controller.
  
@@ -115,6 +121,8 @@ probably discontinued 10 years ago.
  config FB_I740
  	tristate "Intel740 support"
  	depends on FB && PCI
+diff --git a/drivers/video/fbdev/Makefile b/drivers/video/fbdev/Makefile
+index aa63527..120863d 100644
 --- a/drivers/video/fbdev/Makefile
 +++ b/drivers/video/fbdev/Makefile
 @@ -21,8 +21,6 @@ obj-$(CONFIG_FB_PM3)		  += pm3fb.o

@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Sat, 18 Mar 2017 20:47:58 +0000
 Subject: fjes: Disable auto-loading
+
 Bug-Debian: https://bugs.debian.org/853976
 Forwarded: no
 
@@ -9,11 +10,15 @@ function to distinguish whether that really corresponds to a supported
 device.  Very few system will need the driver and it wastes memory on
 all the other systems where the same device ID appears, so disable
 auto-loading.
-
 ---
+ drivers/net/fjes/fjes_main.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/net/fjes/fjes_main.c b/drivers/net/fjes/fjes_main.c
+index 91a1059..8572479 100644
 --- a/drivers/net/fjes/fjes_main.c
 +++ b/drivers/net/fjes/fjes_main.c
-@@ -81,7 +81,7 @@ static const struct acpi_device_id fjes_
+@@ -68,7 +68,7 @@ static const struct acpi_device_id fjes_acpi_ids[] = {
  	{ACPI_MOTHERBOARD_RESOURCE_HID, 0},
  	{"", 0},
  };

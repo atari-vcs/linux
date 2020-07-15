@@ -1,5 +1,5 @@
 From: Ben Hutchings <ben@decadent.org.uk>
-Date: Sat, 01 Dec 2018 19:22:50 +0000
+Date: Sat, 1 Dec 2018 19:22:50 +0000
 Subject: libcpupower: Hide private function
 
 cpupower_read_sysfs() (previously known as sysfs_read_file()) is an
@@ -8,9 +8,14 @@ libcpupower is a shared library.  Change its visibility to "hidden".
 
 Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 ---
+ tools/power/cpupower/lib/cpupower.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tools/power/cpupower/lib/cpupower.c b/tools/power/cpupower/lib/cpupower.c
+index 3656e69..e0b5712 100644
 --- a/tools/power/cpupower/lib/cpupower.c
 +++ b/tools/power/cpupower/lib/cpupower.c
-@@ -15,6 +15,7 @@
+@@ -14,6 +14,7 @@
  #include "cpupower.h"
  #include "cpupower_intern.h"
  

@@ -1,11 +1,12 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Fri, 20 Jul 2018 01:30:24 +0100
 Subject: usbip: Fix misuse of strncpy()
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
 Bug-Debian: https://bugs.debian.org/897802
 Forwarded: https://marc.info/?l=linux-usb&m=153213915806258
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
 gcc 8 reports:
 
@@ -30,7 +31,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  2 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/tools/usb/usbip/libsrc/usbip_common.c b/tools/usb/usbip/libsrc/usbip_common.c
-index b8d7d480595a..02aae7cccb2d 100644
+index b8d7d48..02aae7c 100644
 --- a/tools/usb/usbip/libsrc/usbip_common.c
 +++ b/tools/usb/usbip/libsrc/usbip_common.c
 @@ -226,9 +226,9 @@ int read_usb_device(struct udev_device *sdev, struct usbip_usb_device *udev)
@@ -46,10 +47,10 @@ index b8d7d480595a..02aae7cccb2d 100644
  
  	sscanf(name, "%u-%u", &busnum, &devnum);
 diff --git a/tools/usb/usbip/libsrc/usbip_device_driver.c b/tools/usb/usbip/libsrc/usbip_device_driver.c
-index 051d7d3f443b..1487770603a8 100644
+index 927a151..fd3fb32 100644
 --- a/tools/usb/usbip/libsrc/usbip_device_driver.c
 +++ b/tools/usb/usbip/libsrc/usbip_device_driver.c
-@@ -91,7 +91,7 @@ int read_usb_vudc_device(struct udev_device *sdev, struct usbip_usb_device *dev)
+@@ -93,7 +93,7 @@ int read_usb_vudc_device(struct udev_device *sdev, struct usbip_usb_device *dev)
  	copy_descr_attr16(dev, &descr, idProduct);
  	copy_descr_attr16(dev, &descr, bcdDevice);
  
@@ -58,7 +59,7 @@ index 051d7d3f443b..1487770603a8 100644
  	dev->path[SYSFS_PATH_MAX - 1] = '\0';
  
  	dev->speed = USB_SPEED_UNKNOWN;
-@@ -111,7 +111,7 @@ int read_usb_vudc_device(struct udev_device *sdev, struct usbip_usb_device *dev)
+@@ -113,7 +113,7 @@ int read_usb_vudc_device(struct udev_device *sdev, struct usbip_usb_device *dev)
  	dev->busnum = 0;
  
  	name = udev_device_get_sysname(plat);
@@ -67,6 +68,3 @@ index 051d7d3f443b..1487770603a8 100644
  	dev->busid[SYSFS_BUS_ID_SIZE - 1] = '\0';
  	return 0;
  err:
--- 
-2.23.0
-

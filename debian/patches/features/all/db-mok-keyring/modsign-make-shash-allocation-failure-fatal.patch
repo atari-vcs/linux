@@ -1,5 +1,5 @@
 From: Ben Hutchings <ben@decadent.org.uk>
-Date: Sun, 05 May 2019 13:45:06 +0100
+Date: Sun, 5 May 2019 13:45:06 +0100
 Subject: MODSIGN: Make shash allocation failure fatal
 
 mod_is_hash_blacklisted() currently returns 0 (suceess) if
@@ -8,9 +8,14 @@ so unwrap and pass up the error code.
 
 Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 ---
+ kernel/module_signing.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/kernel/module_signing.c b/kernel/module_signing.c
+index 0f041a2..5d800f1 100644
 --- a/kernel/module_signing.c
 +++ b/kernel/module_signing.c
-@@ -51,11 +51,13 @@ static int mod_is_hash_blacklisted(const
+@@ -22,11 +22,13 @@ static int mod_is_hash_blacklisted(const void *mod, size_t verifylen)
  	struct shash_desc *desc;
  	size_t digest_size, desc_size;
  	u8 *digest;

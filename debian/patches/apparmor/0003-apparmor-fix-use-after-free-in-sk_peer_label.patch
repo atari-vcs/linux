@@ -1,4 +1,3 @@
-From 45ff74bd5a009ab8f9648531fa11fce55b9a67fd Mon Sep 17 00:00:00 2001
 From: John Johansen <john.johansen@canonical.com>
 Date: Tue, 26 Jun 2018 20:19:19 -0700
 Subject: [PATCH 3/3] apparmor: fix use after free in sk_peer_label
@@ -10,10 +9,10 @@ Signed-off-by: John Johansen <john.johansen@canonical.com>
  1 file changed, 7 insertions(+), 4 deletions(-)
 
 diff --git a/security/apparmor/lsm.c b/security/apparmor/lsm.c
-index 7a6b1bd8e046..0d2925389947 100644
+index 10a914c..deebb0d 100644
 --- a/security/apparmor/lsm.c
 +++ b/security/apparmor/lsm.c
-@@ -1125,9 +1125,10 @@ static struct aa_label *sk_peer_label(struct sock *sk)
+@@ -1141,9 +1141,10 @@ static struct aa_label *sk_peer_label(struct sock *sk)
  {
  	struct sock *peer_sk;
  	struct aa_sk_ctx *ctx = SK_CTX(sk);
@@ -25,7 +24,7 @@ index 7a6b1bd8e046..0d2925389947 100644
  
  	if (sk->sk_family != PF_UNIX)
  		return ERR_PTR(-ENOPROTOOPT);
-@@ -1135,14 +1136,15 @@ static struct aa_label *sk_peer_label(struct sock *sk)
+@@ -1151,14 +1152,15 @@ static struct aa_label *sk_peer_label(struct sock *sk)
  	/* check for sockpair peering which does not go through
  	 * security_unix_stream_connect
  	 */
@@ -44,7 +43,7 @@ index 7a6b1bd8e046..0d2925389947 100644
  }
  
  /**
-@@ -1186,6 +1188,7 @@ static int apparmor_socket_getpeersec_stream(struct socket *sock,
+@@ -1202,6 +1204,7 @@ static int apparmor_socket_getpeersec_stream(struct socket *sock,
  
  	}
  
@@ -52,6 +51,3 @@ index 7a6b1bd8e046..0d2925389947 100644
  done:
  	end_current_label_crit_section(label);
  
--- 
-2.14.1
-
