@@ -1,4 +1,19 @@
-linux (5.4.51-0~co1) UNRELEASED; urgency=medium
+linux (5.4.51-0~co1) apertis; urgency=medium
+
+  * Added Apertis patches:
+    - Add missing dependency on libcap-dev
+    - Add libcap LDLIBS when building turbostat
+    - Enable NVMEM_IMX_OCOTP
+  * Remaining Apertis specific changes:
+    - Turn off rt build
+    - Refresh the automatically detected licensing information
+    - Add patches to fix failure path in imx-drm
+  * Dropped downstream changes:
+    - tools/lib/api/fs/fs.c: Fix misuse of strncpy()
+    - usbip: network: Fix unaligned member access
+    - libbpf: fix readelf output parsing on powerpc with recent binutils
+    - Make get_cert_list() not complain about cert lists that aren't present.
+
 
  -- Martyn Welch <martyn.welch@collabora.com>  Wed, 15 Jul 2020 14:18:46 +0100
 
