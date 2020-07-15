@@ -192,8 +192,7 @@ struct fsl_dspi {
 	u8					bytes_per_word;
 	const struct fsl_dspi_devtype_data	*devtype_data;
 
-	wait_queue_head_t			waitq;
-	u32					waitflags;
+	struct completion			xfer_done;
 
 	struct fsl_dspi_dma			*dma;
 };
@@ -703,10 +702,8 @@ static irqreturn_t dspi_interrupt(int irq, void *dev_id)
 	if (!(spi_sr & (SPI_SR_EOQF | SPI_SR_TCFQF)))
 		return IRQ_NONE;
 
-	if (dspi_rxtx(dspi) == 0) {
-		dspi->waitflags = 1;
-		wake_up_interruptible(&dspi->waitq);
-	}
+	if (dspi_rxtx(dspi) == 0)
+		complete(&dspi->xfer_done);
 
 	return IRQ_HANDLED;
 }
@@ -800,13 +797,9 @@ static int dspi_transfer_one_message(struct spi_controller *ctlr,
 				status = dspi_poll(dspi);
 			} while (status == -EINPROGRESS);
 		} else if (trans_mode != DSPI_DMA_MODE) {
-			status = wait_event_interruptible(dspi->waitq,
-							  dspi->waitflags);
-			dspi->waitflags = 0;
+			wait_for_completion(&dspi->xfer_done);
+			reinit_completion(&dspi->xfer_done);
 		}
-		if (status)
-			dev_err(&dspi->pdev->dev,
-				"Waiting for transfer to complete failed!\n");
 
 		if (transfer->delay_usecs)
 			udelay(transfer->delay_usecs);
@@ -908,6 +901,8 @@ static int dspi_suspend(struct device *dev)
 	struct spi_controller *ctlr = dev_get_drvdata(dev);
 	struct fsl_dspi *dspi = spi_controller_get_devdata(ctlr);
 
+	if (dspi->irq)
+		disable_irq(dspi->irq);
 	spi_controller_suspend(ctlr);
 	clk_disable_unprepare(dspi->clk);
 
@@ -928,6 +923,8 @@ static int dspi_resume(struct device *dev)
 	if (ret)
 		return ret;
 	spi_controller_resume(ctlr);
+	if (dspi->irq)
+		enable_irq(dspi->irq);
 
 	return 0;
 }
@@ -1115,21 +1112,21 @@ static int dspi_probe(struct platform_device *pdev)
 		goto poll_mode;
 	}
 
-	ret = devm_request_irq(&pdev->dev, dspi->irq, dspi_interrupt,
-			       IRQF_SHARED, pdev->name, dspi);
+	ret = request_threaded_irq(dspi->irq, dspi_interrupt, NULL,
+				   IRQF_SHARED, pdev->name, dspi);
 	if (ret < 0) {
 		dev_err(&pdev->dev, "Unable to attach DSPI interrupt\n");
 		goto out_clk_put;
 	}
 
-	init_waitqueue_head(&dspi->waitq);
+	init_completion(&dspi->xfer_done);
 
 poll_mode:
 	if (dspi->devtype_data->trans_mode == DSPI_DMA_MODE) {
 		ret = dspi_request_dma(dspi, res->start);
 		if (ret < 0) {
 			dev_err(&pdev->dev, "can't get dma channels\n");
-			goto out_clk_put;
+			goto out_free_irq;
 		}
 	}
 
@@ -1141,11 +1138,14 @@ poll_mode:
 	ret = spi_register_controller(ctlr);
 	if (ret != 0) {
 		dev_err(&pdev->dev, "Problem registering DSPI ctlr\n");
-		goto out_clk_put;
+		goto out_free_irq;
 	}
 
 	return ret;
 
+out_free_irq:
+	if (dspi->irq)
+		free_irq(dspi->irq, dspi);
 out_clk_put:
 	clk_disable_unprepare(dspi->clk);
 out_ctlr_put:
@@ -1161,6 +1161,8 @@ static int dspi_remove(struct platform_device *pdev)
 
 	/* Disconnect from the SPI framework */
 	dspi_release_dma(dspi);
+	if (dspi->irq)
+		free_irq(dspi->irq, dspi);
 	clk_disable_unprepare(dspi->clk);
 	spi_unregister_controller(dspi->ctlr);
 
