@@ -1,3 +1,9 @@
+linux (5.7.6-1co2) apertis; urgency=medium
+
+  * renesas: use new config symbols for Rcar G3 boards
+
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Thu, 23 Jul 2020 10:44:53 +0300
+
 linux (5.7.6-1co1) apertis; urgency=medium
 
   * Refresh Apertis patches for 5.7.6
