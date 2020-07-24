@@ -101,9 +101,10 @@ bugfix/all/kbuild-include-addtree-remove-quotes-before-matching-path.patch
 debian/revert-objtool-fix-config_stack_validation-y-warning.patch
 bugfix/all/mt76-use-the-correct-hweight8-function.patch
 bugfix/all/rtc-s35390a-set-uie_unsupported.patch
-bugfix/all/nfsd-apply-umask-on-fs-without-ACL-support.patch
+bugfix/all/Revert-ath9k-Fix-general-protection-fault-in-ath9k_h.patch
 
 # Miscellaneous features
+features/all/e1000e-Add-support-for-Comet-Lake.patch
 
 # Lockdown (formerly 'securelevel') patchset
 features/all/lockdown/0001-Add-the-ability-to-lock-down-access-to-the-running-k.patch
@@ -133,6 +134,7 @@ features/all/lockdown/0026-Lock-down-kprobes.patch
 features/all/lockdown/0027-bpf-Restrict-kernel-image-access-functions-when-the-.patch
 features/all/lockdown/0028-efi-Add-an-EFI_SECURE_BOOT-flag-to-indicate-secure-b.patch
 features/all/lockdown/0029-efi-Lock-down-the-kernel-if-booted-in-secure-boot-mo.patch
+features/all/lockdown/0032-efi-Restrict-efivar_ssdt_load-when-the-kernel-is-loc.patch
 # some missing pieces
 features/all/lockdown/enable-cold-boot-attack-mitigation.patch
 features/all/lockdown/mtd-disable-slram-and-phram-when-locked-down.patch
@@ -296,6 +298,5 @@ features/arm/staging-vc04_services-Use-correct-cache-line-size.patch
 # Security fixes
 debian/i386-686-pae-pci-set-pci-nobios-by-default.patch
 debian/ntfs-mark-it-as-broken.patch
-bugfix/all/usb-usbtest-fix-missing-kfree-dev-buf-in-usbtest_dis.patch
 
 # ABI maintenance
