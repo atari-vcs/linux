@@ -571,7 +571,7 @@ Copyright: SYSFS Interface:
 License: GPL-2
 
 Files: Documentation/powerpc/hvcs.rst
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: Documentation/powerpc/mpc52xx.rst
@@ -16215,7 +16215,7 @@ Files: arch/powerpc/boot/cuboot-acadia.c
  arch/powerpc/boot/cuboot-bamboo.c
  arch/powerpc/boot/cuboot-yosemite.c
  arch/powerpc/boot/holly.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/boot/cuboot-ebony.c
@@ -16470,7 +16470,7 @@ Copyright: 2007-2009, The GameCube Linux Team
 License: GPL-2
 
 Files: arch/powerpc/boot/dts/holly.dts
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/boot/dts/hotfoot.dts
@@ -16904,7 +16904,7 @@ Files: arch/powerpc/include/asm/drmem.h
  arch/powerpc/include/asm/mce.h
  arch/powerpc/include/asm/mem_encrypt.h
  arch/powerpc/include/asm/mm-arch-hooks.h
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/include/asm/edac.h
@@ -17345,7 +17345,7 @@ Files: arch/powerpc/kernel/cacheinfo.c
  arch/powerpc/kernel/note.S
  arch/powerpc/kernel/prom_init_check.sh
  arch/powerpc/kernel/systbl_chk.sh
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/kernel/cpu_setup_44x.S
@@ -17833,7 +17833,7 @@ Copyright: 2011, Paul Mackerras, IBM Corp. <paulus@au1.ibm.com>
 License: GPL-2
 
 Files: arch/powerpc/kvm/book3s_hv_hmi.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/kvm/book3s_hv_interrupts.S
@@ -18021,7 +18021,7 @@ Copyright: IBM Corp. 2016
 License: GPL-2
 
 Files: arch/powerpc/lib/test_emulate_step_exec_instr.S
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/lib/xor_vmx_glue.c
@@ -18136,7 +18136,7 @@ Copyright: 2001, Dan Malek (dmalek@jlc.net)
 License: GPL-2
 
 Files: arch/powerpc/mm/drmem.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/mm/fault.c
@@ -18356,7 +18356,7 @@ Copyright: 2007, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/platforms/40x/ppc40x_simple.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/platforms/40x/virtex.c
@@ -18395,7 +18395,7 @@ Copyright: 2007, David Gibson <dwg@au1.ibm.com>, IBM Corporation.
 License: GPL-2
 
 Files: arch/powerpc/platforms/44x/ppc44x_simple.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/platforms/44x/ppc476.c
@@ -18876,7 +18876,7 @@ Copyright: 2007-2009, Albert Herranz
 License: GPL-2
 
 Files: arch/powerpc/platforms/embedded6xx/holly.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/platforms/embedded6xx/linkstation.c
@@ -19024,7 +19024,7 @@ License: GPL-2
 
 Files: arch/powerpc/platforms/powernv/opal-hmi.c
  arch/powerpc/platforms/powernv/opal-memory-errors.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/platforms/powernv/opal-imc.c
@@ -19106,7 +19106,7 @@ License: GPL-2
 Files: arch/powerpc/platforms/pseries/cmm.c
  arch/powerpc/platforms/pseries/pseries_energy.c
  arch/powerpc/platforms/pseries/svm.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/platforms/pseries/dlpar.c
@@ -19434,7 +19434,7 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: arch/powerpc/tools/relocs_check.sh
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/powerpc/xmon/*
@@ -20542,7 +20542,7 @@ Copyright: IBM Corp. 2007, 2016, 2018
 License: GPL-2
 
 Files: arch/s390/mm/hugetlbpage.c
-Copyright: IBM Corp. 2007,2016
+Copyright: IBM Corp. 2007,2020
 License: GPL-2
 
 Files: arch/s390/mm/maccess.c
@@ -24501,7 +24501,7 @@ Copyright: 2009, IBM Corporation
 License: GPL-2
 
 Files: arch/x86/kernel/ima_arch.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: arch/x86/kernel/irq_32.c
@@ -27471,7 +27471,7 @@ Copyright: 2004-2010, Sage Weil <sage@newdream.net>
 License: LGPL-2.1
 
 Files: drivers/block/rsxx/*
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: drivers/block/rsxx/Makefile
@@ -28117,7 +28117,7 @@ Copyright: 1996-2001, Jonathan A. Buzzard (jonathan@buzzard.org.uk)
 License: GPL-2
 
 Files: drivers/char/tpm/*
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: drivers/char/tpm/Kconfig
@@ -30295,7 +30295,7 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/crypto/amcc/crypto4xx_trng.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: drivers/crypto/atmel-aes.c
@@ -31668,10 +31668,6 @@ Copyright: 2014, Linaro Ltd. <ard.biesheuvel@linaro.org>
  1999, VA Linux Systems
 License: GPL-2
 
-Files: drivers/firmware/efi/secureboot.c
-Copyright: 2001-2019, Red Hat, Inc.
-License: GPL-2
-
 Files: drivers/firmware/efi/test/*
 Copyright: (C) 2012-2016, Canonical Ltd.
 License: GPL-2
@@ -32662,7 +32658,7 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/gpu/drm/aspeed/*
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: drivers/gpu/drm/aspeed/Kconfig
@@ -39851,7 +39847,7 @@ Copyright: 2016, 2017, Mellanox Technologies Ltd.
 License: GPL-2
 
 Files: drivers/infiniband/sw/siw/*
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: drivers/infiniband/sw/siw/Kconfig
@@ -45723,6 +45719,10 @@ Files: drivers/media/rc/keymaps/rc-videomate-m1f.c
 Copyright: 2010, Pavel Osnova <pvosnova@gmail.com>
 License: GPL-2
 
+Files: drivers/media/rc/keymaps/rc-videostrong-kii-pro.c
+Copyright: 2019, Mohammad Rasim <mohammad.rasim96@gmail.com>
+License: GPL-2
+
 Files: drivers/media/rc/keymaps/rc-xbox-dvd.c
 Copyright: 2018, Benjamin Valentin <benpicco@googlemail.com>
 License: GPL-2
@@ -50686,6 +50686,12 @@ Files: drivers/net/ethernet/freescale/fman/Kconfig
 Copyright: no-info-found
 License: GPL-2
 
+Files: drivers/net/ethernet/freescale/fman/fman.c
+ drivers/net/ethernet/freescale/fman/fman.h
+Copyright: 2020, NXP
+ 2008-2015, Freescale Semiconductor Inc.
+License: BSD-3-clause or GPL
+
 Files: drivers/net/ethernet/freescale/fman/fman_keygen.c
  drivers/net/ethernet/freescale/fman/fman_keygen.h
 Copyright: 2017, NXP
@@ -52349,7 +52355,7 @@ License: GPL-2
 
 Files: drivers/net/ppp/bsd_comp.c
 Copyright: was changed, and the change / doesnt clash with the
-License: BSD-4-clause
+License: BSD-4-Clause-UC
 
 Files: drivers/net/ppp/ppp_async.c
  drivers/net/ppp/ppp_deflate.c
@@ -53408,7 +53414,7 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/*
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
  2013-2015, Intel Mobile Communications GmbH
  2003-2015, Intel Corporation.
@@ -53426,12 +53432,12 @@ License: GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/cfg/22000.c
  drivers/net/wireless/intel/iwlwifi/cfg/9000.c
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
 License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/cfg/7000.c
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
  2013-2015, Intel Mobile Communications GmbH
  2003-2015, Intel Corporation.
@@ -53488,7 +53494,7 @@ Files: drivers/net/wireless/intel/iwlwifi/fw/acpi.c
  drivers/net/wireless/intel/iwlwifi/fw/acpi.h
  drivers/net/wireless/intel/iwlwifi/fw/init.c
  drivers/net/wireless/intel/iwlwifi/fw/runtime.h
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
 License: BSD-3-clause or GPL-2
 
@@ -53514,7 +53520,7 @@ Copyright: 2017, Intel Deutschland GmbH
 License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/fw/api/location.h
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
 License: BSD-3-clause or GPL-2
 
@@ -53572,7 +53578,7 @@ Copyright: 2013, 2018, 2019, Intel Corporation
 License: BSD-3-clause or GPL-2
 
 Files: drivers/net/wireless/intel/iwlwifi/iwl-context-info.h
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
 License: BSD-3-clause or GPL-2
 
@@ -53671,10 +53677,17 @@ Copyright: 2015-2017, Intel Deutschland GmbH
  2007-2014, 2019, Intel Corporation.
 License: BSD-3-clause or GPL-2
 
+Files: drivers/net/wireless/intel/iwlwifi/mvm/debugfs.c
+ drivers/net/wireless/intel/iwlwifi/mvm/mac80211.c
+Copyright: 2016, 2017, Intel Deutschland GmbH
+ 2013-2015, Intel Mobile Communications GmbH
+ 2012-2014, 2018-2020, Intel Corporation
+License: BSD-3-clause or GPL-2
+
 Files: drivers/net/wireless/intel/iwlwifi/mvm/ftm-initiator.c
  drivers/net/wireless/intel/iwlwifi/mvm/ftm-responder.c
  drivers/net/wireless/intel/iwlwifi/mvm/rs-fw.c
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
 License: BSD-3-clause or GPL-2
 
@@ -53709,7 +53722,7 @@ License: BSD-3-clause or GPL-2
 Files: drivers/net/wireless/intel/iwlwifi/pcie/ctxt-info.c
  drivers/net/wireless/intel/iwlwifi/pcie/trans-gen2.c
  drivers/net/wireless/intel/iwlwifi/pcie/tx-gen2.c
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
 License: BSD-3-clause or GPL-2
 
@@ -60458,7 +60471,7 @@ Copyright: 2008-2016, Chelsio Communications, Inc.
 License: GPL
 
 Files: drivers/scsi/cxlflash/*
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: drivers/scsi/cxlflash/Kconfig
@@ -60681,7 +60694,7 @@ License: BSD~unspecified or GPL-2+
 
 Files: drivers/scsi/ipr.c
  drivers/scsi/ipr.h
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: drivers/scsi/ips.c
@@ -60742,7 +60755,7 @@ Copyright: 2005, Luben Tuikov <luben_tuikov@adaptec.com>
 License: GPL-2
 
 Files: drivers/scsi/libsas/sas_ata.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: drivers/scsi/libsas/sas_host_smp.c
@@ -61378,7 +61391,7 @@ Copyright: 2016-2019, Martin Blumenstingl <martin.blumenstingl@googlemail.com>
 License: GPL-2
 
 Files: drivers/soc/aspeed/aspeed-lpc-ctrl.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: drivers/soc/aspeed/aspeed-lpc-snoop.c
@@ -64265,7 +64278,7 @@ Copyright: 2004, IBM Corporation
 License: GPL-2
 
 Files: drivers/tty/hvc/hvc_console.h
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: drivers/tty/hvc/hvc_dcc.c
@@ -68428,7 +68441,7 @@ Copyright: 2014, 2016, 2018, Oleksij Rempel <linux@rempel-privat.de>
 License: GPL-2
 
 Files: drivers/watchdog/aspeed_wdt.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: drivers/watchdog/at91rm9200_wdt.c
@@ -69125,7 +69138,7 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: drivers/xen/sys-hypervisor.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: drivers/xen/xen-acpi-cpuhotplug.c
@@ -73294,7 +73307,7 @@ Copyright: 2010, Politecnico di Torino, Italy
 License: GPL-2
 
 Files: include/keys/trusted-type.h
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: include/kvm/*
@@ -74073,7 +74086,7 @@ Files: include/linux/evm.h
  include/linux/integrity.h
  include/linux/mm-arch-hooks.h
  include/linux/tpm.h
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: include/linux/ext2_fs.h
@@ -77465,7 +77478,7 @@ Copyright: 2018, WMWare Inc.
 License: GPL-2
 
 Files: include/linux/xarray.h
-Copyright: 2017, 2018, Microsoft Corporation
+Copyright: 2017, Microsoft Corporation
 License: GPL-2
 
 Files: include/linux/xattr.h
@@ -78013,7 +78026,7 @@ Copyright: 1997, Martin Mares
 License: GPL-2
 
 Files: include/net/iucv/*
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: include/net/iw_handler.h
@@ -78048,7 +78061,7 @@ Copyright: 1997, Procom Technology,Inc.
 License: GPL
 
 Files: include/net/mac80211.h
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
  2013, 2014, Intel Mobile Communications GmbH
  2007-2010, Johannes Berg <johannes@sipsolutions.net>
@@ -78371,7 +78384,7 @@ License: GPL-2
 
 Files: include/scsi/sas_ata.h
  include/scsi/viosrp.h
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: include/scsi/scsi_bsg_iscsi.h
@@ -80218,7 +80231,7 @@ Copyright: 2016, 2017, Mellanox Technologies Ltd.
 License: GPL-2
 
 Files: include/uapi/rdma/siw-abi.h
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: include/uapi/rdma/vmw_pvrdma-abi.h
@@ -80659,7 +80672,7 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: ipc/mq_sysctl.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: ipc/mqueue.c
@@ -81176,7 +81189,7 @@ License: GPL-2
 
 Files: kernel/nsproxy.c
  kernel/utsname.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: kernel/padata.c
@@ -82089,7 +82102,8 @@ License: GPL-2
 
 Files: lib/test_xarray.c
  lib/xarray.c
-Copyright: 2017, 2018, Microsoft Corporation
+Copyright: 2018-2020, Oracle
+ 2017, 2018, Microsoft Corporation
 License: GPL-2
 
 Files: lib/xxhash.c
@@ -82341,11 +82355,6 @@ Copyright: 2017, Facebook Inc.
  2017, Dennis Zhou <dennisszhou@gmail.com>
  2009, Tejun Heo <tj@kernel.org>
  2009, SUSE Linux Products GmbH
-License: GPL-2
-
-Files: mm/prfile.c
-Copyright: 2014-2019, Junjro R. Okajima
- 2014, Ian Campbell
 License: GPL-2
 
 Files: mm/process_vm_access.c
@@ -83494,7 +83503,7 @@ Copyright: 2006, 2007, Johannes Berg <johannes@sipsolutions.net>
 License: GPL-2
 
 Files: net/mac80211/debugfs_sta.c
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
  2013, 2014, Intel Mobile Communications GmbH
  2007-2010, Johannes Berg <johannes@sipsolutions.net>
@@ -83534,7 +83543,7 @@ License: GPL-2
 
 Files: net/mac80211/ieee80211_i.h
  net/mac80211/tx.c
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2013-2015, Intel Mobile Communications GmbH
  2007-2010, Johannes Berg <johannes@sipsolutions.net>
  2006, 2007, Jiri Benc <jbenc@suse.cz>
@@ -83546,7 +83555,7 @@ Files: net/mac80211/iface.c
  net/mac80211/key.c
  net/mac80211/rx.c
  net/mac80211/util.c
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
  2013, 2014, Intel Mobile Communications GmbH
  2007-2010, Johannes Berg <johannes@sipsolutions.net>
@@ -83606,7 +83615,7 @@ Copyright: 2002-2004, Instant802 Networks, Inc.
 License: GPL-2
 
 Files: net/mac80211/mlme.c
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
  2013, 2014, Intel Mobile Communications GmbH
  2007, Michael Wu <flamingice@sourmilk.net>
@@ -83675,7 +83684,7 @@ Copyright: 2008, Johannes Berg <johannes@sipsolutions.net>
 License: GPL-2
 
 Files: net/mac80211/sta_info.c
-Copyright: 2018, 2019, Intel Corporation
+Copyright: 2018-2020, Intel Corporation
  2015-2017, Intel Deutschland GmbH
  2013, 2014, Intel Mobile Communications GmbH
  2006, 2007, Jiri Benc <jbenc@suse.cz>
@@ -84508,6 +84517,7 @@ License: GPL-2
 
 Files: net/rxrpc/Kconfig
  net/rxrpc/Makefile
+ net/rxrpc/rtt.c
 Copyright: no-info-found
 License: GPL-2
 
@@ -85968,7 +85978,7 @@ Copyright: 2017, Tobin C. Harding <me@tobin.cc>
 License: GPL-2
 
 Files: scripts/makelst
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: scripts/mod/file2alias.c
@@ -86072,16 +86082,14 @@ Files: security/apparmor/Kconfig
 Copyright: no-info-found
 License: GPL-2
 
-Files: security/apparmor/af_unix.c
- security/apparmor/crypto.c
+Files: security/apparmor/crypto.c
  security/apparmor/label.c
  security/apparmor/secid.c
  security/apparmor/task.c
 Copyright: 2009-2018, Canonical Ltd.
 License: GPL-2
 
-Files: security/apparmor/include/af_unix.h
- security/apparmor/include/crypto.h
+Files: security/apparmor/include/crypto.h
  security/apparmor/include/label.h
  security/apparmor/include/mount.h
  security/apparmor/include/perms.h
@@ -86106,7 +86114,7 @@ Copyright: 2005, Greg Kroah-Hartman <gregkh@suse.de>
 License: GPL-2
 
 Files: security/integrity/*
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: security/integrity/Kconfig
@@ -86190,7 +86198,7 @@ Copyright: 2010, Politecnico di Torino, Italy
 License: GPL-2
 
 Files: security/keys/trusted.c
-Copyright: 2000, 2003-2019, IBM Corporation
+Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
 
 Files: security/loadpin/loadpin.c
@@ -91005,6 +91013,10 @@ Files: tools/testing/radix-tree/iteration_check.c
 Copyright: 2001-2019, Intel Corporation
 License: GPL-2
 
+Files: tools/testing/radix-tree/iteration_check_2.c
+Copyright: 2020, Oracle
+License: GPL-2
+
 Files: tools/testing/selftests/android/ion/ion.h
 Copyright: 2007-2019, Google, Inc.
 License: GPL-2
@@ -91043,80 +91055,81 @@ Files: tools/testing/selftests/bpf/prog_tests/bpf_verif_scale.c
 Copyright: 2016-2019, Facebook
 License: GPL-2
 
-Files: tools/testing/selftests/bpf/progs/*
-Copyright: 2016-2019, Facebook
+Files: tools/testing/selftests/bpf/prog_tests/sockmap_basic.c
+Copyright: 2020, Cloudflare
 License: GPL-2
 
-Files: tools/testing/selftests/bpf/progs/bpf_flow.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_arrays.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_arrays___diff_arr_dim.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_arrays___diff_arr_val_sz.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_arrays___err_non_array.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_arrays___err_too_shallow.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_arrays___err_too_small.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_arrays___err_wrong_val_type1.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_arrays___err_wrong_val_type2.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_flavors.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_flavors__err_wrong_name.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_ints.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_ints___bool.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_ints___err_bitfield.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_ints___err_wrong_sz_16.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_ints___err_wrong_sz_32.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_ints___err_wrong_sz_64.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_ints___err_wrong_sz_8.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_ints___reverse_sign.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_misc.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_mods.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_mods___mod_swap.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_mods___typedefs.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting___anon_embed.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting___dup_compat_types.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting___err_array_container.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting___err_array_field.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting___err_dup_incompat_types.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting___err_missing_container.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting___err_missing_field.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting___err_nonstruct_container.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting___err_partial_match_dups.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting___err_too_deep.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting___extra_nesting.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_nesting___struct_union_mixup.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_primitives.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_primitives___diff_enum_def.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_primitives___diff_func_proto.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_primitives___diff_ptr_type.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_primitives___err_non_enum.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_primitives___err_non_int.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_primitives___err_non_ptr.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_ptr_as_arr.c
- tools/testing/selftests/bpf/progs/btf__core_reloc_ptr_as_arr___diff_sz.c
- tools/testing/selftests/bpf/progs/core_reloc_types.h
- tools/testing/selftests/bpf/progs/netcnt_prog.c
- tools/testing/selftests/bpf/progs/sample_map_ret0.c
- tools/testing/selftests/bpf/progs/sample_ret0.c
- tools/testing/selftests/bpf/progs/sockmap_parse_prog.c
- tools/testing/selftests/bpf/progs/sockmap_tcp_msg_prog.c
- tools/testing/selftests/bpf/progs/sockmap_verdict_prog.c
- tools/testing/selftests/bpf/progs/sockopt_inherit.c
- tools/testing/selftests/bpf/progs/sockopt_multi.c
- tools/testing/selftests/bpf/progs/sockopt_sk.c
- tools/testing/selftests/bpf/progs/tcp_rtt.c
- tools/testing/selftests/bpf/progs/test_get_stack_rawtp.c
- tools/testing/selftests/bpf/progs/test_lwt_ip_encap.c
- tools/testing/selftests/bpf/progs/test_lwt_seg6local.c
- tools/testing/selftests/bpf/progs/test_seg6_loop.c
- tools/testing/selftests/bpf/progs/test_skb_ctx.c
- tools/testing/selftests/bpf/progs/test_tc_edt.c
- tools/testing/selftests/bpf/progs/test_tc_tunnel.c
- tools/testing/selftests/bpf/progs/test_tcpbpf_kern.c
- tools/testing/selftests/bpf/progs/test_tcpnotify_kern.c
- tools/testing/selftests/bpf/progs/test_xdp_meta.c
- tools/testing/selftests/bpf/progs/xdp_dummy.c
- tools/testing/selftests/bpf/progs/xdp_redirect_map.c
- tools/testing/selftests/bpf/progs/xdp_tx.c
-Copyright: no-info-found
+Files: tools/testing/selftests/bpf/progs/btf_dump_test_case_bitfields.c
+ tools/testing/selftests/bpf/progs/btf_dump_test_case_multidim.c
+ tools/testing/selftests/bpf/progs/btf_dump_test_case_namespacing.c
+ tools/testing/selftests/bpf/progs/btf_dump_test_case_ordering.c
+ tools/testing/selftests/bpf/progs/btf_dump_test_case_packing.c
+ tools/testing/selftests/bpf/progs/btf_dump_test_case_padding.c
+ tools/testing/selftests/bpf/progs/btf_dump_test_case_syntax.c
+ tools/testing/selftests/bpf/progs/connect4_prog.c
+ tools/testing/selftests/bpf/progs/connect6_prog.c
+ tools/testing/selftests/bpf/progs/dev_cgroup.c
+ tools/testing/selftests/bpf/progs/get_cgroup_id_kern.c
+ tools/testing/selftests/bpf/progs/loop1.c
+ tools/testing/selftests/bpf/progs/loop2.c
+ tools/testing/selftests/bpf/progs/loop3.c
+ tools/testing/selftests/bpf/progs/loop4.c
+ tools/testing/selftests/bpf/progs/loop5.c
+ tools/testing/selftests/bpf/progs/pyperf.h
+ tools/testing/selftests/bpf/progs/pyperf100.c
+ tools/testing/selftests/bpf/progs/pyperf180.c
+ tools/testing/selftests/bpf/progs/pyperf50.c
+ tools/testing/selftests/bpf/progs/pyperf600.c
+ tools/testing/selftests/bpf/progs/pyperf600_nounroll.c
+ tools/testing/selftests/bpf/progs/sendmsg4_prog.c
+ tools/testing/selftests/bpf/progs/sendmsg6_prog.c
+ tools/testing/selftests/bpf/progs/socket_cookie_prog.c
+ tools/testing/selftests/bpf/progs/strobemeta.c
+ tools/testing/selftests/bpf/progs/strobemeta.h
+ tools/testing/selftests/bpf/progs/strobemeta_nounroll1.c
+ tools/testing/selftests/bpf/progs/strobemeta_nounroll2.c
+ tools/testing/selftests/bpf/progs/test_adjust_tail.c
+ tools/testing/selftests/bpf/progs/test_attach_probe.c
+ tools/testing/selftests/bpf/progs/test_btf_haskv.c
+ tools/testing/selftests/bpf/progs/test_btf_newkv.c
+ tools/testing/selftests/bpf/progs/test_btf_nokv.c
+ tools/testing/selftests/bpf/progs/test_core_reloc_arrays.c
+ tools/testing/selftests/bpf/progs/test_core_reloc_flavors.c
+ tools/testing/selftests/bpf/progs/test_core_reloc_ints.c
+ tools/testing/selftests/bpf/progs/test_core_reloc_kernel.c
+ tools/testing/selftests/bpf/progs/test_core_reloc_misc.c
+ tools/testing/selftests/bpf/progs/test_core_reloc_mods.c
+ tools/testing/selftests/bpf/progs/test_core_reloc_nesting.c
+ tools/testing/selftests/bpf/progs/test_core_reloc_primitives.c
+ tools/testing/selftests/bpf/progs/test_core_reloc_ptr_as_arr.c
+ tools/testing/selftests/bpf/progs/test_jhash.h
+ tools/testing/selftests/bpf/progs/test_l4lb.c
+ tools/testing/selftests/bpf/progs/test_l4lb_noinline.c
+ tools/testing/selftests/bpf/progs/test_map_in_map.c
+ tools/testing/selftests/bpf/progs/test_map_lock.c
+ tools/testing/selftests/bpf/progs/test_obj_id.c
+ tools/testing/selftests/bpf/progs/test_perf_buffer.c
+ tools/testing/selftests/bpf/progs/test_pkt_access.c
+ tools/testing/selftests/bpf/progs/test_pkt_md_access.c
+ tools/testing/selftests/bpf/progs/test_select_reuseport_kern.c
+ tools/testing/selftests/bpf/progs/test_send_signal_kern.c
+ tools/testing/selftests/bpf/progs/test_skb_cgroup_id_kern.c
+ tools/testing/selftests/bpf/progs/test_sock_fields_kern.c
+ tools/testing/selftests/bpf/progs/test_spin_lock.c
+ tools/testing/selftests/bpf/progs/test_stacktrace_build_id.c
+ tools/testing/selftests/bpf/progs/test_stacktrace_map.c
+ tools/testing/selftests/bpf/progs/test_sysctl_loop1.c
+ tools/testing/selftests/bpf/progs/test_sysctl_loop2.c
+ tools/testing/selftests/bpf/progs/test_sysctl_prog.c
+ tools/testing/selftests/bpf/progs/test_tcp_estats.c
+ tools/testing/selftests/bpf/progs/test_tracepoint.c
+ tools/testing/selftests/bpf/progs/test_verif_scale1.c
+ tools/testing/selftests/bpf/progs/test_verif_scale2.c
+ tools/testing/selftests/bpf/progs/test_verif_scale3.c
+ tools/testing/selftests/bpf/progs/test_xdp.c
+ tools/testing/selftests/bpf/progs/test_xdp_loop.c
+ tools/testing/selftests/bpf/progs/test_xdp_noinline.c
+Copyright: 2016-2019, Facebook
 License: GPL-2
 
 Files: tools/testing/selftests/bpf/progs/test_global_data.c
