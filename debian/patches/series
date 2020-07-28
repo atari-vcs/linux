@@ -178,3 +178,4 @@ atari/controller/atari-Don-t-use-mutex-in-interrupt-context.patch
 atari/bugfix/drm-amd-display-Stop-if-retimer-is-not-available.patch
 atari/bugfix/usb-xhci-apply-suspend-quirks-to-AMD-XHCI-controller.patch
 atari/bugfix/usb-xhci-workaround-css-timeout-setting-hce-amd.patch
+atari/bugfix/rtw88-config-8822c-multicast-address-in-MAC-init-flow.patch

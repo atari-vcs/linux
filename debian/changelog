@@ -1,3 +1,11 @@
+linux (5.4.13-2ata12) vcs; urgency=medium
+
+  * d/p/atari/bugfix/rtw88-config-8822c-multicast-address-in-MAC-init-flow.patch
+    + Added. Allow received Multicast messages to be passed to the driver
+      (hence futher up the net stack to applications).
+
+ -- Christopher Obbard <chris.obbard@collabora.com>  Tue, 28 Jul 2020 16:40:50 +0100
+
 linux (5.4.13-2ata11) vcs; urgency=medium
 
   * d/p/atari/bugfix/drm-amd-display-Stop-if-retimer-is-not-available.patch
