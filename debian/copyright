@@ -191,6 +191,19 @@ Copyright: 2014-2015 Red Hat, Inc.
            2015 Intel Corporation
 License: LGPL-2.1
 
+Files: drivers/isdn/i4l/isdn_bsdcomp.c drivers/net/ppp/bsd_comp.c
+Copyright: 1985, 1986 The Regents of the University of California
+License: BSD-4-Clause-UC
+
+Files: Documentation/filesystems/cifs/winucase_convert.pl
+Copyright: 2013 Jeff Layton
+License: GPL-3+
+
+Files: tools/testing/selftests/mqueue/*
+Copyright: 2012 Red Hat, Inc.
+           2012 Doug Ledford
+License: GPL-3
+
 License: GPL-2
  This package is free software; you can redistribute it and/or modify
  it under the terms of the GNU General Public License version 2 as

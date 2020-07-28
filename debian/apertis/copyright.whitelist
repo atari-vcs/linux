@@ -1,0 +1,8 @@
+# documentation and sample scripts
+/Documentation/filesystems/cifs/*
+# tests
+/tools/testing/selftests/mqueue/*
+# actually BSD-4-Clause-UC
+/drivers/isdn/i4l/isdn_bsdcomp.c
+/drivers/net/ppp/bsd_comp.c
+
