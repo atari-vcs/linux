@@ -647,13 +647,9 @@ static int scrub_print_warning_inode(u64 inum, u64 offset, u64 root,
 	struct btrfs_fs_info *fs_info = swarn->dev->fs_info;
 	struct inode_fs_paths *ipath = NULL;
 	struct btrfs_root *local_root;
-	struct btrfs_key root_key;
 	struct btrfs_key key;
 
-	root_key.objectid = root;
-	root_key.type = BTRFS_ROOT_ITEM_KEY;
-	root_key.offset = (u64)-1;
-	local_root = btrfs_get_fs_root(fs_info, &root_key, true);
+	local_root = btrfs_get_fs_root(fs_info, root, true);
 	if (IS_ERR(local_root)) {
 		ret = PTR_ERR(local_root);
 		goto err;
@@ -3343,13 +3339,14 @@ again:
 						   &extent_dev,
 						   &extent_mirror_num);
 
-			ret = btrfs_lookup_csums_range(csum_root,
-						       extent_logical,
-						       extent_logical +
-						       extent_len - 1,
-						       &sctx->csum_list, 1);
-			if (ret)
-				goto out;
+			if (flags & BTRFS_EXTENT_FLAG_DATA) {
+				ret = btrfs_lookup_csums_range(csum_root,
+						extent_logical,
+						extent_logical + extent_len - 1,
+						&sctx->csum_list, 1);
+				if (ret)
+					goto out;
+			}
 
 			ret = scrub_extent(sctx, map, extent_logical, extent_len,
 					   extent_physical, extent_dev, flags,
@@ -3583,7 +3580,7 @@ int scrub_enumerate_chunks(struct scrub_ctx *sctx,
 			btrfs_put_block_group(cache);
 			goto skip;
 		}
-		btrfs_get_block_group_trimming(cache);
+		btrfs_freeze_block_group(cache);
 		spin_unlock(&cache->lock);
 
 		/*
@@ -3641,7 +3638,7 @@ int scrub_enumerate_chunks(struct scrub_ctx *sctx,
 		} else {
 			btrfs_warn(fs_info,
 				   "failed setting block group ro: %d", ret);
-			btrfs_put_block_group_trimming(cache);
+			btrfs_unfreeze_block_group(cache);
 			btrfs_put_block_group(cache);
 			scrub_pause_off(fs_info);
 			break;
@@ -3728,7 +3725,7 @@ int scrub_enumerate_chunks(struct scrub_ctx *sctx,
 			spin_unlock(&cache->lock);
 		}
 
-		btrfs_put_block_group_trimming(cache);
+		btrfs_unfreeze_block_group(cache);
 		btrfs_put_block_group(cache);
 		if (ret)
 			break;
@@ -3761,7 +3758,7 @@ static noinline_for_stack int scrub_supers(struct scrub_ctx *sctx,
 	struct btrfs_fs_info *fs_info = sctx->fs_info;
 
 	if (test_bit(BTRFS_FS_STATE_ERROR, &fs_info->fs_state))
-		return -EIO;
+		return -EROFS;
 
 	/* Seed devices of a new filesystem has their own generation. */
 	if (scrub_dev->fs_devices != fs_info->fs_devices)
@@ -3786,50 +3783,84 @@ static noinline_for_stack int scrub_supers(struct scrub_ctx *sctx,
 	return 0;
 }
 
+static void scrub_workers_put(struct btrfs_fs_info *fs_info)
+{
+	if (refcount_dec_and_mutex_lock(&fs_info->scrub_workers_refcnt,
+					&fs_info->scrub_lock)) {
+		struct btrfs_workqueue *scrub_workers = NULL;
+		struct btrfs_workqueue *scrub_wr_comp = NULL;
+		struct btrfs_workqueue *scrub_parity = NULL;
+
+		scrub_workers = fs_info->scrub_workers;
+		scrub_wr_comp = fs_info->scrub_wr_completion_workers;
+		scrub_parity = fs_info->scrub_parity_workers;
+
+		fs_info->scrub_workers = NULL;
+		fs_info->scrub_wr_completion_workers = NULL;
+		fs_info->scrub_parity_workers = NULL;
+		mutex_unlock(&fs_info->scrub_lock);
+
+		btrfs_destroy_workqueue(scrub_workers);
+		btrfs_destroy_workqueue(scrub_wr_comp);
+		btrfs_destroy_workqueue(scrub_parity);
+	}
+}
+
 /*
  * get a reference count on fs_info->scrub_workers. start worker if necessary
  */
 static noinline_for_stack int scrub_workers_get(struct btrfs_fs_info *fs_info,
 						int is_dev_replace)
 {
+	struct btrfs_workqueue *scrub_workers = NULL;
+	struct btrfs_workqueue *scrub_wr_comp = NULL;
+	struct btrfs_workqueue *scrub_parity = NULL;
 	unsigned int flags = WQ_FREEZABLE | WQ_UNBOUND;
 	int max_active = fs_info->thread_pool_size;
+	int ret = -ENOMEM;
 
-	lockdep_assert_held(&fs_info->scrub_lock);
+	if (refcount_inc_not_zero(&fs_info->scrub_workers_refcnt))
+		return 0;
 
+	scrub_workers = btrfs_alloc_workqueue(fs_info, "scrub", flags,
+					      is_dev_replace ? 1 : max_active, 4);
+	if (!scrub_workers)
+		goto fail_scrub_workers;
+
+	scrub_wr_comp = btrfs_alloc_workqueue(fs_info, "scrubwrc", flags,
+					      max_active, 2);
+	if (!scrub_wr_comp)
+		goto fail_scrub_wr_completion_workers;
+
+	scrub_parity = btrfs_alloc_workqueue(fs_info, "scrubparity", flags,
+					     max_active, 2);
+	if (!scrub_parity)
+		goto fail_scrub_parity_workers;
+
+	mutex_lock(&fs_info->scrub_lock);
 	if (refcount_read(&fs_info->scrub_workers_refcnt) == 0) {
-		ASSERT(fs_info->scrub_workers == NULL);
-		fs_info->scrub_workers = btrfs_alloc_workqueue(fs_info, "scrub",
-				flags, is_dev_replace ? 1 : max_active, 4);
-		if (!fs_info->scrub_workers)
-			goto fail_scrub_workers;
-
-		ASSERT(fs_info->scrub_wr_completion_workers == NULL);
-		fs_info->scrub_wr_completion_workers =
-			btrfs_alloc_workqueue(fs_info, "scrubwrc", flags,
-					      max_active, 2);
-		if (!fs_info->scrub_wr_completion_workers)
-			goto fail_scrub_wr_completion_workers;
-
-		ASSERT(fs_info->scrub_parity_workers == NULL);
-		fs_info->scrub_parity_workers =
-			btrfs_alloc_workqueue(fs_info, "scrubparity", flags,
-					      max_active, 2);
-		if (!fs_info->scrub_parity_workers)
-			goto fail_scrub_parity_workers;
-
+		ASSERT(fs_info->scrub_workers == NULL &&
+		       fs_info->scrub_wr_completion_workers == NULL &&
+		       fs_info->scrub_parity_workers == NULL);
+		fs_info->scrub_workers = scrub_workers;
+		fs_info->scrub_wr_completion_workers = scrub_wr_comp;
+		fs_info->scrub_parity_workers = scrub_parity;
 		refcount_set(&fs_info->scrub_workers_refcnt, 1);
-	} else {
-		refcount_inc(&fs_info->scrub_workers_refcnt);
+		mutex_unlock(&fs_info->scrub_lock);
+		return 0;
 	}
-	return 0;
+	/* Other thread raced in and created the workers for us */
+	refcount_inc(&fs_info->scrub_workers_refcnt);
+	mutex_unlock(&fs_info->scrub_lock);
 
+	ret = 0;
+	btrfs_destroy_workqueue(scrub_parity);
 fail_scrub_parity_workers:
-	btrfs_destroy_workqueue(fs_info->scrub_wr_completion_workers);
+	btrfs_destroy_workqueue(scrub_wr_comp);
 fail_scrub_wr_completion_workers:
-	btrfs_destroy_workqueue(fs_info->scrub_workers);
+	btrfs_destroy_workqueue(scrub_workers);
 fail_scrub_workers:
-	return -ENOMEM;
+	return ret;
 }
 
 int btrfs_scrub_dev(struct btrfs_fs_info *fs_info, u64 devid, u64 start,
@@ -3840,9 +3871,6 @@ int btrfs_scrub_dev(struct btrfs_fs_info *fs_info, u64 devid, u64 start,
 	int ret;
 	struct btrfs_device *dev;
 	unsigned int nofs_flag;
-	struct btrfs_workqueue *scrub_workers = NULL;
-	struct btrfs_workqueue *scrub_wr_comp = NULL;
-	struct btrfs_workqueue *scrub_parity = NULL;
 
 	if (btrfs_fs_closing(fs_info))
 		return -EAGAIN;
@@ -3889,13 +3917,17 @@ int btrfs_scrub_dev(struct btrfs_fs_info *fs_info, u64 devid, u64 start,
 	if (IS_ERR(sctx))
 		return PTR_ERR(sctx);
 
+	ret = scrub_workers_get(fs_info, is_dev_replace);
+	if (ret)
+		goto out_free_ctx;
+
 	mutex_lock(&fs_info->fs_devices->device_list_mutex);
 	dev = btrfs_find_device(fs_info->fs_devices, devid, NULL, NULL, true);
 	if (!dev || (test_bit(BTRFS_DEV_STATE_MISSING, &dev->dev_state) &&
 		     !is_dev_replace)) {
 		mutex_unlock(&fs_info->fs_devices->device_list_mutex);
 		ret = -ENODEV;
-		goto out_free_ctx;
+		goto out;
 	}
 
 	if (!is_dev_replace && !readonly &&
@@ -3904,7 +3936,7 @@ int btrfs_scrub_dev(struct btrfs_fs_info *fs_info, u64 devid, u64 start,
 		btrfs_err_in_rcu(fs_info, "scrub: device %s is not writable",
 				rcu_str_deref(dev->name));
 		ret = -EROFS;
-		goto out_free_ctx;
+		goto out;
 	}
 
 	mutex_lock(&fs_info->scrub_lock);
@@ -3913,7 +3945,7 @@ int btrfs_scrub_dev(struct btrfs_fs_info *fs_info, u64 devid, u64 start,
 		mutex_unlock(&fs_info->scrub_lock);
 		mutex_unlock(&fs_info->fs_devices->device_list_mutex);
 		ret = -EIO;
-		goto out_free_ctx;
+		goto out;
 	}
 
 	down_read(&fs_info->dev_replace.rwsem);
@@ -3924,16 +3956,9 @@ int btrfs_scrub_dev(struct btrfs_fs_info *fs_info, u64 devid, u64 start,
 		mutex_unlock(&fs_info->scrub_lock);
 		mutex_unlock(&fs_info->fs_devices->device_list_mutex);
 		ret = -EINPROGRESS;
-		goto out_free_ctx;
+		goto out;
 	}
 	up_read(&fs_info->dev_replace.rwsem);
-
-	ret = scrub_workers_get(fs_info, is_dev_replace);
-	if (ret) {
-		mutex_unlock(&fs_info->scrub_lock);
-		mutex_unlock(&fs_info->fs_devices->device_list_mutex);
-		goto out_free_ctx;
-	}
 
 	sctx->readonly = readonly;
 	dev->scrub_ctx = sctx;
@@ -3987,24 +4012,14 @@ int btrfs_scrub_dev(struct btrfs_fs_info *fs_info, u64 devid, u64 start,
 
 	mutex_lock(&fs_info->scrub_lock);
 	dev->scrub_ctx = NULL;
-	if (refcount_dec_and_test(&fs_info->scrub_workers_refcnt)) {
-		scrub_workers = fs_info->scrub_workers;
-		scrub_wr_comp = fs_info->scrub_wr_completion_workers;
-		scrub_parity = fs_info->scrub_parity_workers;
-
-		fs_info->scrub_workers = NULL;
-		fs_info->scrub_wr_completion_workers = NULL;
-		fs_info->scrub_parity_workers = NULL;
-	}
 	mutex_unlock(&fs_info->scrub_lock);
 
-	btrfs_destroy_workqueue(scrub_workers);
-	btrfs_destroy_workqueue(scrub_wr_comp);
-	btrfs_destroy_workqueue(scrub_parity);
+	scrub_workers_put(fs_info);
 	scrub_put_ctx(sctx);
 
 	return ret;
-
+out:
+	scrub_workers_put(fs_info);
 out_free_ctx:
 	scrub_free_ctx(sctx);
 

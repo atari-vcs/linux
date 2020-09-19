@@ -167,8 +167,6 @@ struct dc_stream_state {
 
 	/* TODO: custom INFO packets */
 	/* TODO: ABM info (DMCU) */
-	/* PSR info */
-	unsigned char psr_version;
 	/* TODO: CEA VIC */
 
 	/* DMCU info */
@@ -224,7 +222,7 @@ struct dc_stream_state {
 	union stream_update_flags update_flags;
 };
 
-#define ABM_LEVEL_IMMEDIATE_DISABLE 0xFFFFFFFF
+#define ABM_LEVEL_IMMEDIATE_DISABLE 255
 
 struct dc_stream_update {
 	struct dc_stream_state *stream;

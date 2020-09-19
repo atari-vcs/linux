@@ -143,6 +143,8 @@ static inline u64 nft_reg_load64(const u32 *sreg)
 static inline void nft_data_copy(u32 *dst, const struct nft_data *src,
 				 unsigned int len)
 {
+	if (len % NFT_REG32_SIZE)
+		dst[len / NFT_REG32_SIZE] = 0;
 	memcpy(dst, src, len);
 }
 
@@ -243,6 +245,10 @@ struct nft_set_elem {
 		u32		buf[NFT_DATA_VALUE_MAXLEN / sizeof(u32)];
 		struct nft_data	val;
 	} key_end;
+	union {
+		u32		buf[NFT_DATA_VALUE_MAXLEN / sizeof(u32)];
+		struct nft_data val;
+	} data;
 	void			*priv;
 };
 
@@ -998,6 +1004,7 @@ struct nft_stats {
 
 struct nft_hook {
 	struct list_head	list;
+	bool			inactive;
 	struct nf_hook_ops	ops;
 	struct rcu_head		rcu;
 };
@@ -1477,10 +1484,16 @@ struct nft_trans_obj {
 
 struct nft_trans_flowtable {
 	struct nft_flowtable		*flowtable;
+	bool				update;
+	struct list_head		hook_list;
 };
 
 #define nft_trans_flowtable(trans)	\
 	(((struct nft_trans_flowtable *)trans->data)->flowtable)
+#define nft_trans_flowtable_update(trans)	\
+	(((struct nft_trans_flowtable *)trans->data)->update)
+#define nft_trans_flowtable_hooks(trans)	\
+	(((struct nft_trans_flowtable *)trans->data)->hook_list)
 
 int __init nft_chain_filter_init(void);
 void nft_chain_filter_fini(void);

@@ -110,6 +110,10 @@ struct perf_stat_config {
 	bool			 all_kernel;
 	bool			 all_user;
 	bool			 percore_show_thread;
+	bool			 summary;
+	bool			 metric_no_group;
+	bool			 metric_no_merge;
+	bool			 stop_read_counter;
 	FILE			*output;
 	unsigned int		 interval;
 	unsigned int		 timeout;
@@ -131,6 +135,8 @@ struct perf_stat_config {
 	u64			*walltime_run;
 	struct rblist		 metric_events;
 };
+
+void perf_stat__set_big_num(int set);
 
 void update_stats(struct stats *stats, u64 val);
 double avg_stats(struct stats *stats);
@@ -198,6 +204,8 @@ int perf_evlist__alloc_stats(struct evlist *evlist, bool alloc_raw);
 void perf_evlist__free_stats(struct evlist *evlist);
 void perf_evlist__reset_stats(struct evlist *evlist);
 void perf_evlist__reset_prev_raw_counts(struct evlist *evlist);
+void perf_evlist__copy_prev_raw_counts(struct evlist *evlist);
+void perf_evlist__save_aggr_prev_raw_counts(struct evlist *evlist);
 
 int perf_stat_process_counter(struct perf_stat_config *config,
 			      struct evsel *counter);
