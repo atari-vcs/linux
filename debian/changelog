@@ -1,3 +1,8 @@
+linux (5.4.70-0~co1) UNRELEASED; urgency=medium
+
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Thu, 08 Oct 2020 17:15:21 +0100
+
 linux (5.4.51-0~co1) apertis; urgency=medium
 
   * Added Apertis patches:
