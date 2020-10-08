@@ -109,18 +109,16 @@ bool intel_hdcp2_capable(struct intel_connector *connector)
 	return capable;
 }
 
-static inline
-bool intel_hdcp_in_use(struct drm_i915_private *dev_priv,
-		       enum transcoder cpu_transcoder, enum port port)
+static bool intel_hdcp_in_use(struct drm_i915_private *dev_priv,
+			      enum transcoder cpu_transcoder, enum port port)
 {
 	return intel_de_read(dev_priv,
 	                     HDCP_STATUS(dev_priv, cpu_transcoder, port)) &
 	       HDCP_STATUS_ENC;
 }
 
-static inline
-bool intel_hdcp2_in_use(struct drm_i915_private *dev_priv,
-			enum transcoder cpu_transcoder, enum port port)
+static bool intel_hdcp2_in_use(struct drm_i915_private *dev_priv,
+			       enum transcoder cpu_transcoder, enum port port)
 {
 	return intel_de_read(dev_priv,
 	                     HDCP2_STATUS(dev_priv, cpu_transcoder, port)) &
@@ -338,8 +336,10 @@ int intel_hdcp_validate_v_prime(struct intel_connector *connector,
 
 		/* Fill up the empty slots in sha_text and write it out */
 		sha_empty = sizeof(sha_text) - sha_leftovers;
-		for (j = 0; j < sha_empty; j++)
-			sha_text |= ksv[j] << ((sizeof(sha_text) - j - 1) * 8);
+		for (j = 0; j < sha_empty; j++) {
+			u8 off = ((sizeof(sha_text) - j - 1 - sha_leftovers) * 8);
+			sha_text |= ksv[j] << off;
+		}
 
 		ret = intel_write_sha_text(dev_priv, sha_text);
 		if (ret < 0)
@@ -437,7 +437,7 @@ int intel_hdcp_validate_v_prime(struct intel_connector *connector,
 		/* Write 32 bits of text */
 		intel_de_write(dev_priv, HDCP_REP_CTL,
 			       rep_ctl | HDCP_SHA1_TEXT_32);
-		sha_text |= bstatus[0] << 24 | bstatus[1] << 16;
+		sha_text |= bstatus[0] << 8 | bstatus[1];
 		ret = intel_write_sha_text(dev_priv, sha_text);
 		if (ret < 0)
 			return ret;
@@ -452,17 +452,29 @@ int intel_hdcp_validate_v_prime(struct intel_connector *connector,
 				return ret;
 			sha_idx += sizeof(sha_text);
 		}
-	} else if (sha_leftovers == 3) {
-		/* Write 32 bits of text */
+
+		/*
+		 * Terminate the SHA-1 stream by hand. For the other leftover
+		 * cases this is appended by the hardware.
+		 */
 		intel_de_write(dev_priv, HDCP_REP_CTL,
 			       rep_ctl | HDCP_SHA1_TEXT_32);
-		sha_text |= bstatus[0] << 24;
+		sha_text = DRM_HDCP_SHA1_TERMINATOR << 24;
+		ret = intel_write_sha_text(dev_priv, sha_text);
+		if (ret < 0)
+			return ret;
+		sha_idx += sizeof(sha_text);
+	} else if (sha_leftovers == 3) {
+		/* Write 32 bits of text (filled from LSB) */
+		intel_de_write(dev_priv, HDCP_REP_CTL,
+			       rep_ctl | HDCP_SHA1_TEXT_32);
+		sha_text |= bstatus[0];
 		ret = intel_write_sha_text(dev_priv, sha_text);
 		if (ret < 0)
 			return ret;
 		sha_idx += sizeof(sha_text);
 
-		/* Write 8 bits of text, 24 bits of M0 */
+		/* Write 8 bits of text (filled from LSB), 24 bits of M0 */
 		intel_de_write(dev_priv, HDCP_REP_CTL,
 			       rep_ctl | HDCP_SHA1_TEXT_8);
 		ret = intel_write_sha_text(dev_priv, bstatus[1]);
@@ -853,8 +865,7 @@ static int _intel_hdcp_enable(struct intel_connector *connector)
 	return ret;
 }
 
-static inline
-struct intel_connector *intel_hdcp_to_connector(struct intel_hdcp *hdcp)
+static struct intel_connector *intel_hdcp_to_connector(struct intel_hdcp *hdcp)
 {
 	return container_of(hdcp, struct intel_connector, hdcp);
 }
@@ -1391,6 +1402,7 @@ static
 int hdcp2_propagate_stream_management_info(struct intel_connector *connector)
 {
 	struct intel_digital_port *intel_dig_port = intel_attached_dig_port(connector);
+	struct drm_i915_private *i915 = to_i915(connector->base.dev);
 	struct intel_hdcp *hdcp = &connector->hdcp;
 	union {
 		struct hdcp2_rep_stream_manage stream_manage;
@@ -1431,7 +1443,7 @@ int hdcp2_propagate_stream_management_info(struct intel_connector *connector)
 	hdcp->seq_num_m++;
 
 	if (hdcp->seq_num_m > HDCP_2_2_SEQ_NUM_MAX) {
-		DRM_DEBUG_KMS("seq_num_m roll over.\n");
+		drm_dbg_kms(&i915->drm, "seq_num_m roll over.\n");
 		return -1;
 	}
 
@@ -1855,8 +1867,7 @@ static const struct component_ops i915_hdcp_component_ops = {
 	.unbind = i915_hdcp_component_unbind,
 };
 
-static inline
-enum mei_fw_ddi intel_get_mei_fw_ddi_index(enum port port)
+static enum mei_fw_ddi intel_get_mei_fw_ddi_index(enum port port)
 {
 	switch (port) {
 	case PORT_A:
@@ -1868,8 +1879,7 @@ enum mei_fw_ddi intel_get_mei_fw_ddi_index(enum port port)
 	}
 }
 
-static inline
-enum mei_fw_tc intel_get_mei_fw_tc(enum transcoder cpu_transcoder)
+static enum mei_fw_tc intel_get_mei_fw_tc(enum transcoder cpu_transcoder)
 {
 	switch (cpu_transcoder) {
 	case TRANSCODER_A ... TRANSCODER_D:
@@ -1879,8 +1889,8 @@ enum mei_fw_tc intel_get_mei_fw_tc(enum transcoder cpu_transcoder)
 	}
 }
 
-static inline int initialize_hdcp_port_data(struct intel_connector *connector,
-					    const struct intel_hdcp_shim *shim)
+static int initialize_hdcp_port_data(struct intel_connector *connector,
+				     const struct intel_hdcp_shim *shim)
 {
 	struct drm_i915_private *dev_priv = to_i915(connector->base.dev);
 	struct intel_hdcp *hdcp = &connector->hdcp;
@@ -2075,7 +2085,8 @@ int intel_hdcp_disable(struct intel_connector *connector)
 	return ret;
 }
 
-void intel_hdcp_update_pipe(struct intel_encoder *encoder,
+void intel_hdcp_update_pipe(struct intel_atomic_state *state,
+			    struct intel_encoder *encoder,
 			    const struct intel_crtc_state *crtc_state,
 			    const struct drm_connector_state *conn_state)
 {

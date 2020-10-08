@@ -215,9 +215,9 @@ static int dp83867_set_wol(struct phy_device *phydev,
 		if (wol->wolopts & WAKE_MAGICSECURE) {
 			phy_write_mmd(phydev, DP83867_DEVADDR, DP83867_RXFSOP1,
 				      (wol->sopass[1] << 8) | wol->sopass[0]);
-			phy_write_mmd(phydev, DP83867_DEVADDR, DP83867_RXFSOP1,
+			phy_write_mmd(phydev, DP83867_DEVADDR, DP83867_RXFSOP2,
 				      (wol->sopass[3] << 8) | wol->sopass[2]);
-			phy_write_mmd(phydev, DP83867_DEVADDR, DP83867_RXFSOP1,
+			phy_write_mmd(phydev, DP83867_DEVADDR, DP83867_RXFSOP3,
 				      (wol->sopass[5] << 8) | wol->sopass[4]);
 
 			val_rxcfg |= DP83867_WOL_SEC_EN;
@@ -365,7 +365,7 @@ static int dp83867_get_downshift(struct phy_device *phydev, u8 *data)
 		break;
 	default:
 		return -EINVAL;
-	};
+	}
 
 	*data = enable ? count : DOWNSHIFT_DEV_DISABLE;
 
@@ -400,7 +400,7 @@ static int dp83867_set_downshift(struct phy_device *phydev, u8 cnt)
 			phydev_err(phydev,
 				   "Downshift count must be 1, 2, 4 or 8\n");
 			return -EINVAL;
-	};
+	}
 
 	val = DP83867_DOWNSHIFT_EN;
 	val |= FIELD_PREP(DP83867_DOWNSHIFT_ATTEMPT_MASK, count);

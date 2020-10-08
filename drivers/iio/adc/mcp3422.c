@@ -19,6 +19,7 @@
 #include <linux/delay.h>
 #include <linux/sysfs.h>
 #include <linux/of.h>
+#include <asm/unaligned.h>
 
 #include <linux/iio/iio.h>
 #include <linux/iio/sysfs.h>
@@ -95,15 +96,11 @@ static int mcp3422_update_config(struct mcp3422 *adc, u8 newconfig)
 {
 	int ret;
 
-	mutex_lock(&adc->lock);
-
 	ret = i2c_master_send(adc->i2c, &newconfig, 1);
 	if (ret > 0) {
 		adc->config = newconfig;
 		ret = 0;
 	}
-
-	mutex_unlock(&adc->lock);
 
 	return ret;
 }
@@ -117,11 +114,11 @@ static int mcp3422_read(struct mcp3422 *adc, int *value, u8 *config)
 
 	if (sample_rate == MCP3422_SRATE_3) {
 		ret = i2c_master_recv(adc->i2c, buf, 4);
-		temp = buf[0] << 16 | buf[1] << 8 | buf[2];
+		temp = get_unaligned_be24(&buf[0]);
 		*config = buf[3];
 	} else {
 		ret = i2c_master_recv(adc->i2c, buf, 3);
-		temp = buf[0] << 8 | buf[1];
+		temp = get_unaligned_be16(&buf[0]);
 		*config = buf[2];
 	}
 
@@ -137,6 +134,8 @@ static int mcp3422_read_channel(struct mcp3422 *adc,
 	u8 config;
 	u8 req_channel = channel->channel;
 
+	mutex_lock(&adc->lock);
+
 	if (req_channel != MCP3422_CHANNEL(adc->config)) {
 		config = adc->config;
 		config &= ~MCP3422_CHANNEL_MASK;
@@ -144,12 +143,18 @@ static int mcp3422_read_channel(struct mcp3422 *adc,
 		config &= ~MCP3422_PGA_MASK;
 		config |= MCP3422_PGA_VALUE(adc->pga[req_channel]);
 		ret = mcp3422_update_config(adc, config);
-		if (ret < 0)
+		if (ret < 0) {
+			mutex_unlock(&adc->lock);
 			return ret;
+		}
 		msleep(mcp3422_read_times[MCP3422_SAMPLE_RATE(adc->config)]);
 	}
 
-	return mcp3422_read(adc, value, &config);
+	ret = mcp3422_read(adc, value, &config);
+
+	mutex_unlock(&adc->lock);
+
+	return ret;
 }
 
 static int mcp3422_read_raw(struct iio_dev *iio,
