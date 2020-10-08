@@ -1,3 +1,7 @@
+linux (5.8.10-1co1) UNRELEASED; urgency=medium
+
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Fri, 09 Oct 2020 00:30:29 +0300
+
 linux (5.8.10-1) unstable; urgency=medium
 
   * New upstream stable update:
