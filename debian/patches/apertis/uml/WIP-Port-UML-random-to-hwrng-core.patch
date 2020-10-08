@@ -6,10 +6,10 @@ Subject: [PATCH] WIP: Port UML random to hwrng core
  arch/um/drivers/random.c | 103 ++++++++++++-----------------------------------
  1 file changed, 25 insertions(+), 78 deletions(-)
 
-diff --git a/arch/um/drivers/random.c b/arch/um/drivers/random.c
-index ce115fc..cd6f4fc 100644
---- a/arch/um/drivers/random.c
-+++ b/arch/um/drivers/random.c
+Index: linux/arch/um/drivers/random.c
+===================================================================
+--- linux.orig/arch/um/drivers/random.c	2020-10-09 02:03:53.370365135 +0300
++++ linux/arch/um/drivers/random.c	2020-10-09 02:03:53.368365166 +0300
 @@ -11,6 +11,7 @@
  #include <linux/fs.h>
  #include <linux/interrupt.h>
@@ -89,11 +89,11 @@ index ce115fc..cd6f4fc 100644
  
 -			add_wait_queue(&host_read_wait, &wait);
 -			set_current_state(TASK_INTERRUPTIBLE);
--
--			schedule();
--			remove_wait_queue(&host_read_wait, &wait);
 +			ret = wait_for_completion_killable (&have_data);
  
+-			schedule();
+-			remove_wait_queue(&host_read_wait, &wait);
+-
 -			if (atomic_dec_and_test(&host_sleep_count)) {
 -				ignore_sigio_fd(random_fd);
 -				deactivate_fd(random_fd, RANDOM_IRQ);
@@ -135,7 +135,7 @@ index ce115fc..cd6f4fc 100644
  
  	return IRQ_HANDLED;
  }
-@@ -126,17 +71,19 @@ static int __init rng_init (void)
+@@ -126,17 +71,19 @@
  		goto out;
  
  	random_fd = err;
@@ -158,7 +158,7 @@ index ce115fc..cd6f4fc 100644
  			"failed\n");
  		goto err_out_cleanup_hw;
  	}
-@@ -161,8 +108,8 @@ static void cleanup(void)
+@@ -161,8 +108,8 @@
  
  static void __exit rng_cleanup(void)
  {

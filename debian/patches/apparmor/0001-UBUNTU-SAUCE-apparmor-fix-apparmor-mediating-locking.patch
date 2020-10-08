@@ -20,11 +20,11 @@ Signed-off-by: Seth Forshee <seth.forshee@canonical.com>
  security/apparmor/lib.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/security/apparmor/lib.c b/security/apparmor/lib.c
-index 30c246a..ec24f86 100644
---- a/security/apparmor/lib.c
-+++ b/security/apparmor/lib.c
-@@ -334,7 +334,7 @@ void aa_compute_perms(struct aa_dfa *dfa, unsigned int state,
+Index: linux/security/apparmor/lib.c
+===================================================================
+--- linux.orig/security/apparmor/lib.c	2020-10-09 02:03:52.539377798 +0300
++++ linux/security/apparmor/lib.c	2020-10-09 02:03:52.537377828 +0300
+@@ -334,7 +334,7 @@
  	/* for v5 perm mapping in the policydb, the other set is used
  	 * to extend the general perm set
  	 */

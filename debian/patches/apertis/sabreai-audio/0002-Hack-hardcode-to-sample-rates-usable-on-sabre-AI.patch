@@ -14,11 +14,11 @@ Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
  sound/soc/fsl/fsl-asoc-card.c | 1 +
  2 files changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/sound/soc/codecs/cs42xx8.c b/sound/soc/codecs/cs42xx8.c
-index 9f0ab34..3e676ac 100644
---- a/sound/soc/codecs/cs42xx8.c
-+++ b/sound/soc/codecs/cs42xx8.c
-@@ -388,13 +388,15 @@ static struct snd_soc_dai_driver cs42xx8_dai = {
+Index: linux/sound/soc/codecs/cs42xx8.c
+===================================================================
+--- linux.orig/sound/soc/codecs/cs42xx8.c	2020-10-09 02:03:52.822373485 +0300
++++ linux/sound/soc/codecs/cs42xx8.c	2020-10-09 02:03:52.820373516 +0300
+@@ -388,13 +388,15 @@
  		.stream_name = "Playback",
  		.channels_min = 1,
  		.channels_max = 8,
@@ -36,11 +36,11 @@ index 9f0ab34..3e676ac 100644
  		.formats = CS42XX8_FORMATS,
  	},
  	.ops = &cs42xx8_dai_ops,
-diff --git a/sound/soc/fsl/fsl-asoc-card.c b/sound/soc/fsl/fsl-asoc-card.c
-index bb33601..d5209ca 100644
---- a/sound/soc/fsl/fsl-asoc-card.c
-+++ b/sound/soc/fsl/fsl-asoc-card.c
-@@ -548,6 +548,7 @@ static int fsl_asoc_card_probe(struct platform_device *pdev)
+Index: linux/sound/soc/fsl/fsl-asoc-card.c
+===================================================================
+--- linux.orig/sound/soc/fsl/fsl-asoc-card.c	2020-10-09 02:03:52.822373485 +0300
++++ linux/sound/soc/fsl/fsl-asoc-card.c	2020-10-09 02:03:52.820373516 +0300
+@@ -548,6 +548,7 @@
  		priv->cpu_priv.sysclk_dir[RX] = SND_SOC_CLOCK_OUT;
  		priv->cpu_priv.slot_width = 32;
  		priv->dai_fmt |= SND_SOC_DAIFMT_CBS_CFS;

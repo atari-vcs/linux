@@ -22,11 +22,11 @@ Signed-off-by: John Johansen <john.johansen@canonical.com>
  create mode 100644 security/apparmor/af_unix.c
  create mode 100644 security/apparmor/include/af_unix.h
 
-diff --git a/security/apparmor/Makefile b/security/apparmor/Makefile
-index ff23fcf..fad407f 100644
---- a/security/apparmor/Makefile
-+++ b/security/apparmor/Makefile
-@@ -5,7 +5,8 @@ obj-$(CONFIG_SECURITY_APPARMOR) += apparmor.o
+Index: linux/security/apparmor/Makefile
+===================================================================
+--- linux.orig/security/apparmor/Makefile	2020-10-09 02:03:52.305381363 +0300
++++ linux/security/apparmor/Makefile	2020-10-09 02:03:52.302381409 +0300
+@@ -5,7 +5,8 @@
  
  apparmor-y := apparmorfs.o audit.o capability.o task.o ipc.o lib.o match.o \
                path.o domain.o policy.o policy_unpack.o procattr.o lsm.o \
@@ -36,11 +36,10 @@ index ff23fcf..fad407f 100644
  apparmor-$(CONFIG_SECURITY_APPARMOR_HASH) += crypto.o
  
  clean-files := capability_names.h rlim_names.h net_names.h
-diff --git a/security/apparmor/af_unix.c b/security/apparmor/af_unix.c
-new file mode 100644
-index 0000000..54b3796
---- /dev/null
-+++ b/security/apparmor/af_unix.c
+Index: linux/security/apparmor/af_unix.c
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ linux/security/apparmor/af_unix.c	2020-10-09 02:03:52.302381409 +0300
 @@ -0,0 +1,652 @@
 +/*
 + * AppArmor security module
@@ -694,11 +693,11 @@ index 0000000..54b3796
 +
 +	return error;
 +}
-diff --git a/security/apparmor/apparmorfs.c b/security/apparmor/apparmorfs.c
-index 9305ca0..6e80794 100644
---- a/security/apparmor/apparmorfs.c
-+++ b/security/apparmor/apparmorfs.c
-@@ -2378,6 +2378,11 @@ static struct aa_sfs_entry aa_sfs_entry_ns[] = {
+Index: linux/security/apparmor/apparmorfs.c
+===================================================================
+--- linux.orig/security/apparmor/apparmorfs.c	2020-10-09 02:03:52.305381363 +0300
++++ linux/security/apparmor/apparmorfs.c	2020-10-09 02:03:52.303381393 +0300
+@@ -2348,6 +2348,11 @@
  	{ }
  };
  
@@ -710,7 +709,7 @@ index 9305ca0..6e80794 100644
  static struct aa_sfs_entry aa_sfs_entry_query_label[] = {
  	AA_SFS_FILE_STRING("perms", "allow deny audit quiet"),
  	AA_SFS_FILE_BOOLEAN("data",		1),
-@@ -2402,6 +2407,7 @@ static struct aa_sfs_entry aa_sfs_entry_features[] = {
+@@ -2372,6 +2377,7 @@
  	AA_SFS_DIR("caps",			aa_sfs_entry_caps),
  	AA_SFS_DIR("ptrace",			aa_sfs_entry_ptrace),
  	AA_SFS_DIR("signal",			aa_sfs_entry_signal),
@@ -718,10 +717,10 @@ index 9305ca0..6e80794 100644
  	AA_SFS_DIR("query",			aa_sfs_entry_query),
  	{ }
  };
-diff --git a/security/apparmor/file.c b/security/apparmor/file.c
-index f1caf36..ccc4e02 100644
---- a/security/apparmor/file.c
-+++ b/security/apparmor/file.c
+Index: linux/security/apparmor/file.c
+===================================================================
+--- linux.orig/security/apparmor/file.c	2020-10-09 02:03:52.305381363 +0300
++++ linux/security/apparmor/file.c	2020-10-09 02:03:52.303381393 +0300
 @@ -12,6 +12,7 @@
  #include <linux/fdtable.h>
  #include <linux/file.h>
@@ -730,7 +729,7 @@ index f1caf36..ccc4e02 100644
  #include "include/apparmor.h"
  #include "include/audit.h"
  #include "include/cred.h"
-@@ -280,7 +281,8 @@ int __aa_path_perm(const char *op, struct aa_profile *profile, const char *name,
+@@ -280,7 +281,8 @@
  {
  	int e = 0;
  
@@ -740,11 +739,10 @@ index f1caf36..ccc4e02 100644
  		return 0;
  	aa_str_perms(profile->file.dfa, profile->file.start, name, cond, perms);
  	if (request & ~perms->allow)
-diff --git a/security/apparmor/include/af_unix.h b/security/apparmor/include/af_unix.h
-new file mode 100644
-index 0000000..d1b7f23
---- /dev/null
-+++ b/security/apparmor/include/af_unix.h
+Index: linux/security/apparmor/include/af_unix.h
+===================================================================
+--- /dev/null	1970-01-01 00:00:00.000000000 +0000
++++ linux/security/apparmor/include/af_unix.h	2020-10-09 02:03:52.303381393 +0300
 @@ -0,0 +1,114 @@
 +/*
 + * AppArmor security module
@@ -860,10 +858,10 @@ index 0000000..d1b7f23
 +		      struct socket *sock);
 +
 +#endif /* __AA_AF_UNIX_H */
-diff --git a/security/apparmor/include/net.h b/security/apparmor/include/net.h
-index 74768db..4ff96fa 100644
---- a/security/apparmor/include/net.h
-+++ b/security/apparmor/include/net.h
+Index: linux/security/apparmor/include/net.h
+===================================================================
+--- linux.orig/security/apparmor/include/net.h	2020-10-09 02:03:52.305381363 +0300
++++ linux/security/apparmor/include/net.h	2020-10-09 02:03:52.303381393 +0300
 @@ -49,6 +49,7 @@
  struct aa_sk_ctx {
  	struct aa_label *label;
@@ -872,7 +870,7 @@ index 74768db..4ff96fa 100644
  };
  
  #define SK_CTX(X) ((X)->sk_security)
-@@ -83,6 +84,9 @@ struct aa_net_compat {
+@@ -83,6 +84,9 @@
  ({						\
  	int __e;				\
  	switch ((FAMILY)) {			\
@@ -882,10 +880,10 @@ index 74768db..4ff96fa 100644
  	default:				\
  		__e = DEF_FN;			\
  	}					\
-diff --git a/security/apparmor/include/path.h b/security/apparmor/include/path.h
-index 44a7945..44592cd 100644
---- a/security/apparmor/include/path.h
-+++ b/security/apparmor/include/path.h
+Index: linux/security/apparmor/include/path.h
+===================================================================
+--- linux.orig/security/apparmor/include/path.h	2020-10-09 02:03:52.305381363 +0300
++++ linux/security/apparmor/include/path.h	2020-10-09 02:03:52.303381393 +0300
 @@ -13,6 +13,7 @@
  
  enum path_flags {
@@ -894,11 +892,11 @@ index 44a7945..44592cd 100644
  	PATH_CONNECT_PATH = 0x4,	/* connect disconnected paths to / */
  	PATH_CHROOT_REL = 0x8,		/* do path lookup relative to chroot */
  	PATH_CHROOT_NSCONNECT = 0x10,	/* connect paths that are at ns root */
-diff --git a/security/apparmor/include/policy.h b/security/apparmor/include/policy.h
-index f904105..f1c9cdc 100644
---- a/security/apparmor/include/policy.h
-+++ b/security/apparmor/include/policy.h
-@@ -230,9 +230,13 @@ static inline unsigned int PROFILE_MEDIATES_AF(struct aa_profile *profile,
+Index: linux/security/apparmor/include/policy.h
+===================================================================
+--- linux.orig/security/apparmor/include/policy.h	2020-10-09 02:03:52.305381363 +0300
++++ linux/security/apparmor/include/policy.h	2020-10-09 02:03:52.303381393 +0300
+@@ -230,9 +230,13 @@
  	unsigned int state = PROFILE_MEDIATES(profile, AA_CLASS_NET);
  	__be16 be_af = cpu_to_be16(AF);
  
@@ -915,10 +913,10 @@ index f904105..f1c9cdc 100644
  }
  
  /**
-diff --git a/security/apparmor/lsm.c b/security/apparmor/lsm.c
-index 66a8504..5c8b9ab 100644
---- a/security/apparmor/lsm.c
-+++ b/security/apparmor/lsm.c
+Index: linux/security/apparmor/lsm.c
+===================================================================
+--- linux.orig/security/apparmor/lsm.c	2020-10-09 02:03:52.305381363 +0300
++++ linux/security/apparmor/lsm.c	2020-10-09 02:03:52.303381393 +0300
 @@ -22,9 +22,11 @@
  #include <linux/netfilter_ipv4.h>
  #include <linux/netfilter_ipv6.h>
@@ -931,7 +929,7 @@ index 66a8504..5c8b9ab 100644
  #include "include/apparmor.h"
  #include "include/apparmorfs.h"
  #include "include/audit.h"
-@@ -792,6 +794,7 @@ static void apparmor_sk_free_security(struct sock *sk)
+@@ -792,6 +794,7 @@
  	SK_CTX(sk) = NULL;
  	aa_put_label(ctx->label);
  	aa_put_label(ctx->peer);
@@ -939,7 +937,7 @@ index 66a8504..5c8b9ab 100644
  	kfree(ctx);
  }
  
-@@ -811,6 +814,99 @@ static void apparmor_sk_clone_security(const struct sock *sk,
+@@ -811,6 +814,99 @@
  	if (new->peer)
  		aa_put_label(new->peer);
  	new->peer = aa_get_label(ctx->peer);
@@ -1039,7 +1037,7 @@ index 66a8504..5c8b9ab 100644
  }
  
  /**
-@@ -1056,11 +1152,25 @@ static int apparmor_socket_sock_rcv_skb(struct sock *sk, struct sk_buff *skb)
+@@ -1056,11 +1152,25 @@
  
  static struct aa_label *sk_peer_label(struct sock *sk)
  {
@@ -1065,7 +1063,7 @@ index 66a8504..5c8b9ab 100644
  	return ERR_PTR(-ENOPROTOOPT);
  }
  
-@@ -1207,6 +1317,9 @@ static struct security_hook_list apparmor_hooks[] __lsm_ro_after_init = {
+@@ -1207,6 +1317,9 @@
  	LSM_HOOK_INIT(sk_free_security, apparmor_sk_free_security),
  	LSM_HOOK_INIT(sk_clone_security, apparmor_sk_clone_security),
  
@@ -1075,10 +1073,10 @@ index 66a8504..5c8b9ab 100644
  	LSM_HOOK_INIT(socket_create, apparmor_socket_create),
  	LSM_HOOK_INIT(socket_post_create, apparmor_socket_post_create),
  	LSM_HOOK_INIT(socket_bind, apparmor_socket_bind),
-diff --git a/security/apparmor/net.c b/security/apparmor/net.c
-index 1d8f5ff..297589c 100644
---- a/security/apparmor/net.c
-+++ b/security/apparmor/net.c
+Index: linux/security/apparmor/net.c
+===================================================================
+--- linux.orig/security/apparmor/net.c	2020-10-09 02:03:52.305381363 +0300
++++ linux/security/apparmor/net.c	2020-10-09 02:03:52.303381393 +0300
 @@ -8,6 +8,7 @@
   * Copyright 2009-2017 Canonical Ltd.
   */
@@ -1087,7 +1085,7 @@ index 1d8f5ff..297589c 100644
  #include "include/apparmor.h"
  #include "include/audit.h"
  #include "include/cred.h"
-@@ -26,6 +27,7 @@ struct aa_sfs_entry aa_sfs_entry_network[] = {
+@@ -26,6 +27,7 @@
  
  struct aa_sfs_entry aa_sfs_entry_network_compat[] = {
  	AA_SFS_FILE_STRING("af_mask",	AA_SFS_AF_MASK),
@@ -1095,7 +1093,7 @@ index 1d8f5ff..297589c 100644
  	{ }
  };
  
-@@ -71,6 +73,36 @@ static const char * const net_mask_names[] = {
+@@ -71,6 +73,36 @@
  	"unknown",
  };
  
@@ -1132,7 +1130,7 @@ index 1d8f5ff..297589c 100644
  
  /* audit callback for net specific fields */
  void audit_net_cb(struct audit_buffer *ab, void *va)
-@@ -100,6 +132,23 @@ void audit_net_cb(struct audit_buffer *ab, void *va)
+@@ -100,6 +132,23 @@
  					   net_mask_names, NET_PERMS_MASK);
  		}
  	}
@@ -1156,7 +1154,7 @@ index 1d8f5ff..297589c 100644
  	if (aad(sa)->peer) {
  		audit_log_format(ab, " peer=");
  		aa_label_xaudit(ab, labels_ns(aad(sa)->label), aad(sa)->peer,
-@@ -200,7 +249,9 @@ int aa_sock_file_perm(struct aa_label *label, const char *op, u32 request,
+@@ -200,7 +249,9 @@
  	AA_BUG(!sock);
  	AA_BUG(!sock->sk);
  
@@ -1167,11 +1165,11 @@ index 1d8f5ff..297589c 100644
  }
  
  #ifdef CONFIG_NETWORK_SECMARK
-diff --git a/security/apparmor/policy_unpack.c b/security/apparmor/policy_unpack.c
-index b9dcd53..525ca81 100644
---- a/security/apparmor/policy_unpack.c
-+++ b/security/apparmor/policy_unpack.c
-@@ -318,13 +318,13 @@ static bool unpack_u16(struct aa_ext *e, u16 *data, const char *name)
+Index: linux/security/apparmor/policy_unpack.c
+===================================================================
+--- linux.orig/security/apparmor/policy_unpack.c	2020-10-09 02:03:52.305381363 +0300
++++ linux/security/apparmor/policy_unpack.c	2020-10-09 02:03:52.303381393 +0300
+@@ -318,13 +318,13 @@
  {
  	if (unpack_nameX(e, AA_U16, name)) {
  		if (!inbounds(e, sizeof(u16)))

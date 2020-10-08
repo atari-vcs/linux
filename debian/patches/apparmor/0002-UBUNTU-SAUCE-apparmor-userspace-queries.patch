@@ -14,11 +14,11 @@ Signed-off-by: Seth Forshee <seth.forshee@canonical.com>
  security/apparmor/include/policy.h | 10 ++++++++++
  2 files changed, 11 insertions(+), 1 deletion(-)
 
-diff --git a/security/apparmor/apparmorfs.c b/security/apparmor/apparmorfs.c
-index 6e80794..448577a 100644
---- a/security/apparmor/apparmorfs.c
-+++ b/security/apparmor/apparmorfs.c
-@@ -656,7 +656,7 @@ static void profile_query_cb(struct aa_profile *profile, struct aa_perms *perms,
+Index: linux/security/apparmor/apparmorfs.c
+===================================================================
+--- linux.orig/security/apparmor/apparmorfs.c	2020-10-09 02:03:52.628376441 +0300
++++ linux/security/apparmor/apparmorfs.c	2020-10-09 02:03:52.626376472 +0300
+@@ -624,7 +624,7 @@
  			tmp = aa_compute_fperms(dfa, state, &cond);
  		}
  	} else if (profile->policy.dfa) {
@@ -27,11 +27,11 @@ index 6e80794..448577a 100644
  			return;	/* no change to current perms */
  		dfa = profile->policy.dfa;
  		state = aa_dfa_match_len(dfa, profile->policy.start[0],
-diff --git a/security/apparmor/include/policy.h b/security/apparmor/include/policy.h
-index f1c9cdc..45c9aa4 100644
---- a/security/apparmor/include/policy.h
-+++ b/security/apparmor/include/policy.h
-@@ -225,6 +225,16 @@ static inline unsigned int PROFILE_MEDIATES(struct aa_profile *profile,
+Index: linux/security/apparmor/include/policy.h
+===================================================================
+--- linux.orig/security/apparmor/include/policy.h	2020-10-09 02:03:52.628376441 +0300
++++ linux/security/apparmor/include/policy.h	2020-10-09 02:03:52.626376472 +0300
+@@ -225,6 +225,16 @@
  					profile->policy.start[0], &class, 1);
  }
  
