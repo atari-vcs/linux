@@ -1,11 +1,12 @@
 [base]
 featuresets:
  none
+ rt
 kernel-arch: x86
 
 [build]
 image-file: arch/x86/boot/bzImage
-signed-code: false
+signed-code: true
 vdso: true
 
 [image]
@@ -14,7 +15,7 @@ install-stem: vmlinuz
 breaks: xserver-xorg-input-vmmouse (<< 1:13.0.99)
 
 [relations]
-headers%gcc-8: linux-compiler-gcc-8-x86
+headers%gcc-10: linux-compiler-gcc-10-x86
 
 [amd64_description]
 hardware: 64-bit PCs

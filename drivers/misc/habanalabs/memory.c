@@ -66,6 +66,11 @@ static int alloc_device_memory(struct hl_ctx *ctx, struct hl_mem_in *args,
 	num_pgs = (args->alloc.mem_size + (page_size - 1)) >> page_shift;
 	total_size = num_pgs << page_shift;
 
+	if (!total_size) {
+		dev_err(hdev->dev, "Cannot allocate 0 bytes\n");
+		return -EINVAL;
+	}
+
 	contiguous = args->flags & HL_MEM_CONTIGUOUS;
 
 	if (contiguous) {
@@ -93,7 +98,7 @@ static int alloc_device_memory(struct hl_ctx *ctx, struct hl_mem_in *args,
 	phys_pg_pack->contiguous = contiguous;
 
 	phys_pg_pack->pages = kvmalloc_array(num_pgs, sizeof(u64), GFP_KERNEL);
-	if (!phys_pg_pack->pages) {
+	if (ZERO_OR_NULL_PTR(phys_pg_pack->pages)) {
 		rc = -ENOMEM;
 		goto pages_arr_err;
 	}
@@ -683,7 +688,7 @@ static int init_phys_pg_pack_from_userptr(struct hl_ctx *ctx,
 
 	phys_pg_pack->pages = kvmalloc_array(total_npages, sizeof(u64),
 						GFP_KERNEL);
-	if (!phys_pg_pack->pages) {
+	if (ZERO_OR_NULL_PTR(phys_pg_pack->pages)) {
 		rc = -ENOMEM;
 		goto page_pack_arr_mem_err;
 	}
@@ -886,6 +891,7 @@ static int map_device_va(struct hl_ctx *ctx, struct hl_mem_in *args,
 
 		vm_type = (enum vm_type_t *) userptr;
 		hint_addr = args->map_host.hint_addr;
+		handle = phys_pg_pack->handle;
 	} else {
 		handle = lower_32_bits(args->map_device.handle);
 
@@ -954,9 +960,16 @@ static int map_device_va(struct hl_ctx *ctx, struct hl_mem_in *args,
 		goto map_err;
 	}
 
-	hdev->asic_funcs->mmu_invalidate_cache(hdev, false, *vm_type);
+	rc = hdev->asic_funcs->mmu_invalidate_cache(hdev, false, *vm_type);
 
 	mutex_unlock(&ctx->mmu_lock);
+
+	if (rc) {
+		dev_err(hdev->dev,
+			"mapping handle %u failed due to MMU cache invalidation\n",
+			handle);
+		goto map_err;
+	}
 
 	ret_vaddr += phys_pg_pack->offset;
 
@@ -1015,7 +1028,7 @@ static int unmap_device_va(struct hl_ctx *ctx, u64 vaddr, bool ctx_free)
 	struct hl_va_range *va_range;
 	enum vm_type_t *vm_type;
 	bool is_userptr;
-	int rc;
+	int rc = 0;
 
 	/* protect from double entrance */
 	mutex_lock(&ctx->mem_hash_lock);
@@ -1083,21 +1096,34 @@ static int unmap_device_va(struct hl_ctx *ctx, u64 vaddr, bool ctx_free)
 	 * at the loop end rather than for each iteration
 	 */
 	if (!ctx_free)
-		hdev->asic_funcs->mmu_invalidate_cache(hdev, true, *vm_type);
+		rc = hdev->asic_funcs->mmu_invalidate_cache(hdev, true,
+								*vm_type);
 
 	mutex_unlock(&ctx->mmu_lock);
 
 	/*
-	 * No point in maintaining the free VA block list if the context is
-	 * closing as the list will be freed anyway
+	 * If the context is closing we don't need to check for the MMU cache
+	 * invalidation return code and update the VA free list as in this flow
+	 * we invalidate the MMU cache outside of this unmap function and the VA
+	 * free list will be freed anyway.
 	 */
 	if (!ctx_free) {
-		rc = add_va_block(hdev, va_range, vaddr,
-					vaddr + phys_pg_pack->total_size - 1);
+		int tmp_rc;
+
 		if (rc)
+			dev_err(hdev->dev,
+				"unmapping vaddr 0x%llx failed due to MMU cache invalidation\n",
+				vaddr);
+
+		tmp_rc = add_va_block(hdev, va_range, vaddr,
+					vaddr + phys_pg_pack->total_size - 1);
+		if (tmp_rc) {
 			dev_warn(hdev->dev,
 					"add va block failed for vaddr: 0x%llx\n",
 					vaddr);
+			if (!rc)
+				rc = tmp_rc;
+		}
 	}
 
 	atomic_dec(&phys_pg_pack->mapping_cnt);
@@ -1108,7 +1134,7 @@ static int unmap_device_va(struct hl_ctx *ctx, u64 vaddr, bool ctx_free)
 		dma_unmap_host_va(hdev, userptr);
 	}
 
-	return 0;
+	return rc;
 
 mapping_cnt_err:
 	if (is_userptr)

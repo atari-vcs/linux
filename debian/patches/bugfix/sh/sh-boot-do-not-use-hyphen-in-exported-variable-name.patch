@@ -1,7 +1,6 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Sat, 19 Aug 2017 21:42:09 +0100
 Subject: sh: Do not use hyphen in exported variable names
-
 Forwarded: https://marc.info/?l=linux-sh&m=150317827322995&w=2
 
 arch/sh/Makefile defines and exports ld-bfd to be used by
@@ -25,33 +24,33 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  4 files changed, 18 insertions(+), 18 deletions(-)
 
 diff --git a/arch/sh/Makefile b/arch/sh/Makefile
-index 185702f..5f6e145 100644
+index 974bbd9dcfcf..bb952611af6a 100644
 --- a/arch/sh/Makefile
 +++ b/arch/sh/Makefile
-@@ -119,16 +119,16 @@ LDFLAGS_vmlinux		+= --defsym phys_stext=_stext-$(CONFIG_PAGE_OFFSET) \
- endif
+@@ -106,16 +106,16 @@ UTS_MACHINE		:= sh
+ LDFLAGS_vmlinux		+= -e _stext
  
  ifdef CONFIG_CPU_LITTLE_ENDIAN
--ld-bfd			:= elf32-$(UTS_MACHINE)-linux
+-ld-bfd			:= elf32-sh-linux
 -LDFLAGS_vmlinux		+= --defsym jiffies=jiffies_64 --oformat $(ld-bfd)
-+ld_bfd			:= elf32-$(UTS_MACHINE)-linux
++ld_bfd			:= elf32-sh-linux
 +LDFLAGS_vmlinux		+= --defsym jiffies=jiffies_64 --oformat $(ld_bfd)
  KBUILD_LDFLAGS		+= -EL
  else
--ld-bfd			:= elf32-$(UTS_MACHINE)big-linux
+-ld-bfd			:= elf32-shbig-linux
 -LDFLAGS_vmlinux		+= --defsym jiffies=jiffies_64+4 --oformat $(ld-bfd)
-+ld_bfd			:= elf32-$(UTS_MACHINE)big-linux
++ld_bfd			:= elf32-shbig-linux
 +LDFLAGS_vmlinux		+= --defsym jiffies=jiffies_64+4 --oformat $(ld_bfd)
  KBUILD_LDFLAGS		+= -EB
  endif
  
--export ld-bfd BITS
-+export ld_bfd BITS
+-export ld-bfd
++export ld_bfd
  
- head-y	:= arch/sh/kernel/head_$(BITS).o
+ head-y	:= arch/sh/kernel/head_32.o
  
 diff --git a/arch/sh/boot/Makefile b/arch/sh/boot/Makefile
-index 58592df..296b254 100644
+index 58592dfa5cb6..296b25474395 100644
 --- a/arch/sh/boot/Makefile
 +++ b/arch/sh/boot/Makefile
 @@ -19,12 +19,12 @@ CONFIG_ZERO_PAGE_OFFSET	?= 0x00001000
@@ -87,7 +86,7 @@ index 58592df..296b254 100644
 -       KERNEL_MEMORY suffix-y
 +       KERNEL_MEMORY suffix_y
 diff --git a/arch/sh/boot/compressed/Makefile b/arch/sh/boot/compressed/Makefile
-index f5e1bd7..dd130d3 100644
+index ad0e2403e56f..c711416699bd 100644
 --- a/arch/sh/boot/compressed/Makefile
 +++ b/arch/sh/boot/compressed/Makefile
 @@ -33,7 +33,7 @@ ORIG_CFLAGS := $(KBUILD_CFLAGS)
@@ -99,7 +98,7 @@ index f5e1bd7..dd130d3 100644
  		   -T $(obj)/../../kernel/vmlinux.lds
  
  #
-@@ -75,7 +75,7 @@ $(obj)/vmlinux.bin.lzo: $(vmlinux.bin.all-y) FORCE
+@@ -71,7 +71,7 @@ $(obj)/vmlinux.bin.lzo: $(vmlinux.bin.all-y) FORCE
  
  OBJCOPYFLAGS += -R .empty_zero_page
  
@@ -110,7 +109,7 @@ index f5e1bd7..dd130d3 100644
 +$(obj)/piggy.o: $(obj)/vmlinux.scr $(obj)/vmlinux.bin.$(suffix_y) FORCE
  	$(call if_changed,ld)
 diff --git a/arch/sh/boot/romimage/Makefile b/arch/sh/boot/romimage/Makefile
-index c7c8be5..17b03df 100644
+index c7c8be58400c..17b03df0a8de 100644
 --- a/arch/sh/boot/romimage/Makefile
 +++ b/arch/sh/boot/romimage/Makefile
 @@ -13,7 +13,7 @@ mmcif-obj-$(CONFIG_CPU_SUBTYPE_SH7724)	:= $(obj)/mmcif-sh7724.o
@@ -131,3 +130,6 @@ index c7c8be5..17b03df 100644
  
  $(obj)/piggy.o: $(obj)/vmlinux.scr $(obj)/zeropage.bin arch/sh/boot/zImage FORCE
  	$(call if_changed,ld)
+-- 
+2.27.0
+

@@ -1,21 +1,17 @@
 From: YunQiang Su <syq@debian.org>
 Date: Mon, 14 May 2018 16:16:18 +0800
-Subject: Disable uImage generation for mips generic
-
+Subject: Disable uImage generation for mips generic 
 Forwarded: not-needed
 
 MIPS generic trys to generate uImage when build, which then ask for
 u-boot-tools.
----
- arch/mips/generic/Platform | 2 --
- 1 file changed, 2 deletions(-)
 
-diff --git a/arch/mips/generic/Platform b/arch/mips/generic/Platform
-index eaa19d1..10b058f 100644
---- a/arch/mips/generic/Platform
-+++ b/arch/mips/generic/Platform
-@@ -11,9 +11,7 @@
- platform-$(CONFIG_MIPS_GENERIC)	+= generic/
+Index: debian-kernel/arch/mips/generic/Platform
+===================================================================
+--- debian-kernel.orig/arch/mips/generic/Platform
++++ debian-kernel/arch/mips/generic/Platform
+@@ -10,9 +10,7 @@
+ 
  cflags-$(CONFIG_MIPS_GENERIC)	+= -I$(srctree)/arch/mips/include/asm/mach-generic
  load-$(CONFIG_MIPS_GENERIC)	+= 0xffffffff80100000
 -all-$(CONFIG_MIPS_GENERIC)	:= vmlinux.gz.itb

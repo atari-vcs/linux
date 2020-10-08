@@ -21,6 +21,8 @@ debian/tools-perf-install.patch
 debian/wireless-add-debian-wireless-regdb-certificates.patch
 debian/export-symbols-needed-by-android-drivers.patch
 debian/android-enable-building-ashmem-and-binder-as-modules.patch
+debian/documentation-drop-sphinx-version-check.patch
+debian/perf-traceevent-support-asciidoctor-for-documentatio.patch
 
 # Fixes/improvements to firmware loading
 features/all/drivers-media-dvb-usb-af9005-request_firmware.patch
@@ -67,6 +69,7 @@ bugfix/arm/arm-dts-kirkwood-fix-sata-pinmux-ing-for-ts419.patch
 bugfix/arm64/dts-rockchip-correct-voltage-selector-firefly-RK3399.patch
 bugfix/x86/perf-tools-fix-unwind-build-on-i386.patch
 bugfix/sh/sh-boot-do-not-use-hyphen-in-exported-variable-name.patch
+bugfix/sh/sh-implement-__get_user_u64.patch
 bugfix/arm/arm-mm-export-__sync_icache_dcache-for-xen-privcmd.patch
 bugfix/powerpc/powerpc-boot-fix-missing-crc32poly.h-when-building-with-kernel_xz.patch
 bugfix/arm64/arm64-acpi-Add-fixup-for-HPE-m400-quirks.patch
@@ -75,6 +78,7 @@ bugfix/x86/x86-32-disable-3dnow-in-generic-config.patch
 # Arch features
 features/x86/x86-memtest-WARN-if-bad-RAM-found.patch
 features/x86/x86-make-x32-syscall-support-conditional.patch
+features/arm64/arm64-dts-rockchip-add-fuel-gauge-to-Pinebook-Pro-dt.patch
 
 # Miscellaneous bug fixes
 bugfix/all/disable-some-marvell-phys.patch
@@ -82,7 +86,8 @@ bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
 bugfix/all/partially-revert-usb-kconfig-using-select-for-usb_co.patch
 debian/revert-objtool-fix-config_stack_validation-y-warning.patch
 bugfix/all/partially-revert-net-socket-implement-64-bit-timestamps.patch
-bugfix/all/nfsd-apply-umask-on-fs-without-ACL-support.patch
+bugfix/all/usbip-tools-fix-build-error-for-multiple-definition.patch
+bugfix/all/iwlwifi-yoyo-don-t-print-failure-if-debug-firmware-i.patch
 
 # Miscellaneous features
 
@@ -121,9 +126,13 @@ bugfix/all/libcpupower-hide-private-function.patch
 bugfix/all/cpupower-fix-checks-for-cpu-existence.patch
 bugfix/all/tools-perf-pmu-events-fix-reproducibility.patch
 bugfix/all/0005-libtraceevent-Add-dependency-on-libdl.patch
+bugfix/all/bpftool-fix-version-string-in-recursive-builds.patch
+bugfix/all/tools-include-uapi-fix-errno.h.patch
 
 # overlay: allow mounting in user namespaces
 debian/overlayfs-permit-mounts-in-userns.patch
+
+debian/doc-disable-extension-incompatible-with-sphinx-3.patch
 
 # ABI maintenance
 

@@ -1,8 +1,5 @@
-[packages]
-installer: false
-
 [abi]
-abiname: 1
+abiname: 2
 ignore-changes:
  __cpuhp_*
  bpf_analyzer
@@ -134,7 +131,7 @@ arches:
  sparc
  sparc64
  x32
-compiler: gcc-8
+compiler: gcc-10
 featuresets:
  none
  rt
@@ -158,7 +155,7 @@ recommends: apparmor
 
 [relations]
 # compilers
-gcc-8: gcc-8 <!stage1 !cross !pkg.linux.nokernel>, gcc-8-@gnu-type-package@ <!stage1 cross !pkg.linux.nokernel>
+gcc-10: gcc-10 <!stage1 !cross !pkg.linux.nokernel>, gcc-10-@gnu-type-package@ <!stage1 cross !pkg.linux.nokernel>
 
 # initramfs-generators
 initramfs-fallback: linux-initramfs-tool

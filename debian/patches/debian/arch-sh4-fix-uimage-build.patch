@@ -1,7 +1,5 @@
 From: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
-Date: Thu, 30 Apr 2020 09:39:01 +0100
 Subject: [sh4] Fix uImage build
-
 Bug-Debian: https://bugs.debian.org/569034
 Forwarded: not-needed
 
@@ -12,14 +10,17 @@ Forwarded: not-needed
  1 file changed, 1 deletion(-)
 
 diff --git a/arch/sh/Makefile b/arch/sh/Makefile
-index b4a86f2..185702f 100644
+index da9cf952f33c..974bbd9dcfcf 100644
 --- a/arch/sh/Makefile
 +++ b/arch/sh/Makefile
-@@ -89,7 +89,6 @@ OBJCOPYFLAGS	:= -O binary -R .note -R .note.gnu.build-id -R .comment \
+@@ -85,7 +85,6 @@ OBJCOPYFLAGS	:= -O binary -R .note -R .note.gnu.build-id -R .comment \
  
  # Give the various platforms the opportunity to set default image types
- defaultimage-$(CONFIG_SUPERH32)			:= zImage
+ defaultimage-y					:= zImage
 -defaultimage-$(CONFIG_SH_SH7785LCR)		:= uImage
  defaultimage-$(CONFIG_SH_RSK)			:= uImage
  defaultimage-$(CONFIG_SH_URQUELL)		:= uImage
  defaultimage-$(CONFIG_SH_MIGOR)			:= uImage
+-- 
+2.27.0
+

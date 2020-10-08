@@ -266,7 +266,7 @@ static int goya_config_stm(struct hl_device *hdev,
 		WREG32(base_reg + 0xDF4, 0x80);
 		WREG32(base_reg + 0xE8C, input->frequency);
 		WREG32(base_reg + 0xE90, 0x7FF);
-		WREG32(base_reg + 0xE80, 0x7 | (input->id << 16));
+		WREG32(base_reg + 0xE80, 0x27 | (input->id << 16));
 	} else {
 		WREG32(base_reg + 0xE80, 4);
 		WREG32(base_reg + 0xD64, 0);
@@ -358,10 +358,16 @@ static int goya_config_etf(struct hl_device *hdev,
 }
 
 static int goya_etr_validate_address(struct hl_device *hdev, u64 addr,
-		u32 size)
+		u64 size)
 {
 	struct asic_fixed_properties *prop = &hdev->asic_prop;
 	u64 range_start, range_end;
+
+	if (addr > (addr + size)) {
+		dev_err(hdev->dev,
+			"ETR buffer size %llu overflow\n", size);
+		return false;
+	}
 
 	if (hdev->mmu_enable) {
 		range_start = prop->dmmu.start_addr;

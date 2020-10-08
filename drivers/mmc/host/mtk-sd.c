@@ -22,6 +22,7 @@
 #include <linux/slab.h>
 #include <linux/spinlock.h>
 #include <linux/interrupt.h>
+#include <linux/reset.h>
 
 #include <linux/mmc/card.h>
 #include <linux/mmc/core.h>
@@ -414,6 +415,7 @@ struct msdc_host {
 	struct pinctrl_state *pins_uhs;
 	struct delayed_work req_timeout;
 	int irq;		/* host interrupt */
+	struct reset_control *reset;
 
 	struct clk *src_clk;	/* msdc source clock */
 	struct clk *h_clk;      /* msdc h_clk */
@@ -1369,7 +1371,7 @@ static void msdc_set_buswidth(struct msdc_host *host, u32 width)
 static int msdc_ops_switch_volt(struct mmc_host *mmc, struct mmc_ios *ios)
 {
 	struct msdc_host *host = mmc_priv(mmc);
-	int ret = 0;
+	int ret;
 
 	if (!IS_ERR(mmc->supply.vqmmc)) {
 		if (ios->signal_voltage != MMC_SIGNAL_VOLTAGE_330 &&
@@ -1379,18 +1381,19 @@ static int msdc_ops_switch_volt(struct mmc_host *mmc, struct mmc_ios *ios)
 		}
 
 		ret = mmc_regulator_set_vqmmc(mmc, ios);
-		if (ret) {
+		if (ret < 0) {
 			dev_dbg(host->dev, "Regulator set error %d (%d)\n",
 				ret, ios->signal_voltage);
-		} else {
-			/* Apply different pinctrl settings for different signal voltage */
-			if (ios->signal_voltage == MMC_SIGNAL_VOLTAGE_180)
-				pinctrl_select_state(host->pinctrl, host->pins_uhs);
-			else
-				pinctrl_select_state(host->pinctrl, host->pins_default);
+			return ret;
 		}
+
+		/* Apply different pinctrl settings for different signal voltage */
+		if (ios->signal_voltage == MMC_SIGNAL_VOLTAGE_180)
+			pinctrl_select_state(host->pinctrl, host->pins_uhs);
+		else
+			pinctrl_select_state(host->pinctrl, host->pins_default);
 	}
-	return ret;
+	return 0;
 }
 
 static int msdc_card_busy(struct mmc_host *mmc)
@@ -1514,6 +1517,12 @@ static void msdc_init_hw(struct msdc_host *host)
 {
 	u32 val;
 	u32 tune_reg = host->dev_comp->pad_tune_reg;
+
+	if (host->reset) {
+		reset_control_assert(host->reset);
+		usleep_range(10, 50);
+		reset_control_deassert(host->reset);
+	}
 
 	/* Configure to MMC/SD mode, clock free running */
 	sdr_set_bits(host->base + MSDC_CFG, MSDC_CFG_MODE | MSDC_CFG_CKPDN);
@@ -2272,6 +2281,11 @@ static int msdc_drv_probe(struct platform_device *pdev)
 	if (IS_ERR(host->src_clk_cg))
 		host->src_clk_cg = NULL;
 
+	host->reset = devm_reset_control_get_optional_exclusive(&pdev->dev,
+								"hrst");
+	if (IS_ERR(host->reset))
+		return PTR_ERR(host->reset);
+
 	host->irq = platform_get_irq(pdev, 0);
 	if (host->irq < 0) {
 		ret = -EINVAL;
@@ -2325,7 +2339,7 @@ static int msdc_drv_probe(struct platform_device *pdev)
 	if (mmc->caps & MMC_CAP_SDIO_IRQ)
 		mmc->caps2 |= MMC_CAP2_SDIO_IRQ_NOTHREAD;
 
-	mmc->caps |= MMC_CAP_ERASE | MMC_CAP_CMD23;
+	mmc->caps |= MMC_CAP_CMD23;
 	/* MMC core transfer sizes tunable parameters */
 	mmc->max_segs = MAX_BD_NUM;
 	if (host->dev_comp->support_64g)
