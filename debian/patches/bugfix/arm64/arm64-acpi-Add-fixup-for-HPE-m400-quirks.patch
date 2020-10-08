@@ -26,10 +26,10 @@ Signed-off-by: Geoff Levand <geoff@infradead.org>
  1 file changed, 36 insertions(+), 4 deletions(-)
 
 diff --git a/arch/arm64/kernel/acpi.c b/arch/arm64/kernel/acpi.c
-index a100483..29920b9 100644
+index 46ec402..75304d5 100644
 --- a/arch/arm64/kernel/acpi.c
 +++ b/arch/arm64/kernel/acpi.c
-@@ -31,6 +31,8 @@
+@@ -32,6 +32,8 @@
  #include <asm/pgtable.h>
  #include <asm/smp_plat.h>
  
@@ -38,7 +38,7 @@ index a100483..29920b9 100644
  int acpi_noirq = 1;		/* skip ACPI IRQ initialization */
  int acpi_disabled = 1;
  EXPORT_SYMBOL(acpi_disabled);
-@@ -176,6 +178,33 @@ static int __init acpi_fadt_sanity_check(void)
+@@ -177,6 +179,33 @@ static int __init acpi_fadt_sanity_check(void)
  	return ret;
  }
  
@@ -72,7 +72,7 @@ index a100483..29920b9 100644
  /*
   * acpi_boot_table_init() called from setup_arch(), always.
   *	1. find RSDP and get its address, and then find XSDT
-@@ -231,11 +260,14 @@ void __init acpi_boot_table_init(void)
+@@ -232,11 +261,14 @@ void __init acpi_boot_table_init(void)
  	if (acpi_disabled) {
  		if (earlycon_acpi_spcr_enable)
  			early_init_dt_scan_chosen_stdout();

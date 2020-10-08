@@ -13,7 +13,7 @@ wireless-regdb to be signed with it.
  1 file changed, 33 insertions(+)
 
 diff --git a/net/wireless/reg.c b/net/wireless/reg.c
-index 1a8218f..5675407 100644
+index 20a8e6a..36e27f2 100644
 --- a/net/wireless/reg.c
 +++ b/net/wireless/reg.c
 @@ -483,6 +483,7 @@ static void reg_regdb_apply(struct work_struct *work)

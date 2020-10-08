@@ -13,10 +13,10 @@ a version of the script which is directly derived from the driver.
  2 files changed, 54 insertions(+), 14 deletions(-)
 
 diff --git a/drivers/media/usb/dvb-usb/Kconfig b/drivers/media/usb/dvb-usb/Kconfig
-index 250d86c..c6fd5ca 100644
+index 7f9ee10..8b9c8ad 100644
 --- a/drivers/media/usb/dvb-usb/Kconfig
 +++ b/drivers/media/usb/dvb-usb/Kconfig
-@@ -259,10 +259,10 @@ config DVB_USB_OPERA1
+@@ -260,10 +260,10 @@ config DVB_USB_OPERA1
  
  config DVB_USB_AF9005
  	tristate "Afatech AF9005 DVB-T USB1.1 support"

@@ -51,7 +51,7 @@ index c9d3d0c9..55411d9 100644
 +binder_linux-$(CONFIG_ANDROID_BINDERFS)	+= binderfs.o
 +binder_linux-$(CONFIG_ANDROID_BINDER_IPC_SELFTEST) += binder_alloc_selftest.o
 diff --git a/drivers/android/binder_alloc.c b/drivers/android/binder_alloc.c
-index 7067d55..247da8d 100644
+index 2048ba6..82e862e 100644
 --- a/drivers/android/binder_alloc.c
 +++ b/drivers/android/binder_alloc.c
 @@ -38,7 +38,7 @@ enum {
@@ -89,7 +89,7 @@ index 14bd9c6..c202aa4 100644
 +ashmem_linux-y				+= ashmem.o
  obj-$(CONFIG_ANDROID_VSOC)		+= vsoc.o
 diff --git a/drivers/staging/android/ashmem.c b/drivers/staging/android/ashmem.c
-index c669535..da70482 100644
+index 19b0cc5..5d577f2 100644
 --- a/drivers/staging/android/ashmem.c
 +++ b/drivers/staging/android/ashmem.c
 @@ -24,6 +24,7 @@
@@ -100,7 +100,7 @@ index c669535..da70482 100644
  #include "ashmem.h"
  
  #define ASHMEM_NAME_PREFIX "dev/ashmem/"
-@@ -953,3 +954,5 @@ static int __init ashmem_init(void)
+@@ -965,3 +966,5 @@ static int __init ashmem_init(void)
  	return ret;
  }
  device_initcall(ashmem_init);

@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Sat, 19 Aug 2017 21:42:09 +0100
 Subject: sh: Do not use hyphen in exported variable names
+
 Forwarded: https://marc.info/?l=linux-sh&m=150317827322995&w=2
 
 arch/sh/Makefile defines and exports ld-bfd to be used by
@@ -23,9 +24,11 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  arch/sh/boot/romimage/Makefile   |  4 ++--
  4 files changed, 18 insertions(+), 18 deletions(-)
 
+diff --git a/arch/sh/Makefile b/arch/sh/Makefile
+index 185702f..5f6e145 100644
 --- a/arch/sh/Makefile
 +++ b/arch/sh/Makefile
-@@ -119,16 +119,16 @@ LDFLAGS_vmlinux		+= --defsym phys_stext=
+@@ -119,16 +119,16 @@ LDFLAGS_vmlinux		+= --defsym phys_stext=_stext-$(CONFIG_PAGE_OFFSET) \
  endif
  
  ifdef CONFIG_CPU_LITTLE_ENDIAN
@@ -47,6 +50,8 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  
  head-y	:= arch/sh/kernel/head_$(BITS).o
  
+diff --git a/arch/sh/boot/Makefile b/arch/sh/boot/Makefile
+index 58592df..296b254 100644
 --- a/arch/sh/boot/Makefile
 +++ b/arch/sh/boot/Makefile
 @@ -19,12 +19,12 @@ CONFIG_ZERO_PAGE_OFFSET	?= 0x00001000
@@ -68,7 +73,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  
  targets := zImage vmlinux.srec romImage uImage uImage.srec uImage.gz \
  	   uImage.bz2 uImage.lzma uImage.xz uImage.lzo uImage.bin
-@@ -106,10 +106,10 @@ OBJCOPYFLAGS_uImage.srec := -I binary -O
+@@ -106,10 +106,10 @@ OBJCOPYFLAGS_uImage.srec := -I binary -O srec
  $(obj)/uImage.srec: $(obj)/uImage
  	$(call if_changed,objcopy)
  
@@ -81,6 +86,8 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
         CONFIG_PHYSICAL_START CONFIG_ZERO_PAGE_OFFSET CONFIG_ENTRY_OFFSET \
 -       KERNEL_MEMORY suffix-y
 +       KERNEL_MEMORY suffix_y
+diff --git a/arch/sh/boot/compressed/Makefile b/arch/sh/boot/compressed/Makefile
+index f5e1bd7..dd130d3 100644
 --- a/arch/sh/boot/compressed/Makefile
 +++ b/arch/sh/boot/compressed/Makefile
 @@ -33,7 +33,7 @@ ORIG_CFLAGS := $(KBUILD_CFLAGS)
@@ -92,7 +99,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  		   -T $(obj)/../../kernel/vmlinux.lds
  
  #
-@@ -75,7 +75,7 @@ $(obj)/vmlinux.bin.lzo: $(vmlinux.bin.al
+@@ -75,7 +75,7 @@ $(obj)/vmlinux.bin.lzo: $(vmlinux.bin.all-y) FORCE
  
  OBJCOPYFLAGS += -R .empty_zero_page
  
@@ -102,9 +109,11 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 -$(obj)/piggy.o: $(obj)/vmlinux.scr $(obj)/vmlinux.bin.$(suffix-y) FORCE
 +$(obj)/piggy.o: $(obj)/vmlinux.scr $(obj)/vmlinux.bin.$(suffix_y) FORCE
  	$(call if_changed,ld)
+diff --git a/arch/sh/boot/romimage/Makefile b/arch/sh/boot/romimage/Makefile
+index c7c8be5..17b03df 100644
 --- a/arch/sh/boot/romimage/Makefile
 +++ b/arch/sh/boot/romimage/Makefile
-@@ -13,7 +13,7 @@ mmcif-obj-$(CONFIG_CPU_SUBTYPE_SH7724)	:
+@@ -13,7 +13,7 @@ mmcif-obj-$(CONFIG_CPU_SUBTYPE_SH7724)	:= $(obj)/mmcif-sh7724.o
  load-$(CONFIG_ROMIMAGE_MMCIF)		:= $(mmcif-load-y)
  obj-$(CONFIG_ROMIMAGE_MMCIF)		:= $(mmcif-obj-y)
  

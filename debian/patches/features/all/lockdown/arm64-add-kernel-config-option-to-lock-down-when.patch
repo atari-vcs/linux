@@ -1,6 +1,8 @@
 From: Linn Crosetto <linn@hpe.com>
 Date: Tue, 30 Aug 2016 11:54:38 -0600
-Subject: arm64: add kernel config option to lock down when in Secure Boot mode
+Subject: arm64: add kernel config option to lock down when in Secure Boot
+ mode
+
 Bug-Debian: https://bugs.debian.org/831827
 Forwarded: no
 
@@ -22,12 +24,14 @@ Signed-off-by: Linn Crosetto <linn@hpe.com>
 [dannf: Moved init_lockdown() call after uefi_init(), fixing SB detection]
 [bwh: Drop call to init_lockdown(), as efi_set_secure_boot() now calls this]
 ---
- drivers/firmware/efi/arm-init.c    | 4 ++++
+ drivers/firmware/efi/arm-init.c    | 3 +++
  drivers/firmware/efi/efi.c         | 3 ++-
  drivers/firmware/efi/libstub/fdt.c | 6 ++++++
  include/linux/efi.h                | 1 +
- 4 files changed, 13 insertions(+), 1 deletion(-)
+ 4 files changed, 12 insertions(+), 1 deletion(-)
 
+diff --git a/drivers/firmware/efi/arm-init.c b/drivers/firmware/efi/arm-init.c
+index 311cd34..9db4f37 100644
 --- a/drivers/firmware/efi/arm-init.c
 +++ b/drivers/firmware/efi/arm-init.c
 @@ -17,6 +17,7 @@
@@ -47,9 +51,11 @@ Signed-off-by: Linn Crosetto <linn@hpe.com>
  	reserve_regions();
  	efi_esrt_init();
  
+diff --git a/drivers/firmware/efi/efi.c b/drivers/firmware/efi/efi.c
+index b299e22..cccfccb 100644
 --- a/drivers/firmware/efi/efi.c
 +++ b/drivers/firmware/efi/efi.c
-@@ -688,7 +688,8 @@ static __initdata struct params fdt_para
+@@ -690,7 +690,8 @@ static __initdata struct params fdt_params[] = {
  	UEFI_PARAM("MemMap Address", "linux,uefi-mmap-start", mmap),
  	UEFI_PARAM("MemMap Size", "linux,uefi-mmap-size", mmap_size),
  	UEFI_PARAM("MemMap Desc. Size", "linux,uefi-mmap-desc-size", desc_size),
@@ -59,9 +65,11 @@ Signed-off-by: Linn Crosetto <linn@hpe.com>
  };
  
  static __initdata struct params xen_fdt_params[] = {
+diff --git a/drivers/firmware/efi/libstub/fdt.c b/drivers/firmware/efi/libstub/fdt.c
+index 0bf0190..b5249cd 100644
 --- a/drivers/firmware/efi/libstub/fdt.c
 +++ b/drivers/firmware/efi/libstub/fdt.c
-@@ -151,6 +151,12 @@ static efi_status_t update_fdt(efi_syste
+@@ -151,6 +151,12 @@ static efi_status_t update_fdt(efi_system_table_t *sys_table, void *orig_fdt,
  		}
  	}
  
@@ -74,6 +82,8 @@ Signed-off-by: Linn Crosetto <linn@hpe.com>
  	/* Shrink the FDT back to its minimum size: */
  	fdt_pack(fdt);
  
+diff --git a/include/linux/efi.h b/include/linux/efi.h
+index ecd6fd1..54076b3 100644
 --- a/include/linux/efi.h
 +++ b/include/linux/efi.h
 @@ -808,6 +808,7 @@ struct efi_fdt_params {

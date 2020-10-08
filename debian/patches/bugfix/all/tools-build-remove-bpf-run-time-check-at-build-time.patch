@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Sun, 21 Feb 2016 15:33:15 +0000
 Subject: tools/build: Remove bpf() run-time check at build time
+
 Forwarded: no
 
 It is not correct to test that a syscall works on the build system's
@@ -9,6 +10,11 @@ security restrictions that block bpf().
 
 Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
 ---
+ tools/build/feature/test-bpf.c | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/tools/build/feature/test-bpf.c b/tools/build/feature/test-bpf.c
+index 82070ea..3385873 100644
 --- a/tools/build/feature/test-bpf.c
 +++ b/tools/build/feature/test-bpf.c
 @@ -35,8 +35,10 @@ int main(void)

@@ -1,6 +1,7 @@
 From: Sudip Mukherjee <sudipm.mukherjee@gmail.com>
 Date: Sat, 7 Dec 2019 11:14:40 +0000
 Subject: [PATCH 4/5] libtraceevent: Allow custom libdir path
+
 Origin: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=c09982f8e2bae80a66232630ec4ba50afacea486
 
 When I use prefix=/usr and try to install libtraceevent in my laptop it
@@ -29,7 +30,7 @@ Signed-off-by: Arnaldo Carvalho de Melo <acme@redhat.com>
  2 files changed, 6 insertions(+), 4 deletions(-)
 
 diff --git a/tools/lib/traceevent/Makefile b/tools/lib/traceevent/Makefile
-index c5a03356a999..c874c017c636 100644
+index c5a0335..c874c01 100644
 --- a/tools/lib/traceevent/Makefile
 +++ b/tools/lib/traceevent/Makefile
 @@ -39,11 +39,12 @@ DESTDIR_SQ = '$(subst ','\'',$(DESTDIR))'
@@ -48,7 +49,7 @@ index c5a03356a999..c874c017c636 100644
  libdir = $(prefix)/$(libdir_relative)
  man_dir = $(prefix)/share/man
 diff --git a/tools/lib/traceevent/plugins/Makefile b/tools/lib/traceevent/plugins/Makefile
-index f440989fa55e..349bb81482ab 100644
+index 23c3535..680d883 100644
 --- a/tools/lib/traceevent/plugins/Makefile
 +++ b/tools/lib/traceevent/plugins/Makefile
 @@ -32,11 +32,12 @@ DESTDIR_SQ = '$(subst ','\'',$(DESTDIR))'
@@ -66,6 +67,3 @@ index f440989fa55e..349bb81482ab 100644
  prefix ?= /usr/local
  libdir = $(prefix)/$(libdir_relative)
  
--- 
-2.11.0
-

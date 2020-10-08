@@ -1,6 +1,7 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Mon, 13 Sep 2010 02:16:18 +0100
 Subject: [PATCH] Partially revert "MIPS: Add -Werror to arch/mips/Kbuild"
+
 Forwarded: not-needed
 
 This reverts commits 66f9ba101f54bda63ab1db97f9e9e94763d0651b and
@@ -8,6 +9,11 @@ This reverts commits 66f9ba101f54bda63ab1db97f9e9e94763d0651b and
 
 We really don't want to add -Werror anywhere.
 ---
+ arch/mips/Kbuild | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/arch/mips/Kbuild b/arch/mips/Kbuild
+index a8d5e4f..002a95a 100644
 --- a/arch/mips/Kbuild
 +++ b/arch/mips/Kbuild
 @@ -1,10 +1,4 @@

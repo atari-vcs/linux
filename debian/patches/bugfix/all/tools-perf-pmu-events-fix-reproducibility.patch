@@ -22,7 +22,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  1 file changed, 76 insertions(+), 7 deletions(-)
 
 diff --git a/tools/perf/pmu-events/jevents.c b/tools/perf/pmu-events/jevents.c
-index 99e3fd0..9332b17 100644
+index f4a0d72..a3b1875 100644
 --- a/tools/perf/pmu-events/jevents.c
 +++ b/tools/perf/pmu-events/jevents.c
 @@ -50,6 +50,12 @@
@@ -118,7 +118,7 @@ index 99e3fd0..9332b17 100644
  
  	/* base dir or too deep */
  	if (level == 0 || level > 3)
-@@ -1076,6 +1120,7 @@ int main(int argc, char *argv[])
+@@ -1075,6 +1119,7 @@ int main(int argc, char *argv[])
  	const char *output_file;
  	const char *start_dirname;
  	struct stat stbuf;
@@ -126,7 +126,7 @@ index 99e3fd0..9332b17 100644
  
  	prog = basename(argv[0]);
  	if (argc < 4) {
-@@ -1119,8 +1164,26 @@ int main(int argc, char *argv[])
+@@ -1118,8 +1163,26 @@ int main(int argc, char *argv[])
  	 */
  
  	maxfds = get_maxfds();
@@ -154,7 +154,7 @@ index 99e3fd0..9332b17 100644
  	if (rc && verbose) {
  		pr_info("%s: Error preprocessing arch standard files %s\n",
  			prog, ldirname);
-@@ -1134,7 +1197,13 @@ int main(int argc, char *argv[])
+@@ -1133,7 +1196,13 @@ int main(int argc, char *argv[])
  		goto empty_map;
  	}
  

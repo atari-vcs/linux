@@ -296,7 +296,7 @@ index 5471383..341ed2d 100644
  	err = bt3c_load_firmware(info, firmware->data, firmware->size);
  
 diff --git a/drivers/bluetooth/btmrvl_sdio.c b/drivers/bluetooth/btmrvl_sdio.c
-index 0f3a020..eef4e6a 100644
+index 4c7978c..48ea463 100644
 --- a/drivers/bluetooth/btmrvl_sdio.c
 +++ b/drivers/bluetooth/btmrvl_sdio.c
 @@ -526,8 +526,6 @@ static int btmrvl_sdio_download_helper(struct btmrvl_sdio_card *card)
@@ -749,10 +749,10 @@ index 83a798c..f36cc48 100644
  			} else {
  				printk(KERN_INFO "tda1004x: please rename the firmware file to %s\n",
 diff --git a/drivers/media/dvb-frontends/tda10071.c b/drivers/media/dvb-frontends/tda10071.c
-index 1953b00..d0804f6 100644
+index 685c0ac..60ee1f6 100644
 --- a/drivers/media/dvb-frontends/tda10071.c
 +++ b/drivers/media/dvb-frontends/tda10071.c
-@@ -837,12 +837,8 @@ static int tda10071_init(struct dvb_frontend *fe)
+@@ -838,12 +838,8 @@ static int tda10071_init(struct dvb_frontend *fe)
  
  		/* request the firmware, this will block and timeout */
  		ret = request_firmware(&fw, fw_file, &client->dev);
@@ -963,10 +963,10 @@ index 3636894..447fa2d 100644
  		printk(KERN_INFO "%s() firmware read %zu bytes.\n",
  			__func__, fw->size);
 diff --git a/drivers/media/pci/ttpci/av7110.c b/drivers/media/pci/ttpci/av7110.c
-index d0cdee1..9e5e444 100644
+index bf36b1e..4353cab 100644
 --- a/drivers/media/pci/ttpci/av7110.c
 +++ b/drivers/media/pci/ttpci/av7110.c
-@@ -1500,13 +1500,8 @@ static int get_firmware(struct av7110* av7110)
+@@ -1501,13 +1501,8 @@ static int get_firmware(struct av7110* av7110)
  	/* request the av7110 firmware, this will block until someone uploads it */
  	ret = request_firmware(&fw, "dvb-ttpci-01.fw", &av7110->dev->pci->dev);
  	if (ret) {
@@ -1513,10 +1513,10 @@ index cff64e4..dc2b898 100644
  	rc = bnx2x_check_firmware(bp);
  	if (rc) {
 diff --git a/drivers/net/ethernet/broadcom/tg3.c b/drivers/net/ethernet/broadcom/tg3.c
-index e12ba81..7681f7f 100644
+index 70bd79d..8f52f14 100644
 --- a/drivers/net/ethernet/broadcom/tg3.c
 +++ b/drivers/net/ethernet/broadcom/tg3.c
-@@ -11414,11 +11414,8 @@ static int tg3_request_firmware(struct tg3 *tp)
+@@ -11423,11 +11423,8 @@ static int tg3_request_firmware(struct tg3 *tp)
  {
  	const struct tg3_firmware_hdr *fw_hdr;
  
@@ -1709,10 +1709,10 @@ index 6c9a41b..03e2df8 100644
  		i2400m_fw = (void *) ~0;
  	} else
 diff --git a/drivers/net/wireless/ath/ath9k/hif_usb.c b/drivers/net/wireless/ath/ath9k/hif_usb.c
-index 4ed21da..a41bfc6 100644
+index 3f563e0..6d5ef1c 100644
 --- a/drivers/net/wireless/ath/ath9k/hif_usb.c
 +++ b/drivers/net/wireless/ath/ath9k/hif_usb.c
-@@ -1195,9 +1195,6 @@ static void ath9k_hif_usb_firmware_cb(const struct firmware *fw, void *context)
+@@ -1197,9 +1197,6 @@ static void ath9k_hif_usb_firmware_cb(const struct firmware *fw, void *context)
  		if (!ret)
  			return;
  
@@ -2157,7 +2157,7 @@ index 480a8d0..4e9d99e 100644
  	if (fw->size % 4) {
  		wl1251_error("nvs size is not multiple of 32 bits: %zu",
 diff --git a/drivers/net/wireless/ti/wlcore/main.c b/drivers/net/wireless/ti/wlcore/main.c
-index 547ad53..0fa50ce 100644
+index 5f74cf8..696a39e3 100644
 --- a/drivers/net/wireless/ti/wlcore/main.c
 +++ b/drivers/net/wireless/ti/wlcore/main.c
 @@ -755,10 +755,8 @@ static int wl12xx_fetch_firmware(struct wl1271 *wl, bool plt)
@@ -2334,10 +2334,10 @@ index 832af42..fe6df40 100644
  		goto unlock;
  	}
 diff --git a/drivers/scsi/qla2xxx/qla_init.c b/drivers/scsi/qla2xxx/qla_init.c
-index ac4c47f..3929c44 100644
+index 62d2ee8..31787aa 100644
 --- a/drivers/scsi/qla2xxx/qla_init.c
 +++ b/drivers/scsi/qla2xxx/qla_init.c
-@@ -7783,10 +7783,6 @@ qla2x00_load_risc(scsi_qla_host_t *vha, uint32_t *srisc_addr)
+@@ -7774,10 +7774,6 @@ qla2x00_load_risc(scsi_qla_host_t *vha, uint32_t *srisc_addr)
  	/* Load firmware blob. */
  	blob = qla2x00_request_firmware(vha);
  	if (!blob) {
@@ -2348,7 +2348,7 @@ index ac4c47f..3929c44 100644
  		return QLA_FUNCTION_FAILED;
  	}
  
-@@ -7889,9 +7885,6 @@ qla24xx_load_risc_blob(scsi_qla_host_t *vha, uint32_t *srisc_addr)
+@@ -7880,9 +7876,6 @@ qla24xx_load_risc_blob(scsi_qla_host_t *vha, uint32_t *srisc_addr)
  
  	blob = qla2x00_request_firmware(vha);
  	if (!blob) {
@@ -2376,10 +2376,10 @@ index c855d01..9b8d6de 100644
  	/* Validating firmware blob */
  	if (qla82xx_validate_firmware_blob(vha,
 diff --git a/drivers/scsi/qla2xxx/qla_os.c b/drivers/scsi/qla2xxx/qla_os.c
-index d7ec408..08bdd94 100644
+index 67b1e74..46d103e 100644
 --- a/drivers/scsi/qla2xxx/qla_os.c
 +++ b/drivers/scsi/qla2xxx/qla_os.c
-@@ -6815,8 +6815,6 @@ qla2x00_request_firmware(scsi_qla_host_t *vha)
+@@ -6816,8 +6816,6 @@ qla2x00_request_firmware(scsi_qla_host_t *vha)
  		goto out;
  
  	if (request_firmware(&blob->fw, blob->name, &ha->pdev->dev)) {
@@ -2422,10 +2422,10 @@ index dd81d21..933fdc3 100644
  			if (fw_entry->size > sizeof(pfirmware->firmware_buf)) {
  				RT_TRACE(COMP_ERR, "img file size exceed the container buffer fail!\n");
 diff --git a/drivers/staging/rtl8712/hal_init.c b/drivers/staging/rtl8712/hal_init.c
-index 40145c0..c3107bb 100644
+index 42c0a3c..1be4c8e 100644
 --- a/drivers/staging/rtl8712/hal_init.c
 +++ b/drivers/staging/rtl8712/hal_init.c
-@@ -59,8 +59,6 @@ int rtl871x_load_fw(struct _adapter *padapter)
+@@ -60,8 +60,6 @@ int rtl871x_load_fw(struct _adapter *padapter)
  	dev_info(dev, "r8712u: Loading firmware from \"%s\"\n", firmware_file);
  	rc = request_firmware_nowait(THIS_MODULE, 1, firmware_file, dev,
  				     GFP_KERNEL, padapter, rtl871x_load_fw_cb);
@@ -2855,7 +2855,7 @@ index 9acc0ac..7c1ebc8 100644
  	}
  	if (firmware->size < sizeof(header)) {
 diff --git a/sound/pci/cs46xx/cs46xx_lib.c b/sound/pci/cs46xx/cs46xx_lib.c
-index 5b888b7..27ea5c5 100644
+index c07a9e7..613b35b 100644
 --- a/sound/pci/cs46xx/cs46xx_lib.c
 +++ b/sound/pci/cs46xx/cs46xx_lib.c
 @@ -3241,11 +3241,8 @@ int snd_cs46xx_start_dsp(struct snd_cs46xx *chip)
@@ -2872,7 +2872,7 @@ index 5b888b7..27ea5c5 100644
  		if (err < 0) {
  			dev_err(chip->card->dev, "image download error [%s]\n",
 diff --git a/sound/pci/echoaudio/echoaudio.c b/sound/pci/echoaudio/echoaudio.c
-index ca91257..7c8cc79 100644
+index 8596ae4..d27b716 100644
 --- a/sound/pci/echoaudio/echoaudio.c
 +++ b/sound/pci/echoaudio/echoaudio.c
 @@ -48,11 +48,8 @@ static int get_firmware(const struct firmware **fw_entry,
@@ -2905,10 +2905,10 @@ index 8c1e968..a95c405 100644
  	/* ID, should read & 0x7f = 0x55 when FPGA programmed. */
  	snd_emu1010_fpga_read(emu, EMU_HANA_ID, &reg);
 diff --git a/sound/pci/hda/hda_intel.c b/sound/pci/hda/hda_intel.c
-index 6124415..cb559c8 100644
+index 590ea26..a75486e 100644
 --- a/sound/pci/hda/hda_intel.c
 +++ b/sound/pci/hda/hda_intel.c
-@@ -1983,8 +1983,7 @@ static void azx_firmware_cb(const struct firmware *fw, void *context)
+@@ -1997,8 +1997,7 @@ static void azx_firmware_cb(const struct firmware *fw, void *context)
  
  	if (fw)
  		chip->fw = fw;

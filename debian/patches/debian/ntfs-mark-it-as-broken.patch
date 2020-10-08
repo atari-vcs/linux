@@ -6,12 +6,14 @@ NTFS has unfixed issues CVE-2018-12929, CVE-2018-12930, and
 CVE-2018-12931.  ntfs-3g is a better supported alternative.
 
 Make sure it can't be enabled even in custom kernels.
-
 ---
-Index: debian-kernel/fs/ntfs/Kconfig
-===================================================================
---- debian-kernel.orig/fs/ntfs/Kconfig
-+++ debian-kernel/fs/ntfs/Kconfig
+ fs/ntfs/Kconfig | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/fs/ntfs/Kconfig b/fs/ntfs/Kconfig
+index de9fb5c..b5ac37f 100644
+--- a/fs/ntfs/Kconfig
++++ b/fs/ntfs/Kconfig
 @@ -1,6 +1,7 @@
  # SPDX-License-Identifier: GPL-2.0-only
  config NTFS_FS

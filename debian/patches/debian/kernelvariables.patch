@@ -20,7 +20,7 @@ use of $(ARCH) needs to be moved after this.
  1 file changed, 24 insertions(+), 25 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index a297e89f..36dacd9 100644
+index 0ca424d..0f93461 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -359,31 +359,6 @@ include scripts/subarch.include
@@ -55,7 +55,7 @@ index a297e89f..36dacd9 100644
  KCONFIG_CONFIG	?= .config
  export KCONFIG_CONFIG
  
-@@ -437,6 +412,30 @@ CFLAGS_KERNEL	=
+@@ -459,6 +434,30 @@ CFLAGS_KERNEL	=
  AFLAGS_KERNEL	=
  LDFLAGS_vmlinux =
  

@@ -67,7 +67,7 @@ index e5d3283..b49642c 100644
  void do_close_on_exec(struct files_struct *files)
  {
 diff --git a/kernel/fork.c b/kernel/fork.c
-index 9180f44..89f7895 100644
+index 5942725..caf131f 100644
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
 @@ -1117,6 +1117,7 @@ void mmput_async(struct mm_struct *mm)
@@ -79,10 +79,10 @@ index 9180f44..89f7895 100644
  
  /**
 diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-index 7238ef44..3717fb0 100644
+index 79ce22d..cd0c2f0 100644
 --- a/kernel/sched/core.c
 +++ b/kernel/sched/core.c
-@@ -4559,6 +4559,7 @@ int can_nice(const struct task_struct *p, const int nice)
+@@ -4650,6 +4650,7 @@ int can_nice(const struct task_struct *p, const int nice)
  	return (nice_rlim <= task_rlimit(p, RLIMIT_NICE) ||
  		capable(CAP_SYS_NICE));
  }
@@ -115,10 +115,10 @@ index 0fef395..9233b20 100644
  /**
   * task_work_cancel - cancel a pending work added by task_work_add()
 diff --git a/mm/memory.c b/mm/memory.c
-index cb7c940..10d1cfe 100644
+index 2157bb2..0be11c6 100644
 --- a/mm/memory.c
 +++ b/mm/memory.c
-@@ -1340,6 +1340,7 @@ void zap_page_range(struct vm_area_struct *vma, unsigned long start,
+@@ -1352,6 +1352,7 @@ void zap_page_range(struct vm_area_struct *vma, unsigned long start,
  	mmu_notifier_invalidate_range_end(&range);
  	tlb_finish_mmu(&tlb, start, range.end);
  }
@@ -139,10 +139,10 @@ index 98802ca..6919e10 100644
  /**
   * shmem_read_mapping_page_gfp - read into page cache, using specified page allocation flags.
 diff --git a/mm/vmalloc.c b/mm/vmalloc.c
-index ad4d00b..b08cf57c 100644
+index 5797e1e..d02eb85 100644
 --- a/mm/vmalloc.c
 +++ b/mm/vmalloc.c
-@@ -1964,6 +1964,7 @@ int map_kernel_range_noflush(unsigned long addr, unsigned long size,
+@@ -1966,6 +1966,7 @@ int map_kernel_range_noflush(unsigned long addr, unsigned long size,
  {
  	return vmap_page_range_noflush(addr, addr + size, prot, pages);
  }
@@ -150,7 +150,7 @@ index ad4d00b..b08cf57c 100644
  
  /**
   * unmap_kernel_range_noflush - unmap kernel VM area
-@@ -2105,6 +2106,7 @@ struct vm_struct *get_vm_area(unsigned long size, unsigned long flags)
+@@ -2107,6 +2108,7 @@ struct vm_struct *get_vm_area(unsigned long size, unsigned long flags)
  				  NUMA_NO_NODE, GFP_KERNEL,
  				  __builtin_return_address(0));
  }

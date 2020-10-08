@@ -1,13 +1,19 @@
 From: Ben Hutchings <ben@decadent.org.uk>
 Date: Sun, 24 Jun 2012 02:51:39 +0100
 Subject: usbip: Document TCP wrappers
+
 Forwarded: no
 
 Add references to TCP wrappers configuration in the manual page.
+---
+ tools/usb/usbip/doc/usbipd.8 | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
+diff --git a/tools/usb/usbip/doc/usbipd.8 b/tools/usb/usbip/doc/usbipd.8
+index ac4635d..b25afd1 100644
 --- a/tools/usb/usbip/doc/usbipd.8
 +++ b/tools/usb/usbip/doc/usbipd.8
-@@ -14,7 +14,8 @@ Devices have to explicitly be exported u
+@@ -14,7 +14,8 @@ Devices have to explicitly be exported using
  before usbipd makes them available to other hosts.
  
  The daemon accepts connections from USB/IP clients

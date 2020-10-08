@@ -21,10 +21,10 @@ anything.
  3 files changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/base/firmware_loader/main.c b/drivers/base/firmware_loader/main.c
-index 5ef70df..f5bf263 100644
+index 1f72c26..bbc39b9 100644
 --- a/drivers/base/firmware_loader/main.c
 +++ b/drivers/base/firmware_loader/main.c
-@@ -523,9 +523,12 @@ fw_get_filesystem_firmware(struct device *device, struct fw_priv *fw_priv,
+@@ -528,9 +528,12 @@ fw_get_filesystem_firmware(struct device *device, struct fw_priv *fw_priv,
  	}
  	__putname(path);
  
@@ -39,7 +39,7 @@ index 5ef70df..f5bf263 100644
  	return rc;
  }
 diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-index 5940840..b07811f 100644
+index 5a9a072..9a4f80e 100644
 --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
 +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
 @@ -1111,6 +1111,7 @@ static int amdgpu_pci_probe(struct pci_dev *pdev,
@@ -51,10 +51,10 @@ index 5940840..b07811f 100644
  	}
  
 diff --git a/drivers/gpu/drm/radeon/radeon_drv.c b/drivers/gpu/drm/radeon/radeon_drv.c
-index 0c9da7a..28a632e 100644
+index b20b054..286d746 100644
 --- a/drivers/gpu/drm/radeon/radeon_drv.c
 +++ b/drivers/gpu/drm/radeon/radeon_drv.c
-@@ -389,6 +389,7 @@ static int radeon_pci_probe(struct pci_dev *pdev,
+@@ -384,6 +384,7 @@ static int radeon_pci_probe(struct pci_dev *pdev,
  	if ((ent->driver_data & RADEON_FAMILY_MASK) >= CHIP_R600 &&
  	    !radeon_firmware_installed()) {
  		DRM_ERROR("radeon kernel modesetting for R600 or later requires firmware installed\n");

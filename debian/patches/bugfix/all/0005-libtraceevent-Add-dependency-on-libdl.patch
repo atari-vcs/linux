@@ -1,6 +1,7 @@
 From: Sudip Mukherjee <sudipm.mukherjee@gmail.com>
 Date: Thu, 26 Dec 2019 22:31:30 +0000
 Subject: [PATCH 5/5] libtraceevent: Add dependency on libdl
+
 Forwarded: https://lore.kernel.org/lkml/20191226224931.3458-1-sudipm.mukherjee@gmail.com/
 
 event-plugin.c is calling dl_*() functions but it is not linked with
@@ -14,7 +15,7 @@ Signed-off-by: Sudip Mukherjee <sudipm.mukherjee@gmail.com>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/tools/lib/traceevent/Makefile b/tools/lib/traceevent/Makefile
-index c874c017c636..0d0575981cc7 100644
+index c874c01..0d05759 100644
 --- a/tools/lib/traceevent/Makefile
 +++ b/tools/lib/traceevent/Makefile
 @@ -143,7 +143,7 @@ $(TE_IN): force
@@ -26,6 +27,3 @@ index c874c017c636..0d0575981cc7 100644
  	@ln -sf $(@F) $(OUTPUT)libtraceevent.so
  	@ln -sf $(@F) $(OUTPUT)libtraceevent.so.$(EP_VERSION)
  
--- 
-2.11.0
-

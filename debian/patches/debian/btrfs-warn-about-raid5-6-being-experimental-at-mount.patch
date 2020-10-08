@@ -17,10 +17,10 @@ Signed-off-by: Adam Borowski <kilobyte@angband.pl>
  1 file changed, 9 insertions(+)
 
 diff --git a/fs/btrfs/disk-io.c b/fs/btrfs/disk-io.c
-index 273d1cc..e0afedd 100644
+index cd65ef7..7e8a142 100644
 --- a/fs/btrfs/disk-io.c
 +++ b/fs/btrfs/disk-io.c
-@@ -3150,6 +3150,15 @@ int open_ctree(struct super_block *sb,
+@@ -3156,6 +3156,15 @@ int open_ctree(struct super_block *sb,
  		btrfs_set_and_info(fs_info, SSD, "enabling ssd optimizations");
  	}
  

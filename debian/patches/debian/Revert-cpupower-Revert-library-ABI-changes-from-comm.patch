@@ -1,4 +1,3 @@
-From 93826390dae639dd450f087552d68eb86f4c418d Mon Sep 17 00:00:00 2001
 From: Salvatore Bonaccorso <carnil@debian.org>
 Date: Wed, 12 Feb 2020 20:38:54 +0100
 Subject: [PATCH] Revert "cpupower: Revert library ABI changes from commit
@@ -9,13 +8,13 @@ and allows to maintain library ABI stable for the 5.4 series.
 
 Signed-off-by: Salvatore Bonaccorso <carnil@debian.org>
 ---
- tools/power/cpupower/lib/cpufreq.c        | 78 +++--------------------
- tools/power/cpupower/lib/cpufreq.h        | 20 ++----
- tools/power/cpupower/utils/cpufreq-info.c | 12 ++--
+ tools/power/cpupower/lib/cpufreq.c        | 78 ++++---------------------------
+ tools/power/cpupower/lib/cpufreq.h        | 20 +++-----
+ tools/power/cpupower/utils/cpufreq-info.c | 12 ++---
  3 files changed, 23 insertions(+), 87 deletions(-)
 
 diff --git a/tools/power/cpupower/lib/cpufreq.c b/tools/power/cpupower/lib/cpufreq.c
-index 6e04304560ca..2f55d4d23446 100644
+index 6e04304..2f55d4d 100644
 --- a/tools/power/cpupower/lib/cpufreq.c
 +++ b/tools/power/cpupower/lib/cpufreq.c
 @@ -332,74 +332,21 @@ void cpufreq_put_available_governors(struct cpufreq_available_governors *any)
@@ -126,7 +125,7 @@ index 6e04304560ca..2f55d4d23446 100644
  							const char *file)
  {
 diff --git a/tools/power/cpupower/lib/cpufreq.h b/tools/power/cpupower/lib/cpufreq.h
-index 95f4fd9e2656..a55f0d19215b 100644
+index 95f4fd9..a55f0d1 100644
 --- a/tools/power/cpupower/lib/cpufreq.h
 +++ b/tools/power/cpupower/lib/cpufreq.h
 @@ -20,10 +20,10 @@ struct cpufreq_available_governors {
@@ -166,7 +165,7 @@ index 95f4fd9e2656..a55f0d19215b 100644
  
  /* determine affected CPUs
 diff --git a/tools/power/cpupower/utils/cpufreq-info.c b/tools/power/cpupower/utils/cpufreq-info.c
-index 6efc0f6b1b11..e63cf55f81cf 100644
+index 6efc0f6..e63cf55 100644
 --- a/tools/power/cpupower/utils/cpufreq-info.c
 +++ b/tools/power/cpupower/utils/cpufreq-info.c
 @@ -244,14 +244,14 @@ static int get_boost_mode_x86(unsigned int cpu)
@@ -222,6 +221,3 @@ index 6efc0f6b1b11..e63cf55f81cf 100644
  	}
  
  	get_available_governors(cpu);
--- 
-2.20.1
-

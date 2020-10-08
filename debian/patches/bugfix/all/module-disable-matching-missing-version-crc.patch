@@ -12,7 +12,7 @@ alternative may allow subverting module signing.
  1 file changed, 2 insertions(+), 3 deletions(-)
 
 diff --git a/kernel/module.c b/kernel/module.c
-index a2a47f4..4263893 100644
+index 819c5d3..02151fd 100644
 --- a/kernel/module.c
 +++ b/kernel/module.c
 @@ -1333,9 +1333,8 @@ static int check_version(const struct load_info *info,
