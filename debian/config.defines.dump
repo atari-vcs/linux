@@ -8,7 +8,7 @@ tp3
 (dp4
 Vabiname
 p5
-V2
+V1
 p6
 sVignore-changes
 p7
@@ -277,7 +277,7 @@ tp141
 (dp142
 Venabled
 p143
-I00
+I01
 ss(Vdescription
 p144
 tp145
@@ -505,7 +505,7 @@ Vx86-64 cloud
 p268
 sVhardware-long
 p269
-VAmazon EC2, Google Compute Engine and Microsoft Azure cloud platforms
+Vcloud platforms including Amazon EC2, Microsoft Azure, and Google Compute Engine
 p270
 ss(Vbase
 p271
@@ -3042,18 +3042,18 @@ tp1629
 (dp1630
 Vsource
 p1631
-V5.8.10-1
+V5.9.1-1
 p1632
 sVupstream
 p1633
-V5.8
+V5.9
 p1634
 sVabiname_base
 p1635
-V5.8.0
+V5.9.0
 p1636
 sVabiname
 p1637
-V5.8.0-2
+V5.9.0-1
 p1638
 ss.
