@@ -16,9 +16,9 @@ Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
 
 Index: linux/sound/soc/codecs/cs42xx8.c
 ===================================================================
---- linux.orig/sound/soc/codecs/cs42xx8.c	2020-10-09 02:03:52.822373485 +0300
-+++ linux/sound/soc/codecs/cs42xx8.c	2020-10-09 02:03:52.820373516 +0300
-@@ -388,13 +388,15 @@
+--- linux.orig/sound/soc/codecs/cs42xx8.c	2020-10-20 02:33:34.599592346 +0300
++++ linux/sound/soc/codecs/cs42xx8.c	2020-10-20 02:33:34.597592366 +0300
+@@ -389,13 +389,15 @@
  		.stream_name = "Playback",
  		.channels_min = 1,
  		.channels_max = 8,
@@ -38,9 +38,9 @@ Index: linux/sound/soc/codecs/cs42xx8.c
  	.ops = &cs42xx8_dai_ops,
 Index: linux/sound/soc/fsl/fsl-asoc-card.c
 ===================================================================
---- linux.orig/sound/soc/fsl/fsl-asoc-card.c	2020-10-09 02:03:52.822373485 +0300
-+++ linux/sound/soc/fsl/fsl-asoc-card.c	2020-10-09 02:03:52.820373516 +0300
-@@ -548,6 +548,7 @@
+--- linux.orig/sound/soc/fsl/fsl-asoc-card.c	2020-10-20 02:33:34.599592346 +0300
++++ linux/sound/soc/fsl/fsl-asoc-card.c	2020-10-20 02:33:34.598592356 +0300
+@@ -609,6 +609,7 @@
  		priv->cpu_priv.sysclk_dir[RX] = SND_SOC_CLOCK_OUT;
  		priv->cpu_priv.slot_width = 32;
  		priv->dai_fmt |= SND_SOC_DAIFMT_CBS_CFS;

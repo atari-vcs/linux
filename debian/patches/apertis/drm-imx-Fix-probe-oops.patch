@@ -39,9 +39,9 @@ Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
 
 Index: linux/drivers/gpu/drm/imx/imx-drm-core.c
 ===================================================================
---- linux.orig/drivers/gpu/drm/imx/imx-drm-core.c	2020-10-09 02:03:53.187367924 +0300
-+++ linux/drivers/gpu/drm/imx/imx-drm-core.c	2020-10-09 02:03:53.185367954 +0300
-@@ -188,6 +188,11 @@
+--- linux.orig/drivers/gpu/drm/imx/imx-drm-core.c	2020-10-20 02:33:34.972588443 +0300
++++ linux/drivers/gpu/drm/imx/imx-drm-core.c	2020-10-20 02:33:34.970588464 +0300
+@@ -178,6 +178,11 @@
  	return dev->of_node == np;
  }
  
@@ -53,7 +53,7 @@ Index: linux/drivers/gpu/drm/imx/imx-drm-core.c
  static int imx_drm_bind(struct device *dev)
  {
  	struct drm_device *drm;
-@@ -224,14 +229,13 @@
+@@ -214,14 +219,13 @@
  
  	drm_mode_config_init(drm);
  
@@ -73,7 +73,7 @@ Index: linux/drivers/gpu/drm/imx/imx-drm-core.c
  	if (ret)
  		goto err_kms;
  
-@@ -259,9 +263,10 @@
+@@ -249,9 +253,10 @@
  
  err_poll_fini:
  	drm_kms_helper_poll_fini(drm);
@@ -87,8 +87,8 @@ Index: linux/drivers/gpu/drm/imx/imx-drm-core.c
  	return ret;
 Index: linux/drivers/gpu/drm/imx/ipuv3-plane.c
 ===================================================================
---- linux.orig/drivers/gpu/drm/imx/ipuv3-plane.c	2020-10-09 02:03:53.187367924 +0300
-+++ linux/drivers/gpu/drm/imx/ipuv3-plane.c	2020-10-09 02:03:53.186367939 +0300
+--- linux.orig/drivers/gpu/drm/imx/ipuv3-plane.c	2020-10-20 02:33:34.972588443 +0300
++++ linux/drivers/gpu/drm/imx/ipuv3-plane.c	2020-10-20 02:33:34.970588464 +0300
 @@ -152,6 +152,8 @@
  		ipu_idmac_put(ipu_plane->ipu_ch);
  	if (!IS_ERR_OR_NULL(ipu_plane->alpha_ch))

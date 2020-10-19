@@ -23,8 +23,8 @@ Signed-off-by: John Johansen <john.johansen@canonical.com>
 
 Index: linux/security/apparmor/apparmorfs.c
 ===================================================================
---- linux.orig/security/apparmor/apparmorfs.c	2020-10-09 02:03:52.177383313 +0300
-+++ linux/security/apparmor/apparmorfs.c	2020-10-09 02:03:52.175383344 +0300
+--- linux.orig/security/apparmor/apparmorfs.c	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/apparmorfs.c	2020-10-20 02:33:33.944599199 +0300
 @@ -2364,6 +2364,7 @@
  	AA_SFS_DIR("domain",			aa_sfs_entry_domain),
  	AA_SFS_DIR("file",			aa_sfs_entry_file),
@@ -35,8 +35,8 @@ Index: linux/security/apparmor/apparmorfs.c
  	AA_SFS_FILE_U64("capability",		VFS_CAP_FLAGS_MASK),
 Index: linux/security/apparmor/include/apparmor.h
 ===================================================================
---- linux.orig/security/apparmor/include/apparmor.h	2020-10-09 02:03:52.177383313 +0300
-+++ linux/security/apparmor/include/apparmor.h	2020-10-09 02:03:52.175383344 +0300
+--- linux.orig/security/apparmor/include/apparmor.h	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/include/apparmor.h	2020-10-20 02:33:33.945599189 +0300
 @@ -20,7 +20,7 @@
  #define AA_CLASS_UNKNOWN	1
  #define AA_CLASS_FILE		2
@@ -48,8 +48,8 @@ Index: linux/security/apparmor/include/apparmor.h
  #define AA_CLASS_MOUNT		7
 Index: linux/security/apparmor/include/net.h
 ===================================================================
---- linux.orig/security/apparmor/include/net.h	2020-10-09 02:03:52.177383313 +0300
-+++ linux/security/apparmor/include/net.h	2020-10-09 02:03:52.175383344 +0300
+--- linux.orig/security/apparmor/include/net.h	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/include/net.h	2020-10-20 02:33:33.945599189 +0300
 @@ -68,6 +68,16 @@
  	DEFINE_AUDIT_NET(NAME, OP, SK, (SK)->sk_family, (SK)->sk_type,	\
  			 (SK)->sk_protocol)
@@ -77,8 +77,8 @@ Index: linux/security/apparmor/include/net.h
  int aa_profile_af_perm(struct aa_profile *profile, struct common_audit_data *sa,
 Index: linux/security/apparmor/include/policy.h
 ===================================================================
---- linux.orig/security/apparmor/include/policy.h	2020-10-09 02:03:52.177383313 +0300
-+++ linux/security/apparmor/include/policy.h	2020-10-09 02:03:52.175383344 +0300
+--- linux.orig/security/apparmor/include/policy.h	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/include/policy.h	2020-10-20 02:33:33.945599189 +0300
 @@ -108,6 +108,7 @@
   * @policy: general match rules governing policy
   * @file: The set of rules governing basic file access and domain transitions
@@ -97,8 +97,8 @@ Index: linux/security/apparmor/include/policy.h
  	char **xattrs;
 Index: linux/security/apparmor/net.c
 ===================================================================
---- linux.orig/security/apparmor/net.c	2020-10-09 02:03:52.177383313 +0300
-+++ linux/security/apparmor/net.c	2020-10-09 02:03:52.175383344 +0300
+--- linux.orig/security/apparmor/net.c	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/net.c	2020-10-20 02:33:33.945599189 +0300
 @@ -24,6 +24,11 @@
  	{ }
  };
@@ -111,7 +111,7 @@ Index: linux/security/apparmor/net.c
  static const char * const net_mask_names[] = {
  	"unknown",
  	"send",
-@@ -116,14 +121,26 @@
+@@ -118,14 +123,26 @@
  	if (profile_unconfined(profile))
  		return 0;
  	state = PROFILE_MEDIATES(profile, AA_CLASS_NET);
@@ -147,8 +147,8 @@ Index: linux/security/apparmor/net.c
  	return aa_check_perms(profile, &perms, request, sa, audit_net_cb);
 Index: linux/security/apparmor/policy.c
 ===================================================================
---- linux.orig/security/apparmor/policy.c	2020-10-09 02:03:52.177383313 +0300
-+++ linux/security/apparmor/policy.c	2020-10-09 02:03:52.175383344 +0300
+--- linux.orig/security/apparmor/policy.c	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/policy.c	2020-10-20 02:33:33.945599189 +0300
 @@ -222,6 +222,7 @@
  	aa_free_file_rules(&profile->file);
  	aa_free_cap_rules(&profile->caps);
@@ -156,11 +156,11 @@ Index: linux/security/apparmor/policy.c
 +	kzfree(profile->net_compat);
  
  	for (i = 0; i < profile->xattr_count; i++)
- 		kzfree(profile->xattrs[i]);
+ 		kfree_sensitive(profile->xattrs[i]);
 Index: linux/security/apparmor/policy_unpack.c
 ===================================================================
---- linux.orig/security/apparmor/policy_unpack.c	2020-10-09 02:03:52.177383313 +0300
-+++ linux/security/apparmor/policy_unpack.c	2020-10-09 02:03:52.175383344 +0300
+--- linux.orig/security/apparmor/policy_unpack.c	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/policy_unpack.c	2020-10-20 02:33:33.945599189 +0300
 @@ -34,7 +34,7 @@
  
  #define v5	5	/* base version */
