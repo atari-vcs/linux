@@ -1,4 +1,4 @@
-linux (5.9.1-1co1) UNRELEASED; urgency=medium
+linux (5.9.1-1co1) apertis; urgency=medium
 
   * Remaining Apertis specific changes:
     - renesas: use new config symbols for Rcar G3 boards
@@ -24,8 +24,11 @@ linux (5.9.1-1co1) UNRELEASED; urgency=medium
     - Don't build signed templated
     - Disable build of udeb packages
     - Disable cloud images for amd64 and arm64
+  * Refresh Apertis patches for 5.9.1-1
+  * Revert compilation to gcc-8 on all architectures
+  * Regenerate automatic rules due gcc-8
 
- -- Denis Pynkin <denis.pynkin@collabora.com>  Tue, 20 Oct 2020 02:19:42 +0300
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Tue, 20 Oct 2020 02:53:31 +0300
 
 linux (5.9.1-1) unstable; urgency=medium
 
