@@ -24,7 +24,7 @@ Signed-off-by: John Johansen <john.johansen@canonical.com>
 
 --- a/security/apparmor/apparmorfs.c
 +++ b/security/apparmor/apparmorfs.c
-@@ -2275,6 +2275,7 @@
+@@ -2276,6 +2276,7 @@
  	AA_SFS_DIR("domain",			aa_sfs_entry_domain),
  	AA_SFS_DIR("file",			aa_sfs_entry_file),
  	AA_SFS_DIR("network_v8",		aa_sfs_entry_network),

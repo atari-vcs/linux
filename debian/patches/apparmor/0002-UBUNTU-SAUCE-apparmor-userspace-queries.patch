@@ -17,7 +17,7 @@ Signed-off-by: Seth Forshee <seth.forshee@canonical.com>
 
 --- a/security/apparmor/apparmorfs.c
 +++ b/security/apparmor/apparmorfs.c
-@@ -624,7 +624,7 @@ static void profile_query_cb(struct aa_p
+@@ -626,7 +626,7 @@
  			tmp = aa_compute_fperms(dfa, state, &cond);
  		}
  	} else if (profile->policy.dfa) {
@@ -28,7 +28,7 @@ Signed-off-by: Seth Forshee <seth.forshee@canonical.com>
  		state = aa_dfa_match_len(dfa, profile->policy.start[0],
 --- a/security/apparmor/include/policy.h
 +++ b/security/apparmor/include/policy.h
-@@ -226,6 +226,16 @@ static inline unsigned int PROFILE_MEDIA
+@@ -226,6 +226,16 @@
  					profile->policy.start[0], &class, 1);
  }
  
