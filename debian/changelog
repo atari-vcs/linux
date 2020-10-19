@@ -1,3 +1,32 @@
+linux (5.9.1-1co1) UNRELEASED; urgency=medium
+
+  * Remaining Apertis specific changes:
+    - renesas: use new config symbols for Rcar G3 boards
+    - apparmor: patch to provide compatibility with v2.x net
+    - UBUNTU SAUCE: apparmor: fix apparmor mediating locking
+    - apparmor: af_unix mediation
+    - UBUNTU: SAUCE: apparmor: userspace queries
+    - apparmor: fix use after free in sk_peer_label
+    - component: Add an API to cleanup before unbind
+    - drm/imx: Fix probe oops
+    - Hack: hardcode to sample rates usable on sabre AI
+    - cs42xx8-i2c: Fix module auto-loading
+    - ARM: dts: imx6qdl: Enable egalax touch screen
+    - Disable the lcd interface
+    - um: ubd: Submit all data segments as a single command
+    - WIP: Port UML random to hwrng core
+    - debian: armhf: config: Enable Egalax (i2c) touchscreen
+    - armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+    - Add configuration for i.mx6 media pipeline
+    - Install dtbs in /boot
+    - Disable rt flavours
+    - Disable the rt flavours for armhf and arm64 as well
+    - Don't build signed templated
+    - Disable build of udeb packages
+    - Disable cloud images for amd64 and arm64
+
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Tue, 20 Oct 2020 02:19:42 +0300
+
 linux (5.9.1-1) unstable; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_5.9
