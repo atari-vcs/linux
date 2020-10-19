@@ -158,7 +158,7 @@ index 0635571..58ff956 100644
  	for (i = 0; i < profile->xattr_count; i++)
  		kzfree(profile->xattrs[i]);
 diff --git a/security/apparmor/policy_unpack.c b/security/apparmor/policy_unpack.c
-index 8cfc949..c094252 100644
+index 8cfc9493..c094252 100644
 --- a/security/apparmor/policy_unpack.c
 +++ b/security/apparmor/policy_unpack.c
 @@ -33,7 +33,7 @@

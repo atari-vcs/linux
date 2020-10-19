@@ -38,10 +38,10 @@ index 68ccc5b..a7565ea 100644
  {
  	return sysctl_perf_event_paranoid > -1;
 diff --git a/kernel/events/core.c b/kernel/events/core.c
-index 4764605..14cfc9c 100644
+index 09e1cc2..72445b8 100644
 --- a/kernel/events/core.c
 +++ b/kernel/events/core.c
-@@ -403,8 +403,13 @@ static cpumask_var_t perf_online_mask;
+@@ -404,8 +404,13 @@ static cpumask_var_t perf_online_mask;
   *   0 - disallow raw tracepoint access for unpriv
   *   1 - disallow cpu events for unpriv
   *   2 - disallow kernel profiling for unpriv
@@ -55,7 +55,7 @@ index 4764605..14cfc9c 100644
  
  /* Minimum for 512 kiB + 1 user control page */
  int sysctl_perf_event_mlock __read_mostly = 512 + (PAGE_SIZE / 1024); /* 'free' kiB per user */
-@@ -10926,6 +10931,9 @@ SYSCALL_DEFINE5(perf_event_open,
+@@ -10927,6 +10932,9 @@ SYSCALL_DEFINE5(perf_event_open,
  	if (flags & ~PERF_FLAG_ALL)
  		return -EINVAL;
  

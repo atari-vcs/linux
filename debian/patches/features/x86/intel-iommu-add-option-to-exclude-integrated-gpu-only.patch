@@ -35,7 +35,7 @@ index 13984b6..e7be139 100644
  			With this option iommu will not optimize to look
  			for io virtual address below 32-bit forcing dual
 diff --git a/drivers/iommu/intel-iommu.c b/drivers/iommu/intel-iommu.c
-index 2ffec65..4dbcf6b 100644
+index 1147626..ad6fbd9 100644
 --- a/drivers/iommu/intel-iommu.c
 +++ b/drivers/iommu/intel-iommu.c
 @@ -54,6 +54,9 @@
