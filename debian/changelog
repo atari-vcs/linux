@@ -1,5 +1,12 @@
-linux (5.4.72-0~co1) UNRELEASED; urgency=medium
+linux (5.4.72-0~co1) apertis; urgency=medium
 
+  * Remaining Apertis specific changes:
+    - Turn off rt build
+    - Refresh the automatically detected licensing information
+    - Add patches to fix failure path in imx-drm
+    - Add missing dependency on libcap-dev
+    - Add libcap LDLIBS when building turbostat
+    - Enable NVMEM_IMX_OCOTP
 
  -- Martyn Welch <martyn.welch@collabora.com>  Mon, 19 Oct 2020 12:30:28 +0100
 
