@@ -152,3 +152,9 @@ apertis/drm-imx-Fix-probe-oops.patch
 # Apertis fixes for UML
 apertis/uml/um-ubd-Submit-all-data-segments-as-a-single-command.patch
 apertis/uml/WIP-Port-UML-random-to-hwrng-core.patch
+
+# Tune sabre AI to match typical Apertis setups better
+apertis/sabreai/Disable-lvds-display-by-default-on-Sabre-auto.patch
+
+# General configuration for mx6 boards
+apertis/mx6/dtb-imx6-Add-default-256M-CMA-area-on-i.MX6.patch
