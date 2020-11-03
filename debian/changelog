@@ -1,3 +1,12 @@
+linux (5.9.1-1co2) apertis; urgency=medium
+
+  * Tune i.mx6 dtbs for use with apertis
+  * [armhf] Configure the anatop driver as builtin
+  * Drop (unneeded) patches that are not going upstream
+  * [armhf] Enable i.mx hardware video decoder/encoding
+
+ -- Sjoerd Simons <sjoerd@collabora.com>  Tue, 03 Nov 2020 10:07:03 +0100
+
 linux (5.9.1-1co1) apertis; urgency=medium
 
   * Remaining Apertis specific changes:
