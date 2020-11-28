@@ -1,11 +1,11 @@
-From 4302701f88b3dc4409cb42c9c72ccec51636b3b8 Mon Sep 17 00:00:00 2001
-Message-Id: <4302701f88b3dc4409cb42c9c72ccec51636b3b8.1601675151.git.zanussi@kernel.org>
-In-Reply-To: <5b5a156f9808b1acf1205606e03da117214549ea.1601675151.git.zanussi@kernel.org>
-References: <5b5a156f9808b1acf1205606e03da117214549ea.1601675151.git.zanussi@kernel.org>
+From a8e3b5f5ab12ab1ceeffb1c5e539cdf76f7dd5a1 Mon Sep 17 00:00:00 2001
+Message-Id: <a8e3b5f5ab12ab1ceeffb1c5e539cdf76f7dd5a1.1606340619.git.zanussi@kernel.org>
+In-Reply-To: <ed9d09c7a4927383a47903a6b59b35853a530a2c.1606340618.git.zanussi@kernel.org>
+References: <ed9d09c7a4927383a47903a6b59b35853a530a2c.1606340618.git.zanussi@kernel.org>
 From: Josh Cartwright <joshc@ni.com>
 Date: Thu, 31 Mar 2016 00:04:25 -0500
-Subject: [PATCH 069/333] list_bl: fixup bogus lockdep warning
-Origin: https://www.kernel.org/pub/linux/kernel/projects/rt/4.19/older/patches-4.19.148-rt64.tar.xz
+Subject: [PATCH 069/335] list_bl: fixup bogus lockdep warning
+Origin: https://www.kernel.org/pub/linux/kernel/projects/rt/4.19/older/patches-4.19.160-rt69.tar.xz
 
 At first glance, the use of 'static inline' seems appropriate for
 INIT_HLIST_BL_HEAD().
