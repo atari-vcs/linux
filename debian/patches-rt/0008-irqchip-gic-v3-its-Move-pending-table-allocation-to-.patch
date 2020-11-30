@@ -1,12 +1,12 @@
-From 893750b4d975db6ff5027e83b0b074d80e7e4b21 Mon Sep 17 00:00:00 2001
-Message-Id: <893750b4d975db6ff5027e83b0b074d80e7e4b21.1601675151.git.zanussi@kernel.org>
-In-Reply-To: <5b5a156f9808b1acf1205606e03da117214549ea.1601675151.git.zanussi@kernel.org>
-References: <5b5a156f9808b1acf1205606e03da117214549ea.1601675151.git.zanussi@kernel.org>
+From 4f5ac1d16824fb241ae4ec78745362cb896b3475 Mon Sep 17 00:00:00 2001
+Message-Id: <4f5ac1d16824fb241ae4ec78745362cb896b3475.1606340618.git.zanussi@kernel.org>
+In-Reply-To: <ed9d09c7a4927383a47903a6b59b35853a530a2c.1606340618.git.zanussi@kernel.org>
+References: <ed9d09c7a4927383a47903a6b59b35853a530a2c.1606340618.git.zanussi@kernel.org>
 From: Marc Zyngier <marc.zyngier@arm.com>
 Date: Fri, 27 Jul 2018 13:38:54 +0100
-Subject: [PATCH 008/333] irqchip/gic-v3-its: Move pending table allocation to
+Subject: [PATCH 008/335] irqchip/gic-v3-its: Move pending table allocation to
  init time
-Origin: https://www.kernel.org/pub/linux/kernel/projects/rt/4.19/older/patches-4.19.148-rt64.tar.xz
+Origin: https://www.kernel.org/pub/linux/kernel/projects/rt/4.19/older/patches-4.19.160-rt69.tar.xz
 
 Signed-off-by: Marc Zyngier <marc.zyngier@arm.com>
 Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>

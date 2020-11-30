@@ -1,11 +1,11 @@
-From cce5eefc8e4fa9f0d3196fa267c8fab21b013944 Mon Sep 17 00:00:00 2001
-Message-Id: <cce5eefc8e4fa9f0d3196fa267c8fab21b013944.1601675152.git.zanussi@kernel.org>
-In-Reply-To: <5b5a156f9808b1acf1205606e03da117214549ea.1601675151.git.zanussi@kernel.org>
-References: <5b5a156f9808b1acf1205606e03da117214549ea.1601675151.git.zanussi@kernel.org>
+From 2f66e4b0d70121a1e5df20ce1bf01e508d0ccdb7 Mon Sep 17 00:00:00 2001
+Message-Id: <2f66e4b0d70121a1e5df20ce1bf01e508d0ccdb7.1606340619.git.zanussi@kernel.org>
+In-Reply-To: <ed9d09c7a4927383a47903a6b59b35853a530a2c.1606340618.git.zanussi@kernel.org>
+References: <ed9d09c7a4927383a47903a6b59b35853a530a2c.1606340618.git.zanussi@kernel.org>
 From: Thomas Gleixner <tglx@linutronix.de>
 Date: Thu, 4 Oct 2012 14:20:47 +0100
-Subject: [PATCH 121/333] softirq: Split softirq locks
-Origin: https://www.kernel.org/pub/linux/kernel/projects/rt/4.19/older/patches-4.19.148-rt64.tar.xz
+Subject: [PATCH 121/335] softirq: Split softirq locks
+Origin: https://www.kernel.org/pub/linux/kernel/projects/rt/4.19/older/patches-4.19.160-rt69.tar.xz
 
 The 3.x RT series removed the split softirq implementation in favour
 of pushing softirq processing into the context of the thread which

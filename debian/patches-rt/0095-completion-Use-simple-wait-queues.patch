@@ -1,11 +1,11 @@
-From e2f5989ceb39d5a71dcfdadfed1cfc80f8ed65e0 Mon Sep 17 00:00:00 2001
-Message-Id: <e2f5989ceb39d5a71dcfdadfed1cfc80f8ed65e0.1601675152.git.zanussi@kernel.org>
-In-Reply-To: <5b5a156f9808b1acf1205606e03da117214549ea.1601675151.git.zanussi@kernel.org>
-References: <5b5a156f9808b1acf1205606e03da117214549ea.1601675151.git.zanussi@kernel.org>
+From dca9a354d06bab543de5a763b8183dd8134e6896 Mon Sep 17 00:00:00 2001
+Message-Id: <dca9a354d06bab543de5a763b8183dd8134e6896.1606340619.git.zanussi@kernel.org>
+In-Reply-To: <ed9d09c7a4927383a47903a6b59b35853a530a2c.1606340618.git.zanussi@kernel.org>
+References: <ed9d09c7a4927383a47903a6b59b35853a530a2c.1606340618.git.zanussi@kernel.org>
 From: Thomas Gleixner <tglx@linutronix.de>
 Date: Fri, 11 Jan 2013 11:23:51 +0100
-Subject: [PATCH 095/333] completion: Use simple wait queues
-Origin: https://www.kernel.org/pub/linux/kernel/projects/rt/4.19/older/patches-4.19.148-rt64.tar.xz
+Subject: [PATCH 095/335] completion: Use simple wait queues
+Origin: https://www.kernel.org/pub/linux/kernel/projects/rt/4.19/older/patches-4.19.160-rt69.tar.xz
 
 Completions have no long lasting callbacks and therefor do not need
 the complex waitqueue variant. Use simple waitqueues which reduces the
@@ -164,7 +164,7 @@ index 73e06e9986d4..f426a0661aa0 100644
  extern long prepare_to_swait_event(struct swait_queue_head *q, struct swait_queue *wait, int state);
  
 diff --git a/kernel/power/hibernate.c b/kernel/power/hibernate.c
-index 537a2a3c1dea..5b1c16500d07 100644
+index 28db51274ed0..66a3c99e2a57 100644
 --- a/kernel/power/hibernate.c
 +++ b/kernel/power/hibernate.c
 @@ -690,6 +690,10 @@ static int load_image_and_restore(void)
@@ -323,7 +323,7 @@ index a1ad5b7d5521..755a58084978 100644
  }
  EXPORT_SYMBOL(completion_done);
 diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-index c0058e62a3fc..b32dfc96620d 100644
+index e3a05db66b48..d302a5d895ec 100644
 --- a/kernel/sched/core.c
 +++ b/kernel/sched/core.c
 @@ -7158,7 +7158,10 @@ void migrate_disable(void)

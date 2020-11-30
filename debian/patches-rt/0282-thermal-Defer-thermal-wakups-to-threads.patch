@@ -1,11 +1,11 @@
-From c62dfb4104de740edf17882cfd1f212f31d08f00 Mon Sep 17 00:00:00 2001
-Message-Id: <c62dfb4104de740edf17882cfd1f212f31d08f00.1601675153.git.zanussi@kernel.org>
-In-Reply-To: <5b5a156f9808b1acf1205606e03da117214549ea.1601675151.git.zanussi@kernel.org>
-References: <5b5a156f9808b1acf1205606e03da117214549ea.1601675151.git.zanussi@kernel.org>
+From ec67c1195e6bbfd0ae4eab33b0a6a2ee1d3b289b Mon Sep 17 00:00:00 2001
+Message-Id: <ec67c1195e6bbfd0ae4eab33b0a6a2ee1d3b289b.1606340620.git.zanussi@kernel.org>
+In-Reply-To: <ed9d09c7a4927383a47903a6b59b35853a530a2c.1606340618.git.zanussi@kernel.org>
+References: <ed9d09c7a4927383a47903a6b59b35853a530a2c.1606340618.git.zanussi@kernel.org>
 From: Daniel Wagner <wagi@monom.org>
 Date: Tue, 17 Feb 2015 09:37:44 +0100
-Subject: [PATCH 282/333] thermal: Defer thermal wakups to threads
-Origin: https://www.kernel.org/pub/linux/kernel/projects/rt/4.19/older/patches-4.19.148-rt64.tar.xz
+Subject: [PATCH 282/335] thermal: Defer thermal wakups to threads
+Origin: https://www.kernel.org/pub/linux/kernel/projects/rt/4.19/older/patches-4.19.160-rt69.tar.xz
 
 [ Upstream commit ad2408dc248fe58536eef5b2b5734d8f9d3a280b ]
 
