@@ -1,35 +1,28 @@
 From: Ian Campbell <ijc@hellion.org.uk>
 Date: Thu, 17 Jan 2013 08:55:21 +0000
 Subject: Tweak gitignore for Debian pkg-kernel using git svn.
-
 Forwarded: not-needed
 
 [bwh: Tweak further for pure git]
----
- .gitignore | 22 +++++++---------------
- 1 file changed, 7 insertions(+), 15 deletions(-)
 
-diff --git a/.gitignore b/.gitignore
-index 70580bd..6880352af 100644
 --- a/.gitignore
 +++ b/.gitignore
-@@ -67,11 +67,6 @@ modules.order
- #
+@@ -71,11 +71,6 @@ modules.order
  /*.spec
  
--#
+ #
 -# Debian directory (make deb-pkg)
 -#
 -/debian/
 -
- #
+-#
  # Snap directory (make snap-pkg)
  #
-@@ -82,16 +77,6 @@ modules.order
- #
+ /snap/
+@@ -86,16 +81,6 @@ modules.order
  /tar-install/
  
--#
+ #
 -# We don't want to ignore the following even if they are dot-files
 -#
 -!.clang-format
@@ -39,13 +32,14 @@ index 70580bd..6880352af 100644
 -!.gitignore
 -!.mailmap
 -
- #
+-#
  # Generated include files
  #
-@@ -146,3 +131,10 @@ x509.genkey
+ /include/config/
+@@ -155,3 +140,10 @@ x509.genkey
  
- # Clang's compilation database file
- /compile_commands.json
+ # Documentation toolchain
+ sphinx_*/
 +
 +#
 +# Debian packaging: ignore everything at the top level, since it isn't
