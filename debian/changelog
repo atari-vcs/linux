@@ -1,4 +1,4 @@
-linux (5.10.4-1co1) UNRELEASED; urgency=medium
+linux (5.10.4-1co1) apertis; urgency=medium
 
   * Remaining Apertis specific changes:
     - renesas: use new config symbols for Rcar G3 boards
@@ -25,8 +25,13 @@ linux (5.10.4-1co1) UNRELEASED; urgency=medium
     - Tune i.mx6 dtbs for use with apertis
     - [armhf] Configure the anatop driver as builtin
     - [armhf] Enable i.mx hardware video decoder/encoding
+  * Revert compilation to gcc-8 on all architectures
+  * Regenerate automatic rules due gcc-8
+  * Apparmor: fix kzfree() call in patch
+  * [armhf] Enable i.MX GPIO support
+  * debian/apertis/component: Set to target
 
- -- Denis Pynkin <denis.pynkin@collabora.com>  Sat, 09 Jan 2021 19:19:19 +0300
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Sat, 09 Jan 2021 22:52:08 +0300
 
 linux (5.10.4-1) unstable; urgency=medium
 
