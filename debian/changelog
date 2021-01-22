@@ -1,3 +1,11 @@
+linux (5.4.91-0~co1) apertis; urgency=medium
+
+  * New upstream release.
+  * Rebase and regenerate the patch series.
+  * Set debian/apertis/component to target.
+
+ -- Andrej Shadura <andrew.shadura@collabora.co.uk>  Fri, 22 Jan 2021 12:26:55 +0100
+
 linux (5.4.72-0~co1) apertis; urgency=medium
 
   * Remaining Apertis specific changes:
