@@ -67,7 +67,7 @@ index e5d3283..b49642c 100644
  void do_close_on_exec(struct files_struct *files)
  {
 diff --git a/kernel/fork.c b/kernel/fork.c
-index 5942725..caf131f 100644
+index 50f37d5..6ec99f6 100644
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
 @@ -1117,6 +1117,7 @@ void mmput_async(struct mm_struct *mm)
@@ -79,7 +79,7 @@ index 5942725..caf131f 100644
  
  /**
 diff --git a/kernel/sched/core.c b/kernel/sched/core.c
-index 79ce22d..cd0c2f0 100644
+index 7841e73..5967886 100644
 --- a/kernel/sched/core.c
 +++ b/kernel/sched/core.c
 @@ -4650,6 +4650,7 @@ int can_nice(const struct task_struct *p, const int nice)
@@ -91,10 +91,10 @@ index 79ce22d..cd0c2f0 100644
  #ifdef __ARCH_WANT_SYS_NICE
  
 diff --git a/kernel/signal.c b/kernel/signal.c
-index 595a36a..7a9592b 100644
+index 8c97fc7..4f5e6be 100644
 --- a/kernel/signal.c
 +++ b/kernel/signal.c
-@@ -1396,6 +1396,7 @@ struct sighand_struct *__lock_task_sighand(struct task_struct *tsk,
+@@ -1397,6 +1397,7 @@ struct sighand_struct *__lock_task_sighand(struct task_struct *tsk,
  
  	return sighand;
  }

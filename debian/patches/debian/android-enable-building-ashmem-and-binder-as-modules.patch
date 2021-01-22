@@ -51,7 +51,7 @@ index c9d3d0c9..55411d9 100644
 +binder_linux-$(CONFIG_ANDROID_BINDERFS)	+= binderfs.o
 +binder_linux-$(CONFIG_ANDROID_BINDER_IPC_SELFTEST) += binder_alloc_selftest.o
 diff --git a/drivers/android/binder_alloc.c b/drivers/android/binder_alloc.c
-index 2048ba6..82e862e 100644
+index 3526bb1..211dc26 100644
 --- a/drivers/android/binder_alloc.c
 +++ b/drivers/android/binder_alloc.c
 @@ -38,7 +38,7 @@ enum {

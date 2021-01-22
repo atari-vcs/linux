@@ -17,10 +17,10 @@ are set.
  6 files changed, 34 insertions(+), 11 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index 8db75cc..2bcd10f 100644
+index a5edbd4..e5700a3 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1131,7 +1131,8 @@ scripts: scripts_basic scripts_dtc
+@@ -1134,7 +1134,8 @@ scripts: scripts_basic scripts_dtc
  PHONY += prepare archprepare
  
  archprepare: outputmakefile archheaders archscripts scripts include/config/kernel.release \
@@ -30,7 +30,7 @@ index 8db75cc..2bcd10f 100644
  
  prepare0: archprepare
  	$(Q)$(MAKE) $(build)=scripts/mod
-@@ -1183,6 +1184,16 @@ define filechk_version.h
+@@ -1186,6 +1187,16 @@ define filechk_version.h
  	echo '#define KERNEL_VERSION(a,b,c) (((a) << 16) + ((b) << 8) + (c))'
  endef
  
@@ -47,7 +47,7 @@ index 8db75cc..2bcd10f 100644
  $(version_h): FORCE
  	$(call filechk,version.h)
  	$(Q)rm -f $(old_version_h)
-@@ -1190,6 +1201,9 @@ $(version_h): FORCE
+@@ -1193,6 +1204,9 @@ $(version_h): FORCE
  include/generated/utsrelease.h: include/config/kernel.release FORCE
  	$(call filechk,utsrelease.h)
  

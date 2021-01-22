@@ -39,10 +39,10 @@ index 1f72c26..bbc39b9 100644
  	return rc;
  }
 diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-index 5a9a072..9a4f80e 100644
+index 03db1f9..3244b35 100644
 --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
 +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_drv.c
-@@ -1111,6 +1111,7 @@ static int amdgpu_pci_probe(struct pci_dev *pdev,
+@@ -1112,6 +1112,7 @@ static int amdgpu_pci_probe(struct pci_dev *pdev,
  
  	if (!amdgpu_firmware_installed()) {
  		DRM_ERROR("amdgpu requires firmware installed\n");

@@ -22,7 +22,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  2 files changed, 16 insertions(+)
 
 diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 13984b6..e7be139 100644
+index 74ba077..4bcc95a 100644
 --- a/Documentation/admin-guide/kernel-parameters.txt
 +++ b/Documentation/admin-guide/kernel-parameters.txt
 @@ -1717,6 +1717,8 @@
@@ -35,7 +35,7 @@ index 13984b6..e7be139 100644
  			With this option iommu will not optimize to look
  			for io virtual address below 32-bit forcing dual
 diff --git a/drivers/iommu/intel-iommu.c b/drivers/iommu/intel-iommu.c
-index 1147626..ad6fbd9 100644
+index 984c7a6..287ad1b 100644
 --- a/drivers/iommu/intel-iommu.c
 +++ b/drivers/iommu/intel-iommu.c
 @@ -54,6 +54,9 @@

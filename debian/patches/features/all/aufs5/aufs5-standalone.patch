@@ -49,7 +49,7 @@ index 727c97f..c08d8b9 100644
  /**
   * d_ancestor - search for an ancestor
 diff --git a/fs/exec.c b/fs/exec.c
-index de83355..5bf9353 100644
+index 1b4d220..7126483 100644
 --- a/fs/exec.c
 +++ b/fs/exec.c
 @@ -110,6 +110,7 @@ bool path_noexec(const struct path *path)
@@ -61,7 +61,7 @@ index de83355..5bf9353 100644
  #ifdef CONFIG_USELIB
  /*
 diff --git a/fs/fcntl.c b/fs/fcntl.c
-index d62303c..d4ad344 100644
+index 57115de..84b613d 100644
 --- a/fs/fcntl.c
 +++ b/fs/fcntl.c
 @@ -85,6 +85,7 @@ int setfl(int fd, struct file * filp, unsigned long arg)
@@ -105,7 +105,7 @@ index 086025c..52cc64a 100644
  /**
   *	touch_atime	-	update the access time
 diff --git a/fs/namespace.c b/fs/namespace.c
-index 0f7e57e..516c2f3 100644
+index f09fb65..c69a3a0 100644
 --- a/fs/namespace.c
 +++ b/fs/namespace.c
 @@ -431,6 +431,7 @@ void __mnt_drop_write(struct vfsmount *mnt)
@@ -124,7 +124,7 @@ index 0f7e57e..516c2f3 100644
  
  /*
   * vfsmount lock must be held for write
-@@ -1903,6 +1905,7 @@ int iterate_mounts(int (*f)(struct vfsmount *, void *), void *arg,
+@@ -1906,6 +1908,7 @@ int iterate_mounts(int (*f)(struct vfsmount *, void *), void *arg,
  	}
  	return 0;
  }

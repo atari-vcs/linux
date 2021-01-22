@@ -43,7 +43,7 @@ index d10f427..d9dd91c 100644
  
  	acpi_table_upgrade();
 diff --git a/drivers/firmware/efi/secureboot.c b/drivers/firmware/efi/secureboot.c
-index bf16cfb6..b56f262 100644
+index bf16cfb..b56f262 100644
 --- a/drivers/firmware/efi/secureboot.c
 +++ b/drivers/firmware/efi/secureboot.c
 @@ -15,6 +15,7 @@
@@ -64,7 +64,7 @@ index bf16cfb6..b56f262 100644
  			break;
  		default:
 diff --git a/include/linux/security.h b/include/linux/security.h
-index fd02276..5f23bf7 100644
+index df90399..8c225d2 100644
 --- a/include/linux/security.h
 +++ b/include/linux/security.h
 @@ -445,6 +445,7 @@ int security_inode_notifysecctx(struct inode *inode, void *ctx, u32 ctxlen);

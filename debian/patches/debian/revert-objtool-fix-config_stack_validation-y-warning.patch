@@ -11,10 +11,10 @@ a pre-built objtool.
  1 file changed, 11 insertions(+), 11 deletions(-)
 
 diff --git a/Makefile b/Makefile
-index e062782..4898447 100644
+index 32308a9..8f30f44 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1022,17 +1022,6 @@ export mod_sign_cmd
+@@ -1025,17 +1025,6 @@ export mod_sign_cmd
  
  HOST_LIBELF_LIBS = $(shell pkg-config libelf --libs 2>/dev/null || echo -lelf)
  
@@ -32,7 +32,7 @@ index e062782..4898447 100644
  PHONY += prepare0
  
  export MODORDER := $(extmod-prefix)modules.order
-@@ -1151,6 +1140,17 @@ uapi-asm-generic:
+@@ -1154,6 +1143,17 @@ uapi-asm-generic:
  	$(Q)$(MAKE) $(asm-generic)=arch/$(SRCARCH)/include/generated/uapi/asm \
  	generic=include/uapi/asm-generic
  

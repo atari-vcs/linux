@@ -19,20 +19,20 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  5 files changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/fs/btrfs/super.c b/fs/btrfs/super.c
-index 6a2ae20..be9282e 100644
+index 1a69bdb..a0a3e93 100644
 --- a/fs/btrfs/super.c
 +++ b/fs/btrfs/super.c
-@@ -2475,4 +2475,4 @@ late_initcall(init_btrfs_fs);
+@@ -2483,4 +2483,4 @@ late_initcall(init_btrfs_fs);
  module_exit(exit_btrfs_fs)
  
  MODULE_LICENSE("GPL");
 -MODULE_SOFTDEP("pre: crc32c");
 +MODULE_SOFTDEP("pre: crypto-crc32c");
 diff --git a/fs/ext4/super.c b/fs/ext4/super.c
-index 4aae7e3..312007d 100644
+index 0656846..2ff2e22d 100644
 --- a/fs/ext4/super.c
 +++ b/fs/ext4/super.c
-@@ -6307,6 +6307,6 @@ static void __exit ext4_exit_fs(void)
+@@ -6311,6 +6311,6 @@ static void __exit ext4_exit_fs(void)
  MODULE_AUTHOR("Remy Card, Stephen Tweedie, Andrew Morton, Andreas Dilger, Theodore Ts'o and others");
  MODULE_DESCRIPTION("Fourth Extended Filesystem");
  MODULE_LICENSE("GPL");
@@ -41,10 +41,10 @@ index 4aae7e3..312007d 100644
  module_init(ext4_init_fs)
  module_exit(ext4_exit_fs)
 diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index fa461db..d4098af 100644
+index a9a0832..2b616850 100644
 --- a/fs/f2fs/super.c
 +++ b/fs/f2fs/super.c
-@@ -3805,4 +3805,5 @@ module_exit(exit_f2fs_fs)
+@@ -3804,4 +3804,5 @@ module_exit(exit_f2fs_fs)
  MODULE_AUTHOR("Samsung Electronics's Praesto Team");
  MODULE_DESCRIPTION("Flash Friendly File System");
  MODULE_LICENSE("GPL");

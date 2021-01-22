@@ -93,7 +93,7 @@ index b2a7f17..727c97f 100644
  {
  	struct dentry *this_parent;
 diff --git a/fs/fcntl.c b/fs/fcntl.c
-index 3d40771..d62303c 100644
+index 3dc90e5..57115de 100644
 --- a/fs/fcntl.c
 +++ b/fs/fcntl.c
 @@ -32,7 +32,7 @@
@@ -128,7 +128,7 @@ index c5267a4..086025c 100644
  	int (*update_time)(struct inode *, struct timespec64 *, int);
  
 diff --git a/fs/namespace.c b/fs/namespace.c
-index 2adfe7b..0f7e57e 100644
+index 76ea929..f09fb65 100644
 --- a/fs/namespace.c
 +++ b/fs/namespace.c
 @@ -776,6 +776,12 @@ static inline int check_mnt(struct mount *mnt)
