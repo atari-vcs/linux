@@ -3,6 +3,13 @@ linux (5.4.91-0~co1) apertis; urgency=medium
   * New upstream release.
   * Rebase and regenerate the patch series.
   * Set debian/apertis/component to target.
+  * Remaining Apertis specific changes:
+    - Turn off rt build
+    - Refresh the automatically detected licensing information
+    - Add patches to fix failure path in imx-drm
+    - Add missing dependency on libcap-dev
+    - Add libcap LDLIBS when building turbostat
+    - Enable NVMEM_IMX_OCOTP
 
  -- Andrej Shadura <andrew.shadura@collabora.co.uk>  Fri, 22 Jan 2021 12:26:55 +0100
 
