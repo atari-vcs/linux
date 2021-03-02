@@ -114,6 +114,11 @@ CONFIG_DRM_I915_GVT=y
 CONFIG_DRM_I915_GVT_KVMGT=m
 
 ##
+## file: drivers/hwmon/Kconfig
+##
+CONFIG_SENSORS_AMD_ENERGY=m
+
+##
 ## file: drivers/i2c/Kconfig
 ##
 CONFIG_I2C_STUB=m
@@ -223,6 +228,7 @@ CONFIG_RCU_FANOUT=64
 ##
 ## file: lib/Kconfig.debug
 ##
+CONFIG_DEBUG_INFO_BTF=y
 CONFIG_FRAME_WARN=2048
 
 ##
