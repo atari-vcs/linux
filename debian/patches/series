@@ -135,3 +135,22 @@ bugfix/all/tools-include-uapi-fix-errno.h.patch
 debian/overlayfs-permit-mounts-in-userns.patch
 
 # ABI maintenance
+
+# AppArmor
+apparmor/0001-apparmor-patch-to-provide-compatibility-with-v2.x-ne.patch
+apparmor/0002-apparmor-af_unix-mediation.patch
+apparmor/0003-apparmor-fix-use-after-free-in-sk_peer_label.patch
+apparmor/0001-UBUNTU-SAUCE-apparmor-fix-apparmor-mediating-locking.patch
+apparmor/0002-UBUNTU-SAUCE-apparmor-userspace-queries.patch
+
+# Apertis support/fixes for sabre ai audio
+apertis/sabreai-audio/0001-cs42xx8-i2c-Fix-module-auto-loading.patch
+apertis/sabreai-audio/0002-Hack-hardcode-to-sample-rates-usable-on-sabre-AI.patch
+apertis/sabrelite/0216-Disable-the-lcd-interface.patch
+apertis/sabrelite/0103-ARM-dts-imx6qdl-Enable-egalax-touch-screen.patch
+
+# Tune sabre AI to match typical Apertis setups better
+apertis/sabreai/Disable-lvds-display-by-default-on-Sabre-auto.patch
+
+# General configuration for mx6 boards
+apertis/mx6/dtb-imx6-Add-default-256M-CMA-area-on-i.MX6.patch

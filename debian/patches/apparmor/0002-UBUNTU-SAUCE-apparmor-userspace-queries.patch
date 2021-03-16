@@ -1,0 +1,50 @@
+From: John Johansen <john.johansen@canonical.com>
+Date: Tue, 26 Jun 2018 08:07:54 -0700
+Subject: [PATCH 2/2] UBUNTU: SAUCE: apparmor: userspace queries
+
+The userspaced controlled query interface needs a safe version of the
+POLICY_MEDIATES query, otherwise userspace can cause an index out of
+bounds reference for trusted helper enforced policy.
+
+Fixes: b9590ad4c4f2 ("apparmor: remove POLICY_MEDIATES_SAFE")
+Signed-off-by: John Johansen <john.johansen@canonical.com>
+Signed-off-by: Seth Forshee <seth.forshee@canonical.com>
+---
+ security/apparmor/apparmorfs.c     |  2 +-
+ security/apparmor/include/policy.h | 10 ++++++++++
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+
+Index: linux/security/apparmor/apparmorfs.c
+===================================================================
+--- linux.orig/security/apparmor/apparmorfs.c	2020-10-09 02:03:52.628376441 +0300
++++ linux/security/apparmor/apparmorfs.c	2020-10-09 02:03:52.626376472 +0300
+@@ -624,7 +624,7 @@
+ 			tmp = aa_compute_fperms(dfa, state, &cond);
+ 		}
+ 	} else if (profile->policy.dfa) {
+-		if (!PROFILE_MEDIATES(profile, *match_str))
++		if (!PROFILE_MEDIATES_SAFE(profile, *match_str))
+ 			return;	/* no change to current perms */
+ 		dfa = profile->policy.dfa;
+ 		state = aa_dfa_match_len(dfa, profile->policy.start[0],
+Index: linux/security/apparmor/include/policy.h
+===================================================================
+--- linux.orig/security/apparmor/include/policy.h	2020-10-09 02:03:52.628376441 +0300
++++ linux/security/apparmor/include/policy.h	2020-10-09 02:03:52.626376472 +0300
+@@ -225,6 +225,16 @@
+ 					profile->policy.start[0], &class, 1);
+ }
+ 
++/* safe version of POLICY_MEDIATES for full range input */
++static inline unsigned int PROFILE_MEDIATES_SAFE(struct aa_profile *profile,
++                                                unsigned char class)
++{
++       if (profile->policy.dfa)
++               return aa_dfa_match_len(profile->policy.dfa,
++                                       profile->policy.start[0], &class, 1);
++       return 0;
++}
++
+ static inline unsigned int PROFILE_MEDIATES_AF(struct aa_profile *profile,
+ 					       u16 AF) {
+ 	unsigned int state = PROFILE_MEDIATES(profile, AA_CLASS_NET);

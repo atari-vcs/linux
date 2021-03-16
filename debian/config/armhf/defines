@@ -1,7 +1,6 @@
 [base]
 featuresets:
  none
- rt
 kernel-arch: arm
 
 [build]
@@ -12,7 +11,7 @@ vdso: true
 install-stem: vmlinuz
 
 [relations]
-headers%gcc-10: linux-compiler-gcc-10-arm
+headers%gcc-8: linux-compiler-gcc-8-arm
 
 [armmp_description]
 hardware: ARMv7 multiplatform compatible SoCs
