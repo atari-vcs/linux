@@ -265,7 +265,7 @@ aVx32
 p135
 asVcompiler
 p136
-Vgcc-8
+Vgcc-10
 p137
 sVfeaturesets
 p138
@@ -326,9 +326,9 @@ ass(Vrelations
 p170
 tp171
 (dp172
-Vgcc-8
+Vgcc-10
 p173
-Vgcc-8 <!stage1 !cross !pkg.linux.nokernel>, gcc-8-@gnu-type-package@ <!stage1 cross !pkg.linux.nokernel>
+Vgcc-10 <!stage1 !cross !pkg.linux.nokernel>, gcc-10-@gnu-type-package@ <!stage1 cross !pkg.linux.nokernel>
 p174
 sVinitramfs-fallback
 p175
@@ -486,9 +486,9 @@ p257
 g229
 tp258
 (dp259
-Vheaders%gcc-8
+Vheaders%gcc-10
 p260
-Vlinux-compiler-gcc-8-x86
+Vlinux-compiler-gcc-10-x86
 p261
 ss(Vdescription
 p262
@@ -639,13 +639,13 @@ p340
 g296
 tp341
 (dp342
-Vgcc-8
+Vgcc-10
 p343
-Vgcc-8 <!stage1 !cross !pkg.linux.nokernel>, gcc-8-aarch64-linux-gnu <!stage1 cross !pkg.linux.nokernel>, gcc-arm-linux-gnueabihf <!stage1 !pkg.linux.nokernel>
+Vgcc-10 <!stage1 !cross !pkg.linux.nokernel>, gcc-10-aarch64-linux-gnu <!stage1 cross !pkg.linux.nokernel>, gcc-arm-linux-gnueabihf <!stage1 !pkg.linux.nokernel>
 p344
-sVheaders%gcc-8
+sVheaders%gcc-10
 p345
-Vgcc-8
+Vgcc-10
 p346
 ss(Vbase
 p347
@@ -731,9 +731,9 @@ p391
 g373
 tp392
 (dp393
-Vheaders%gcc-8
+Vheaders%gcc-10
 p394
-Vlinux-compiler-gcc-8-arm
+Vlinux-compiler-gcc-10-arm
 p395
 ss(Vdescription
 p396
@@ -842,9 +842,9 @@ p449
 g430
 tp450
 (dp451
-Vheaders%gcc-8
+Vheaders%gcc-10
 p452
-Vlinux-compiler-gcc-8-arm
+Vlinux-compiler-gcc-10-arm
 p453
 ss(Vdescription
 p454
@@ -987,9 +987,9 @@ p527
 g481
 tp528
 (dp529
-Vgcc-8
+Vgcc-10
 p530
-Vgcc-8 <!stage1 !cross !pkg.linux.nokernel>, gcc-8-hppa-linux-gnu <!stage1 cross !pkg.linux.nokernel>, binutils-hppa64-linux-gnu <!stage1 !pkg.linux.nokernel>, gcc-8-hppa64-linux-gnu <!stage1 !pkg.linux.nokernel>
+Vgcc-10 <!stage1 !cross !pkg.linux.nokernel>, gcc-10-hppa-linux-gnu <!stage1 cross !pkg.linux.nokernel>, binutils-hppa64-linux-gnu <!stage1 !pkg.linux.nokernel>, gcc-10-hppa64-linux-gnu <!stage1 !pkg.linux.nokernel>
 p531
 ss(g220
 g481
@@ -1071,9 +1071,9 @@ p571
 g538
 tp572
 (dp573
-Vheaders%gcc-8
+Vheaders%gcc-10
 p574
-Vlinux-compiler-gcc-8-x86
+Vlinux-compiler-gcc-10-x86
 p575
 ss(Vdescription
 p576
@@ -2698,9 +2698,9 @@ p1441
 g1419
 tp1442
 (dp1443
-Vheaders%gcc-8
+Vheaders%gcc-10
 p1444
-Vlinux-compiler-gcc-8-s390
+Vlinux-compiler-gcc-10-s390
 p1445
 ss(Vdescription
 p1446
@@ -2994,7 +2994,7 @@ tp1602
 (dp1603
 Vsource
 p1604
-V5.10.19-1apertis1~v2021
+V5.10.19-1apertis1
 p1605
 sVupstream
 p1606

@@ -5,7 +5,7 @@ Maintainer: Debian Kernel Team <debian-kernel@lists.debian.org>
 Uploaders: Bastian Blank <waldi@debian.org>, maximilian attems <maks@debian.org>, Ben Hutchings <benh@debian.org>, Salvatore Bonaccorso <carnil@debian.org>
 Standards-Version: 4.2.0
 Build-Depends: debhelper-compat (= 12), dh-exec, python3:any, quilt, cpio <!stage1>, xz-utils <!stage1>, dh-python <!stage1>, bison <!stage1>, flex (>= 2.6.1-1.1~) <!stage1>
-Build-Depends-Arch: kernel-wedge (>= 2.102~) <!stage1 !pkg.linux.nokernel>, kmod <!stage1 !pkg.linux.nokernel>, bc <!stage1 !pkg.linux.nokernel>, libssl-dev:native <!stage1 !pkg.linux.nokernel>, libssl-dev <!stage1 !pkg.linux.notools>, openssl (>= 1.1.0-1~) <!stage1 !pkg.linux.nokernel>, libelf-dev:native [amd64] <!stage1 !pkg.linux.nokernel>, libelf-dev <!stage1 !pkg.linux.notools>, rsync, lz4 [amd64 arm64] <!stage1 !pkg.linux.nokernel>, dwarves (>= 1.16~) [amd64 arm64] <!stage1 !pkg.linux.nokernel>, gcc-8 [alpha amd64 arm64 armel armhf hppa i386 ia64 m68k mips mips64 mips64el mips64r6 mips64r6el mipsel mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390x sh4 sparc64] <!stage1 !cross !pkg.linux.nokernel>, gcc-8-alpha-linux-gnu [alpha] <!stage1 cross !pkg.linux.nokernel>, gcc-8-x86-64-linux-gnu [amd64] <!stage1 cross !pkg.linux.nokernel>, gcc-8-aarch64-linux-gnu [arm64] <!stage1 cross !pkg.linux.nokernel>, gcc-arm-linux-gnueabihf [arm64] <!stage1 !pkg.linux.nokernel>, gcc-8-arm-linux-gnueabi [armel] <!stage1 cross !pkg.linux.nokernel>, gcc-8-arm-linux-gnueabihf [armhf] <!stage1 cross !pkg.linux.nokernel>, gcc-8-hppa-linux-gnu [hppa] <!stage1 cross !pkg.linux.nokernel>, binutils-hppa64-linux-gnu [hppa] <!stage1 !pkg.linux.nokernel>, gcc-8-hppa64-linux-gnu [hppa] <!stage1 !pkg.linux.nokernel>, gcc-8-i686-linux-gnu [i386] <!stage1 cross !pkg.linux.nokernel>, gcc-8-ia64-linux-gnu [ia64] <!stage1 cross !pkg.linux.nokernel>, gcc-8-m68k-linux-gnu [m68k] <!stage1 cross !pkg.linux.nokernel>, gcc-8-mips-linux-gnu [mips] <!stage1 cross !pkg.linux.nokernel>, gcc-8-mips64-linux-gnuabi64 [mips64] <!stage1 cross !pkg.linux.nokernel>, gcc-8-mips64el-linux-gnuabi64 [mips64el] <!stage1 cross !pkg.linux.nokernel>, gcc-8-mipsisa64r6-linux-gnuabi64 [mips64r6] <!stage1 cross !pkg.linux.nokernel>, gcc-8-mipsisa64r6el-linux-gnuabi64 [mips64r6el] <!stage1 cross !pkg.linux.nokernel>, gcc-8-mipsel-linux-gnu [mipsel] <!stage1 cross !pkg.linux.nokernel>, gcc-8-mipsisa32r6-linux-gnu [mipsr6] <!stage1 cross !pkg.linux.nokernel>, gcc-8-mipsisa32r6el-linux-gnu [mipsr6el] <!stage1 cross !pkg.linux.nokernel>, gcc-8-powerpc-linux-gnu [powerpc] <!stage1 cross !pkg.linux.nokernel>, gcc-8-powerpc64-linux-gnu [ppc64] <!stage1 cross !pkg.linux.nokernel>, gcc-8-powerpc64le-linux-gnu [ppc64el] <!stage1 cross !pkg.linux.nokernel>, gcc-8-riscv64-linux-gnu [riscv64] <!stage1 cross !pkg.linux.nokernel>, gcc-8-s390x-linux-gnu [s390x] <!stage1 cross !pkg.linux.nokernel>, gcc-8-sh4-linux-gnu [sh4] <!stage1 cross !pkg.linux.nokernel>, gcc-8-sparc64-linux-gnu [sparc64] <!stage1 cross !pkg.linux.nokernel>, python3-docutils [linux-any] <!stage1 !nodoc !pkg.linux.notools>, zlib1g-dev [linux-any] <!stage1 !pkg.linux.notools>, libcap-dev [linux-any] <!stage1 !pkg.linux.notools>, libpci-dev [linux-any] <!stage1 !pkg.linux.notools>, autoconf [linux-any] <!stage1 !pkg.linux.notools>, automake [linux-any] <!stage1 !pkg.linux.notools>, libtool [linux-any] <!stage1 !pkg.linux.notools>, libglib2.0-dev [linux-any] <!stage1 !pkg.linux.notools>, libudev-dev [linux-any] <!stage1 !pkg.linux.notools>, libwrap0-dev [linux-any] <!stage1 !pkg.linux.notools>, asciidoctor [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !nodoc !pkg.linux.notools !nopython>, gcc-multilib [amd64 mips64 mips64el mips64r6 mips64r6el ppc64 s390x sparc64] <!stage1 !pkg.linux.notools !nopython>, libaudit-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libbabeltrace-dev (>= 1.5.0) [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libbabeltrace-dev (>= 1.5.3-2~) [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython> | libbabeltrace-ctf-dev (>= 1.5.0) [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libdw-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libiberty-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libnewt-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libnuma-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libperl-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libunwind-dev [amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mipsel powerpc ppc64 ppc64el sh4] <!stage1 !pkg.linux.notools !nopython>, libopencsd-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, python3-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>
+Build-Depends-Arch: kernel-wedge (>= 2.102~) <!stage1 !pkg.linux.nokernel>, kmod <!stage1 !pkg.linux.nokernel>, bc <!stage1 !pkg.linux.nokernel>, libssl-dev:native <!stage1 !pkg.linux.nokernel>, libssl-dev <!stage1 !pkg.linux.notools>, openssl (>= 1.1.0-1~) <!stage1 !pkg.linux.nokernel>, libelf-dev:native [amd64] <!stage1 !pkg.linux.nokernel>, libelf-dev <!stage1 !pkg.linux.notools>, rsync, lz4 [amd64 arm64] <!stage1 !pkg.linux.nokernel>, dwarves (>= 1.16~) [amd64 arm64] <!stage1 !pkg.linux.nokernel>, gcc-10 [alpha amd64 arm64 armel armhf hppa i386 ia64 m68k mips mips64 mips64el mips64r6 mips64r6el mipsel mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390x sh4 sparc64] <!stage1 !cross !pkg.linux.nokernel>, gcc-10-alpha-linux-gnu [alpha] <!stage1 cross !pkg.linux.nokernel>, gcc-10-x86-64-linux-gnu [amd64] <!stage1 cross !pkg.linux.nokernel>, gcc-10-aarch64-linux-gnu [arm64] <!stage1 cross !pkg.linux.nokernel>, gcc-arm-linux-gnueabihf [arm64] <!stage1 !pkg.linux.nokernel>, gcc-10-arm-linux-gnueabi [armel] <!stage1 cross !pkg.linux.nokernel>, gcc-10-arm-linux-gnueabihf [armhf] <!stage1 cross !pkg.linux.nokernel>, gcc-10-hppa-linux-gnu [hppa] <!stage1 cross !pkg.linux.nokernel>, binutils-hppa64-linux-gnu [hppa] <!stage1 !pkg.linux.nokernel>, gcc-10-hppa64-linux-gnu [hppa] <!stage1 !pkg.linux.nokernel>, gcc-10-i686-linux-gnu [i386] <!stage1 cross !pkg.linux.nokernel>, gcc-10-ia64-linux-gnu [ia64] <!stage1 cross !pkg.linux.nokernel>, gcc-10-m68k-linux-gnu [m68k] <!stage1 cross !pkg.linux.nokernel>, gcc-10-mips-linux-gnu [mips] <!stage1 cross !pkg.linux.nokernel>, gcc-10-mips64-linux-gnuabi64 [mips64] <!stage1 cross !pkg.linux.nokernel>, gcc-10-mips64el-linux-gnuabi64 [mips64el] <!stage1 cross !pkg.linux.nokernel>, gcc-10-mipsisa64r6-linux-gnuabi64 [mips64r6] <!stage1 cross !pkg.linux.nokernel>, gcc-10-mipsisa64r6el-linux-gnuabi64 [mips64r6el] <!stage1 cross !pkg.linux.nokernel>, gcc-10-mipsel-linux-gnu [mipsel] <!stage1 cross !pkg.linux.nokernel>, gcc-10-mipsisa32r6-linux-gnu [mipsr6] <!stage1 cross !pkg.linux.nokernel>, gcc-10-mipsisa32r6el-linux-gnu [mipsr6el] <!stage1 cross !pkg.linux.nokernel>, gcc-10-powerpc-linux-gnu [powerpc] <!stage1 cross !pkg.linux.nokernel>, gcc-10-powerpc64-linux-gnu [ppc64] <!stage1 cross !pkg.linux.nokernel>, gcc-10-powerpc64le-linux-gnu [ppc64el] <!stage1 cross !pkg.linux.nokernel>, gcc-10-riscv64-linux-gnu [riscv64] <!stage1 cross !pkg.linux.nokernel>, gcc-10-s390x-linux-gnu [s390x] <!stage1 cross !pkg.linux.nokernel>, gcc-10-sh4-linux-gnu [sh4] <!stage1 cross !pkg.linux.nokernel>, gcc-10-sparc64-linux-gnu [sparc64] <!stage1 cross !pkg.linux.nokernel>, python3-docutils [linux-any] <!stage1 !nodoc !pkg.linux.notools>, zlib1g-dev [linux-any] <!stage1 !pkg.linux.notools>, libcap-dev [linux-any] <!stage1 !pkg.linux.notools>, libpci-dev [linux-any] <!stage1 !pkg.linux.notools>, autoconf [linux-any] <!stage1 !pkg.linux.notools>, automake [linux-any] <!stage1 !pkg.linux.notools>, libtool [linux-any] <!stage1 !pkg.linux.notools>, libglib2.0-dev [linux-any] <!stage1 !pkg.linux.notools>, libudev-dev [linux-any] <!stage1 !pkg.linux.notools>, libwrap0-dev [linux-any] <!stage1 !pkg.linux.notools>, asciidoctor [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !nodoc !pkg.linux.notools !nopython>, gcc-multilib [amd64 mips64 mips64el mips64r6 mips64r6el ppc64 s390x sparc64] <!stage1 !pkg.linux.notools !nopython>, libaudit-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libbabeltrace-dev (>= 1.5.0) [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libbabeltrace-dev (>= 1.5.3-2~) [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython> | libbabeltrace-ctf-dev (>= 1.5.0) [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libdw-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libiberty-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libnewt-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libnuma-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libperl-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, libunwind-dev [amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mipsel powerpc ppc64 ppc64el sh4] <!stage1 !pkg.linux.notools !nopython>, libopencsd-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>, python3-dev [alpha amd64 arm64 armel armhf hppa i386 mips mips64 mips64el mips64r6 mips64r6el mipsel mipsn32 mipsn32el mipsn32r6 mipsn32r6el mipsr6 mipsr6el powerpc ppc64 ppc64el riscv64 s390 s390x sh4 sparc sparc64] <!stage1 !pkg.linux.notools !nopython>
 Build-Depends-Indep: graphviz <!stage1 !nodoc>, python3-sphinx <!stage1 !nodoc>, python3-sphinx-rtd-theme <!stage1 !nodoc>, texlive-latex-base <!stage1 !nodoc>, texlive-latex-extra <!stage1 !nodoc>, dvipng <!stage1 !nodoc>, patchutils <!stage1 !pkg.linux.nosource>
 Homepage: https://www.kernel.org/
 Rules-Requires-Root: no
@@ -259,7 +259,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-alpha-generic
 Architecture: alpha
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-alpha-generic
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-alpha-generic, generally used for building
@@ -319,7 +319,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-alpha-smp
 Architecture: alpha
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-alpha-smp
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-alpha-smp, generally used for building out-of-tree
@@ -380,7 +380,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-amd64
 Architecture: amd64
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-8-x86
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-x86
 Description: Header files for Linux 5.10.0-4-amd64
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-amd64, generally used for building out-of-tree
@@ -439,7 +439,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-arm64
 Architecture: arm64
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-arm64
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-arm64, generally used for building out-of-tree
@@ -499,7 +499,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-marvell
 Architecture: armel
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-8-arm
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-arm
 Description: Header files for Linux 5.10.0-4-marvell
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-marvell, generally used for building out-of-tree
@@ -559,7 +559,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-rpi
 Architecture: armel
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-8-arm
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-arm
 Description: Header files for Linux 5.10.0-4-rpi
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-rpi, generally used for building out-of-tree kernel
@@ -619,7 +619,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-armmp
 Architecture: armhf
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-8-arm
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-arm
 Description: Header files for Linux 5.10.0-4-armmp
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-armmp, generally used for building out-of-tree
@@ -682,7 +682,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-armmp-lpae
 Architecture: armhf
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-8-arm
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-arm
 Description: Header files for Linux 5.10.0-4-armmp-lpae
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-armmp-lpae, generally used for building out-of-tree
@@ -743,7 +743,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-parisc
 Architecture: hppa
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8, binutils-hppa64-linux-gnu, gcc-8-hppa64-linux-gnu
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10, binutils-hppa64-linux-gnu, gcc-10-hppa64-linux-gnu
 Description: Header files for Linux 5.10.0-4-parisc
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-parisc, generally used for building out-of-tree
@@ -784,7 +784,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-parisc64
 Architecture: hppa
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8, binutils-hppa64-linux-gnu, gcc-8-hppa64-linux-gnu
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10, binutils-hppa64-linux-gnu, gcc-10-hppa64-linux-gnu
 Description: Header files for Linux 5.10.0-4-parisc64
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-parisc64, generally used for building out-of-tree
@@ -824,7 +824,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-686
 Architecture: i386
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-8-x86
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-x86
 Description: Header files for Linux 5.10.0-4-686
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-686, generally used for building out-of-tree kernel
@@ -888,7 +888,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-686-pae
 Architecture: i386
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-8-x86
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-x86
 Description: Header files for Linux 5.10.0-4-686-pae
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-686-pae, generally used for building out-of-tree
@@ -948,7 +948,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-itanium
 Architecture: ia64
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-itanium
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-itanium, generally used for building out-of-tree
@@ -1008,7 +1008,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-mckinley
 Architecture: ia64
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-mckinley
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-mckinley, generally used for building out-of-tree
@@ -1066,7 +1066,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-m68k
 Architecture: m68k
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-m68k
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-m68k, generally used for building out-of-tree kernel
@@ -1125,7 +1125,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-4kc-malta
 Architecture: mips mipsel
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-4kc-malta
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-4kc-malta, generally used for building out-of-tree
@@ -1183,7 +1183,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-5kc-malta
 Architecture: mips mips64 mips64el mipsel
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-5kc-malta
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-5kc-malta, generally used for building out-of-tree
@@ -1241,7 +1241,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-octeon
 Architecture: mips mips64 mips64el mipsel
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-octeon
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-octeon, generally used for building out-of-tree
@@ -1300,7 +1300,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-loongson-3
 Architecture: mips64el mipsel
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-loongson-3
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-loongson-3, generally used for building out-of-tree
@@ -1358,7 +1358,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-mips64r6
 Architecture: mips64r6 mipsr6
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-mips64r6
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-mips64r6, generally used for building out-of-tree
@@ -1418,7 +1418,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-mips64r6el
 Architecture: mips64r6el mipsr6el
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-mips64r6el
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-mips64r6el, generally used for building out-of-tree
@@ -1477,7 +1477,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-mips32r6
 Architecture: mipsr6
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-mips32r6
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-mips32r6, generally used for building out-of-tree
@@ -1537,7 +1537,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-mips32r6el
 Architecture: mipsr6el
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-mips32r6el
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-mips32r6el, generally used for building out-of-tree
@@ -1596,7 +1596,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-powerpc
 Architecture: powerpc
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-powerpc
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-powerpc, generally used for building out-of-tree
@@ -1655,7 +1655,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-powerpc-smp
 Architecture: powerpc
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-powerpc-smp
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-powerpc-smp, generally used for building out-of-tree
@@ -1713,7 +1713,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-powerpc64
 Architecture: powerpc ppc64
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-powerpc64
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-powerpc64, generally used for building out-of-tree
@@ -1772,7 +1772,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-powerpc64le
 Architecture: ppc64el
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-powerpc64le
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-powerpc64le, generally used for building out-of-tree
@@ -1831,7 +1831,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-riscv64
 Architecture: riscv64
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-riscv64
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-riscv64, generally used for building out-of-tree
@@ -1890,7 +1890,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-s390x
 Architecture: s390x
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-8-s390
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-s390
 Description: Header files for Linux 5.10.0-4-s390x
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-s390x, generally used for building out-of-tree
@@ -1950,7 +1950,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-sh7751r
 Architecture: sh4
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-sh7751r
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-sh7751r, generally used for building out-of-tree
@@ -2009,7 +2009,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-sh7785lcr
 Architecture: sh4
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-sh7785lcr
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-sh7785lcr, generally used for building out-of-tree
@@ -2068,7 +2068,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-sparc64
 Architecture: sparc64
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-sparc64
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-sparc64, generally used for building out-of-tree
@@ -2127,7 +2127,7 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-headers-5.10.0-4-sparc64-smp
 Architecture: sparc64
-Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-8
+Depends: linux-headers-5.10.0-4-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
 Description: Header files for Linux 5.10.0-4-sparc64-smp
  This package provides the architecture-specific kernel header files for
  Linux kernel 5.10.0-4-sparc64-smp, generally used for building out-of-tree
@@ -2174,27 +2174,27 @@ Description: Debugging symbols for Linux sparc64-smp configuration (meta-package
  Linux kernel sparc64-smp configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-compiler-gcc-8-arm
+Package: linux-compiler-gcc-10-arm
 Architecture: armel armhf
-Depends: gcc-8, ${misc:Depends}
+Depends: gcc-10, ${misc:Depends}
 Description: Compiler for Linux on ARM (meta-package)
  This package depends on GCC of the appropriate version and architecture
  for Linux on armel and armhf.
 Build-Profiles: <!stage1>
 Multi-Arch: foreign
 
-Package: linux-compiler-gcc-8-s390
+Package: linux-compiler-gcc-10-s390
 Architecture: s390 s390x
-Depends: gcc-8, ${misc:Depends}
+Depends: gcc-10, ${misc:Depends}
 Description: Compiler for Linux on IBM zSeries (meta-package)
  This package depends on GCC of the appropriate version and architecture
  for Linux on s390 and s390x.
 Build-Profiles: <!stage1>
 Multi-Arch: foreign
 
-Package: linux-compiler-gcc-8-x86
+Package: linux-compiler-gcc-10-x86
 Architecture: amd64 i386 x32
-Depends: gcc-8, ${misc:Depends}
+Depends: gcc-10, ${misc:Depends}
 Description: Compiler for Linux on x86 (meta-package)
  This package depends on GCC of the appropriate version and architecture
  for Linux on amd64, i386 and x32.

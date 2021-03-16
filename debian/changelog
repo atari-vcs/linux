@@ -1,3 +1,9 @@
+linux (5.10.19-1apertis1) apertis; urgency=medium
+
+  * Use gcc-10 again as v2022 will base on bullseye
+
+ -- Sjoerd Simons <sjoerd@collabora.com>  Tue, 16 Mar 2021 14:32:16 +0100
+
 linux (5.10.19-1apertis1~v2021) apertis; urgency=medium
 
   * Remaining Apertis specific changes:
