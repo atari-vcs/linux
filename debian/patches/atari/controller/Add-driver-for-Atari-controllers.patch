@@ -12,7 +12,7 @@ Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
  create mode 100644 drivers/hid/hid-atari.c
 
 diff --git a/drivers/hid/Kconfig b/drivers/hid/Kconfig
-index 9b56226..be833f9 100644
+index 9b56226..975f20b 100644
 --- a/drivers/hid/Kconfig
 +++ b/drivers/hid/Kconfig
 @@ -163,6 +163,12 @@ config HID_ASUS
@@ -22,7 +22,7 @@ index 9b56226..be833f9 100644
 +config HID_ATARI
 +	tristate "Atari"
 +	depends on HID
-+	---help---
++	help
 +	Support for the Atari VCS Modern and Atari VCS Classic gaming devices.
 +
  config HID_AUREAL
