@@ -154,3 +154,6 @@ apertis/sabreai/Disable-lvds-display-by-default-on-Sabre-auto.patch
 
 # General configuration for mx6 boards
 apertis/mx6/dtb-imx6-Add-default-256M-CMA-area-on-i.MX6.patch
+atari/controller/Add-driver-for-Atari-controllers.patch
+atari/bugfix/usb-xhci-apply-suspend-quirks-to-AMD-XHCI-controller.patch
+atari/bugfix/usb-xhci-workaround-css-timeout-setting-hce-amd.patch
