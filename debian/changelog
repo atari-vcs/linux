@@ -1,3 +1,9 @@
+linux (5.10.19-1apertis2) apertis; urgency=medium
+
+  * Regenerate automatic rules
+
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Thu, 18 Mar 2021 18:33:26 +0300
+
 linux (5.10.19-1apertis1) apertis; urgency=medium
 
   * Use gcc-10 again as v2022 will base on bullseye
