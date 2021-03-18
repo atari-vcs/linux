@@ -1,3 +1,9 @@
+linux (5.10.19-1apertis2~v2021) apertis; urgency=medium
+
+  * Regenerate automatic rules
+
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Thu, 18 Mar 2021 17:40:22 +0300
+
 linux (5.10.19-1apertis1~v2021) apertis; urgency=medium
 
   * Remaining Apertis specific changes:
