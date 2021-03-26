@@ -1,3 +1,10 @@
+linux (5.10.19-1apertis1vcs2) atari; urgency=medium
+
+  * d/p/atari/bugfix/bluetooth-btusb-allow-realtek-remote-wake-from-suspend.patch
+  + Added. Allow Realtek controllers to remote wake from suspend
+
+ -- Christopher Obbard <chris.obbard@collabora.com>  Tue, 30 Mar 2021 11:28:38 +0100
+
 linux (5.10.19-1apertis1vcs1) atari; urgency=medium
 
   * Refresh atari patch on top of 5.10.19
