@@ -117,10 +117,6 @@ Files: Documentation/arm/samsung-s3c24xx/*
 Copyright: 2003-2010, Simtec Electronics
 License: GPL-2
 
-Files: Documentation/arm/samsung-s3c24xx/cpufreq.rst
-Copyright: 2009, Simtec Electronics
-License: GPL
-
 Files: Documentation/arm/samsung-s3c24xx/eb2410itx.rst
  Documentation/arm/samsung-s3c24xx/gpio.rst
 Copyright: 2004, Ben Dooks, Simtec Electronics
@@ -136,10 +132,7 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: Documentation/arm/samsung/clksrc-change-registers.awk
-Copyright: 2010, Ben Dooks <ben-linux@fluff.org>
-License: GPL
-
-Files: Documentation/arm/samsung/overview.rst
+ Documentation/arm/samsung/overview.rst
 Copyright: 2006, 2009, 2010, Ben Dooks <ben-linux@fluff.org>
 License: GPL-2
 
@@ -43807,6 +43800,7 @@ Copyright: 2006, 2007, Olivier DANET <odanet@caramail.com>
 License: GPL-2
 
 Files: drivers/media/tuners/mt2063.c
+ drivers/media/tuners/r820t.c
 Copyright: 2009-2013, Mauro Carvalho Chehab
 License: GPL-2
 
@@ -43844,10 +43838,6 @@ Files: drivers/media/tuners/mxl5007t.c
  drivers/media/tuners/tda18271.h
 Copyright: 2007-2014, Michael Krufky <mkrufky@linuxtv.org>
 License: GPL-2
-
-Files: drivers/media/tuners/r820t.c
-Copyright: 2013, Mauro Carvalho Chehab
-License: GPL
 
 Files: drivers/media/tuners/tda18250.c
  drivers/media/tuners/tda18250.h
@@ -58381,10 +58371,6 @@ License: GPL-2
 Files: drivers/scsi/libsas/sas_ata.c
 Copyright: 2000, 2003-2020, IBM Corporation
 License: GPL-2
-
-Files: drivers/scsi/libsas/sas_expander.c
-Copyright: no-info-found
-License: GPL
 
 Files: drivers/scsi/libsas/sas_host_smp.c
 Copyright: 2007, James E.J. Bottomley
@@ -78194,8 +78180,8 @@ Copyright: no-info-found
 License: GPL-2
 
 Files: kernel/irq/msi.c
-Copyright: 2014, Intel Corp.
-License: GPL
+Copyright: 2000-2020, Intel Corp.
+License: GPL-2
 
 Files: kernel/irq/pm.c
 Copyright: 2008-2011, Rafael J. Wysocki <rjw@sisk.pl>, Novell Inc.
@@ -88967,10 +88953,6 @@ Files: tools/testing/selftests/powerpc/pmu/Makefile
 Copyright: no-info-found
 License: GPL-2
 
-Files: tools/testing/selftests/powerpc/pmu/count_stcx_fail.c
-Copyright: 2013, Michael Ellerman, IBM Corp.
-License: GPL
-
 Files: tools/testing/selftests/powerpc/pmu/ebb/Makefile
 Copyright: no-info-found
 License: GPL-2
@@ -89020,7 +89002,7 @@ License: GPL-2
 
 Files: tools/testing/selftests/powerpc/signal/sigfuz.c
 Copyright: 2018, Breno Leitao, IBM Corp.
-License: GPL
+License: GPL-2
 
 Files: tools/testing/selftests/powerpc/signal/signal.S
  tools/testing/selftests/powerpc/signal/signal.c
