@@ -1,0 +1,43 @@
+From: Martyn Welch <martyn.welch@collabora.com>
+Date: Tue, 1 Oct 2019 12:55:07 +0100
+Subject: Disable the lcd interface
+
+We do not use the lcd interface (not to be confused with the LVDS
+interface) in the supported configuration. Disable the lcd interface so
+that it's not presented as a viable option for Weston.
+
+Signed-off-by: Martyn Welch <martyn.welch@collabora.com>
+---
+ arch/arm/boot/dts/imx6qdl-sabrelite.dtsi | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+Index: linux/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi
+===================================================================
+--- linux.orig/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi	2020-10-09 02:03:52.919372007 +0300
++++ linux/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi	2020-10-09 02:03:52.917372038 +0300
+@@ -210,7 +210,7 @@
+ 		brightness-levels = <0 4 8 16 32 64 128 255>;
+ 		default-brightness-level = <7>;
+ 		power-supply = <&reg_3p3v>;
+-		status = "okay";
++		status = "disabled";
+ 	};
+ 
+ 	backlight_lvds: backlight-lvds {
+@@ -229,7 +229,7 @@
+ 		interface-pix-fmt = "bgr666";
+ 		pinctrl-names = "default";
+ 		pinctrl-0 = <&pinctrl_j15>;
+-		status = "okay";
++		status = "disabled";
+ 
+ 		port@0 {
+ 			reg = <0>;
+@@ -251,6 +251,7 @@
+ 	panel-lcd {
+ 		compatible = "okaya,rs800480t-7x0gp";
+ 		backlight = <&backlight_lcd>;
++		status = "disabled";
+ 
+ 		port {
+ 			lcd_panel_in: endpoint {

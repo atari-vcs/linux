@@ -1,0 +1,50 @@
+From: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+Date: Thu, 6 Jun 2019 22:25:31 +0200
+Subject: [PATCH] Hack: hardcode to sample rates usable on sabre AI
+
+The codec on the Sabre AI has a fixed rate clock as input, this means
+the codec can only cope with samplerates that are at supported ratios
+compared to that clock rate. Hardcode those for now.
+
+An upstreamable solution would dynamical determine them instead.
+
+Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
+---
+ sound/soc/codecs/cs42xx8.c    | 6 ++++--
+ sound/soc/fsl/fsl-asoc-card.c | 1 +
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+Index: linux/sound/soc/codecs/cs42xx8.c
+===================================================================
+--- linux.orig/sound/soc/codecs/cs42xx8.c	2020-10-20 02:33:34.599592346 +0300
++++ linux/sound/soc/codecs/cs42xx8.c	2020-10-20 02:33:34.597592366 +0300
+@@ -389,13 +389,15 @@
+ 		.stream_name = "Playback",
+ 		.channels_min = 1,
+ 		.channels_max = 8,
+-		.rates = SNDRV_PCM_RATE_8000_192000,
++		//.rates = SNDRV_PCM_RATE_8000_192000,
++		.rates = SNDRV_PCM_RATE_48000 | SNDRV_PCM_RATE_96000 | SNDRV_PCM_RATE_192000,
+ 		.formats = CS42XX8_FORMATS,
+ 	},
+ 	.capture = {
+ 		.stream_name = "Capture",
+ 		.channels_min = 1,
+-		.rates = SNDRV_PCM_RATE_8000_192000,
++		//.rates = SNDRV_PCM_RATE_8000_192000,
++		.rates = SNDRV_PCM_RATE_48000 | SNDRV_PCM_RATE_96000 | SNDRV_PCM_RATE_192000,
+ 		.formats = CS42XX8_FORMATS,
+ 	},
+ 	.ops = &cs42xx8_dai_ops,
+Index: linux/sound/soc/fsl/fsl-asoc-card.c
+===================================================================
+--- linux.orig/sound/soc/fsl/fsl-asoc-card.c	2020-10-20 02:33:34.599592346 +0300
++++ linux/sound/soc/fsl/fsl-asoc-card.c	2020-10-20 02:33:34.598592356 +0300
+@@ -609,6 +609,7 @@
+ 		priv->cpu_priv.sysclk_dir[RX] = SND_SOC_CLOCK_OUT;
+ 		priv->cpu_priv.slot_width = 32;
+ 		priv->dai_fmt |= SND_SOC_DAIFMT_CBS_CFS;
++		priv->sample_rate = 48000;
+ 	} else if (of_device_is_compatible(np, "fsl,imx-audio-cs427x")) {
+ 		codec_dai_name = "cs4271-hifi";
+ 		priv->codec_priv.mclk_id = CS427x_SYSCLK_MCLK;
