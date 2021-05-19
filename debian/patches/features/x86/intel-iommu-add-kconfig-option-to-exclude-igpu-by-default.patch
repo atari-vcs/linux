@@ -59,7 +59,7 @@ index fc0160e..bd63826 100644
  config INTEL_IOMMU_BROKEN_GFX_WA
  	bool "Workaround broken graphics drivers (going away soon)"
 diff --git a/drivers/iommu/intel-iommu.c b/drivers/iommu/intel-iommu.c
-index ad6fbd9..670ce0b 100644
+index 42a2fe8..d427d04 100644
 --- a/drivers/iommu/intel-iommu.c
 +++ b/drivers/iommu/intel-iommu.c
 @@ -354,18 +354,14 @@ static int intel_iommu_attach_device(struct iommu_domain *domain,

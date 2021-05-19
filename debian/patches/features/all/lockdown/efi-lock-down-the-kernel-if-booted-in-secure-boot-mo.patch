@@ -21,7 +21,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  5 files changed, 27 insertions(+), 3 deletions(-)
 
 diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
-index d10f427..d9dd91c 100644
+index b9923f7..3927ec6 100644
 --- a/arch/x86/kernel/setup.c
 +++ b/arch/x86/kernel/setup.c
 @@ -1027,6 +1027,8 @@ void __init setup_arch(char **cmdline_p)
@@ -64,7 +64,7 @@ index bf16cfb6..b56f262 100644
  			break;
  		default:
 diff --git a/include/linux/security.h b/include/linux/security.h
-index fd02276..5f23bf7 100644
+index df90399..8c225d2 100644
 --- a/include/linux/security.h
 +++ b/include/linux/security.h
 @@ -445,6 +445,7 @@ int security_inode_notifysecctx(struct inode *inode, void *ctx, u32 ctxlen);

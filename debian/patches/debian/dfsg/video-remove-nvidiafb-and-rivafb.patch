@@ -18,7 +18,7 @@ probably discontinued 10 years ago.
  2 files changed, 95 deletions(-)
 
 diff --git a/drivers/video/fbdev/Kconfig b/drivers/video/fbdev/Kconfig
-index 1e70e83..4d4895b 100644
+index a7e5f12..1133d90 100644
 --- a/drivers/video/fbdev/Kconfig
 +++ b/drivers/video/fbdev/Kconfig
 @@ -870,99 +870,6 @@ config FB_ATMEL

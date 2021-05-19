@@ -26,10 +26,10 @@ aufs5.x-rcN mmap patch
  create mode 100644 mm/prfile.c
 
 diff --git a/fs/proc/base.c b/fs/proc/base.c
-index 529d0c6..296adca 100644
+index 653c2d8..336b371 100644
 --- a/fs/proc/base.c
 +++ b/fs/proc/base.c
-@@ -2037,7 +2037,7 @@ static int map_files_get_link(struct dentry *dentry, struct path *path)
+@@ -2036,7 +2036,7 @@ static int map_files_get_link(struct dentry *dentry, struct path *path)
  	rc = -ENOENT;
  	vma = find_exact_vma(mm, vm_start, vm_end);
  	if (vma && vma->vm_file) {
@@ -55,7 +55,7 @@ index 14c2bad..65afe52 100644
  		ino = inode->i_ino;
  	}
 diff --git a/fs/proc/task_mmu.c b/fs/proc/task_mmu.c
-index 9442631..1fa8a5f 100644
+index f51dadd..328e3ef 100644
 --- a/fs/proc/task_mmu.c
 +++ b/fs/proc/task_mmu.c
 @@ -309,7 +309,10 @@ show_map_vma(struct seq_file *m, struct vm_area_struct *vma)
@@ -70,7 +70,7 @@ index 9442631..1fa8a5f 100644
  		dev = inode->i_sb->s_dev;
  		ino = inode->i_ino;
  		pgoff = ((loff_t)vma->vm_pgoff) << PAGE_SHIFT;
-@@ -1819,7 +1822,7 @@ static int show_numa_map(struct seq_file *m, void *v)
+@@ -1823,7 +1826,7 @@ static int show_numa_map(struct seq_file *m, void *v)
  	struct proc_maps_private *proc_priv = &numa_priv->proc_maps;
  	struct vm_area_struct *vma = v;
  	struct numa_maps *md = &numa_priv->md;
@@ -96,10 +96,10 @@ index 7907e64..d17209c 100644
  		ino = inode->i_ino;
  		pgoff = (loff_t)vma->vm_pgoff << PAGE_SHIFT;
 diff --git a/include/linux/mm.h b/include/linux/mm.h
-index 34119f3..dfc80fb 100644
+index 5565d11..fdf4297 100644
 --- a/include/linux/mm.h
 +++ b/include/linux/mm.h
-@@ -1522,6 +1522,28 @@ static inline void unmap_shared_mapping_range(struct address_space *mapping,
+@@ -1537,6 +1537,28 @@ static inline void unmap_shared_mapping_range(struct address_space *mapping,
  	unmap_mapping_range(mapping, holebegin, holelen, 0);
  }
  
@@ -129,7 +129,7 @@ index 34119f3..dfc80fb 100644
  		void *buf, int len, unsigned int gup_flags);
  extern int access_remote_vm(struct mm_struct *mm, unsigned long addr,
 diff --git a/include/linux/mm_types.h b/include/linux/mm_types.h
-index 270aa8f..33848c2 100644
+index 2b3b2fc..96acd99 100644
 --- a/include/linux/mm_types.h
 +++ b/include/linux/mm_types.h
 @@ -267,6 +267,7 @@ struct vm_region {
@@ -149,7 +149,7 @@ index 270aa8f..33848c2 100644
  
  #ifdef CONFIG_SWAP
 diff --git a/kernel/fork.c b/kernel/fork.c
-index caf131f..f369cc2 100644
+index 6ec99f6..50278d4 100644
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
 @@ -562,7 +562,7 @@ static __latent_entropy int dup_mmap(struct mm_struct *mm,
@@ -175,7 +175,7 @@ index d996846..fbadb91 100644
  # Give 'page_alloc' its own module-parameter namespace
  page-alloc-y := page_alloc.o
 diff --git a/mm/filemap.c b/mm/filemap.c
-index 51b2cb5..30eef9b 100644
+index db542b4..0513acd 100644
 --- a/mm/filemap.c
 +++ b/mm/filemap.c
 @@ -2675,7 +2675,7 @@ vm_fault_t filemap_page_mkwrite(struct vm_fault *vmf)

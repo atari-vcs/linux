@@ -26,7 +26,7 @@ Signed-off-by: "Lee, Chun-Yi" <jlee@suse.com>
  1 file changed, 57 insertions(+), 2 deletions(-)
 
 diff --git a/kernel/module_signing.c b/kernel/module_signing.c
-index 9d9fc67..0f041a2 100644
+index 8723ae7..18d15c5 100644
 --- a/kernel/module_signing.c
 +++ b/kernel/module_signing.c
 @@ -12,15 +12,62 @@
@@ -100,7 +100,7 @@ index 9d9fc67..0f041a2 100644
 +	wholelen = modlen + sizeof(MODULE_SIG_STRING) - 1;
  	memcpy(&ms, mod + (modlen - sizeof(ms)), sizeof(ms));
  
- 	ret = mod_check_sig(&ms, modlen, info->name);
+ 	ret = mod_check_sig(&ms, modlen, "module");
 @@ -38,8 +86,15 @@ int mod_verify_sig(const void *mod, struct load_info *info)
  	modlen -= sig_len + sizeof(ms);
  	info->len = modlen;

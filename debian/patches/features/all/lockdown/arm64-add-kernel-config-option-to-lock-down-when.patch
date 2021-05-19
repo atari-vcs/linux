@@ -52,7 +52,7 @@ index 311cd34..9db4f37 100644
  	efi_esrt_init();
  
 diff --git a/drivers/firmware/efi/efi.c b/drivers/firmware/efi/efi.c
-index b299e22..cccfccb 100644
+index 3a2b607..12ef234 100644
 --- a/drivers/firmware/efi/efi.c
 +++ b/drivers/firmware/efi/efi.c
 @@ -690,7 +690,8 @@ static __initdata struct params fdt_params[] = {
@@ -83,10 +83,10 @@ index 0bf0190..b5249cd 100644
  	fdt_pack(fdt);
  
 diff --git a/include/linux/efi.h b/include/linux/efi.h
-index ecd6fd1..54076b3 100644
+index 1d5af58..167d92c 100644
 --- a/include/linux/efi.h
 +++ b/include/linux/efi.h
-@@ -808,6 +808,7 @@ struct efi_fdt_params {
+@@ -810,6 +810,7 @@ struct efi_fdt_params {
  	u32 mmap_size;
  	u32 desc_size;
  	u32 desc_ver;

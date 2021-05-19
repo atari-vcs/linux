@@ -46,7 +46,7 @@ index af509b0..0d2a7da 100644
  	tristate "Appletalk-IP driver support"
  	depends on DEV_APPLETALK && ATALK
 diff --git a/drivers/net/appletalk/Makefile b/drivers/net/appletalk/Makefile
-index 903da33..7482020 100644
+index 903da330..7482020 100644
 --- a/drivers/net/appletalk/Makefile
 +++ b/drivers/net/appletalk/Makefile
 @@ -4,5 +4,4 @@

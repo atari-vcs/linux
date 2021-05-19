@@ -21,7 +21,7 @@ Signed-off-by: Jeremy Cline <jcline@redhat.com>
  1 file changed, 7 insertions(+)
 
 diff --git a/kernel/module_signing.c b/kernel/module_signing.c
-index 5d800f1..80b90a4 100644
+index 0eec508..30cd803 100644
 --- a/kernel/module_signing.c
 +++ b/kernel/module_signing.c
 @@ -93,6 +93,13 @@ int mod_verify_sig(const void *mod, struct load_info *info)

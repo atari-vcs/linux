@@ -20,7 +20,7 @@ Signed-off-by: Serge Hallyn <serge.hallyn@ubuntu.com>
  3 files changed, 30 insertions(+)
 
 diff --git a/kernel/fork.c b/kernel/fork.c
-index f369cc2..f397378 100644
+index 50278d4..d2eb3cf 100644
 --- a/kernel/fork.c
 +++ b/kernel/fork.c
 @@ -106,6 +106,11 @@
@@ -35,7 +35,7 @@ index f369cc2..f397378 100644
  
  /*
   * Minimum number of threads to boot the kernel
-@@ -1781,6 +1786,10 @@ static __latent_entropy struct task_struct *copy_process(
+@@ -1800,6 +1805,10 @@ static __latent_entropy struct task_struct *copy_process(
  	if ((clone_flags & (CLONE_NEWUSER|CLONE_FS)) == (CLONE_NEWUSER|CLONE_FS))
  		return ERR_PTR(-EINVAL);
  
@@ -46,7 +46,7 @@ index f369cc2..f397378 100644
  	/*
  	 * Thread groups must share signals as well, and detached threads
  	 * can only be started up within the thread group.
-@@ -2839,6 +2848,12 @@ int ksys_unshare(unsigned long unshare_flags)
+@@ -2860,6 +2869,12 @@ int ksys_unshare(unsigned long unshare_flags)
  	if (unshare_flags & CLONE_NEWNS)
  		unshare_flags |= CLONE_FS;
  
@@ -60,7 +60,7 @@ index f369cc2..f397378 100644
  	if (err)
  		goto bad_unshare_out;
 diff --git a/kernel/sysctl.c b/kernel/sysctl.c
-index 7066593..9797869 100644
+index eae6a07..878d66b 100644
 --- a/kernel/sysctl.c
 +++ b/kernel/sysctl.c
 @@ -110,6 +110,9 @@ extern int core_uses_pid;

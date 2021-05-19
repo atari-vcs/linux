@@ -12,7 +12,7 @@ Signed-off-by: Ben Hutchings <ben@decadent.org.uk>
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/kernel/module_signing.c b/kernel/module_signing.c
-index 0f041a2..5d800f1 100644
+index 18d15c5..0eec508 100644
 --- a/kernel/module_signing.c
 +++ b/kernel/module_signing.c
 @@ -22,11 +22,13 @@ static int mod_is_hash_blacklisted(const void *mod, size_t verifylen)

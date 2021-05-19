@@ -10,10 +10,10 @@ Forwarded: no
  1 file changed, 8 insertions(+), 8 deletions(-)
 
 diff --git a/tools/perf/Makefile.perf b/tools/perf/Makefile.perf
-index 1b41817..11a9e9b 100644
+index f890594..9ef0a85 100644
 --- a/tools/perf/Makefile.perf
 +++ b/tools/perf/Makefile.perf
-@@ -898,8 +898,8 @@ endif
+@@ -894,8 +894,8 @@ endif
  ifndef NO_LIBPERL
  	$(call QUIET_INSTALL, perl-scripts) \
  		$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(perfexec_instdir_SQ)/scripts/perl/Perf-Trace-Util/lib/Perf/Trace'; \
@@ -24,7 +24,7 @@ index 1b41817..11a9e9b 100644
  		$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(perfexec_instdir_SQ)/scripts/perl/bin'; \
  		$(INSTALL) scripts/perl/bin/* -t '$(DESTDIR_SQ)$(perfexec_instdir_SQ)/scripts/perl/bin'
  endif
-@@ -913,21 +913,21 @@ ifndef NO_LIBPYTHON
+@@ -909,21 +909,21 @@ ifndef NO_LIBPYTHON
  endif
  	$(call QUIET_INSTALL, perf_completion-script) \
  		$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(sysconfdir_SQ)/bash_completion.d'; \

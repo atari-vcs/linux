@@ -1148,7 +1148,7 @@ index 42c207a..95ca570 100644
  	switch (props->usb_ctrl) {
  		case CYPRESS_AN2135:
 diff --git a/drivers/media/usb/dvb-usb/gp8psk.c b/drivers/media/usb/dvb-usb/gp8psk.c
-index 1282f70..8269233 100644
+index ac8b8bf..08f066b 100644
 --- a/drivers/media/usb/dvb-usb/gp8psk.c
 +++ b/drivers/media/usb/dvb-usb/gp8psk.c
 @@ -131,19 +131,14 @@ static int gp8psk_load_bcm4500fw(struct dvb_usb_device *d)
@@ -1709,10 +1709,10 @@ index 6c9a41b..03e2df8 100644
  		i2400m_fw = (void *) ~0;
  	} else
 diff --git a/drivers/net/wireless/ath/ath9k/hif_usb.c b/drivers/net/wireless/ath/ath9k/hif_usb.c
-index 3f563e0..6d5ef1c 100644
+index 2ed98aa..b341152 100644
 --- a/drivers/net/wireless/ath/ath9k/hif_usb.c
 +++ b/drivers/net/wireless/ath/ath9k/hif_usb.c
-@@ -1197,9 +1197,6 @@ static void ath9k_hif_usb_firmware_cb(const struct firmware *fw, void *context)
+@@ -1216,9 +1216,6 @@ static void ath9k_hif_usb_firmware_cb(const struct firmware *fw, void *context)
  		if (!ret)
  			return;
  
@@ -1935,7 +1935,7 @@ index 400a352..2559f7f 100644
  		fw_entry = orinoco_cached_fw_get(priv, false);
  
 diff --git a/drivers/net/wireless/intersil/orinoco/orinoco_usb.c b/drivers/net/wireless/intersil/orinoco/orinoco_usb.c
-index e753f43..e000142 100644
+index e2368bf..987be34 100644
 --- a/drivers/net/wireless/intersil/orinoco/orinoco_usb.c
 +++ b/drivers/net/wireless/intersil/orinoco/orinoco_usb.c
 @@ -1675,7 +1675,6 @@ static int ezusb_probe(struct usb_interface *interface,
@@ -1947,10 +1947,10 @@ index e753f43..e000142 100644
  	}
  
 diff --git a/drivers/net/wireless/intersil/p54/p54pci.c b/drivers/net/wireless/intersil/p54/p54pci.c
-index 80ad0b7..909b92e 100644
+index f8c6027..3597b04 100644
 --- a/drivers/net/wireless/intersil/p54/p54pci.c
 +++ b/drivers/net/wireless/intersil/p54/p54pci.c
-@@ -496,7 +496,6 @@ static void p54p_firmware_step2(const struct firmware *fw,
+@@ -498,7 +498,6 @@ static void p54p_firmware_step2(const struct firmware *fw,
  	int err;
  
  	if (!fw) {
@@ -2019,7 +2019,7 @@ index bedc092..cdf74d4 100644
  		goto done;
  	}
 diff --git a/drivers/net/wireless/marvell/mwifiex/main.c b/drivers/net/wireless/marvell/mwifiex/main.c
-index d14e55e..896e3ef 100644
+index 5894566..86b893f 100644
 --- a/drivers/net/wireless/marvell/mwifiex/main.c
 +++ b/drivers/net/wireless/marvell/mwifiex/main.c
 @@ -525,11 +525,8 @@ static int _mwifiex_fw_dpc(const struct firmware *firmware, void *context)
@@ -2036,10 +2036,10 @@ index d14e55e..896e3ef 100644
  	memset(&fw, 0, sizeof(struct mwifiex_fw_image));
  	adapter->firmware = firmware;
 diff --git a/drivers/net/wireless/marvell/mwl8k.c b/drivers/net/wireless/marvell/mwl8k.c
-index c4db641..ca83425 100644
+index 1b76b24..e72f4a8 100644
 --- a/drivers/net/wireless/marvell/mwl8k.c
 +++ b/drivers/net/wireless/marvell/mwl8k.c
-@@ -5727,16 +5727,12 @@ static int mwl8k_firmware_load_success(struct mwl8k_priv *priv);
+@@ -5728,16 +5728,12 @@ static int mwl8k_firmware_load_success(struct mwl8k_priv *priv);
  static void mwl8k_fw_state_machine(const struct firmware *fw, void *context)
  {
  	struct mwl8k_priv *priv = context;
@@ -2057,7 +2057,7 @@ index c4db641..ca83425 100644
  		priv->fw_helper = fw;
  		rc = mwl8k_request_fw(priv, priv->fw_pref, &priv->fw_ucode,
  				      true);
-@@ -5771,11 +5767,8 @@ static void mwl8k_fw_state_machine(const struct firmware *fw, void *context)
+@@ -5772,11 +5768,8 @@ static void mwl8k_fw_state_machine(const struct firmware *fw, void *context)
  		break;
  
  	case FW_STATE_LOADING_ALT:
@@ -2070,7 +2070,7 @@ index c4db641..ca83425 100644
  		priv->fw_ucode = fw;
  		rc = mwl8k_firmware_load_success(priv);
  		if (rc)
-@@ -5813,10 +5806,8 @@ static int mwl8k_init_firmware(struct ieee80211_hw *hw, char *fw_image,
+@@ -5814,10 +5807,8 @@ static int mwl8k_init_firmware(struct ieee80211_hw *hw, char *fw_image,
  
  	/* Ask userland hotplug daemon for the device firmware */
  	rc = mwl8k_request_firmware(priv, fw_image, nowait);
@@ -2157,7 +2157,7 @@ index 480a8d0..4e9d99e 100644
  	if (fw->size % 4) {
  		wl1251_error("nvs size is not multiple of 32 bits: %zu",
 diff --git a/drivers/net/wireless/ti/wlcore/main.c b/drivers/net/wireless/ti/wlcore/main.c
-index 5f74cf8..696a39e3 100644
+index be0ed19..aa1980e 100644
 --- a/drivers/net/wireless/ti/wlcore/main.c
 +++ b/drivers/net/wireless/ti/wlcore/main.c
 @@ -755,10 +755,8 @@ static int wl12xx_fetch_firmware(struct wl1271 *wl, bool plt)
@@ -2278,10 +2278,10 @@ index 11853ec..f2015d7 100644
  	err = asd_seq_download_seqs(asd_ha);
  	if (err) {
 diff --git a/drivers/scsi/bfa/bfad.c b/drivers/scsi/bfa/bfad.c
-index 2f9213b..73e877b 100644
+index 93e4011..d0889c2 100644
 --- a/drivers/scsi/bfa/bfad.c
 +++ b/drivers/scsi/bfa/bfad.c
-@@ -1749,7 +1749,6 @@ bfad_read_firmware(struct pci_dev *pdev, u32 **bfi_image,
+@@ -1750,7 +1750,6 @@ bfad_read_firmware(struct pci_dev *pdev, u32 **bfi_image,
  	const struct firmware *fw;
  
  	if (request_firmware(&fw, fw_name, &pdev->dev)) {
@@ -2334,10 +2334,10 @@ index 832af42..fe6df40 100644
  		goto unlock;
  	}
 diff --git a/drivers/scsi/qla2xxx/qla_init.c b/drivers/scsi/qla2xxx/qla_init.c
-index 62d2ee8..31787aa 100644
+index 643b8ae..567b7c3 100644
 --- a/drivers/scsi/qla2xxx/qla_init.c
 +++ b/drivers/scsi/qla2xxx/qla_init.c
-@@ -7774,10 +7774,6 @@ qla2x00_load_risc(scsi_qla_host_t *vha, uint32_t *srisc_addr)
+@@ -7802,10 +7802,6 @@ qla2x00_load_risc(scsi_qla_host_t *vha, uint32_t *srisc_addr)
  	/* Load firmware blob. */
  	blob = qla2x00_request_firmware(vha);
  	if (!blob) {
@@ -2348,7 +2348,7 @@ index 62d2ee8..31787aa 100644
  		return QLA_FUNCTION_FAILED;
  	}
  
-@@ -7880,9 +7876,6 @@ qla24xx_load_risc_blob(scsi_qla_host_t *vha, uint32_t *srisc_addr)
+@@ -7908,9 +7904,6 @@ qla24xx_load_risc_blob(scsi_qla_host_t *vha, uint32_t *srisc_addr)
  
  	blob = qla2x00_request_firmware(vha);
  	if (!blob) {
@@ -2376,10 +2376,10 @@ index c855d01..9b8d6de 100644
  	/* Validating firmware blob */
  	if (qla82xx_validate_firmware_blob(vha,
 diff --git a/drivers/scsi/qla2xxx/qla_os.c b/drivers/scsi/qla2xxx/qla_os.c
-index 67b1e74..46d103e 100644
+index 052ce78..2977b05 100644
 --- a/drivers/scsi/qla2xxx/qla_os.c
 +++ b/drivers/scsi/qla2xxx/qla_os.c
-@@ -6816,8 +6816,6 @@ qla2x00_request_firmware(scsi_qla_host_t *vha)
+@@ -6808,8 +6808,6 @@ qla2x00_request_firmware(scsi_qla_host_t *vha)
  		goto out;
  
  	if (request_firmware(&blob->fw, blob->name, &ha->pdev->dev)) {
@@ -2468,7 +2468,7 @@ index 4562c80..a36a72c 100644
  	/* Check whether the firmware is already loaded and running. If
  	   positive, skip this board */
 diff --git a/drivers/tty/moxa.c b/drivers/tty/moxa.c
-index 3a1a5e0..40d156d 100644
+index 1254b39..fe60f3ee 100644
 --- a/drivers/tty/moxa.c
 +++ b/drivers/tty/moxa.c
 @@ -854,13 +854,8 @@ static int moxa_init_board(struct moxa_board_conf *brd, struct device *dev)
@@ -2681,7 +2681,7 @@ index 4d30095..e217999 100644
  		goto out;
  	}
 diff --git a/drivers/usb/serial/io_edgeport.c b/drivers/usb/serial/io_edgeport.c
-index 4cca0b8..81a9679 100644
+index 3b4d1ff..c9ef76e 100644
 --- a/drivers/usb/serial/io_edgeport.c
 +++ b/drivers/usb/serial/io_edgeport.c
 @@ -375,11 +375,8 @@ static void update_edgeport_E2PROM(struct edgeport_serial *edge_serial)
@@ -2711,10 +2711,10 @@ index c327d4c..ac3c2ae 100644
  	}
  
 diff --git a/drivers/usb/serial/ti_usb_3410_5052.c b/drivers/usb/serial/ti_usb_3410_5052.c
-index ef23acc..73fa0cf 100644
+index b1449d4..4c4a12a 100644
 --- a/drivers/usb/serial/ti_usb_3410_5052.c
 +++ b/drivers/usb/serial/ti_usb_3410_5052.c
-@@ -1663,10 +1663,8 @@ static int ti_download_firmware(struct ti_device *tdev)
+@@ -1668,10 +1668,8 @@ static int ti_download_firmware(struct ti_device *tdev)
  	}
  
  check_firmware:
@@ -2905,10 +2905,10 @@ index 8c1e968..a95c405 100644
  	/* ID, should read & 0x7f = 0x55 when FPGA programmed. */
  	snd_emu1010_fpga_read(emu, EMU_HANA_ID, &reg);
 diff --git a/sound/pci/hda/hda_intel.c b/sound/pci/hda/hda_intel.c
-index 590ea26..a75486e 100644
+index ebb1ee6..faa1921 100644
 --- a/sound/pci/hda/hda_intel.c
 +++ b/sound/pci/hda/hda_intel.c
-@@ -1997,8 +1997,7 @@ static void azx_firmware_cb(const struct firmware *fw, void *context)
+@@ -2015,8 +2015,7 @@ static void azx_firmware_cb(const struct firmware *fw, void *context)
  
  	if (fw)
  		chip->fw = fw;
@@ -2983,7 +2983,7 @@ index 58771ae..bbc7b1c 100644
  	err = loadfirmware(cif, chip->fw_entry->data, chip->fw_entry->size);
  	if (err) {
 diff --git a/sound/pci/rme9652/hdsp.c b/sound/pci/rme9652/hdsp.c
-index 5cbdc9b..bc5c620 100644
+index c7b3e76..40533d4 100644
 --- a/sound/pci/rme9652/hdsp.c
 +++ b/sound/pci/rme9652/hdsp.c
 @@ -5117,11 +5117,8 @@ static int hdsp_request_fw_loader(struct hdsp *hdsp)

@@ -42,10 +42,10 @@ index adc5a7e..c7d00ed 100644
  install-man: check-man-tools man do-install-man
  
 diff --git a/tools/perf/Makefile.perf b/tools/perf/Makefile.perf
-index 902c792..1b41817 100644
+index 961f5e4..f890594 100644
 --- a/tools/perf/Makefile.perf
 +++ b/tools/perf/Makefile.perf
-@@ -859,23 +859,23 @@ endif
+@@ -855,23 +855,23 @@ endif
  install-tools: all install-gtk
  	$(call QUIET_INSTALL, binaries) \
  		$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(bindir_SQ)'; \
@@ -75,7 +75,7 @@ index 902c792..1b41817 100644
  ifndef NO_LIBBPF
  	$(call QUIET_INSTALL, bpf-headers) \
  		$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(perf_include_instdir_SQ)/bpf'; \
-@@ -913,7 +913,7 @@ ifndef NO_LIBPYTHON
+@@ -909,7 +909,7 @@ ifndef NO_LIBPYTHON
  endif
  	$(call QUIET_INSTALL, perf_completion-script) \
  		$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(sysconfdir_SQ)/bash_completion.d'; \
@@ -84,7 +84,7 @@ index 902c792..1b41817 100644
  	$(call QUIET_INSTALL, perf-tip) \
  		$(INSTALL) -d -m 755 '$(DESTDIR_SQ)$(tip_instdir_SQ)'; \
  		$(INSTALL) Documentation/tips.txt -t '$(DESTDIR_SQ)$(tip_instdir_SQ)'
-@@ -938,7 +938,7 @@ install-python_ext:
+@@ -934,7 +934,7 @@ install-python_ext:
  
  # 'make install-doc' should call 'make -C Documentation install'
  $(INSTALL_DOC_TARGETS):

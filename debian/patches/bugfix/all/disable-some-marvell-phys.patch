@@ -19,7 +19,7 @@ correctness.
  1 file changed, 13 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/net/phy/marvell.c b/drivers/net/phy/marvell.c
-index 91cf1d1..5ab5545 100644
+index 9dbe625..15d1bae 100644
 --- a/drivers/net/phy/marvell.c
 +++ b/drivers/net/phy/marvell.c
 @@ -937,6 +937,7 @@ static int m88e1118_config_init(struct phy_device *phydev)
@@ -82,7 +82,7 @@ index 91cf1d1..5ab5545 100644
  	{
  		.phy_id = MARVELL_PHY_ID_88E1116R,
  		.phy_id_mask = MARVELL_PHY_ID_MASK,
-@@ -2432,9 +2442,9 @@ static struct mdio_device_id __maybe_unused marvell_tbl[] = {
+@@ -2454,9 +2464,9 @@ static struct mdio_device_id __maybe_unused marvell_tbl[] = {
  	{ MARVELL_PHY_ID_88E1111, MARVELL_PHY_ID_MASK },
  	{ MARVELL_PHY_ID_88E1118, MARVELL_PHY_ID_MASK },
  	{ MARVELL_PHY_ID_88E1121R, MARVELL_PHY_ID_MASK },

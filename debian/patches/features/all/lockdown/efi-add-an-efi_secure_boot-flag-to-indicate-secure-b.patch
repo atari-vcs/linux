@@ -25,7 +25,7 @@ cc: linux-efi@vger.kernel.org
  create mode 100644 drivers/firmware/efi/secureboot.c
 
 diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
-index 77ea96b..d10f427 100644
+index 366875a..b9923f7 100644
 --- a/arch/x86/kernel/setup.c
 +++ b/arch/x86/kernel/setup.c
 @@ -1179,19 +1179,7 @@ void __init setup_arch(char **cmdline_p)
@@ -107,10 +107,10 @@ index 00000000..bf16cfb6
 +	}
 +}
 diff --git a/include/linux/efi.h b/include/linux/efi.h
-index 13ed2c6..ecd6fd1 100644
+index c82ef0e..1d5af58 100644
 --- a/include/linux/efi.h
 +++ b/include/linux/efi.h
-@@ -1206,6 +1206,14 @@ extern int __init efi_setup_pcdp_console(char *);
+@@ -1208,6 +1208,14 @@ extern int __init efi_setup_pcdp_console(char *);
  #define EFI_DBG			8	/* Print additional debug info at runtime */
  #define EFI_NX_PE_DATA		9	/* Can runtime data regions be mapped non-executable? */
  #define EFI_MEM_ATTR		10	/* Did firmware publish an EFI_MEMORY_ATTRIBUTES table? */
@@ -125,7 +125,7 @@ index 13ed2c6..ecd6fd1 100644
  
  #ifdef CONFIG_EFI
  /*
-@@ -1216,6 +1224,7 @@ static inline bool efi_enabled(int feature)
+@@ -1218,6 +1226,7 @@ static inline bool efi_enabled(int feature)
  	return test_bit(feature, &efi.flags) != 0;
  }
  extern void efi_reboot(enum reboot_mode reboot_mode, const char *__unused);
@@ -133,7 +133,7 @@ index 13ed2c6..ecd6fd1 100644
  #else
  static inline bool efi_enabled(int feature)
  {
-@@ -1229,6 +1238,7 @@ efi_capsule_pending(int *reset_type)
+@@ -1231,6 +1240,7 @@ efi_capsule_pending(int *reset_type)
  {
  	return false;
  }
@@ -141,7 +141,7 @@ index 13ed2c6..ecd6fd1 100644
  #endif
  
  extern int efi_status_to_err(efi_status_t status);
-@@ -1634,12 +1644,6 @@ static inline bool efi_runtime_disabled(void) { return true; }
+@@ -1636,12 +1646,6 @@ static inline bool efi_runtime_disabled(void) { return true; }
  extern void efi_call_virt_check_flags(unsigned long flags, const char *call);
  extern unsigned long efi_call_virt_save_flags(void);
  

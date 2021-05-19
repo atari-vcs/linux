@@ -15,7 +15,7 @@ once it's ready to speak MBIM.
  1 file changed, 4 deletions(-)
 
 diff --git a/drivers/net/usb/cdc_ncm.c b/drivers/net/usb/cdc_ncm.c
-index c2c82e6..a047175f 100644
+index cbe7f35..dd63d46 100644
 --- a/drivers/net/usb/cdc_ncm.c
 +++ b/drivers/net/usb/cdc_ncm.c
 @@ -53,11 +53,7 @@

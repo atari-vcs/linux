@@ -33,7 +33,7 @@ Signed-off-by: Nicolas Schier <nicolas@fjasle.eu>
  1 file changed, 10 insertions(+)
 
 diff --git a/fs/overlayfs/super.c b/fs/overlayfs/super.c
-index d6b724b..7c0edb4 100644
+index f036d75..04d223d 100644
 --- a/fs/overlayfs/super.c
 +++ b/fs/overlayfs/super.c
 @@ -53,6 +53,11 @@ module_param_named(xino_auto, ovl_xino_auto_def, bool, 0644);
@@ -48,7 +48,7 @@ index d6b724b..7c0edb4 100644
  static void ovl_entry_stack_free(struct ovl_entry *oe)
  {
  	unsigned int i;
-@@ -1770,6 +1775,11 @@ static int __init ovl_init(void)
+@@ -1775,6 +1780,11 @@ static int __init ovl_init(void)
  	if (ovl_inode_cachep == NULL)
  		return -ENOMEM;
  
