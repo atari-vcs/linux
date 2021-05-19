@@ -706,13 +706,6 @@ int tcf_action_destroy(struct tc_action *actions[], int bind)
 	return ret;
 }
 
-static int tcf_action_destroy_1(struct tc_action *a, int bind)
-{
-	struct tc_action *actions[] = { a, NULL };
-
-	return tcf_action_destroy(actions, bind);
-}
-
 static int tcf_action_put(struct tc_action *p)
 {
 	return __tcf_action_put(p, false);
@@ -830,7 +823,7 @@ static const struct nla_policy tcf_action_policy[TCA_ACT_MAX + 1] = {
 	[TCA_ACT_OPTIONS]	= { .type = NLA_NESTED },
 };
 
-static void tcf_idr_insert_many(struct tc_action *actions[])
+void tcf_idr_insert_many(struct tc_action *actions[])
 {
 	int i;
 
@@ -932,13 +925,6 @@ struct tc_action *tcf_action_init_1(struct net *net, struct tcf_proto *tp,
 	if (err < 0)
 		goto err_mod;
 
-	if (TC_ACT_EXT_CMP(a->tcfa_action, TC_ACT_GOTO_CHAIN) &&
-	    !rcu_access_pointer(a->goto_chain)) {
-		tcf_action_destroy_1(a, bind);
-		NL_SET_ERR_MSG(extack, "can't use goto chain with NULL chain");
-		return ERR_PTR(-EINVAL);
-	}
-
 	if (!name && tb[TCA_ACT_COOKIE])
 		tcf_set_action_cookie(&a->act_cookie, cookie);
 
@@ -948,6 +934,9 @@ struct tc_action *tcf_action_init_1(struct net *net, struct tcf_proto *tp,
 	 */
 	if (err != ACT_P_CREATED)
 		module_put(a_o->owner);
+
+	if (!bind && ovr && err == ACT_P_CREATED)
+		refcount_set(&a->tcfa_refcnt, 2);
 
 	return a;
 
