@@ -15,7 +15,7 @@ tp7
 (dp8
 Vabiname
 p9
-V6
+V7
 p10
 sVignore-changes
 p11
@@ -2996,7 +2996,7 @@ tp1603
 (dp1604
 Vsource
 p1605
-V5.10.28-1
+V5.10.40-1+apertis1~2021
 p1606
 sVupstream
 p1607
@@ -3008,6 +3008,6 @@ V5.10.0
 p1610
 sVabiname
 p1611
-V5.10.0-6
+V5.10.0-7
 p1612
 ss.
