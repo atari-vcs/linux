@@ -192,7 +192,10 @@ CONFIG_STUB_CLK_HI6220=y
 ##
 ## file: drivers/clk/imx/Kconfig
 ##
+CONFIG_CLK_IMX8MM=y
 CONFIG_CLK_IMX8MN=y
+CONFIG_CLK_IMX8MP=y
+CONFIG_CLK_IMX8MQ=y
 
 ##
 ## file: drivers/clk/qcom/Kconfig
@@ -208,6 +211,11 @@ CONFIG_MSM_MMCC_8996=y
 ## file: drivers/clk/sunxi-ng/Kconfig
 ##
 CONFIG_SUN8I_DE2_CCU=y
+
+##
+## file: drivers/clk/zynqmp/Kconfig
+##
+CONFIG_COMMON_CLK_ZYNQMP=y
 
 ##
 ## file: drivers/cpufreq/Kconfig
@@ -1478,6 +1486,17 @@ CONFIG_NOP_USB_XCEIV=m
 CONFIG_USB_ULPI=y
 
 ##
+## file: drivers/usb/typec/Kconfig
+##
+CONFIG_TYPEC=m
+
+##
+## file: drivers/usb/typec/tcpm/Kconfig
+##
+CONFIG_TYPEC_TCPM=m
+CONFIG_TYPEC_FUSB302=m
+
+##
 ## file: drivers/vfio/Kconfig
 ##
 CONFIG_VFIO=m
@@ -1580,6 +1599,7 @@ CONFIG_SND_BCM2835_SOC_I2S=m
 ##
 CONFIG_SND_SOC_SIMPLE_AMPLIFIER=m
 CONFIG_SND_SOC_WM8904=m
+CONFIG_SND_SOC_ES8316=m
 
 ##
 ## file: sound/soc/fsl/Kconfig

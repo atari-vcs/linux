@@ -12,7 +12,7 @@ Rules-Requires-Root: no
 Vcs-Browser: https://salsa.debian.org/kernel-team/linux
 Vcs-Git: https://salsa.debian.org/kernel-team/linux.git
 
-Package: linux-support-5.10.0-6
+Package: linux-support-5.10.0-7
 Architecture: all
 Section: devel
 Depends: ${python3:Depends}, ${misc:Depends}
@@ -159,7 +159,7 @@ Description: Performance analysis tools for Linux 5.10
  appropriate version for the running kernel.
 Build-Profiles: <!stage1 !pkg.linux.notools !nopython>
 
-Package: linux-bootwrapper-5.10.0-6
+Package: linux-bootwrapper-5.10.0-7
 Architecture: powerpc ppc64
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Boot wrapper tools for Linux 5.10 on PowerPC
@@ -199,26 +199,26 @@ Description: Linux kernel source (meta-package)
  Linux kernel.
 Build-Profiles: <!stage1 !pkg.linux.nosource !pkg.linux.nometa>
 
-Package: linux-headers-5.10.0-6-common
+Package: linux-headers-5.10.0-7-common
 Architecture: all
 Depends: ${misc:Depends}
-Description: Common header files for Linux 5.10.0-6
+Description: Common header files for Linux 5.10.0-7
  This package provides the common kernel header files for Linux kernel
- version 5.10.0-6, generally used for building out-of-tree kernel modules.
+ version 5.10.0-7, generally used for building out-of-tree kernel modules.
  To obtain a complete set of headers you also need to install the
- linux-headers-5.10.0-6-(flavour) package, matching the flavour of the
+ linux-headers-5.10.0-7-(flavour) package, matching the flavour of the
  kernel you intend the build for.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 Multi-Arch: foreign
 
-Package: linux-headers-5.10.0-6-common-rt
+Package: linux-headers-5.10.0-7-common-rt
 Architecture: all
 Depends: ${misc:Depends}
-Description: Common header files for Linux 5.10.0-6-rt
+Description: Common header files for Linux 5.10.0-7-rt
  This package provides the common kernel header files for Linux kernel
- version 5.10.0-6 with the PREEMPT_RT featureset, generally used for
+ version 5.10.0-7 with the PREEMPT_RT featureset, generally used for
  building out-of-tree kernel modules.  To obtain a complete set of headers
- you also need to install the linux-headers-5.10.0-6-(flavour) package,
+ you also need to install the linux-headers-5.10.0-7-(flavour) package,
  matching the flavour of the kernel you intend the build for.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 Multi-Arch: foreign
@@ -246,9 +246,9 @@ Description: Debian kernel configurations for Linux 5.10
 Build-Profiles: <!stage1 !pkg.linux.nosource>
 Multi-Arch: same
 
-Package: linux-image-5.10.0-6-alpha-generic
+Package: linux-image-5.10.0-7-alpha-generic
 Architecture: alpha
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [alpha] | linux-initramfs-tool [alpha]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [alpha] | linux-initramfs-tool [alpha]
 Recommends: firmware-linux-free, apparmor [alpha]
 Suggests: linux-doc-5.10, debian-kernel-handbook, aboot [alpha], fdutils [alpha]
 Breaks: fwupdate (<< 12-7) [alpha], wireless-regdb (<< 2019.06.03-1~) [alpha], initramfs-tools (<< 0.120+deb8u2)
@@ -257,22 +257,22 @@ Description: Linux 5.10 for Alpha
  extended kernel start address (Wildfire, Titan, Marvel).
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-alpha-generic
+Package: linux-headers-5.10.0-7-alpha-generic
 Architecture: alpha
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-alpha-generic
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-alpha-generic
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-alpha-generic, generally used for building
+ Linux kernel 5.10.0-7-alpha-generic, generally used for building
  out-of-tree kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-alpha-generic, and can be used for
+ /usr/src/linux-headers-5.10.0-7-alpha-generic, and can be used for
  building modules that load into the kernel provided by the
- linux-image-5.10.0-6-alpha-generic package.
+ linux-image-5.10.0-7-alpha-generic package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-alpha-generic
 Architecture: alpha
-Provides: linux-latest-modules-5.10.0-6-alpha-generic, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-alpha-generic (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-alpha-generic, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-alpha-generic (= ${binary:Version}), ${misc:Depends}
 Description: Linux for Alpha (meta-package)
  This package depends on the latest Linux kernel and modules for use on DEC
  Alpha systems with extended kernel start address (Wildfire, Titan,
@@ -281,34 +281,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-alpha-generic
 Architecture: alpha
-Depends: linux-headers-5.10.0-6-alpha-generic (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-alpha-generic (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux alpha-generic configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel alpha-generic configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-alpha-generic-dbg
+Package: linux-image-5.10.0-7-alpha-generic-dbg
 Architecture: alpha
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-alpha-generic
+Description: Debug symbols for linux-image-5.10.0-7-alpha-generic
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-alpha-generic.
+ modules in linux-image-5.10.0-7-alpha-generic.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-alpha-generic-dbg
 Architecture: alpha
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-alpha-generic-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-alpha-generic-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux alpha-generic configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel alpha-generic configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-alpha-smp
+Package: linux-image-5.10.0-7-alpha-smp
 Architecture: alpha
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [alpha] | linux-initramfs-tool [alpha]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [alpha] | linux-initramfs-tool [alpha]
 Recommends: firmware-linux-free, apparmor [alpha]
 Suggests: linux-doc-5.10, debian-kernel-handbook, aboot [alpha], fdutils [alpha]
 Breaks: fwupdate (<< 12-7) [alpha], wireless-regdb (<< 2019.06.03-1~) [alpha], initramfs-tools (<< 0.120+deb8u2)
@@ -317,22 +317,22 @@ Description: Linux 5.10 for Alpha SMP
  extended kernel start address (Wildfire, Titan, Marvel).
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-alpha-smp
+Package: linux-headers-5.10.0-7-alpha-smp
 Architecture: alpha
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-alpha-smp
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-alpha-smp
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-alpha-smp, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-alpha-smp, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-alpha-smp, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-alpha-smp, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-alpha-smp package.
+ linux-image-5.10.0-7-alpha-smp package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-alpha-smp
 Architecture: alpha
-Provides: linux-latest-modules-5.10.0-6-alpha-smp, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-alpha-smp (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-alpha-smp, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-alpha-smp (= ${binary:Version}), ${misc:Depends}
 Description: Linux for Alpha SMP (meta-package)
  This package depends on the latest Linux kernel and modules for use on DEC
  Alpha SMP systems with extended kernel start address (Wildfire, Titan,
@@ -342,34 +342,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-alpha-smp
 Architecture: alpha
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-alpha-smp (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-alpha-smp (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux alpha-smp configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel alpha-smp configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-alpha-smp-dbg
+Package: linux-image-5.10.0-7-alpha-smp-dbg
 Architecture: alpha
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-alpha-smp
+Description: Debug symbols for linux-image-5.10.0-7-alpha-smp
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-alpha-smp.
+ modules in linux-image-5.10.0-7-alpha-smp.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-alpha-smp-dbg
 Architecture: alpha
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-alpha-smp-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-alpha-smp-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux alpha-smp configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel alpha-smp configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-amd64
+Package: linux-image-5.10.0-7-amd64
 Architecture: amd64
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [amd64] | linux-initramfs-tool [amd64]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [amd64] | linux-initramfs-tool [amd64]
 Recommends: firmware-linux-free, apparmor [amd64]
 Suggests: linux-doc-5.10, debian-kernel-handbook, grub-pc [amd64] | grub-efi-amd64 [amd64] | extlinux [amd64]
 Breaks: xserver-xorg-input-vmmouse (<< 1:13.0.99) [amd64], fwupdate (<< 12-7) [amd64], wireless-regdb (<< 2019.06.03-1~) [amd64], initramfs-tools (<< 0.120+deb8u2)
@@ -378,22 +378,22 @@ Description: Linux 5.10 for 64-bit PCs
  VIA Nano processors.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-amd64
+Package: linux-headers-5.10.0-7-amd64
 Architecture: amd64
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-x86
-Description: Header files for Linux 5.10.0-6-amd64
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-x86
+Description: Header files for Linux 5.10.0-7-amd64
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-amd64, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-amd64, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-amd64, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-amd64, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-amd64 package.
+ linux-image-5.10.0-7-amd64 package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-amd64
 Architecture: amd64
-Provides: linux-latest-modules-5.10.0-6-amd64, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-amd64 (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-amd64, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-amd64 (= ${binary:Version}), ${misc:Depends}
 Description: Linux for 64-bit PCs (meta-package)
  This package depends on the latest Linux kernel and modules for use on PCs
  with AMD64, Intel 64 or VIA Nano processors.
@@ -402,34 +402,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-amd64
 Architecture: amd64
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-amd64 (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-amd64 (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux amd64 configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel amd64 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-amd64-dbg
+Package: linux-image-5.10.0-7-amd64-dbg
 Architecture: amd64
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-amd64
+Description: Debug symbols for linux-image-5.10.0-7-amd64
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-amd64.
+ modules in linux-image-5.10.0-7-amd64.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-amd64-dbg
 Architecture: amd64
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-amd64-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-amd64-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux amd64 configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel amd64 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-arm64
+Package: linux-image-5.10.0-7-arm64
 Architecture: arm64
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [arm64] | linux-initramfs-tool [arm64]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [arm64] | linux-initramfs-tool [arm64]
 Recommends: firmware-linux-free, apparmor [arm64]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: libmozjs185-1.0 [arm64], libmozjs-24-0 (<< 24.2.0-5.1~) [arm64], fwupdate (<< 12-7) [arm64], wireless-regdb (<< 2019.06.03-1~) [arm64], initramfs-tools (<< 0.120+deb8u2)
@@ -437,22 +437,22 @@ Description: Linux 5.10 for 64-bit ARMv8 machines
  The Linux kernel 5.10 and modules for use on 64-bit ARMv8 machines.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-arm64
+Package: linux-headers-5.10.0-7-arm64
 Architecture: arm64
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-arm64
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-arm64
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-arm64, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-arm64, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-arm64, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-arm64, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-arm64 package.
+ linux-image-5.10.0-7-arm64 package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-arm64
 Architecture: arm64
-Provides: linux-latest-modules-5.10.0-6-arm64, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-arm64 (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-arm64, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-arm64 (= ${binary:Version}), ${misc:Depends}
 Description: Linux for 64-bit ARMv8 machines (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  64-bit ARMv8 machines.
@@ -461,34 +461,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-arm64
 Architecture: arm64
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-arm64 (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-arm64 (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux arm64 configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel arm64 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-arm64-dbg
+Package: linux-image-5.10.0-7-arm64-dbg
 Architecture: arm64
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-arm64
+Description: Debug symbols for linux-image-5.10.0-7-arm64
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-arm64.
+ modules in linux-image-5.10.0-7-arm64.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-arm64-dbg
 Architecture: arm64
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-arm64-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-arm64-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux arm64 configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel arm64 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-marvell
+Package: linux-image-5.10.0-7-marvell
 Architecture: armel
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [armel] | linux-initramfs-tool [armel]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [armel] | linux-initramfs-tool [armel]
 Recommends: firmware-linux-free, u-boot-tools [armel], apparmor [armel]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: flash-kernel (<< 3.57~) [armel], fwupdate (<< 12-7) [armel], wireless-regdb (<< 2019.06.03-1~) [armel], initramfs-tools (<< 0.120+deb8u2)
@@ -497,22 +497,22 @@ Description: Linux 5.10 for Marvell Kirkwood/Orion
  based systems (https://wiki.debian.org/ArmEabiPort#Supported_hardware).
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-marvell
+Package: linux-headers-5.10.0-7-marvell
 Architecture: armel
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-arm
-Description: Header files for Linux 5.10.0-6-marvell
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-arm
+Description: Header files for Linux 5.10.0-7-marvell
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-marvell, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-marvell, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-marvell, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-marvell, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-marvell package.
+ linux-image-5.10.0-7-marvell package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-marvell
 Architecture: armel
-Provides: linux-latest-modules-5.10.0-6-marvell, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-marvell (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-marvell, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-marvell (= ${binary:Version}), ${misc:Depends}
 Description: Linux for Marvell Kirkwood/Orion (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  Marvell Kirkwood and Orion based systems
@@ -521,34 +521,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-marvell
 Architecture: armel
-Depends: linux-headers-5.10.0-6-marvell (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-marvell (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux marvell configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel marvell configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-marvell-dbg
+Package: linux-image-5.10.0-7-marvell-dbg
 Architecture: armel
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-marvell
+Description: Debug symbols for linux-image-5.10.0-7-marvell
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-marvell.
+ modules in linux-image-5.10.0-7-marvell.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-marvell-dbg
 Architecture: armel
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-marvell-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-marvell-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux marvell configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel marvell configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-rpi
+Package: linux-image-5.10.0-7-rpi
 Architecture: armel
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [armel] | linux-initramfs-tool [armel]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [armel] | linux-initramfs-tool [armel]
 Recommends: firmware-linux-free, apparmor [armel]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [armel], wireless-regdb (<< 2019.06.03-1~) [armel], initramfs-tools (<< 0.120+deb8u2)
@@ -557,22 +557,22 @@ Description: Linux 5.10 for Raspberry Pi and Pi Zero
  Zero based systems.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-rpi
+Package: linux-headers-5.10.0-7-rpi
 Architecture: armel
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-arm
-Description: Header files for Linux 5.10.0-6-rpi
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-arm
+Description: Header files for Linux 5.10.0-7-rpi
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-rpi, generally used for building out-of-tree kernel
+ Linux kernel 5.10.0-7-rpi, generally used for building out-of-tree kernel
  modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-rpi, and can be used for building modules
- that load into the kernel provided by the linux-image-5.10.0-6-rpi
+ /usr/src/linux-headers-5.10.0-7-rpi, and can be used for building modules
+ that load into the kernel provided by the linux-image-5.10.0-7-rpi
  package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-rpi
 Architecture: armel
-Provides: linux-latest-modules-5.10.0-6-rpi, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-rpi (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-rpi, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-rpi (= ${binary:Version}), ${misc:Depends}
 Description: Linux for Raspberry Pi and Pi Zero (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  Raspberry Pi, Raspberry Pi Zero based systems.
@@ -580,34 +580,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-rpi
 Architecture: armel
-Depends: linux-headers-5.10.0-6-rpi (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-rpi (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux rpi configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel rpi configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-rpi-dbg
+Package: linux-image-5.10.0-7-rpi-dbg
 Architecture: armel
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-rpi
+Description: Debug symbols for linux-image-5.10.0-7-rpi
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-rpi.
+ modules in linux-image-5.10.0-7-rpi.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-rpi-dbg
 Architecture: armel
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-rpi-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-rpi-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux rpi configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel rpi configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-armmp
+Package: linux-image-5.10.0-7-armmp
 Architecture: armhf
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [armhf] | linux-initramfs-tool [armhf]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [armhf] | linux-initramfs-tool [armhf]
 Recommends: firmware-linux-free, apparmor [armhf]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [armhf], wireless-regdb (<< 2019.06.03-1~) [armhf], initramfs-tools (<< 0.120+deb8u2)
@@ -617,22 +617,22 @@ Description: Linux 5.10 for ARMv7 multiplatform compatible SoCs
  platforms.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-armmp
+Package: linux-headers-5.10.0-7-armmp
 Architecture: armhf
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-arm
-Description: Header files for Linux 5.10.0-6-armmp
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-arm
+Description: Header files for Linux 5.10.0-7-armmp
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-armmp, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-armmp, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-armmp, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-armmp, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-armmp package.
+ linux-image-5.10.0-7-armmp package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-armmp
 Architecture: armhf
-Provides: linux-latest-modules-5.10.0-6-armmp, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-armmp (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-armmp, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-armmp (= ${binary:Version}), ${misc:Depends}
 Description: Linux for ARMv7 multiplatform compatible SoCs (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  ARMv7 multiplatform kernel.  See
@@ -643,34 +643,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-armmp
 Architecture: armhf
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-armmp (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-armmp (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux armmp configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel armmp configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-armmp-dbg
+Package: linux-image-5.10.0-7-armmp-dbg
 Architecture: armhf
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-armmp
+Description: Debug symbols for linux-image-5.10.0-7-armmp
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-armmp.
+ modules in linux-image-5.10.0-7-armmp.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-armmp-dbg
 Architecture: armhf
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-armmp-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-armmp-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux armmp configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel armmp configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-armmp-lpae
+Package: linux-image-5.10.0-7-armmp-lpae
 Architecture: armhf
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [armhf] | linux-initramfs-tool [armhf]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [armhf] | linux-initramfs-tool [armhf]
 Recommends: firmware-linux-free, apparmor [armhf]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [armhf], wireless-regdb (<< 2019.06.03-1~) [armhf], initramfs-tools (<< 0.120+deb8u2)
@@ -680,22 +680,22 @@ Description: Linux 5.10 for ARMv7 multiplatform compatible SoCs supporting LPAE
  details of supported platforms..
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-armmp-lpae
+Package: linux-headers-5.10.0-7-armmp-lpae
 Architecture: armhf
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-arm
-Description: Header files for Linux 5.10.0-6-armmp-lpae
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-arm
+Description: Header files for Linux 5.10.0-7-armmp-lpae
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-armmp-lpae, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-armmp-lpae, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-armmp-lpae, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-armmp-lpae, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-armmp-lpae package.
+ linux-image-5.10.0-7-armmp-lpae package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-armmp-lpae
 Architecture: armhf
-Provides: linux-latest-modules-5.10.0-6-armmp-lpae, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-armmp-lpae (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-armmp-lpae, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-armmp-lpae (= ${binary:Version}), ${misc:Depends}
 Description: Linux for ARMv7 multiplatform compatible SoCs supporting LPAE (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  ARMv7 multiplatform kernel supporting LPAE. See
@@ -705,34 +705,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-armmp-lpae
 Architecture: armhf
-Depends: linux-headers-5.10.0-6-armmp-lpae (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-armmp-lpae (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux armmp-lpae configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel armmp-lpae configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-armmp-lpae-dbg
+Package: linux-image-5.10.0-7-armmp-lpae-dbg
 Architecture: armhf
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-armmp-lpae
+Description: Debug symbols for linux-image-5.10.0-7-armmp-lpae
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-armmp-lpae.
+ modules in linux-image-5.10.0-7-armmp-lpae.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-armmp-lpae-dbg
 Architecture: armhf
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-armmp-lpae-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-armmp-lpae-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux armmp-lpae configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel armmp-lpae configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-parisc
+Package: linux-image-5.10.0-7-parisc
 Architecture: hppa
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [hppa] | linux-initramfs-tool [hppa]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [hppa] | linux-initramfs-tool [hppa]
 Recommends: firmware-linux-free, apparmor [hppa]
 Suggests: linux-doc-5.10, debian-kernel-handbook, palo [hppa]
 Breaks: fwupdate (<< 12-7) [hppa], wireless-regdb (<< 2019.06.03-1~) [hppa], initramfs-tools (<< 0.120+deb8u2)
@@ -741,22 +741,22 @@ Description: Linux 5.10 for 32-bit PA-RISC
  with max 4 GB RAM.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-parisc
+Package: linux-headers-5.10.0-7-parisc
 Architecture: hppa
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10, binutils-hppa64-linux-gnu, gcc-10-hppa64-linux-gnu
-Description: Header files for Linux 5.10.0-6-parisc
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10, binutils-hppa64-linux-gnu, gcc-10-hppa64-linux-gnu
+Description: Header files for Linux 5.10.0-7-parisc
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-parisc, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-parisc, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-parisc, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-parisc, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-parisc package.
+ linux-image-5.10.0-7-parisc package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-parisc
 Architecture: hppa
-Provides: linux-latest-modules-5.10.0-6-parisc, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-parisc (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-parisc, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-parisc (= ${binary:Version}), ${misc:Depends}
 Description: Linux for 32-bit PA-RISC (meta-package)
  This package depends on the latest Linux kernel and modules for use on HP
  PA-RISC 32-bit systems with max 4 GB RAM.
@@ -765,15 +765,15 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-parisc
 Architecture: hppa
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-parisc (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-parisc (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux parisc configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel parisc configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-parisc64
+Package: linux-image-5.10.0-7-parisc64
 Architecture: hppa
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [hppa] | linux-initramfs-tool [hppa]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [hppa] | linux-initramfs-tool [hppa]
 Recommends: firmware-linux-free, apparmor [hppa]
 Suggests: linux-doc-5.10, debian-kernel-handbook, palo [hppa]
 Breaks: fwupdate (<< 12-7) [hppa], wireless-regdb (<< 2019.06.03-1~) [hppa], initramfs-tools (<< 0.120+deb8u2)
@@ -782,22 +782,22 @@ Description: Linux 5.10 for 64-bit PA-RISC
  with support for more than 4 GB RAM.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-parisc64
+Package: linux-headers-5.10.0-7-parisc64
 Architecture: hppa
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10, binutils-hppa64-linux-gnu, gcc-10-hppa64-linux-gnu
-Description: Header files for Linux 5.10.0-6-parisc64
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10, binutils-hppa64-linux-gnu, gcc-10-hppa64-linux-gnu
+Description: Header files for Linux 5.10.0-7-parisc64
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-parisc64, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-parisc64, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-parisc64, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-parisc64, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-parisc64 package.
+ linux-image-5.10.0-7-parisc64 package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-parisc64
 Architecture: hppa
-Provides: linux-latest-modules-5.10.0-6-parisc64, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-parisc64 (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-parisc64, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-parisc64 (= ${binary:Version}), ${misc:Depends}
 Description: Linux for 64-bit PA-RISC (meta-package)
  This package depends on the latest Linux kernel and modules for use on HP
  PA-RISC 64-bit systems with support for more than 4 GB RAM.
@@ -805,15 +805,15 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-parisc64
 Architecture: hppa
-Depends: linux-headers-5.10.0-6-parisc64 (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-parisc64 (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux parisc64 configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel parisc64 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-686
+Package: linux-image-5.10.0-7-686
 Architecture: i386
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [i386] | linux-initramfs-tool [i386]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [i386] | linux-initramfs-tool [i386]
 Recommends: firmware-linux-free, apparmor [i386]
 Suggests: linux-doc-5.10, debian-kernel-handbook, grub-pc [i386] | grub-efi-ia32 [i386] | extlinux [i386]
 Breaks: xserver-xorg-input-vmmouse (<< 1:13.0.99) [i386], fwupdate (<< 12-7) [i386], wireless-regdb (<< 2019.06.03-1~) [i386], initramfs-tools (<< 0.120+deb8u2)
@@ -822,22 +822,22 @@ Description: Linux 5.10 for older PCs
  processors not supporting PAE.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-686
+Package: linux-headers-5.10.0-7-686
 Architecture: i386
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-x86
-Description: Header files for Linux 5.10.0-6-686
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-x86
+Description: Header files for Linux 5.10.0-7-686
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-686, generally used for building out-of-tree kernel
+ Linux kernel 5.10.0-7-686, generally used for building out-of-tree kernel
  modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-686, and can be used for building modules
- that load into the kernel provided by the linux-image-5.10.0-6-686
+ /usr/src/linux-headers-5.10.0-7-686, and can be used for building modules
+ that load into the kernel provided by the linux-image-5.10.0-7-686
  package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-686
 Architecture: i386
-Provides: linux-latest-modules-5.10.0-6-686, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-686 (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-686, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-686 (= ${binary:Version}), ${misc:Depends}
 Description: Linux for older PCs (meta-package)
  This package depends on the latest Linux kernel and modules for use on PCs
  with one or more processors not supporting PAE.
@@ -845,34 +845,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-686
 Architecture: i386
-Depends: linux-headers-5.10.0-6-686 (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-686 (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux 686 configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel 686 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-686-dbg
+Package: linux-image-5.10.0-7-686-dbg
 Architecture: i386
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-686
+Description: Debug symbols for linux-image-5.10.0-7-686
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-686.
+ modules in linux-image-5.10.0-7-686.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-686-dbg
 Architecture: i386
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-686-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-686-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux 686 configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel 686 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-686-pae
+Package: linux-image-5.10.0-7-686-pae
 Architecture: i386
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [i386] | linux-initramfs-tool [i386]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [i386] | linux-initramfs-tool [i386]
 Recommends: firmware-linux-free, apparmor [i386]
 Suggests: linux-doc-5.10, debian-kernel-handbook, grub-pc [i386] | grub-efi-ia32 [i386] | extlinux [i386]
 Breaks: xserver-xorg-input-vmmouse (<< 1:13.0.99) [i386], fwupdate (<< 12-7) [i386], wireless-regdb (<< 2019.06.03-1~) [i386], initramfs-tools (<< 0.120+deb8u2)
@@ -886,22 +886,22 @@ Description: Linux 5.10 for modern PCs
  Transmeta Efficeon; VIA C7; and some other processors.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-686-pae
+Package: linux-headers-5.10.0-7-686-pae
 Architecture: i386
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-x86
-Description: Header files for Linux 5.10.0-6-686-pae
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-x86
+Description: Header files for Linux 5.10.0-7-686-pae
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-686-pae, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-686-pae, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-686-pae, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-686-pae, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-686-pae package.
+ linux-image-5.10.0-7-686-pae package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-686-pae
 Architecture: i386
-Provides: linux-latest-modules-5.10.0-6-686-pae, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-686-pae (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-686-pae, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-686-pae (= ${binary:Version}), ${misc:Depends}
 Description: Linux for modern PCs (meta-package)
  This package depends on the latest Linux kernel and modules for use on PCs
  with one or more processors supporting PAE.
@@ -910,34 +910,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-686-pae
 Architecture: i386
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-686-pae (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-686-pae (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux 686-pae configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel 686-pae configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-686-pae-dbg
+Package: linux-image-5.10.0-7-686-pae-dbg
 Architecture: i386
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-686-pae
+Description: Debug symbols for linux-image-5.10.0-7-686-pae
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-686-pae.
+ modules in linux-image-5.10.0-7-686-pae.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-686-pae-dbg
 Architecture: i386
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-686-pae-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-686-pae-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux 686-pae configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel 686-pae configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-itanium
+Package: linux-image-5.10.0-7-itanium
 Architecture: ia64
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [ia64] | linux-initramfs-tool [ia64]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [ia64] | linux-initramfs-tool [ia64]
 Recommends: firmware-linux-free, apparmor [ia64]
 Suggests: linux-doc-5.10, debian-kernel-handbook, grub-efi-ia64 [ia64]
 Breaks: fwupdate (<< 12-7) [ia64], wireless-regdb (<< 2019.06.03-1~) [ia64], initramfs-tools (<< 0.120+deb8u2)
@@ -946,22 +946,22 @@ Description: Linux 5.10 for Itanium (Merced)
  (Merced) processors.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-itanium
+Package: linux-headers-5.10.0-7-itanium
 Architecture: ia64
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-itanium
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-itanium
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-itanium, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-itanium, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-itanium, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-itanium, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-itanium package.
+ linux-image-5.10.0-7-itanium package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-itanium
 Architecture: ia64
-Provides: linux-latest-modules-5.10.0-6-itanium, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-itanium (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-itanium, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-itanium (= ${binary:Version}), ${misc:Depends}
 Description: Linux for Itanium (Merced) (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  systems with original Itanium (Merced) processors.
@@ -970,34 +970,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-itanium
 Architecture: ia64
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-itanium (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-itanium (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux itanium configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel itanium configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-itanium-dbg
+Package: linux-image-5.10.0-7-itanium-dbg
 Architecture: ia64
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-itanium
+Description: Debug symbols for linux-image-5.10.0-7-itanium
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-itanium.
+ modules in linux-image-5.10.0-7-itanium.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-itanium-dbg
 Architecture: ia64
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-itanium-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-itanium-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux itanium configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel itanium configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-mckinley
+Package: linux-image-5.10.0-7-mckinley
 Architecture: ia64
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [ia64] | linux-initramfs-tool [ia64]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [ia64] | linux-initramfs-tool [ia64]
 Recommends: firmware-linux-free, apparmor [ia64]
 Suggests: linux-doc-5.10, debian-kernel-handbook, grub-efi-ia64 [ia64]
 Breaks: fwupdate (<< 12-7) [ia64], wireless-regdb (<< 2019.06.03-1~) [ia64], initramfs-tools (<< 0.120+deb8u2)
@@ -1006,22 +1006,22 @@ Description: Linux 5.10 for Itanium 2+
  9300/9500/9700-series processors.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-mckinley
+Package: linux-headers-5.10.0-7-mckinley
 Architecture: ia64
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-mckinley
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-mckinley
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-mckinley, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-mckinley, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-mckinley, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-mckinley, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-mckinley package.
+ linux-image-5.10.0-7-mckinley package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-mckinley
 Architecture: ia64
-Provides: linux-latest-modules-5.10.0-6-mckinley, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-mckinley (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-mckinley, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-mckinley (= ${binary:Version}), ${misc:Depends}
 Description: Linux for Itanium 2+ (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  systems with Itanium 2 or 9300/9500/9700-series processors.
@@ -1029,34 +1029,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-mckinley
 Architecture: ia64
-Depends: linux-headers-5.10.0-6-mckinley (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-mckinley (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux mckinley configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel mckinley configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-mckinley-dbg
+Package: linux-image-5.10.0-7-mckinley-dbg
 Architecture: ia64
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-mckinley
+Description: Debug symbols for linux-image-5.10.0-7-mckinley
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-mckinley.
+ modules in linux-image-5.10.0-7-mckinley.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-mckinley-dbg
 Architecture: ia64
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-mckinley-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-mckinley-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux mckinley configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel mckinley configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-m68k
+Package: linux-image-5.10.0-7-m68k
 Architecture: m68k
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [m68k] | linux-initramfs-tool [m68k]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [m68k] | linux-initramfs-tool [m68k]
 Recommends: firmware-linux-free, apparmor [m68k]
 Suggests: linux-doc-5.10, debian-kernel-handbook, vmelilo [m68k], fdutils [m68k]
 Breaks: fwupdate (<< 12-7) [m68k], wireless-regdb (<< 2019.06.03-1~) [m68k], initramfs-tools (<< 0.120+deb8u2)
@@ -1064,22 +1064,22 @@ Description: Linux 5.10 for Motorola MC68020+ family
  The Linux kernel 5.10 and modules for use on Motorola MC68020+ family.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-m68k
+Package: linux-headers-5.10.0-7-m68k
 Architecture: m68k
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-m68k
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-m68k
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-m68k, generally used for building out-of-tree kernel
+ Linux kernel 5.10.0-7-m68k, generally used for building out-of-tree kernel
  modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-m68k, and can be used for building modules
- that load into the kernel provided by the linux-image-5.10.0-6-m68k
+ /usr/src/linux-headers-5.10.0-7-m68k, and can be used for building modules
+ that load into the kernel provided by the linux-image-5.10.0-7-m68k
  package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-m68k
 Architecture: m68k
-Provides: linux-latest-modules-5.10.0-6-m68k, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-m68k (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-m68k, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-m68k (= ${binary:Version}), ${misc:Depends}
 Description: Linux for Motorola MC68020+ family (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  Motorola MC68020+ family.
@@ -1088,34 +1088,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-m68k
 Architecture: m68k
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-m68k (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-m68k (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux m68k configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel m68k configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-m68k-dbg
+Package: linux-image-5.10.0-7-m68k-dbg
 Architecture: m68k
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-m68k
+Description: Debug symbols for linux-image-5.10.0-7-m68k
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-m68k.
+ modules in linux-image-5.10.0-7-m68k.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-m68k-dbg
 Architecture: m68k
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-m68k-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-m68k-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux m68k configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel m68k configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-4kc-malta
+Package: linux-image-5.10.0-7-4kc-malta
 Architecture: mips mipsel
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mips mipsel] | linux-initramfs-tool [mips mipsel]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mips mipsel] | linux-initramfs-tool [mips mipsel]
 Recommends: firmware-linux-free, apparmor [mips mipsel]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [mips], wireless-regdb (<< 2019.06.03-1~) [mips], initramfs-tools (<< 0.120+deb8u2)
@@ -1123,22 +1123,22 @@ Description: Linux 5.10 for MIPS Malta
  The Linux kernel 5.10 and modules for use on MIPS Malta boards.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-4kc-malta
+Package: linux-headers-5.10.0-7-4kc-malta
 Architecture: mips mipsel
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-4kc-malta
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-4kc-malta
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-4kc-malta, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-4kc-malta, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-4kc-malta, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-4kc-malta, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-4kc-malta package.
+ linux-image-5.10.0-7-4kc-malta package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-4kc-malta
 Architecture: mips mipsel
-Provides: linux-latest-modules-5.10.0-6-4kc-malta, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-4kc-malta (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-4kc-malta, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-4kc-malta (= ${binary:Version}), ${misc:Depends}
 Description: Linux for MIPS Malta (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  MIPS Malta boards.
@@ -1146,34 +1146,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-4kc-malta
 Architecture: mips mipsel
-Depends: linux-headers-5.10.0-6-4kc-malta (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-4kc-malta (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux 4kc-malta configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel 4kc-malta configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-4kc-malta-dbg
+Package: linux-image-5.10.0-7-4kc-malta-dbg
 Architecture: mips mipsel
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-4kc-malta
+Description: Debug symbols for linux-image-5.10.0-7-4kc-malta
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-4kc-malta.
+ modules in linux-image-5.10.0-7-4kc-malta.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-4kc-malta-dbg
 Architecture: mips mipsel
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-4kc-malta-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-4kc-malta-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux 4kc-malta configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel 4kc-malta configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-5kc-malta
+Package: linux-image-5.10.0-7-5kc-malta
 Architecture: mips mips64 mips64el mipsel
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mips mips64 mips64el mipsel] | linux-initramfs-tool [mips mips64 mips64el mipsel]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mips mips64 mips64el mipsel] | linux-initramfs-tool [mips mips64 mips64el mipsel]
 Recommends: firmware-linux-free, apparmor [mips mips64 mips64el mipsel]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [mips], wireless-regdb (<< 2019.06.03-1~) [mips], initramfs-tools (<< 0.120+deb8u2)
@@ -1181,22 +1181,22 @@ Description: Linux 5.10 for MIPS Malta (64-bit)
  The Linux kernel 5.10 and modules for use on MIPS Malta boards (64-bit).
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-5kc-malta
+Package: linux-headers-5.10.0-7-5kc-malta
 Architecture: mips mips64 mips64el mipsel
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-5kc-malta
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-5kc-malta
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-5kc-malta, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-5kc-malta, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-5kc-malta, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-5kc-malta, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-5kc-malta package.
+ linux-image-5.10.0-7-5kc-malta package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-5kc-malta
 Architecture: mips mips64 mips64el mipsel
-Provides: linux-latest-modules-5.10.0-6-5kc-malta, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-5kc-malta (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-5kc-malta, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-5kc-malta (= ${binary:Version}), ${misc:Depends}
 Description: Linux for MIPS Malta (64-bit) (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  MIPS Malta boards (64-bit).
@@ -1204,34 +1204,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-5kc-malta
 Architecture: mips mips64 mips64el mipsel
-Depends: linux-headers-5.10.0-6-5kc-malta (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-5kc-malta (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux 5kc-malta configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel 5kc-malta configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-5kc-malta-dbg
+Package: linux-image-5.10.0-7-5kc-malta-dbg
 Architecture: mips mips64 mips64el mipsel
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-5kc-malta
+Description: Debug symbols for linux-image-5.10.0-7-5kc-malta
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-5kc-malta.
+ modules in linux-image-5.10.0-7-5kc-malta.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-5kc-malta-dbg
 Architecture: mips mips64 mips64el mipsel
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-5kc-malta-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-5kc-malta-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux 5kc-malta configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel 5kc-malta configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-octeon
+Package: linux-image-5.10.0-7-octeon
 Architecture: mips mips64 mips64el mipsel
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mips mips64 mips64el mipsel] | linux-initramfs-tool [mips mips64 mips64el mipsel]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mips mips64 mips64el mipsel] | linux-initramfs-tool [mips mips64 mips64el mipsel]
 Recommends: firmware-linux-free, apparmor [mips mips64 mips64el mipsel]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [mips], wireless-regdb (<< 2019.06.03-1~) [mips], initramfs-tools (<< 0.120+deb8u2)
@@ -1239,22 +1239,22 @@ Description: Linux 5.10 for Octeon
  The Linux kernel 5.10 and modules for use on Cavium Networks Octeon.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-octeon
+Package: linux-headers-5.10.0-7-octeon
 Architecture: mips mips64 mips64el mipsel
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-octeon
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-octeon
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-octeon, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-octeon, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-octeon, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-octeon, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-octeon package.
+ linux-image-5.10.0-7-octeon package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-octeon
 Architecture: mips mips64 mips64el mipsel
-Provides: linux-latest-modules-5.10.0-6-octeon, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-octeon (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-octeon, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-octeon (= ${binary:Version}), ${misc:Depends}
 Description: Linux for Octeon (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  Cavium Networks Octeon.
@@ -1262,34 +1262,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-octeon
 Architecture: mips mips64 mips64el mipsel
-Depends: linux-headers-5.10.0-6-octeon (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-octeon (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux octeon configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel octeon configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-octeon-dbg
+Package: linux-image-5.10.0-7-octeon-dbg
 Architecture: mips mips64 mips64el mipsel
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-octeon
+Description: Debug symbols for linux-image-5.10.0-7-octeon
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-octeon.
+ modules in linux-image-5.10.0-7-octeon.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-octeon-dbg
 Architecture: mips mips64 mips64el mipsel
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-octeon-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-octeon-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux octeon configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel octeon configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-loongson-3
+Package: linux-image-5.10.0-7-loongson-3
 Architecture: mips64el mipsel
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mips64el mipsel] | linux-initramfs-tool [mips64el mipsel]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mips64el mipsel] | linux-initramfs-tool [mips64el mipsel]
 Recommends: firmware-linux-free, apparmor [mips64el mipsel]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [mips64el], wireless-regdb (<< 2019.06.03-1~) [mips64el], initramfs-tools (<< 0.120+deb8u2)
@@ -1298,22 +1298,22 @@ Description: Linux 5.10 for Loongson 3A/3B
  systems (e.g.  from Loongson or Lemote).
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-loongson-3
+Package: linux-headers-5.10.0-7-loongson-3
 Architecture: mips64el mipsel
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-loongson-3
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-loongson-3
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-loongson-3, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-loongson-3, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-loongson-3, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-loongson-3, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-loongson-3 package.
+ linux-image-5.10.0-7-loongson-3 package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-loongson-3
 Architecture: mips64el mipsel
-Provides: linux-latest-modules-5.10.0-6-loongson-3, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-loongson-3 (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-loongson-3, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-loongson-3 (= ${binary:Version}), ${misc:Depends}
 Description: Linux for Loongson 3A/3B (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  Loongson 3A or 3B based systems (e.g.  from Loongson or Lemote).
@@ -1321,34 +1321,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-loongson-3
 Architecture: mips64el mipsel
-Depends: linux-headers-5.10.0-6-loongson-3 (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-loongson-3 (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux loongson-3 configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel loongson-3 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-loongson-3-dbg
+Package: linux-image-5.10.0-7-loongson-3-dbg
 Architecture: mips64el mipsel
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-loongson-3
+Description: Debug symbols for linux-image-5.10.0-7-loongson-3
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-loongson-3.
+ modules in linux-image-5.10.0-7-loongson-3.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-loongson-3-dbg
 Architecture: mips64el mipsel
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-loongson-3-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-loongson-3-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux loongson-3 configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel loongson-3 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-mips64r6
+Package: linux-image-5.10.0-7-mips64r6
 Architecture: mips64r6 mipsr6
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mips64r6 mipsr6] | linux-initramfs-tool [mips64r6 mipsr6]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mips64r6 mipsr6] | linux-initramfs-tool [mips64r6 mipsr6]
 Recommends: firmware-linux-free, apparmor [mips64r6 mipsr6]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [mips64r6], wireless-regdb (<< 2019.06.03-1~) [mips64r6], initramfs-tools (<< 0.120+deb8u2)
@@ -1356,22 +1356,22 @@ Description: Linux 5.10 for MIPS R6 (64 bit, big endian)
  The Linux kernel 5.10 and modules for use on MIPS R6 (64 bit, big endian).
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-mips64r6
+Package: linux-headers-5.10.0-7-mips64r6
 Architecture: mips64r6 mipsr6
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-mips64r6
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-mips64r6
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-mips64r6, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-mips64r6, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-mips64r6, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-mips64r6, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-mips64r6 package.
+ linux-image-5.10.0-7-mips64r6 package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-mips64r6
 Architecture: mips64r6 mipsr6
-Provides: linux-latest-modules-5.10.0-6-mips64r6, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-mips64r6 (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-mips64r6, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-mips64r6 (= ${binary:Version}), ${misc:Depends}
 Description: Linux for MIPS R6 (64 bit, big endian) (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  MIPS R6 (64 bit, big endian).
@@ -1380,34 +1380,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-mips64r6
 Architecture: mips64r6 mipsr6
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-mips64r6 (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-mips64r6 (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux mips64r6 configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel mips64r6 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-mips64r6-dbg
+Package: linux-image-5.10.0-7-mips64r6-dbg
 Architecture: mips64r6 mipsr6
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-mips64r6
+Description: Debug symbols for linux-image-5.10.0-7-mips64r6
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-mips64r6.
+ modules in linux-image-5.10.0-7-mips64r6.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-mips64r6-dbg
 Architecture: mips64r6 mipsr6
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-mips64r6-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-mips64r6-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux mips64r6 configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel mips64r6 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-mips64r6el
+Package: linux-image-5.10.0-7-mips64r6el
 Architecture: mips64r6el mipsr6el
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mips64r6el mipsr6el] | linux-initramfs-tool [mips64r6el mipsr6el]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mips64r6el mipsr6el] | linux-initramfs-tool [mips64r6el mipsr6el]
 Recommends: firmware-linux-free, apparmor [mips64r6el mipsr6el]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [mips64r6el], wireless-regdb (<< 2019.06.03-1~) [mips64r6el], initramfs-tools (<< 0.120+deb8u2)
@@ -1416,22 +1416,22 @@ Description: Linux 5.10 for MIPS R6 (64 bit, little endian)
  endian).
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-mips64r6el
+Package: linux-headers-5.10.0-7-mips64r6el
 Architecture: mips64r6el mipsr6el
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-mips64r6el
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-mips64r6el
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-mips64r6el, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-mips64r6el, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-mips64r6el, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-mips64r6el, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-mips64r6el package.
+ linux-image-5.10.0-7-mips64r6el package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-mips64r6el
 Architecture: mips64r6el mipsr6el
-Provides: linux-latest-modules-5.10.0-6-mips64r6el, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-mips64r6el (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-mips64r6el, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-mips64r6el (= ${binary:Version}), ${misc:Depends}
 Description: Linux for MIPS R6 (64 bit, little endian) (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  MIPS R6 (64 bit, little endian).
@@ -1440,34 +1440,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-mips64r6el
 Architecture: mips64r6el mipsr6el
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-mips64r6el (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-mips64r6el (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux mips64r6el configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel mips64r6el configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-mips64r6el-dbg
+Package: linux-image-5.10.0-7-mips64r6el-dbg
 Architecture: mips64r6el mipsr6el
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-mips64r6el
+Description: Debug symbols for linux-image-5.10.0-7-mips64r6el
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-mips64r6el.
+ modules in linux-image-5.10.0-7-mips64r6el.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-mips64r6el-dbg
 Architecture: mips64r6el mipsr6el
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-mips64r6el-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-mips64r6el-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux mips64r6el configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel mips64r6el configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-mips32r6
+Package: linux-image-5.10.0-7-mips32r6
 Architecture: mipsr6
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mipsr6] | linux-initramfs-tool [mipsr6]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mipsr6] | linux-initramfs-tool [mipsr6]
 Recommends: firmware-linux-free, apparmor [mipsr6]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [mipsr6], wireless-regdb (<< 2019.06.03-1~) [mipsr6], initramfs-tools (<< 0.120+deb8u2)
@@ -1475,22 +1475,22 @@ Description: Linux 5.10 for MIPS R6 (32 bit, big endian)
  The Linux kernel 5.10 and modules for use on MIPS R6 (32 bit, big endian).
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-mips32r6
+Package: linux-headers-5.10.0-7-mips32r6
 Architecture: mipsr6
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-mips32r6
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-mips32r6
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-mips32r6, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-mips32r6, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-mips32r6, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-mips32r6, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-mips32r6 package.
+ linux-image-5.10.0-7-mips32r6 package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-mips32r6
 Architecture: mipsr6
-Provides: linux-latest-modules-5.10.0-6-mips32r6, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-mips32r6 (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-mips32r6, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-mips32r6 (= ${binary:Version}), ${misc:Depends}
 Description: Linux for MIPS R6 (32 bit, big endian) (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  MIPS R6 (32 bit, big endian).
@@ -1499,34 +1499,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-mips32r6
 Architecture: mipsr6
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-mips32r6 (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-mips32r6 (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux mips32r6 configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel mips32r6 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-mips32r6-dbg
+Package: linux-image-5.10.0-7-mips32r6-dbg
 Architecture: mipsr6
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-mips32r6
+Description: Debug symbols for linux-image-5.10.0-7-mips32r6
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-mips32r6.
+ modules in linux-image-5.10.0-7-mips32r6.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-mips32r6-dbg
 Architecture: mipsr6
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-mips32r6-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-mips32r6-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux mips32r6 configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel mips32r6 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-mips32r6el
+Package: linux-image-5.10.0-7-mips32r6el
 Architecture: mipsr6el
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mipsr6el] | linux-initramfs-tool [mipsr6el]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [mipsr6el] | linux-initramfs-tool [mipsr6el]
 Recommends: firmware-linux-free, apparmor [mipsr6el]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [mipsr6el], wireless-regdb (<< 2019.06.03-1~) [mipsr6el], initramfs-tools (<< 0.120+deb8u2)
@@ -1535,22 +1535,22 @@ Description: Linux 5.10 for MIPS R6 (32 bit, little endian)
  endian).
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-mips32r6el
+Package: linux-headers-5.10.0-7-mips32r6el
 Architecture: mipsr6el
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-mips32r6el
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-mips32r6el
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-mips32r6el, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-mips32r6el, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-mips32r6el, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-mips32r6el, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-mips32r6el package.
+ linux-image-5.10.0-7-mips32r6el package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-mips32r6el
 Architecture: mipsr6el
-Provides: linux-latest-modules-5.10.0-6-mips32r6el, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-mips32r6el (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-mips32r6el, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-mips32r6el (= ${binary:Version}), ${misc:Depends}
 Description: Linux for MIPS R6 (32 bit, little endian) (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  MIPS R6 (32 bit, little endian).
@@ -1559,34 +1559,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-mips32r6el
 Architecture: mipsr6el
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-mips32r6el (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-mips32r6el (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux mips32r6el configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel mips32r6el configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-mips32r6el-dbg
+Package: linux-image-5.10.0-7-mips32r6el-dbg
 Architecture: mipsr6el
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-mips32r6el
+Description: Debug symbols for linux-image-5.10.0-7-mips32r6el
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-mips32r6el.
+ modules in linux-image-5.10.0-7-mips32r6el.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-mips32r6el-dbg
 Architecture: mipsr6el
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-mips32r6el-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-mips32r6el-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux mips32r6el configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel mips32r6el configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-powerpc
+Package: linux-image-5.10.0-7-powerpc
 Architecture: powerpc
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [powerpc] | linux-initramfs-tool [powerpc]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [powerpc] | linux-initramfs-tool [powerpc]
 Recommends: firmware-linux-free, apparmor [powerpc]
 Suggests: linux-doc-5.10, debian-kernel-handbook, mkvmlinuz [powerpc], grub-ieee1275 [powerpc]
 Breaks: fwupdate (<< 12-7) [powerpc], wireless-regdb (<< 2019.06.03-1~) [powerpc], initramfs-tools (<< 0.120+deb8u2)
@@ -1594,22 +1594,22 @@ Description: Linux 5.10 for uniprocessor 32-bit PowerPC
  The Linux kernel 5.10 and modules for use on uniprocessor 32-bit PowerPC.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-powerpc
+Package: linux-headers-5.10.0-7-powerpc
 Architecture: powerpc
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-powerpc
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-powerpc
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-powerpc, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-powerpc, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-powerpc, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-powerpc, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-powerpc package.
+ linux-image-5.10.0-7-powerpc package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-powerpc
 Architecture: powerpc
-Provides: linux-latest-modules-5.10.0-6-powerpc, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-powerpc (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-powerpc, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-powerpc (= ${binary:Version}), ${misc:Depends}
 Description: Linux for uniprocessor 32-bit PowerPC (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  uniprocessor 32-bit PowerPC.
@@ -1617,34 +1617,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-powerpc
 Architecture: powerpc
-Depends: linux-headers-5.10.0-6-powerpc (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-powerpc (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux powerpc configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel powerpc configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-powerpc-dbg
+Package: linux-image-5.10.0-7-powerpc-dbg
 Architecture: powerpc
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-powerpc
+Description: Debug symbols for linux-image-5.10.0-7-powerpc
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-powerpc.
+ modules in linux-image-5.10.0-7-powerpc.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-powerpc-dbg
 Architecture: powerpc
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-powerpc-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-powerpc-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux powerpc configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel powerpc configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-powerpc-smp
+Package: linux-image-5.10.0-7-powerpc-smp
 Architecture: powerpc
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [powerpc] | linux-initramfs-tool [powerpc]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [powerpc] | linux-initramfs-tool [powerpc]
 Recommends: firmware-linux-free, apparmor [powerpc]
 Suggests: linux-doc-5.10, debian-kernel-handbook, mkvmlinuz [powerpc], grub-ieee1275 [powerpc]
 Breaks: fwupdate (<< 12-7) [powerpc], wireless-regdb (<< 2019.06.03-1~) [powerpc], initramfs-tools (<< 0.120+deb8u2)
@@ -1653,22 +1653,22 @@ Description: Linux 5.10 for multiprocessor 32-bit PowerPC
  PowerPC.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-powerpc-smp
+Package: linux-headers-5.10.0-7-powerpc-smp
 Architecture: powerpc
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-powerpc-smp
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-powerpc-smp
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-powerpc-smp, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-powerpc-smp, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-powerpc-smp, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-powerpc-smp, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-powerpc-smp package.
+ linux-image-5.10.0-7-powerpc-smp package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-powerpc-smp
 Architecture: powerpc
-Provides: linux-latest-modules-5.10.0-6-powerpc-smp, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-powerpc-smp (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-powerpc-smp, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-powerpc-smp (= ${binary:Version}), ${misc:Depends}
 Description: Linux for multiprocessor 32-bit PowerPC (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  multiprocessor 32-bit PowerPC.
@@ -1676,34 +1676,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-powerpc-smp
 Architecture: powerpc
-Depends: linux-headers-5.10.0-6-powerpc-smp (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-powerpc-smp (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux powerpc-smp configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel powerpc-smp configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-powerpc-smp-dbg
+Package: linux-image-5.10.0-7-powerpc-smp-dbg
 Architecture: powerpc
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-powerpc-smp
+Description: Debug symbols for linux-image-5.10.0-7-powerpc-smp
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-powerpc-smp.
+ modules in linux-image-5.10.0-7-powerpc-smp.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-powerpc-smp-dbg
 Architecture: powerpc
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-powerpc-smp-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-powerpc-smp-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux powerpc-smp configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel powerpc-smp configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-powerpc64
+Package: linux-image-5.10.0-7-powerpc64
 Architecture: powerpc ppc64
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [powerpc ppc64] | linux-initramfs-tool [powerpc ppc64]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [powerpc ppc64] | linux-initramfs-tool [powerpc ppc64]
 Recommends: firmware-linux-free, apparmor [powerpc ppc64]
 Suggests: linux-doc-5.10, debian-kernel-handbook, mkvmlinuz [powerpc ppc64], grub-ieee1275 [powerpc ppc64]
 Breaks: fwupdate (<< 12-7) [powerpc], wireless-regdb (<< 2019.06.03-1~) [powerpc], initramfs-tools (<< 0.120+deb8u2)
@@ -1711,22 +1711,22 @@ Description: Linux 5.10 for 64-bit PowerPC
  The Linux kernel 5.10 and modules for use on 64-bit PowerPC.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-powerpc64
+Package: linux-headers-5.10.0-7-powerpc64
 Architecture: powerpc ppc64
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-powerpc64
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-powerpc64
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-powerpc64, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-powerpc64, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-powerpc64, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-powerpc64, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-powerpc64 package.
+ linux-image-5.10.0-7-powerpc64 package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-powerpc64
 Architecture: powerpc ppc64
-Provides: linux-latest-modules-5.10.0-6-powerpc64, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-powerpc64 (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-powerpc64, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-powerpc64 (= ${binary:Version}), ${misc:Depends}
 Description: Linux for 64-bit PowerPC (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  64-bit PowerPC.
@@ -1735,34 +1735,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-powerpc64
 Architecture: powerpc ppc64
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-powerpc64 (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-powerpc64 (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux powerpc64 configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel powerpc64 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-powerpc64-dbg
+Package: linux-image-5.10.0-7-powerpc64-dbg
 Architecture: powerpc ppc64
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-powerpc64
+Description: Debug symbols for linux-image-5.10.0-7-powerpc64
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-powerpc64.
+ modules in linux-image-5.10.0-7-powerpc64.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-powerpc64-dbg
 Architecture: powerpc ppc64
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-powerpc64-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-powerpc64-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux powerpc64 configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel powerpc64 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-powerpc64le
+Package: linux-image-5.10.0-7-powerpc64le
 Architecture: ppc64el
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [ppc64el] | linux-initramfs-tool [ppc64el]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [ppc64el] | linux-initramfs-tool [ppc64el]
 Recommends: firmware-linux-free, apparmor [ppc64el]
 Suggests: linux-doc-5.10, debian-kernel-handbook, mkvmlinuz [ppc64el], grub-ieee1275 [ppc64el]
 Breaks: fwupdate (<< 12-7) [ppc64el], wireless-regdb (<< 2019.06.03-1~) [ppc64el], initramfs-tools (<< 0.120+deb8u2)
@@ -1770,22 +1770,22 @@ Description: Linux 5.10 for Little-endian 64-bit PowerPC
  The Linux kernel 5.10 and modules for use on Little-endian 64-bit PowerPC.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-powerpc64le
+Package: linux-headers-5.10.0-7-powerpc64le
 Architecture: ppc64el
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-powerpc64le
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-powerpc64le
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-powerpc64le, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-powerpc64le, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-powerpc64le, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-powerpc64le, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-powerpc64le package.
+ linux-image-5.10.0-7-powerpc64le package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-powerpc64le
 Architecture: ppc64el
-Provides: linux-latest-modules-5.10.0-6-powerpc64le, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-powerpc64le (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-powerpc64le, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-powerpc64le (= ${binary:Version}), ${misc:Depends}
 Description: Linux for Little-endian 64-bit PowerPC (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  Little-endian 64-bit PowerPC.
@@ -1794,34 +1794,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-powerpc64le
 Architecture: ppc64el
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-powerpc64le (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-powerpc64le (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux powerpc64le configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel powerpc64le configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-powerpc64le-dbg
+Package: linux-image-5.10.0-7-powerpc64le-dbg
 Architecture: ppc64el
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-powerpc64le
+Description: Debug symbols for linux-image-5.10.0-7-powerpc64le
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-powerpc64le.
+ modules in linux-image-5.10.0-7-powerpc64le.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-powerpc64le-dbg
 Architecture: ppc64el
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-powerpc64le-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-powerpc64le-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux powerpc64le configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel powerpc64le configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-riscv64
+Package: linux-image-5.10.0-7-riscv64
 Architecture: riscv64
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [riscv64] | linux-initramfs-tool [riscv64]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [riscv64] | linux-initramfs-tool [riscv64]
 Recommends: firmware-linux-free, apparmor [riscv64]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [riscv64], wireless-regdb (<< 2019.06.03-1~) [riscv64], initramfs-tools (<< 0.120+deb8u2)
@@ -1829,22 +1829,22 @@ Description: Linux 5.10 for 64-bit RISC-V platforms
  The Linux kernel 5.10 and modules for use on 64-bit RISC-V platforms.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-riscv64
+Package: linux-headers-5.10.0-7-riscv64
 Architecture: riscv64
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-riscv64
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-riscv64
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-riscv64, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-riscv64, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-riscv64, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-riscv64, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-riscv64 package.
+ linux-image-5.10.0-7-riscv64 package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-riscv64
 Architecture: riscv64
-Provides: linux-latest-modules-5.10.0-6-riscv64, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-riscv64 (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-riscv64, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-riscv64 (= ${binary:Version}), ${misc:Depends}
 Description: Linux for 64-bit RISC-V platforms (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  64-bit RISC-V platforms.
@@ -1853,34 +1853,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-riscv64
 Architecture: riscv64
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-riscv64 (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-riscv64 (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux riscv64 configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel riscv64 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-riscv64-dbg
+Package: linux-image-5.10.0-7-riscv64-dbg
 Architecture: riscv64
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-riscv64
+Description: Debug symbols for linux-image-5.10.0-7-riscv64
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-riscv64.
+ modules in linux-image-5.10.0-7-riscv64.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-riscv64-dbg
 Architecture: riscv64
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-riscv64-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-riscv64-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux riscv64 configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel riscv64 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-s390x
+Package: linux-image-5.10.0-7-s390x
 Architecture: s390x
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [s390x] | linux-initramfs-tool [s390x]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [s390x] | linux-initramfs-tool [s390x]
 Recommends: firmware-linux-free, apparmor [s390x]
 Suggests: linux-doc-5.10, debian-kernel-handbook, s390-tools [s390x]
 Breaks: fwupdate (<< 12-7) [s390x], wireless-regdb (<< 2019.06.03-1~) [s390x], initramfs-tools (<< 0.120+deb8u2)
@@ -1888,22 +1888,22 @@ Description: Linux 5.10 for IBM zSeries
  The Linux kernel 5.10 and modules for use on IBM zSeries.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-s390x
+Package: linux-headers-5.10.0-7-s390x
 Architecture: s390x
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-s390
-Description: Header files for Linux 5.10.0-6-s390x
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, linux-compiler-gcc-10-s390
+Description: Header files for Linux 5.10.0-7-s390x
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-s390x, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-s390x, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-s390x, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-s390x, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-s390x package.
+ linux-image-5.10.0-7-s390x package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-s390x
 Architecture: s390x
-Provides: linux-latest-modules-5.10.0-6-s390x, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-s390x (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-s390x, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-s390x (= ${binary:Version}), ${misc:Depends}
 Description: Linux for IBM zSeries (meta-package)
  This package depends on the latest Linux kernel and modules for use on IBM
  zSeries.
@@ -1912,34 +1912,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-s390x
 Architecture: s390x
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-s390x (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-s390x (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux s390x configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel s390x configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-s390x-dbg
+Package: linux-image-5.10.0-7-s390x-dbg
 Architecture: s390x
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-s390x
+Description: Debug symbols for linux-image-5.10.0-7-s390x
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-s390x.
+ modules in linux-image-5.10.0-7-s390x.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-s390x-dbg
 Architecture: s390x
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-s390x-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-s390x-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux s390x configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel s390x configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-sh7751r
+Package: linux-image-5.10.0-7-sh7751r
 Architecture: sh4
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [sh4] | linux-initramfs-tool [sh4]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [sh4] | linux-initramfs-tool [sh4]
 Recommends: firmware-linux-free, apparmor [sh4]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [sh4], wireless-regdb (<< 2019.06.03-1~) [sh4], initramfs-tools (<< 0.120+deb8u2)
@@ -1948,22 +1948,22 @@ Description: Linux 5.10 for sh7751r
  board.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-sh7751r
+Package: linux-headers-5.10.0-7-sh7751r
 Architecture: sh4
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-sh7751r
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-sh7751r
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-sh7751r, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-sh7751r, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-sh7751r, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-sh7751r, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-sh7751r package.
+ linux-image-5.10.0-7-sh7751r package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-sh7751r
 Architecture: sh4
-Provides: linux-latest-modules-5.10.0-6-sh7751r, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-sh7751r (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-sh7751r, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-sh7751r (= ${binary:Version}), ${misc:Depends}
 Description: Linux for sh7751r (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  Renesas SH7751R R2D plus board.
@@ -1971,34 +1971,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-sh7751r
 Architecture: sh4
-Depends: linux-headers-5.10.0-6-sh7751r (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-sh7751r (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux sh7751r configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel sh7751r configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-sh7751r-dbg
+Package: linux-image-5.10.0-7-sh7751r-dbg
 Architecture: sh4
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-sh7751r
+Description: Debug symbols for linux-image-5.10.0-7-sh7751r
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-sh7751r.
+ modules in linux-image-5.10.0-7-sh7751r.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-sh7751r-dbg
 Architecture: sh4
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-sh7751r-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-sh7751r-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux sh7751r configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel sh7751r configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-sh7785lcr
+Package: linux-image-5.10.0-7-sh7785lcr
 Architecture: sh4
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [sh4] | linux-initramfs-tool [sh4]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [sh4] | linux-initramfs-tool [sh4]
 Recommends: firmware-linux-free, u-boot-tools [sh4], apparmor [sh4]
 Suggests: linux-doc-5.10, debian-kernel-handbook
 Breaks: fwupdate (<< 12-7) [sh4], wireless-regdb (<< 2019.06.03-1~) [sh4], initramfs-tools (<< 0.120+deb8u2)
@@ -2007,22 +2007,22 @@ Description: Linux 5.10 for sh7785lcr
  board.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-sh7785lcr
+Package: linux-headers-5.10.0-7-sh7785lcr
 Architecture: sh4
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-sh7785lcr
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-sh7785lcr
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-sh7785lcr, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-sh7785lcr, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-sh7785lcr, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-sh7785lcr, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-sh7785lcr package.
+ linux-image-5.10.0-7-sh7785lcr package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-sh7785lcr
 Architecture: sh4
-Provides: linux-latest-modules-5.10.0-6-sh7785lcr, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-sh7785lcr (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-sh7785lcr, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-sh7785lcr (= ${binary:Version}), ${misc:Depends}
 Description: Linux for sh7785lcr (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  Renesas SH7785 reference board.
@@ -2030,34 +2030,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-sh7785lcr
 Architecture: sh4
-Depends: linux-headers-5.10.0-6-sh7785lcr (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-sh7785lcr (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux sh7785lcr configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel sh7785lcr configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-sh7785lcr-dbg
+Package: linux-image-5.10.0-7-sh7785lcr-dbg
 Architecture: sh4
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-sh7785lcr
+Description: Debug symbols for linux-image-5.10.0-7-sh7785lcr
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-sh7785lcr.
+ modules in linux-image-5.10.0-7-sh7785lcr.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-sh7785lcr-dbg
 Architecture: sh4
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-sh7785lcr-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-sh7785lcr-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux sh7785lcr configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel sh7785lcr configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-sparc64
+Package: linux-image-5.10.0-7-sparc64
 Architecture: sparc64
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [sparc64] | linux-initramfs-tool [sparc64]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [sparc64] | linux-initramfs-tool [sparc64]
 Recommends: firmware-linux-free, apparmor [sparc64]
 Suggests: linux-doc-5.10, debian-kernel-handbook, fdutils [sparc64], grub-ieee1275 [sparc64]
 Breaks: fwupdate (<< 12-7) [sparc64], wireless-regdb (<< 2019.06.03-1~) [sparc64], initramfs-tools (<< 0.120+deb8u2)
@@ -2066,22 +2066,22 @@ Description: Linux 5.10 for uniprocessor 64-bit UltraSPARC
  UltraSPARC.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-sparc64
+Package: linux-headers-5.10.0-7-sparc64
 Architecture: sparc64
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-sparc64
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-sparc64
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-sparc64, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-sparc64, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-sparc64, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-sparc64, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-sparc64 package.
+ linux-image-5.10.0-7-sparc64 package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-sparc64
 Architecture: sparc64
-Provides: linux-latest-modules-5.10.0-6-sparc64, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
-Depends: linux-image-5.10.0-6-sparc64 (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-sparc64, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386]
+Depends: linux-image-5.10.0-7-sparc64 (= ${binary:Version}), ${misc:Depends}
 Description: Linux for uniprocessor 64-bit UltraSPARC (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  uniprocessor 64-bit UltraSPARC.
@@ -2089,34 +2089,34 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
 Package: linux-headers-sparc64
 Architecture: sparc64
-Depends: linux-headers-5.10.0-6-sparc64 (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-sparc64 (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux sparc64 configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel sparc64 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-sparc64-dbg
+Package: linux-image-5.10.0-7-sparc64-dbg
 Architecture: sparc64
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-sparc64
+Description: Debug symbols for linux-image-5.10.0-7-sparc64
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-sparc64.
+ modules in linux-image-5.10.0-7-sparc64.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-sparc64-dbg
 Architecture: sparc64
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-sparc64-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-sparc64-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux sparc64 configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel sparc64 configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-sparc64-smp
+Package: linux-image-5.10.0-7-sparc64-smp
 Architecture: sparc64
-Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-6 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [sparc64] | linux-initramfs-tool [sparc64]
+Depends: kmod, linux-base (>= 4.3~), linux-bootwrapper-5.10.0-7 [powerpc ppc64], ${misc:Depends}, initramfs-tools (>= 0.120+deb8u2) [sparc64] | linux-initramfs-tool [sparc64]
 Recommends: firmware-linux-free, apparmor [sparc64]
 Suggests: linux-doc-5.10, debian-kernel-handbook, fdutils [sparc64], grub-ieee1275 [sparc64]
 Breaks: fwupdate (<< 12-7) [sparc64], wireless-regdb (<< 2019.06.03-1~) [sparc64], initramfs-tools (<< 0.120+deb8u2)
@@ -2125,22 +2125,22 @@ Description: Linux 5.10 for multiprocessor 64-bit UltraSPARC
  UltraSPARC.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
-Package: linux-headers-5.10.0-6-sparc64-smp
+Package: linux-headers-5.10.0-7-sparc64-smp
 Architecture: sparc64
-Depends: linux-headers-5.10.0-6-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
-Description: Header files for Linux 5.10.0-6-sparc64-smp
+Depends: linux-headers-5.10.0-7-common (= ${source:Version}), linux-kbuild-5.10 (>= ${source:Version}), ${misc:Depends}, gcc-10
+Description: Header files for Linux 5.10.0-7-sparc64-smp
  This package provides the architecture-specific kernel header files for
- Linux kernel 5.10.0-6-sparc64-smp, generally used for building out-of-tree
+ Linux kernel 5.10.0-7-sparc64-smp, generally used for building out-of-tree
  kernel modules.  These files are going to be installed into
- /usr/src/linux-headers-5.10.0-6-sparc64-smp, and can be used for building
+ /usr/src/linux-headers-5.10.0-7-sparc64-smp, and can be used for building
  modules that load into the kernel provided by the
- linux-image-5.10.0-6-sparc64-smp package.
+ linux-image-5.10.0-7-sparc64-smp package.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-sparc64-smp
 Architecture: sparc64
-Provides: linux-latest-modules-5.10.0-6-sparc64-smp, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
-Depends: linux-image-5.10.0-6-sparc64-smp (= ${binary:Version}), ${misc:Depends}
+Provides: linux-latest-modules-5.10.0-7-sparc64-smp, wireguard-modules (= 1.0.0), virtualbox-guest-modules [amd64 i386], linux-image-generic
+Depends: linux-image-5.10.0-7-sparc64-smp (= ${binary:Version}), ${misc:Depends}
 Description: Linux for multiprocessor 64-bit UltraSPARC (meta-package)
  This package depends on the latest Linux kernel and modules for use on
  multiprocessor 64-bit UltraSPARC.
@@ -2149,26 +2149,26 @@ Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 Package: linux-headers-sparc64-smp
 Architecture: sparc64
 Provides: linux-headers-generic
-Depends: linux-headers-5.10.0-6-sparc64-smp (= ${binary:Version}), ${misc:Depends}
+Depends: linux-headers-5.10.0-7-sparc64-smp (= ${binary:Version}), ${misc:Depends}
 Description: Header files for Linux sparc64-smp configuration (meta-package)
  This package depends on the architecture-specific header files for the
  latest Linux kernel sparc64-smp configuration.
 Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
 
-Package: linux-image-5.10.0-6-sparc64-smp-dbg
+Package: linux-image-5.10.0-7-sparc64-smp-dbg
 Architecture: sparc64
 Section: debug
 Priority: optional
 Depends: ${misc:Depends}
-Description: Debug symbols for linux-image-5.10.0-6-sparc64-smp
+Description: Debug symbols for linux-image-5.10.0-7-sparc64-smp
  This package provides the detached debug symbols for the Linux kernel and
- modules in linux-image-5.10.0-6-sparc64-smp.
+ modules in linux-image-5.10.0-7-sparc64-smp.
 Build-Profiles: <!stage1 !pkg.linux.nokernel>
 
 Package: linux-image-sparc64-smp-dbg
 Architecture: sparc64
 Provides: linux-latest-image-dbg
-Depends: linux-image-5.10.0-6-sparc64-smp-dbg (= ${binary:Version}), ${misc:Depends}
+Depends: linux-image-5.10.0-7-sparc64-smp-dbg (= ${binary:Version}), ${misc:Depends}
 Description: Debugging symbols for Linux sparc64-smp configuration (meta-package)
  This package depends on the detached debugging symbols for the latest
  Linux kernel sparc64-smp configuration.

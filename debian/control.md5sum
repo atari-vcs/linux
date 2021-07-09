@@ -1,5 +1,9 @@
 a46eb172db472ccbe5364b1de7eeb2a0  debian/bin/gencontrol.py
+<<<<<<< HEAD
 2c293b5c1a1f573c1783a9f7aecd0b7b  debian/build/version-info
+=======
+60d71289171bd604d984b47e1bad4d5f  debian/build/version-info
+>>>>>>> debian/bullseye
 fe4456d48e3218fb8980c8577d03a7ae  debian/templates/control.config.in
 9509e39d8e60906ebd5ee4a8b0355d25  debian/templates/control.docs.in
 358db3af53a223fe60ae89c7a481609f  debian/templates/control.docs.meta.in
@@ -38,7 +42,11 @@ afb508873a44a1f196c2a525fec4b415  debian/templates/image.prerm.in
 381bc892fd36ef7ea5327f649b99cb98  debian/templates/sourcebin.meta.maintscript.in
 814dda166c7e3ef02e6e259e805ac66a  debian/templates/tests-control.image.in
 33d71bfd398d2f9b3bc5c0193b67d17e  debian/templates/tests-control.main.in
+<<<<<<< HEAD
 08d276db003efc01941ca8b21cb93e21  debian/config/defines
+=======
+5990bab4a49fac16bcb0bbd7007866d6  debian/config/defines
+>>>>>>> debian/bullseye
 59a811890d2e7129bec940075850f11f  debian/config/alpha/defines
 4293038c3943fe515183950b045d71fa  debian/config/amd64/defines
 debf457046142cfd1ef3199f82fa5836  debian/config/arm64/defines
