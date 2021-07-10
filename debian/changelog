@@ -1,3 +1,10 @@
+linux (5.10.40-1+apertis1vcs1) atari; urgency=medium
+
+  * Refresh Atari patches on top of 5.10.40
+  * Remove superseded downstream XCHI suspend patches
+
+ -- Christopher Obbard <chris.obbard@collabora.com>  Sat, 10 Jul 2021 09:44:36 +0100
+
 linux (5.10.40-1+apertis1~2021) apertis; urgency=medium
 
   * Remaining Apertis specific changes:
