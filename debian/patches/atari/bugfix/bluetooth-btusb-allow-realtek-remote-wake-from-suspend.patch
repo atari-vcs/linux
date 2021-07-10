@@ -18,10 +18,10 @@ Signed-off-by: Christopher Obbard <chris.obbard@collabora.com>
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/drivers/bluetooth/btusb.c b/drivers/bluetooth/btusb.c
-index 1c94286..ca2ff6d 100644
+index 175cb1c..6ebd437 100644
 --- a/drivers/bluetooth/btusb.c
 +++ b/drivers/bluetooth/btusb.c
-@@ -4151,7 +4151,8 @@ static int btusb_probe(struct usb_interface *intf,
+@@ -4153,7 +4153,8 @@ static int btusb_probe(struct usb_interface *intf,
  		 * suspend that means host doesn't send SET_FEATURE
  		 * (DEVICE_REMOTE_WAKEUP)
  		 */
