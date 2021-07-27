@@ -10,10 +10,10 @@ Signed-off-by: Sjoerd Simons <sjoerd.simons@collabora.co.uk>
  arch/arm/boot/dts/imx6qdl-sabrelite.dtsi | 8 ++++++++
  1 file changed, 8 insertions(+)
 
-diff --git a/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi b/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi
-index f9f5dbc..24923c7 100644
---- a/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi
-+++ b/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi
+Index: linux/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi
+===================================================================
+--- linux.orig/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi	2020-10-09 02:03:53.007370666 +0300
++++ linux/arch/arm/boot/dts/imx6qdl-sabrelite.dtsi	2020-10-09 02:03:53.005370697 +0300
 @@ -417,6 +417,14 @@
  	pinctrl-names = "default";
  	pinctrl-0 = <&pinctrl_i2c3>;

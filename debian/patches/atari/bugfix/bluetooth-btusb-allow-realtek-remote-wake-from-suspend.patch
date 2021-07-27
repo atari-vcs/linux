@@ -1,0 +1,33 @@
+From: Christopher Obbard <chris.obbard@collabora.com>
+Date: Fri, 26 Mar 2021 13:02:13 +0000
+Subject: Bluetooth: btusb: Allow Realtek controllers to remote wake from
+ suspend
+
+Currently all Realtek controllers have remote waking up from suspend
+disabled due to power concerns and individual device support. Consensus
+has been reached upstream to quirk individual devices, but no one has
+patched this correctly yet. This means we cannot wake the system from
+suspend using bluetooth devices. So until upstream has a proper
+solution, allow all Realtek controllers to remote wake from suspend.
+
+Link: https://www.spinics.net/lists/linux-bluetooth/msg89700.html
+
+Signed-off-by: Christopher Obbard <chris.obbard@collabora.com>
+---
+ drivers/bluetooth/btusb.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/bluetooth/btusb.c b/drivers/bluetooth/btusb.c
+index 175cb1c..6ebd437 100644
+--- a/drivers/bluetooth/btusb.c
++++ b/drivers/bluetooth/btusb.c
+@@ -4153,7 +4153,8 @@ static int btusb_probe(struct usb_interface *intf,
+ 		 * suspend that means host doesn't send SET_FEATURE
+ 		 * (DEVICE_REMOTE_WAKEUP)
+ 		 */
+-		set_bit(BTUSB_WAKEUP_DISABLE, &data->flags);
++		// ATARI: Do not disable bluetooth wakeup
++		//set_bit(BTUSB_WAKEUP_DISABLE, &data->flags);
+ 	}
+ 
+ 	if (!reset)

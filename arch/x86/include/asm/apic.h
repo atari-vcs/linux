@@ -140,6 +140,7 @@ extern void apic_soft_disable(void);
 extern void lapic_shutdown(void);
 extern void sync_Arb_IDs(void);
 extern void init_bsp_APIC(void);
+extern void apic_intr_mode_select(void);
 extern void apic_intr_mode_init(void);
 extern void init_apic_mappings(void);
 void register_lapic_address(unsigned long address);
@@ -188,6 +189,7 @@ static inline void disable_local_APIC(void) { }
 # define setup_secondary_APIC_clock x86_init_noop
 static inline void lapic_update_tsc_freq(void) { }
 static inline void init_bsp_APIC(void) { }
+static inline void apic_intr_mode_select(void) { }
 static inline void apic_intr_mode_init(void) { }
 static inline void lapic_assign_system_vectors(void) { }
 static inline void lapic_assign_legacy_vector(unsigned int i, bool r) { }
@@ -195,16 +197,6 @@ static inline bool apic_needs_pit(void) { return true; }
 #endif /* !CONFIG_X86_LOCAL_APIC */
 
 #ifdef CONFIG_X86_X2APIC
-/*
- * Make previous memory operations globally visible before
- * sending the IPI through x2apic wrmsr. We need a serializing instruction or
- * mfence for this.
- */
-static inline void x2apic_wrmsr_fence(void)
-{
-	asm volatile("mfence" : : : "memory");
-}
-
 static inline void native_apic_msr_write(u32 reg, u32 v)
 {
 	if (reg == APIC_DFR || reg == APIC_ID || reg == APIC_LDR ||
@@ -257,6 +249,7 @@ static inline u64 native_x2apic_icr_read(void)
 
 extern int x2apic_mode;
 extern int x2apic_phys;
+extern void __init x2apic_set_max_apicid(u32 apicid);
 extern void __init check_x2apic(void);
 extern void x2apic_setup(void);
 static inline int x2apic_enabled(void)
@@ -372,12 +365,12 @@ extern struct apic *apic;
 #define apic_driver(sym)					\
 	static const struct apic *__apicdrivers_##sym __used		\
 	__aligned(sizeof(struct apic *))			\
-	__section(.apicdrivers) = { &sym }
+	__section(".apicdrivers") = { &sym }
 
 #define apic_drivers(sym1, sym2)					\
 	static struct apic *__apicdrivers_##sym1##sym2[2] __used	\
 	__aligned(sizeof(struct apic *))				\
-	__section(.apicdrivers) = { &sym1, &sym2 }
+	__section(".apicdrivers") = { &sym1, &sym2 }
 
 extern struct apic *__apicdrivers[], *__apicdrivers_end[];
 
@@ -452,6 +445,14 @@ static inline void ack_APIC_irq(void)
 	apic_eoi();
 }
 
+
+static inline bool lapic_vector_set_in_irr(unsigned int vector)
+{
+	u32 irr = apic_read(APIC_IRR + (vector / 32 * 0x10));
+
+	return !!(irr & (1U << (vector % 32)));
+}
+
 static inline unsigned default_get_apic_id(unsigned long x)
 {
 	unsigned int ver = GET_APIC_VERSION(apic_read(APIC_LVR));
@@ -509,38 +510,13 @@ static inline bool apic_id_is_primary_thread(unsigned int id) { return false; }
 static inline void apic_smt_update(void) { }
 #endif
 
-extern void irq_enter(void);
-extern void irq_exit(void);
+struct msi_msg;
 
-static inline void entering_irq(void)
-{
-	irq_enter();
-	kvm_set_cpu_l1tf_flush_l1d();
-}
-
-static inline void entering_ack_irq(void)
-{
-	entering_irq();
-	ack_APIC_irq();
-}
-
-static inline void ipi_entering_ack_irq(void)
-{
-	irq_enter();
-	ack_APIC_irq();
-	kvm_set_cpu_l1tf_flush_l1d();
-}
-
-static inline void exiting_irq(void)
-{
-	irq_exit();
-}
-
-static inline void exiting_ack_irq(void)
-{
-	ack_APIC_irq();
-	irq_exit();
-}
+#ifdef CONFIG_PCI_MSI
+void x86_vector_msi_compose_msg(struct irq_data *data, struct msi_msg *msg);
+#else
+# define x86_vector_msi_compose_msg NULL
+#endif
 
 extern void ioapic_zap_locks(void);
 

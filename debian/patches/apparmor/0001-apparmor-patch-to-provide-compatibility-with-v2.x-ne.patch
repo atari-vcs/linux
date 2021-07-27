@@ -1,4 +1,3 @@
-From 02e2bc1b330f7e15dba671547a256a6f900f6e5d Mon Sep 17 00:00:00 2001
 From: John Johansen <john.johansen@canonical.com>
 Date: Sun, 17 Jun 2018 03:56:25 -0700
 Subject: [PATCH 1/3] apparmor: patch to provide compatibility with v2.x net
@@ -22,11 +21,11 @@ Signed-off-by: John Johansen <john.johansen@canonical.com>
  security/apparmor/policy_unpack.c    | 54 ++++++++++++++++++++++++++++++++++--
  7 files changed, 92 insertions(+), 10 deletions(-)
 
-diff --git a/security/apparmor/apparmorfs.c b/security/apparmor/apparmorfs.c
-index 1fdcc7d5a977..32f0e660ffd0 100644
---- a/security/apparmor/apparmorfs.c
-+++ b/security/apparmor/apparmorfs.c
-@@ -2275,6 +2275,7 @@ static struct aa_sfs_entry aa_sfs_entry_features[] = {
+Index: linux/security/apparmor/apparmorfs.c
+===================================================================
+--- linux.orig/security/apparmor/apparmorfs.c	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/apparmorfs.c	2020-10-20 02:33:33.944599199 +0300
+@@ -2364,6 +2364,7 @@
  	AA_SFS_DIR("domain",			aa_sfs_entry_domain),
  	AA_SFS_DIR("file",			aa_sfs_entry_file),
  	AA_SFS_DIR("network_v8",		aa_sfs_entry_network),
@@ -34,10 +33,10 @@ index 1fdcc7d5a977..32f0e660ffd0 100644
  	AA_SFS_DIR("mount",			aa_sfs_entry_mount),
  	AA_SFS_DIR("namespaces",		aa_sfs_entry_ns),
  	AA_SFS_FILE_U64("capability",		VFS_CAP_FLAGS_MASK),
-diff --git a/security/apparmor/include/apparmor.h b/security/apparmor/include/apparmor.h
-index 73d63b58d875..17d89f3badc6 100644
---- a/security/apparmor/include/apparmor.h
-+++ b/security/apparmor/include/apparmor.h
+Index: linux/security/apparmor/include/apparmor.h
+===================================================================
+--- linux.orig/security/apparmor/include/apparmor.h	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/include/apparmor.h	2020-10-20 02:33:33.945599189 +0300
 @@ -20,7 +20,7 @@
  #define AA_CLASS_UNKNOWN	1
  #define AA_CLASS_FILE		2
@@ -47,11 +46,11 @@ index 73d63b58d875..17d89f3badc6 100644
  #define AA_CLASS_RLIMITS	5
  #define AA_CLASS_DOMAIN		6
  #define AA_CLASS_MOUNT		7
-diff --git a/security/apparmor/include/net.h b/security/apparmor/include/net.h
-index ec7228e857a9..579b59a40ea4 100644
---- a/security/apparmor/include/net.h
-+++ b/security/apparmor/include/net.h
-@@ -68,6 +68,16 @@ struct aa_sk_ctx {
+Index: linux/security/apparmor/include/net.h
+===================================================================
+--- linux.orig/security/apparmor/include/net.h	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/include/net.h	2020-10-20 02:33:33.945599189 +0300
+@@ -68,6 +68,16 @@
  	DEFINE_AUDIT_NET(NAME, OP, SK, (SK)->sk_family, (SK)->sk_type,	\
  			 (SK)->sk_protocol)
  
@@ -68,7 +67,7 @@ index ec7228e857a9..579b59a40ea4 100644
  
  #define af_select(FAMILY, FN, DEF_FN)		\
  ({						\
-@@ -87,6 +97,7 @@ struct aa_sk_ctx {
+@@ -87,6 +97,7 @@
  };
  
  extern struct aa_sfs_entry aa_sfs_entry_network[];
@@ -76,11 +75,11 @@ index ec7228e857a9..579b59a40ea4 100644
  
  void audit_net_cb(struct audit_buffer *ab, void *va);
  int aa_profile_af_perm(struct aa_profile *profile, struct common_audit_data *sa,
-diff --git a/security/apparmor/include/policy.h b/security/apparmor/include/policy.h
-index 6c93e62383e6..4006fa9fc9f1 100644
---- a/security/apparmor/include/policy.h
-+++ b/security/apparmor/include/policy.h
-@@ -108,6 +108,7 @@ struct aa_data {
+Index: linux/security/apparmor/include/policy.h
+===================================================================
+--- linux.orig/security/apparmor/include/policy.h	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/include/policy.h	2020-10-20 02:33:33.945599189 +0300
+@@ -108,6 +108,7 @@
   * @policy: general match rules governing policy
   * @file: The set of rules governing basic file access and domain transitions
   * @caps: capabilities for the profile
@@ -88,7 +87,7 @@ index 6c93e62383e6..4006fa9fc9f1 100644
   * @rlimits: rlimits for the profile
   *
   * @dents: dentries for the profiles file entries in apparmorfs
-@@ -145,6 +146,7 @@ struct aa_profile {
+@@ -145,6 +146,7 @@
  	struct aa_policydb policy;
  	struct aa_file_rules file;
  	struct aa_caps caps;
@@ -96,11 +95,11 @@ index 6c93e62383e6..4006fa9fc9f1 100644
  
  	int xattr_count;
  	char **xattrs;
-diff --git a/security/apparmor/net.c b/security/apparmor/net.c
-index bb24cfa0a164..bf6aaefc3a5f 100644
---- a/security/apparmor/net.c
-+++ b/security/apparmor/net.c
-@@ -24,6 +24,11 @@ struct aa_sfs_entry aa_sfs_entry_network[] = {
+Index: linux/security/apparmor/net.c
+===================================================================
+--- linux.orig/security/apparmor/net.c	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/net.c	2020-10-20 02:33:33.945599189 +0300
+@@ -24,6 +24,11 @@
  	{ }
  };
  
@@ -112,7 +111,7 @@ index bb24cfa0a164..bf6aaefc3a5f 100644
  static const char * const net_mask_names[] = {
  	"unknown",
  	"send",
-@@ -116,14 +121,26 @@ int aa_profile_af_perm(struct aa_profile *profile, struct common_audit_data *sa,
+@@ -118,14 +123,26 @@
  	if (profile_unconfined(profile))
  		return 0;
  	state = PROFILE_MEDIATES(profile, AA_CLASS_NET);
@@ -146,23 +145,23 @@ index bb24cfa0a164..bf6aaefc3a5f 100644
  	aa_apply_modes_to_perms(profile, &perms);
  
  	return aa_check_perms(profile, &perms, request, sa, audit_net_cb);
-diff --git a/security/apparmor/policy.c b/security/apparmor/policy.c
-index c07493ce2376..d1a869699040 100644
---- a/security/apparmor/policy.c
-+++ b/security/apparmor/policy.c
-@@ -222,6 +222,7 @@ void aa_free_profile(struct aa_profile *profile)
+Index: linux/security/apparmor/policy.c
+===================================================================
+--- linux.orig/security/apparmor/policy.c	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/policy.c	2020-10-20 02:33:33.945599189 +0300
+@@ -222,6 +222,7 @@
  	aa_free_file_rules(&profile->file);
  	aa_free_cap_rules(&profile->caps);
  	aa_free_rlimit_rules(&profile->rlimits);
-+	kzfree(profile->net_compat);
++	kfree_sensitive(profile->net_compat);
  
  	for (i = 0; i < profile->xattr_count; i++)
- 		kzfree(profile->xattrs[i]);
-diff --git a/security/apparmor/policy_unpack.c b/security/apparmor/policy_unpack.c
-index b9e6b2cafa69..a1b07e6c163d 100644
---- a/security/apparmor/policy_unpack.c
-+++ b/security/apparmor/policy_unpack.c
-@@ -33,7 +33,7 @@
+ 		kfree_sensitive(profile->xattrs[i]);
+Index: linux/security/apparmor/policy_unpack.c
+===================================================================
+--- linux.orig/security/apparmor/policy_unpack.c	2020-10-20 02:33:33.947599168 +0300
++++ linux/security/apparmor/policy_unpack.c	2020-10-20 02:33:33.945599189 +0300
+@@ -34,7 +34,7 @@
  
  #define v5	5	/* base version */
  #define v6	6	/* per entry policydb mediation check */
@@ -171,8 +170,8 @@ index b9e6b2cafa69..a1b07e6c163d 100644
  #define v8	8	/* full network masking */
  
  /*
-@@ -311,6 +311,19 @@ static bool unpack_nameX(struct aa_ext *e, enum aa_code code, const char *name)
- 	return 0;
+@@ -314,6 +314,19 @@
+ 	return false;
  }
  
 +static bool unpack_u16(struct aa_ext *e, u16 *data, const char *name)
@@ -191,7 +190,7 @@ index b9e6b2cafa69..a1b07e6c163d 100644
  static bool unpack_u32(struct aa_ext *e, u32 *data, const char *name)
  {
  	void *pos = e->pos;
-@@ -673,7 +686,7 @@ static struct aa_profile *unpack_profile(struct aa_ext *e, char **ns_name)
+@@ -676,7 +689,7 @@
  	struct aa_profile *profile = NULL;
  	const char *tmpname, *tmpns = NULL, *name = NULL;
  	const char *info = "failed to unpack profile";
@@ -200,7 +199,7 @@ index b9e6b2cafa69..a1b07e6c163d 100644
  	struct rhashtable_params params = { 0 };
  	char *key = NULL;
  	struct aa_data *data;
-@@ -816,6 +829,43 @@ static struct aa_profile *unpack_profile(struct aa_ext *e, char **ns_name)
+@@ -823,6 +836,43 @@
  		goto fail;
  	}
  
@@ -244,6 +243,3 @@ index b9e6b2cafa69..a1b07e6c163d 100644
  	if (unpack_nameX(e, AA_STRUCT, "policydb")) {
  		/* generic policy dfa - optional and may be NULL */
  		info = "failed to unpack policydb";
--- 
-2.14.1
-

@@ -21,18 +21,21 @@
 #include "gpiolib.h"
 #include "gpiolib-acpi.h"
 
-#define QUIRK_NO_EDGE_EVENTS_ON_BOOT		0x01l
-#define QUIRK_NO_WAKEUP				0x02l
-
 static int run_edge_events_on_boot = -1;
 module_param(run_edge_events_on_boot, int, 0444);
 MODULE_PARM_DESC(run_edge_events_on_boot,
 		 "Run edge _AEI event-handlers at boot: 0=no, 1=yes, -1=auto");
 
-static int honor_wakeup = -1;
-module_param(honor_wakeup, int, 0444);
-MODULE_PARM_DESC(honor_wakeup,
-		 "Honor the ACPI wake-capable flag: 0=no, 1=yes, -1=auto");
+static char *ignore_wake;
+module_param(ignore_wake, charp, 0444);
+MODULE_PARM_DESC(ignore_wake,
+		 "controller@pin combos on which to ignore the ACPI wake flag "
+		 "ignore_wake=controller@pin[,controller@pin[,...]]");
+
+struct acpi_gpiolib_dmi_quirk {
+	bool no_edge_events_on_boot;
+	char *ignore_wake;
+};
 
 /**
  * struct acpi_gpio_event - ACPI GPIO event handler data
@@ -171,7 +174,7 @@ static void acpi_gpiochip_request_irq(struct acpi_gpio_chip *acpi_gpio,
 	int ret, value;
 
 	ret = request_threaded_irq(event->irq, NULL, event->handler,
-				   event->irqflags, "ACPI:Event", event);
+				   event->irqflags | IRQF_ONESHOT, "ACPI:Event", event);
 	if (ret) {
 		dev_err(acpi_gpio->chip->parent,
 			"Failed to setup interrupt handler for %d\n",
@@ -202,6 +205,58 @@ static void acpi_gpiochip_request_irqs(struct acpi_gpio_chip *acpi_gpio)
 		acpi_gpiochip_request_irq(acpi_gpio, event);
 }
 
+static bool acpi_gpio_in_ignore_list(const char *controller_in, int pin_in)
+{
+	const char *controller, *pin_str;
+	int len, pin;
+	char *endp;
+
+	controller = ignore_wake;
+	while (controller) {
+		pin_str = strchr(controller, '@');
+		if (!pin_str)
+			goto err;
+
+		len = pin_str - controller;
+		if (len == strlen(controller_in) &&
+		    strncmp(controller, controller_in, len) == 0) {
+			pin = simple_strtoul(pin_str + 1, &endp, 10);
+			if (*endp != 0 && *endp != ',')
+				goto err;
+
+			if (pin == pin_in)
+				return true;
+		}
+
+		controller = strchr(controller, ',');
+		if (controller)
+			controller++;
+	}
+
+	return false;
+err:
+	pr_err_once("Error invalid value for gpiolib_acpi.ignore_wake: %s\n",
+		    ignore_wake);
+	return false;
+}
+
+static bool acpi_gpio_irq_is_wake(struct device *parent,
+				  struct acpi_resource_gpio *agpio)
+{
+	int pin = agpio->pin_table[0];
+
+	if (agpio->wake_capable != ACPI_WAKE_CAPABLE)
+		return false;
+
+	if (acpi_gpio_in_ignore_list(dev_name(parent), pin)) {
+		dev_info(parent, "Ignoring wakeup on pin %d\n", pin);
+		return false;
+	}
+
+	return true;
+}
+
+/* Always returns AE_OK so that we keep looping over the resources */
 static acpi_status acpi_gpiochip_alloc_event(struct acpi_resource *ares,
 					     void *context)
 {
@@ -238,19 +293,25 @@ static acpi_status acpi_gpiochip_alloc_event(struct acpi_resource *ares,
 	desc = gpiochip_request_own_desc(chip, pin, "ACPI:Event",
 					 GPIO_ACTIVE_HIGH, GPIOD_IN);
 	if (IS_ERR(desc)) {
-		dev_err(chip->parent, "Failed to request GPIO\n");
-		return AE_ERROR;
+		dev_err(chip->parent,
+			"Failed to request GPIO for pin 0x%04X, err %ld\n",
+			pin, PTR_ERR(desc));
+		return AE_OK;
 	}
 
 	ret = gpiochip_lock_as_irq(chip, pin);
 	if (ret) {
-		dev_err(chip->parent, "Failed to lock GPIO as interrupt\n");
+		dev_err(chip->parent,
+			"Failed to lock GPIO pin 0x%04X as interrupt, err %d\n",
+			pin, ret);
 		goto fail_free_desc;
 	}
 
 	irq = gpiod_to_irq(desc);
 	if (irq < 0) {
-		dev_err(chip->parent, "Failed to translate GPIO to IRQ\n");
+		dev_err(chip->parent,
+			"Failed to translate GPIO pin 0x%04X to IRQ, err %d\n",
+			pin, irq);
 		goto fail_unlock_irq;
 	}
 
@@ -282,7 +343,7 @@ static acpi_status acpi_gpiochip_alloc_event(struct acpi_resource *ares,
 	event->handle = evt_handle;
 	event->handler = handler;
 	event->irq = irq;
-	event->irq_is_wake = honor_wakeup && agpio->wake_capable == ACPI_WAKE_CAPABLE;
+	event->irq_is_wake = acpi_gpio_irq_is_wake(chip->parent, agpio);
 	event->pin = pin;
 	event->desc = desc;
 
@@ -295,7 +356,7 @@ fail_unlock_irq:
 fail_free_desc:
 	gpiochip_free_own_desc(desc);
 
-	return AE_ERROR;
+	return AE_OK;
 }
 
 /**
@@ -588,6 +649,7 @@ static int acpi_populate_gpio_lookup(struct acpi_resource *ares, void *data)
 	if (!lookup->desc) {
 		const struct acpi_resource_gpio *agpio = &ares->data.gpio;
 		bool gpioint = agpio->connection_type == ACPI_RESOURCE_GPIO_TYPE_INT;
+		struct gpio_desc *desc;
 		int pin_index;
 
 		if (lookup->info.quirks & ACPI_GPIO_QUIRK_ONLY_GPIOIO && gpioint)
@@ -600,8 +662,12 @@ static int acpi_populate_gpio_lookup(struct acpi_resource *ares, void *data)
 		if (pin_index >= agpio->pin_table_length)
 			return 1;
 
-		lookup->desc = acpi_get_gpiod(agpio->resource_source.string_ptr,
+		if (lookup->info.quirks & ACPI_GPIO_QUIRK_ABSOLUTE_NUMBER)
+			desc = gpio_to_desc(agpio->pin_table[pin_index]);
+		else
+			desc = acpi_get_gpiod(agpio->resource_source.string_ptr,
 					      agpio->pin_table[pin_index]);
+		lookup->desc = desc;
 		lookup->info.pin_config = agpio->pin_config;
 		lookup->info.gpioint = gpioint;
 
@@ -850,8 +916,9 @@ struct gpio_desc *acpi_node_get_gpiod(struct fwnode_handle *fwnode,
 }
 
 /**
- * acpi_dev_gpio_irq_get() - Find GpioInt and translate it to Linux IRQ number
+ * acpi_dev_gpio_irq_get_by() - Find GpioInt and translate it to Linux IRQ number
  * @adev: pointer to a ACPI device to get IRQ from
+ * @name: optional name of GpioInt resource
  * @index: index of GpioInt resource (starting from %0)
  *
  * If the device has one or more GpioInt resources, this function can be
@@ -861,9 +928,12 @@ struct gpio_desc *acpi_node_get_gpiod(struct fwnode_handle *fwnode,
  * The function is idempotent, though each time it runs it will configure GPIO
  * pin direction according to the flags in GpioInt resource.
  *
+ * The function takes optional @name parameter. If the resource has a property
+ * name, then only those will be taken into account.
+ *
  * Return: Linux IRQ number (> %0) on success, negative errno on failure.
  */
-int acpi_dev_gpio_irq_get(struct acpi_device *adev, int index)
+int acpi_dev_gpio_irq_get_by(struct acpi_device *adev, const char *name, int index)
 {
 	int idx, i;
 	unsigned int irq_flags;
@@ -873,7 +943,7 @@ int acpi_dev_gpio_irq_get(struct acpi_device *adev, int index)
 		struct acpi_gpio_info info;
 		struct gpio_desc *desc;
 
-		desc = acpi_get_gpiod_by_index(adev, NULL, i, &info);
+		desc = acpi_get_gpiod_by_index(adev, name, i, &info);
 
 		/* Ignore -EPROBE_DEFER, it only matters if idx matches */
 		if (IS_ERR(desc) && PTR_ERR(desc) != -EPROBE_DEFER)
@@ -910,7 +980,7 @@ int acpi_dev_gpio_irq_get(struct acpi_device *adev, int index)
 	}
 	return -ENOENT;
 }
-EXPORT_SYMBOL_GPL(acpi_dev_gpio_irq_get);
+EXPORT_SYMBOL_GPL(acpi_dev_gpio_irq_get_by);
 
 static acpi_status
 acpi_gpio_adr_space_handler(u32 function, acpi_physical_address address,
@@ -1160,9 +1230,6 @@ void acpi_gpiochip_add(struct gpio_chip *chip)
 		return;
 	}
 
-	if (!chip->names)
-		devprop_gpiochip_set_names(chip, dev_fwnode(chip->parent));
-
 	acpi_gpiochip_request_regions(acpi_gpio);
 	acpi_gpiochip_scan_gpios(acpi_gpio);
 	acpi_walk_dep_device_list(handle);
@@ -1203,7 +1270,7 @@ static int acpi_gpio_package_count(const union acpi_object *obj)
 		switch (element->type) {
 		case ACPI_TYPE_LOCAL_REFERENCE:
 			element += 3;
-			/* Fallthrough */
+			fallthrough;
 		case ACPI_TYPE_INTEGER:
 			element++;
 			count++;
@@ -1292,7 +1359,7 @@ int acpi_gpio_count(struct device *dev, const char *con_id)
 }
 
 /* Run deferred acpi_gpiochip_request_irqs() */
-static int acpi_gpio_handle_deferred_request_irqs(void)
+static int __init acpi_gpio_handle_deferred_request_irqs(void)
 {
 	struct acpi_gpio_chip *acpi_gpio, *tmp;
 
@@ -1310,7 +1377,7 @@ static int acpi_gpio_handle_deferred_request_irqs(void)
 /* We must use _sync so that this runs after the first deferred_probe run */
 late_initcall_sync(acpi_gpio_handle_deferred_request_irqs);
 
-static const struct dmi_system_id gpiolib_acpi_quirks[] = {
+static const struct dmi_system_id gpiolib_acpi_quirks[] __initconst = {
 	{
 		/*
 		 * The Minix Neo Z83-4 has a micro-USB-B id-pin handler for
@@ -1321,7 +1388,9 @@ static const struct dmi_system_id gpiolib_acpi_quirks[] = {
 			DMI_MATCH(DMI_SYS_VENDOR, "MINIX"),
 			DMI_MATCH(DMI_PRODUCT_NAME, "Z83-4"),
 		},
-		.driver_data = (void *)QUIRK_NO_EDGE_EVENTS_ON_BOOT,
+		.driver_data = &(struct acpi_gpiolib_dmi_quirk) {
+			.no_edge_events_on_boot = true,
+		},
 	},
 	{
 		/*
@@ -1334,16 +1403,34 @@ static const struct dmi_system_id gpiolib_acpi_quirks[] = {
 			DMI_MATCH(DMI_SYS_VENDOR, "Wortmann_AG"),
 			DMI_MATCH(DMI_PRODUCT_NAME, "TERRA_PAD_1061"),
 		},
-		.driver_data = (void *)QUIRK_NO_EDGE_EVENTS_ON_BOOT,
+		.driver_data = &(struct acpi_gpiolib_dmi_quirk) {
+			.no_edge_events_on_boot = true,
+		},
 	},
 	{
 		/*
-		 * Various HP X2 10 Cherry Trail models use an external
-		 * embedded-controller connected via I2C + an ACPI GPIO
-		 * event handler. The embedded controller generates various
-		 * spurious wakeup events when suspended. So disable wakeup
-		 * for its handler (it uses the only ACPI GPIO event handler).
-		 * This breaks wakeup when opening the lid, the user needs
+		 * The Dell Venue 10 Pro 5055, with Bay Trail SoC + TI PMIC uses an
+		 * external embedded-controller connected via I2C + an ACPI GPIO
+		 * event handler on INT33FFC:02 pin 12, causing spurious wakeups.
+		 */
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
+			DMI_MATCH(DMI_PRODUCT_NAME, "Venue 10 Pro 5055"),
+		},
+		.driver_data = &(struct acpi_gpiolib_dmi_quirk) {
+			.ignore_wake = "INT33FC:02@12",
+		},
+	},
+	{
+		/*
+		 * HP X2 10 models with Cherry Trail SoC + TI PMIC use an
+		 * external embedded-controller connected via I2C + an ACPI GPIO
+		 * event handler on INT33FF:01 pin 0, causing spurious wakeups.
+		 * When suspending by closing the LID, the power to the USB
+		 * keyboard is turned off, causing INT0002 ACPI events to
+		 * trigger once the XHCI controller notices the keyboard is
+		 * gone. So INT0002 events cause spurious wakeups too. Ignoring
+		 * EC wakes breaks wakeup when opening the lid, the user needs
 		 * to press the power-button to wakeup the system. The
 		 * alternative is suspend simply not working, which is worse.
 		 */
@@ -1351,33 +1438,61 @@ static const struct dmi_system_id gpiolib_acpi_quirks[] = {
 			DMI_MATCH(DMI_SYS_VENDOR, "HP"),
 			DMI_MATCH(DMI_PRODUCT_NAME, "HP x2 Detachable 10-p0XX"),
 		},
-		.driver_data = (void *)QUIRK_NO_WAKEUP,
+		.driver_data = &(struct acpi_gpiolib_dmi_quirk) {
+			.ignore_wake = "INT33FF:01@0,INT0002:00@2",
+		},
+	},
+	{
+		/*
+		 * HP X2 10 models with Bay Trail SoC + AXP288 PMIC use an
+		 * external embedded-controller connected via I2C + an ACPI GPIO
+		 * event handler on INT33FC:02 pin 28, causing spurious wakeups.
+		 */
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "Hewlett-Packard"),
+			DMI_MATCH(DMI_PRODUCT_NAME, "HP Pavilion x2 Detachable"),
+			DMI_MATCH(DMI_BOARD_NAME, "815D"),
+		},
+		.driver_data = &(struct acpi_gpiolib_dmi_quirk) {
+			.ignore_wake = "INT33FC:02@28",
+		},
+	},
+	{
+		/*
+		 * HP X2 10 models with Cherry Trail SoC + AXP288 PMIC use an
+		 * external embedded-controller connected via I2C + an ACPI GPIO
+		 * event handler on INT33FF:01 pin 0, causing spurious wakeups.
+		 */
+		.matches = {
+			DMI_MATCH(DMI_SYS_VENDOR, "HP"),
+			DMI_MATCH(DMI_PRODUCT_NAME, "HP Pavilion x2 Detachable"),
+			DMI_MATCH(DMI_BOARD_NAME, "813E"),
+		},
+		.driver_data = &(struct acpi_gpiolib_dmi_quirk) {
+			.ignore_wake = "INT33FF:01@0",
+		},
 	},
 	{} /* Terminating entry */
 };
 
-static int acpi_gpio_setup_params(void)
+static int __init acpi_gpio_setup_params(void)
 {
+	const struct acpi_gpiolib_dmi_quirk *quirk = NULL;
 	const struct dmi_system_id *id;
-	long quirks = 0;
 
 	id = dmi_first_match(gpiolib_acpi_quirks);
 	if (id)
-		quirks = (long)id->driver_data;
+		quirk = id->driver_data;
 
 	if (run_edge_events_on_boot < 0) {
-		if (quirks & QUIRK_NO_EDGE_EVENTS_ON_BOOT)
+		if (quirk && quirk->no_edge_events_on_boot)
 			run_edge_events_on_boot = 0;
 		else
 			run_edge_events_on_boot = 1;
 	}
 
-	if (honor_wakeup < 0) {
-		if (quirks & QUIRK_NO_WAKEUP)
-			honor_wakeup = 0;
-		else
-			honor_wakeup = 1;
-	}
+	if (ignore_wake == NULL && quirk && quirk->ignore_wake)
+		ignore_wake = quirk->ignore_wake;
 
 	return 0;
 }

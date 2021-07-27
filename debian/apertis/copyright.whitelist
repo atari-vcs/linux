@@ -1,2 +1,4 @@
+# documentation and sample scripts
 Documentation/admin-guide/cifs/winucase_convert.pl
+# tests
 tools/testing/selftests/mqueue/*
