@@ -1,0 +1,32 @@
+From: Ariel D'Alessandro <ariel.dalessandro@collabora.com>
+Date: Wed, 28 Jul 2021 09:45:27 -0300
+Subject: arm64: dts: imx8mn-var-som-symphony: Temporarily disable power key
+Forwarded: not-needed
+
+Kernel hang has been seen during power key probe.
+Disable it temporarily until this driver is properly debugged.
+
+Signed-off-by: Ariel D'Alessandro <ariel.dalessandro@collabora.com>
+---
+ arch/arm64/boot/dts/freescale/imx8mn-var-som-symphony.dts | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/freescale/imx8mn-var-som-symphony.dts b/arch/arm64/boot/dts/freescale/imx8mn-var-som-symphony.dts
+index f61c487..9d52cfb 100644
+--- a/arch/arm64/boot/dts/freescale/imx8mn-var-som-symphony.dts
++++ b/arch/arm64/boot/dts/freescale/imx8mn-var-som-symphony.dts
+@@ -133,6 +133,14 @@ rtc@68 {
+ 	};
+ };
+ 
++/*
++ * Kernel hang has been seen during power key probe.
++ * Disable it temporarily until this driver is properly debugged.
++ */
++&snvs_pwrkey {
++	status = "disabled";
++};
++
+ /* Header */
+ &uart1 {
+ 	pinctrl-names = "default";

@@ -176,3 +176,6 @@ apertis/sabreai/Disable-lvds-display-by-default-on-Sabre-auto.patch
 
 # General configuration for mx6 boards
 apertis/mx6/dtb-imx6-Add-default-256M-CMA-area-on-i.MX6.patch
+
+# Apertis support/fixed for Variscite iMX8M Nano board
+apertis/imx8/0001-arm64-dts-imx8mn-var-som-symphony-Temporarily-disabl.patch
