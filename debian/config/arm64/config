@@ -1362,7 +1362,8 @@ CONFIG_TEGRA_SOCTHERM=y
 ##
 ## file: drivers/tty/serdev/Kconfig
 ##
-CONFIG_SERIAL_DEV_BUS=m
+CONFIG_SERIAL_DEV_BUS=y
+CONFIG_SERIAL_DEV_CTRL_TTYPORT=y
 
 ##
 ## file: drivers/tty/serial/Kconfig
