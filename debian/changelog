@@ -33,6 +33,39 @@ linux (5.10.46-3) unstable; urgency=medium
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Wed, 28 Jul 2021 07:55:40 +0200
 
+linux (5.10.46-2+apertis1~2021) apertis; urgency=medium
+
+  * Remaining Apertis specific changes:
+    - renesas: use new config symbols for Rcar G3 boards
+    - apparmor: patch to provide compatibility with v2.x net
+    - apparmor: af_unix mediation
+    - apparmor: fix use after free in sk_peer_label
+    - UBUNTU SAUCE: apparmor: fix apparmor mediating locking
+    - UBUNTU: SAUCE: apparmor: userspace queries
+    - cs42xx8-i2c: Fix module auto-loading
+    - Hack: hardcode to sample rates usable on sabre AI
+    - Disable the lcd interface
+    - ARM: dts: imx6qdl: Enable egalax touch screen
+    - debian: armhf: config: Enable Egalax (i2c) touchscreen
+    - armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+    - Add configuration for i.mx6 media pipeline
+    - Install dtbs in /boot
+    - Disable rt flavours
+    - Disable the rt flavours for armhf and arm64 as well
+    - Don't build signed templated
+    - Disable build of udeb packages
+    - Disable cloud images for amd64 and arm64
+    - Tune i.mx6 dtbs for use with apertis
+    - [armhf] Configure the anatop driver as builtin
+    - [armhf] Enable i.mx hardware video decoder/encoding
+  * Revert compilation to gcc-8 on all architectures
+  * Regenerate automatic rules due gcc-8
+  * Apparmor: fix kzfree() call in patch
+  * [armhf] Enable i.MX GPIO support
+  * debian/apertis/component: Set to target
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Fri, 23 Jul 2021 11:21:57 +0100
+
 linux (5.10.46-2) unstable; urgency=medium
 
   * swiotlb: manipulate orig_addr when tlb_addr has offset (Closes: #989778)
@@ -670,6 +703,39 @@ linux (5.10.46-1) unstable; urgency=medium
     (Closes: #982270)
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 24 Jun 2021 14:11:37 +0200
+
+linux (5.10.40-1+apertis1~2021) apertis; urgency=medium
+
+  * Remaining Apertis specific changes:
+    - renesas: use new config symbols for Rcar G3 boards
+    - apparmor: patch to provide compatibility with v2.x net
+    - apparmor: af_unix mediation
+    - apparmor: fix use after free in sk_peer_label
+    - UBUNTU SAUCE: apparmor: fix apparmor mediating locking
+    - UBUNTU: SAUCE: apparmor: userspace queries
+    - cs42xx8-i2c: Fix module auto-loading
+    - Hack: hardcode to sample rates usable on sabre AI
+    - Disable the lcd interface
+    - ARM: dts: imx6qdl: Enable egalax touch screen
+    - debian: armhf: config: Enable Egalax (i2c) touchscreen
+    - armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+    - Add configuration for i.mx6 media pipeline
+    - Install dtbs in /boot
+    - Disable rt flavours
+    - Disable the rt flavours for armhf and arm64 as well
+    - Don't build signed templated
+    - Disable build of udeb packages
+    - Disable cloud images for amd64 and arm64
+    - Tune i.mx6 dtbs for use with apertis
+    - [armhf] Configure the anatop driver as builtin
+    - [armhf] Enable i.mx hardware video decoder/encoding
+  * Revert compilation to gcc-8 on all architectures
+  * Regenerate automatic rules due gcc-8
+  * Apparmor: fix kzfree() call in patch
+  * [armhf] Enable i.MX GPIO support
+  * debian/apertis/component: Set to target
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Fri, 09 Jul 2021 14:33:15 +0000
 
 linux (5.10.40-1) unstable; urgency=medium
 
@@ -2052,6 +2118,39 @@ linux (5.10.38-1) unstable; urgency=medium
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 20 May 2021 07:47:35 +0200
 
+linux (5.10.28-1+apertis1~2021) apertis; urgency=medium
+
+  * Remaining Apertis specific changes:
+    - renesas: use new config symbols for Rcar G3 boards
+    - apparmor: patch to provide compatibility with v2.x net
+    - apparmor: af_unix mediation
+    - apparmor: fix use after free in sk_peer_label
+    - UBUNTU SAUCE: apparmor: fix apparmor mediating locking
+    - UBUNTU: SAUCE: apparmor: userspace queries
+    - cs42xx8-i2c: Fix module auto-loading
+    - Hack: hardcode to sample rates usable on sabre AI
+    - Disable the lcd interface
+    - ARM: dts: imx6qdl: Enable egalax touch screen
+    - debian: armhf: config: Enable Egalax (i2c) touchscreen
+    - armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+    - Add configuration for i.mx6 media pipeline
+    - Install dtbs in /boot
+    - Disable rt flavours
+    - Disable the rt flavours for armhf and arm64 as well
+    - Don't build signed templated
+    - Disable build of udeb packages
+    - Disable cloud images for amd64 and arm64
+    - Tune i.mx6 dtbs for use with apertis
+    - [armhf] Configure the anatop driver as builtin
+    - [armhf] Enable i.mx hardware video decoder/encoding
+  * Revert compilation to gcc-8 on all architectures
+  * Regenerate automatic rules due gcc-8
+  * Apparmor: fix kzfree() call in patch
+  * [armhf] Enable i.MX GPIO support
+  * debian/apertis/component: Set to target
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Fri, 21 May 2021 12:00:15 +0000
+
 linux (5.10.28-1) unstable; urgency=medium
 
   * New upstream stable update:
@@ -3412,6 +3511,45 @@ linux (5.10.24-1) unstable; urgency=medium
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 19 Mar 2021 19:20:52 +0100
 
+linux (5.10.19-1apertis2~v2021) apertis; urgency=medium
+
+  * Regenerate automatic rules
+
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Thu, 18 Mar 2021 17:40:22 +0300
+
+linux (5.10.19-1apertis1~v2021) apertis; urgency=medium
+
+  * Remaining Apertis specific changes:
+    - renesas: use new config symbols for Rcar G3 boards
+    - apparmor: patch to provide compatibility with v2.x net
+    - apparmor: af_unix mediation
+    - apparmor: fix use after free in sk_peer_label
+    - UBUNTU SAUCE: apparmor: fix apparmor mediating locking
+    - UBUNTU: SAUCE: apparmor: userspace queries
+    - cs42xx8-i2c: Fix module auto-loading
+    - Hack: hardcode to sample rates usable on sabre AI
+    - Disable the lcd interface
+    - ARM: dts: imx6qdl: Enable egalax touch screen
+    - debian: armhf: config: Enable Egalax (i2c) touchscreen
+    - armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+    - Add configuration for i.mx6 media pipeline
+    - Install dtbs in /boot
+    - Disable rt flavours
+    - Disable the rt flavours for armhf and arm64 as well
+    - Don't build signed templated
+    - Disable build of udeb packages
+    - Disable cloud images for amd64 and arm64
+    - Tune i.mx6 dtbs for use with apertis
+    - [armhf] Configure the anatop driver as builtin
+    - [armhf] Enable i.mx hardware video decoder/encoding
+  * Revert compilation to gcc-8 on all architectures
+  * Regenerate automatic rules due gcc-8
+  * Apparmor: fix kzfree() call in patch
+  * [armhf] Enable i.MX GPIO support
+  * debian/apertis/component: Set to target
+
+ -- Sjoerd Simons <sjoerd@collabora.com>  Tue, 16 Mar 2021 13:10:41 +0100
+
 linux (5.10.19-1) unstable; urgency=medium
 
   * New upstream stable update:
@@ -4653,6 +4791,41 @@ linux (5.10.5-1) unstable; urgency=medium
   * Revert "drm/amd/display: Fix memory leaks in S3 resume"
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 09 Jan 2021 21:25:11 +0100
+
+linux (5.10.4-1co1) apertis; urgency=medium
+
+  * Remaining Apertis specific changes:
+    - renesas: use new config symbols for Rcar G3 boards
+    - apparmor: patch to provide compatibility with v2.x net
+    - apparmor: af_unix mediation
+    - apparmor: fix use after free in sk_peer_label
+    - UBUNTU SAUCE: apparmor: fix apparmor mediating locking
+    - UBUNTU: SAUCE: apparmor: userspace queries
+    - cs42xx8-i2c: Fix module auto-loading
+    - Hack: hardcode to sample rates usable on sabre AI
+    - Disable the lcd interface
+    - ARM: dts: imx6qdl: Enable egalax touch screen
+    - um: ubd: Submit all data segments as a single command
+    - WIP: Port UML random to hwrng core
+    - debian: armhf: config: Enable Egalax (i2c) touchscreen
+    - armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+    - Add configuration for i.mx6 media pipeline
+    - Install dtbs in /boot
+    - Disable rt flavours
+    - Disable the rt flavours for armhf and arm64 as well
+    - Don't build signed templated
+    - Disable build of udeb packages
+    - Disable cloud images for amd64 and arm64
+    - Tune i.mx6 dtbs for use with apertis
+    - [armhf] Configure the anatop driver as builtin
+    - [armhf] Enable i.mx hardware video decoder/encoding
+  * Revert compilation to gcc-8 on all architectures
+  * Regenerate automatic rules due gcc-8
+  * Apparmor: fix kzfree() call in patch
+  * [armhf] Enable i.MX GPIO support
+  * debian/apertis/component: Set to target
+
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Sat, 09 Jan 2021 22:52:08 +0300
 
 linux (5.10.4-1) unstable; urgency=medium
 
@@ -7420,6 +7593,47 @@ linux (5.9.6-1) unstable; urgency=medium
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 08 Nov 2020 13:40:04 +0100
 
+linux (5.9.1-1co2) apertis; urgency=medium
+
+  * Tune i.mx6 dtbs for use with apertis
+  * [armhf] Configure the anatop driver as builtin
+  * Drop (unneeded) patches that are not going upstream
+  * [armhf] Enable i.mx hardware video decoder/encoding
+
+ -- Sjoerd Simons <sjoerd@collabora.com>  Tue, 03 Nov 2020 10:07:03 +0100
+
+linux (5.9.1-1co1) apertis; urgency=medium
+
+  * Remaining Apertis specific changes:
+    - renesas: use new config symbols for Rcar G3 boards
+    - apparmor: patch to provide compatibility with v2.x net
+    - UBUNTU SAUCE: apparmor: fix apparmor mediating locking
+    - apparmor: af_unix mediation
+    - UBUNTU: SAUCE: apparmor: userspace queries
+    - apparmor: fix use after free in sk_peer_label
+    - component: Add an API to cleanup before unbind
+    - drm/imx: Fix probe oops
+    - Hack: hardcode to sample rates usable on sabre AI
+    - cs42xx8-i2c: Fix module auto-loading
+    - ARM: dts: imx6qdl: Enable egalax touch screen
+    - Disable the lcd interface
+    - um: ubd: Submit all data segments as a single command
+    - WIP: Port UML random to hwrng core
+    - debian: armhf: config: Enable Egalax (i2c) touchscreen
+    - armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+    - Add configuration for i.mx6 media pipeline
+    - Install dtbs in /boot
+    - Disable rt flavours
+    - Disable the rt flavours for armhf and arm64 as well
+    - Don't build signed templated
+    - Disable build of udeb packages
+    - Disable cloud images for amd64 and arm64
+  * Refresh Apertis patches for 5.9.1-1
+  * Revert compilation to gcc-8 on all architectures
+  * Regenerate automatic rules due gcc-8
+
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Tue, 20 Oct 2020 02:53:31 +0300
+
 linux (5.9.1-1) unstable; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_5.9
@@ -7811,6 +8025,38 @@ linux (5.8.14-1) unstable; urgency=medium
   * Bump ABI to 3
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sat, 10 Oct 2020 21:40:31 +0200
+
+linux (5.8.10-1co1) apertis; urgency=medium
+
+  * Revert compilation to gcc-8 on all architectures
+  * Regenerate automatic rules due gcc-8
+  * Refresh Apertis patches for 5.8.10-1
+  * Remaining Apertis specific changes:
+    - renesas: use new config symbols for Rcar G3 boards
+    - apparmor: patch to provide compatibility with v2.x net
+    - UBUNTU SAUCE: apparmor: fix apparmor mediating locking
+    - apparmor: af_unix mediation
+    - UBUNTU: SAUCE: apparmor: userspace queries
+    - apparmor: fix use after free in sk_peer_label
+    - component: Add an API to cleanup before unbind
+    - drm/imx: Fix probe oops
+    - Hack: hardcode to sample rates usable on sabre AI
+    - cs42xx8-i2c: Fix module auto-loading
+    - ARM: dts: imx6qdl: Enable egalax touch screen
+    - Disable the lcd interface
+    - um: ubd: Submit all data segments as a single command
+    - WIP: Port UML random to hwrng core
+    - debian: armhf: config: Enable Egalax (i2c) touchscreen
+    - armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+    - Add configuration for i.mx6 media pipeline
+    - Install dtbs in /boot
+    - Disable rt flavours
+    - Disable the rt flavours for armhf and arm64 as well
+    - Don't build signed templated
+    - Disable build of udeb packages
+    - Disable cloud images for amd64 and arm64
+
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Sat, 10 Oct 2020 00:16:35 +0300
 
 linux (5.8.10-1) unstable; urgency=medium
 
@@ -9753,6 +9999,20 @@ linux (5.7.10-1) unstable; urgency=medium
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Sun, 26 Jul 2020 08:40:40 +0200
 
+linux (5.7.6-1co2) apertis; urgency=medium
+
+  * renesas: use new config symbols for Rcar G3 boards
+
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Thu, 23 Jul 2020 10:44:53 +0300
+
+linux (5.7.6-1co1) apertis; urgency=medium
+
+  * Refresh Apertis patches for 5.7.6
+  * Revert compilation to gcc-8 on all architectures
+  * Regenerate automatic rules due gcc-8
+
+ -- Denis Pynkin <denis.pynkin@collabora.com>  Sun, 05 Jul 2020 23:06:49 +0300
+
 linux (5.7.6-1) unstable; urgency=medium
 
   * New upstream release: https://kernelnewbies.org/Linux_5.7
@@ -11081,6 +11341,64 @@ linux (5.5~rc5-1~exp1) experimental; urgency=medium
 
  -- Ben Hutchings <ben@decadent.org.uk>  Mon, 06 Jan 2020 04:26:45 +0000
 
+linux (5.4.41-0~co1) apertis; urgency=medium
+
+  * Update to Linux stable v5.4.41
+  * Apertis specific changes:
+    - apparmor: patch to provide compatibility with v2.x net
+    - UBUNTU SAUCE: apparmor: fix apparmor mediating locking
+    - apparmor: af_unix mediation
+    - UBUNTU: SAUCE: apparmor: userspace queries
+    - apparmor: fix use after free in sk_peer_label
+    - component: Add an API to cleanup before unbind
+    - drm/imx: Fix probe oops
+    - Hack: hardcode to sample rates usable on sabre AI
+    - cs42xx8-i2c: Fix module auto-loading
+    - ARM: dts: imx6qdl: Enable egalax touch screen
+    - Disable the lcd interface
+    - um: ubd: Submit all data segments as a single command
+    - um: ubd: Retry buffer read on any kind of error
+    - um: vector: Avoid NULL ptr deference if transport is unset
+    - WIP: Port UML random to hwrng core
+  * Dropping Debian patches (merged in new upstream stable):
+    - libbpf-fix-readelf-output-parsing-on-powerpc-with-re.patch
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Mon, 25 May 2020 12:25:54 +0100
+
+linux (5.4.35-2) apertis; urgency=medium
+
+  * Add missing dependency on libcap-dev
+  * Add libcap LDLIBS when building turbostat
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Thu, 14 May 2020 20:33:02 +0100
+
+linux (5.4.35-1) apertis; urgency=medium
+
+  * Update to Linux stable v5.4.35
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Thu, 30 Apr 2020 12:01:52 +0100
+
+linux (5.4.19-1co3) apertis; urgency=medium
+
+  * Apply user mode linux fixes from Sjoerd
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Tue, 31 Mar 2020 12:37:58 +0100
+
+linux (5.4.19-1co2) apertis; urgency=medium
+
+  * Fix kernel warning in ubd driver
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Mon, 30 Mar 2020 15:37:04 +0100
+
+linux (5.4.19-1co1) apertis; urgency=medium
+
+  * Apertis specific changes
+    - Turn off rt build
+    - Refresh the automatically detected licensing information
+    - Add patches to fix failure path in imx-drm
+
+ -- Ritesh Raj Sarraf <ritesh.sarraf@collabora.com>  Fri, 27 Mar 2020 20:03:02 +0530
+
 linux (5.4.19-1) unstable; urgency=medium
 
   * New upstream stable update:
@@ -11897,6 +12215,15 @@ linux (5.4.19-1) unstable; urgency=medium
     Closes: #944546)
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Thu, 13 Feb 2020 06:14:49 +0100
+
+linux (5.4.13-2) apertis; urgency=medium
+
+  [ Martyn Welch ]
+  * Turn off rt build
+  * Refresh the automatically detected licensing information
+  * Add patches to fix failure path in imx-drm
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Tue, 04 Feb 2020 18:16:36 +0000
 
 linux (5.4.13-1) unstable; urgency=medium
 
@@ -13323,6 +13650,33 @@ linux (5.4.6-1) unstable; urgency=medium
   * Add libtraceevent packages (Closes: #944138)
 
  -- Ben Hutchings <ben@decadent.org.uk>  Fri, 27 Dec 2019 22:17:44 +0000
+
+linux (5.4.2-1~exp1co1) apertis; urgency=medium
+
+  * Merge from Debian. Remaining Apertis changes:
+    - Add default Apertis gbp.conf
+    - Widen the binnmu match for Apertis builds
+    - Disable rt flavours
+    - Disable build of udeb packages
+    - Disable signed templates
+    - Disable cloud images
+    - Install dtbs in /boot
+    - Build with GCC 8
+    - d/p/apparmor: Add latest upstream apparmor patches
+      + Including fix to enforce denied dbus transations
+    - arm64: Add configuration for the 64 bit Renesas platforms
+    - armhf: Add configuration for the i.MX6 platform
+      + Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+      + Disable XEN
+      + Add configuration options needed for Audio and USB on Sabre AI boards
+    - armhf: d/p/apertis/sabreai-audio: Add fixes for loading and using the
+      audio on i.MX6 Sabre AI boards
+    - sabrelite: Add patch to disable the LCD display by default
+    - arm64: Back out "Use armhf cross-compiler for building compat vDSO"
+  * Dropped downstream changes:
+    - Add backported fix for USB detach panic
+
+ -- Andrej Shadura <andrew.shadura@collabora.co.uk>  Thu, 12 Dec 2019 14:44:32 +0100
 
 linux (5.4.2-1~exp1) experimental; urgency=medium
 
@@ -16005,6 +16359,51 @@ linux (4.20-1~exp1) experimental; urgency=medium
 
  -- Ben Hutchings <ben@decadent.org.uk>  Mon, 24 Dec 2018 04:26:47 +0000
 
+linux (4.19.67-2co4) apertis; urgency=medium
+
+  * apertis: sabrelite: Add patch to disable the lcd display by default
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Wed, 09 Oct 2019 11:26:43 +0200
+
+linux (4.19.67-2co3) apertis; urgency=medium
+
+  * Re-add configuration for 64 bit Renesas platforms
+
+ -- Emanuele Aina <emanuele.aina@collabora.com>  Tue, 24 Sep 2019 16:10:24 +0200
+
+linux (4.19.67-2co2) apertis; urgency=medium
+
+  * Disable the rt flavours for armhf and arm64 as well
+  * Revert abiname bump
+  * Disable the module ABI check
+
+ -- Emanuele Aina <emanuele.aina@collabora.com>  Sat, 21 Sep 2019 02:06:57 +0200
+
+linux (4.19.67-2co1) apertis; urgency=medium
+
+  * Merge from Debian buster. Remaining apertis changes:
+    + Add default apertis gbp.conf
+    + Widen the binnmu match for Apertis builds
+    + Disable rt flavours
+    + Disable build of udeb packages
+    + Disable signed templates
+    + Disable cloud images
+    + Install dtbs in /boot
+    + d/p/apparmor: Add latest upstream apparmor patches
+      + Including fix to enforce denied dbus transations
+    + arm64: Add configuration for the 64 bit Renesas platforms
+    + armhf: Add configuration for the i.MX6 platform
+      + Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+      + Disable XEN
+      + Add configuration options needed for Audio and USB on Sabre AI boards
+    + armhf: d/p/apertis/sabreai-audio: Add fixes for loading and using the
+      audio on i.MX6 Sabre AI boards
+  * Dropped downstream changes:
+    + Support for Raspbery Pi CM3 (APERTIS-6053): shipped upstream
+    + Module ABI tweaks: build was still broken on armhf and arm64
+
+ -- Andrew Lee (李健秋) <andrew.lee@collabora.co.uk>  Tue, 17 Sep 2019 13:51:56 +0800
+
 linux (4.19.37-6) unstable; urgency=high
 
   [ John Paul Adrian Glaubitz ]
@@ -16027,4 +16426,110 @@ linux (4.19.37-6) unstable; urgency=high
   * [arm64] Backport DTB support for Rasperry Pi Compute Module 3.
 
  -- Salvatore Bonaccorso <carnil@debian.org>  Fri, 19 Jul 2019 00:23:17 +0200
+
+linux (4.19.37-5co4) apertis; urgency=medium
+
+  * d/patches/series: Fixup spurious change
+  * Disable cloud images
+  * Preserve ABI whether the module signing support is enabled or not
+
+ -- Emanuele Aina <emanuele.aina@collabora.com>  Wed, 11 Sep 2019 10:26:06 +0200
+
+linux (4.19.37-5co3) apertis; urgency=medium
+
+  * Drop the check for the fips_enabled symbol
+
+ -- Emanuele Aina <emanuele.aina@collabora.com>  Tue, 10 Sep 2019 10:23:58 +0200
+
+linux (4.19.37-5co2) apertis; urgency=medium
+
+  * d/rules: Accept dots in the extended BINNMU rule
+
+ -- Emanuele Aina <emanuele.aina@collabora.com>  Mon, 09 Sep 2019 15:05:22 +0000
+
+linux (4.19.37-5co1) apertis; urgency=medium
+
+  * Merge from Debian. Remaining changes:
+    + Install dtbs in /boot
+    + Widen the binnmu match for Apertis builds
+    + Disable rt flavours
+    + Add default apertis gbp.conf
+    + Add configuration for 64 bit Renesas platforms
+    + Add configuration for i.mx6 media pipeline
+    + Disable build of udeb packages
+    + Fix binnmu detection again
+    + Don't build signed templated
+    + armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+    + armhf: config: Disable XEN
+    + Correct debian-branch
+    + Refresh the AppArmor af_unix mediation patches.
+    + Enable support for Raspbery Pi CM3 (APERTIS-6053) 
+    + d/p/apertis/sabreai-audio
+      + Add fixes for loading and using the audio on i.MX5 Sabre AI boards
+    + d/config/armhf/config:
+      + Add configuration options needed for Audio and USB on Sabre AI boards
+    + Add latest upstream apparmor patches
+      + Including fix to enforce denied dbus transations
+
+ -- Andrej Shadura <andrewsh@debian.org>  Thu, 05 Sep 2019 09:41:20 +0200
+
+linux (4.19.20-1co8) apertis; urgency=medium
+
+  * Add latest upstream apparmor patches
+    + Including fix to enforce denied dbus transations
+
+ -- Martyn Welch <martyn.welch@collabora.com>  Mon, 17 Jun 2019 18:22:16 +0100
+
+linux (4.19.20-1co7) apertis; urgency=medium
+
+  * d/p/apertis/sabreai-audio
+    + Add fixes for loading and using the audio on i.MX5 Sabre AI boards
+  * d/config/armhf/config:
+    + Add configuration options needed for Audio and USB on Sabre AI boards
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Thu, 06 Jun 2019 22:56:09 +0200
+
+linux (4.19.20-1co6) apertis; urgency=medium
+
+  * Enable support for Raspbery Pi CM3 (APERTIS-6053) 
+
+ -- Ritesh Raj Sarraf <ritesh.sarraf@collabora.com>  Tue, 28 May 2019 12:44:57 +0530
+
+linux (4.19.20-1co5) apertis; urgency=medium
+
+  * Refresh the AppArmor af_unix mediation patches.
+
+ -- Andrej Shadura <andrew.shadura@collabora.co.uk>  Fri, 22 Mar 2019 14:36:02 +0100
+
+linux (4.19.20-1co4) apertis; urgency=medium
+
+  * armhf: Enable CONFIG_CRYPTO_DEV_FSL_CAAM
+  * armhf: config: Disable XEN
+  * Correct debian-branch
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Mon, 18 Feb 2019 23:16:45 +0100
+
+linux (4.19.20-1co3) apertis; urgency=medium
+
+  * Don't build signed templated
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Sun, 17 Feb 2019 23:08:07 +0100
+
+linux (4.19.20-1co2) apertis; urgency=medium
+
+  * Fix binnmu detection again
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Fri, 15 Feb 2019 10:25:50 +0100
+
+linux (4.19.20-1co1) apertis; urgency=medium
+
+  * Install dtbs in /boot
+  * Widen the binnmu match for Apertis builds
+  * Disable rt flavours
+  * Add default apertis gbp.conf
+  * Add configuration for 64 bit Renesas platforms
+  * Add configuration for i.mx6 media pipeline
+  * Disable build of udeb packages
+
+ -- Sjoerd Simons <sjoerd.simons@collabora.co.uk>  Thu, 14 Feb 2019 23:40:03 +0100
 
