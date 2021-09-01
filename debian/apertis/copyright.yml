@@ -3,3 +3,5 @@
 Documentation/logo.gif:
   override-copyright: Larry Ewing
   license: GPL-2
+drivers/net/ppp/bsd_comp.c:
+  override-license: BSD-4-Clause-UC

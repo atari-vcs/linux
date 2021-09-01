@@ -18,9 +18,27 @@ Description: Compiler for Linux on IBM zSeries (meta-package)
 
 Package: linux-compiler-gcc-8-x86
 Build-Profiles: <!stage1>
-Depends: gcc-8 (>= 8-20180123-1~), ${misc:Depends}
+Depends: gcc-8, ${misc:Depends}
 Architecture: amd64 i386 x32
 Multi-Arch: foreign
 Description: Compiler for Linux on x86 (meta-package)
  This package depends on GCC of the appropriate version and architecture
  for Linux on amd64, i386 and x32.
+
+Package: linux-image-parisc64-smp
+Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
+Architecture: hppa
+Section: oldlibs
+Priority: extra
+Depends: linux-image-parisc64, ${misc:Depends}
+Description: Linux for multiprocessor 64-bit PA-RISC (dummy package)
+ This is a dummy transitional package.  It can be safely removed.
+
+Package: linux-image-parisc-smp
+Build-Profiles: <!stage1 !pkg.linux.nokernel !pkg.linux.nometa>
+Architecture: hppa
+Section: oldlibs
+Priority: extra
+Depends: linux-image-parisc, ${misc:Depends}
+Description: Linux for multiprocessor 32-bit PA-RISC (dummy package)
+ This is a dummy transitional package.  It can be safely removed.

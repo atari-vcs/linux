@@ -15,12 +15,17 @@ debian/kernelvariables.patch
 debian/ia64-hardcode-arch-script-output.patch
 debian/mips-disable-werror.patch
 debian/mips-boston-disable-its.patch
+debian/mips-ieee754-relaxed.patch
 debian/arch-sh4-fix-uimage-build.patch
 debian/tools-perf-version.patch
 debian/tools-perf-install.patch
 debian/wireless-add-debian-wireless-regdb-certificates.patch
 debian/export-symbols-needed-by-android-drivers.patch
 debian/android-enable-building-ashmem-and-binder-as-modules.patch
+debian/documentation-drop-sphinx-version-check.patch
+debian/perf-traceevent-support-asciidoctor-for-documentatio.patch
+debian/kbuild-look-for-module.lds-under-arch-directory-too.patch
+debian/kbuild-abort-build-if-subdirs-used.patch
 
 # Fixes/improvements to firmware loading
 features/all/drivers-media-dvb-usb-af9005-request_firmware.patch
@@ -32,9 +37,9 @@ debian/firmware_class-refer-to-debian-wiki-firmware-page.patch
 
 # Patches from aufs5 repository, imported with debian/bin/genpatch-aufs.
 # These are only the changes needed to allow aufs to be built out-of-tree.
-features/all/aufs5/aufs5-base.patch
-features/all/aufs5/aufs5-mmap.patch
-features/all/aufs5/aufs5-standalone.patch
+#features/all/aufs5/aufs5-base.patch
+#features/all/aufs5/aufs5-mmap.patch
+#features/all/aufs5/aufs5-standalone.patch
 
 # Change some defaults for security reasons
 debian/af_802154-Disable-auto-loading-as-mitigation-against.patch
@@ -71,10 +76,11 @@ bugfix/arm/arm-mm-export-__sync_icache_dcache-for-xen-privcmd.patch
 bugfix/powerpc/powerpc-boot-fix-missing-crc32poly.h-when-building-with-kernel_xz.patch
 bugfix/arm64/arm64-acpi-Add-fixup-for-HPE-m400-quirks.patch
 bugfix/x86/x86-32-disable-3dnow-in-generic-config.patch
-bugfix/ppc64el/libbpf-fix-readelf-output-parsing-on-powerpc-with-re.patch
+bugfix/arm/ARM-dts-sun8i-h3-orangepi-plus-Fix-ethernet-phy-mode.patch
 
 # Arch features
-features/mips/MIPS-Loongson-3-Add-Loongson-LS3A-RS780E-1-way-machi.patch
+features/arm64/arm64-dts-rockchip-Add-basic-support-for-Kobol-s-Hel.patch
+features/arm64/arm64-dts-rockchip-disable-USB-type-c-DisplayPort.patch
 features/x86/x86-memtest-WARN-if-bad-RAM-found.patch
 features/x86/x86-make-x32-syscall-support-conditional.patch
 
@@ -82,7 +88,7 @@ features/x86/x86-make-x32-syscall-support-conditional.patch
 bugfix/all/disable-some-marvell-phys.patch
 bugfix/all/fs-add-module_softdep-declarations-for-hard-coded-cr.patch
 bugfix/all/partially-revert-usb-kconfig-using-select-for-usb_co.patch
-debian/revert-objtool-fix-config_stack_validation-y-warning.patch
+debian/makefile-do-not-check-for-libelf-when-building-oot-module.patch
 bugfix/all/partially-revert-net-socket-implement-64-bit-timestamps.patch
 
 # Miscellaneous features
@@ -90,15 +96,10 @@ bugfix/all/partially-revert-net-socket-implement-64-bit-timestamps.patch
 # Lockdown missing pieces
 features/all/lockdown/efi-add-an-efi_secure_boot-flag-to-indicate-secure-b.patch
 features/all/lockdown/efi-lock-down-the-kernel-if-booted-in-secure-boot-mo.patch
-features/all/lockdown/add-a-sysrq-option-to-lift-kernel-lockdown.patch
-features/all/lockdown/enable-cold-boot-attack-mitigation.patch
 features/all/lockdown/mtd-disable-slram-and-phram-when-locked-down.patch
 features/all/lockdown/arm64-add-kernel-config-option-to-lock-down-when.patch
-# until the "kernel_lockdown.7" manual page exists
-features/all/lockdown/lockdown-refer-to-debian-wiki-until-manual-page-exists.patch
 
 # Improve integrity platform keyring for kernel modules verification
-features/all/db-mok-keyring/0006-Make-get_cert_list-not-complain-about-cert-lists-tha.patch
 features/all/db-mok-keyring/0001-MODSIGN-do-not-load-mok-when-secure-boot-disabled.patch
 features/all/db-mok-keyring/0002-MODSIGN-load-blacklist-from-MOKx.patch
 features/all/db-mok-keyring/0003-MODSIGN-checking-the-blacklisted-hash-before-loading-a-kernel-module.patch
@@ -109,6 +110,10 @@ features/all/db-mok-keyring/KEYS-Make-use-of-platform-keyring-for-module-signatu
 # Security fixes
 debian/i386-686-pae-pci-set-pci-nobios-by-default.patch
 debian/ntfs-mark-it-as-broken.patch
+bugfix/all/vfs-move-cap_convert_nscap-call-into-vfs_setxattr.patch
+bugfix/all/bpf-wrap-aux-data-inside-bpf_sanitize_info-container.patch
+bugfix/all/bpf-fix-mask-direction-swap-upon-off-reg-sign-change.patch
+bugfix/all/bpf-no-need-to-simulate-speculative-domain-for-immediates.patch
 
 # Fix exported symbol versions
 bugfix/all/module-disable-matching-missing-version-crc.patch
@@ -123,21 +128,15 @@ bugfix/all/tools-build-remove-bpf-run-time-check-at-build-time.patch
 bugfix/all/cpupower-bump-soname-version.patch
 bugfix/all/libcpupower-hide-private-function.patch
 bugfix/all/cpupower-fix-checks-for-cpu-existence.patch
-bugfix/all/tools-lib-api-fs-fs.c-fix-misuse-of-strncpy.patch
-bugfix/all/usbip-fix-misuse-of-strncpy.patch
-bugfix/all/usbip-network-fix-unaligned-member-access.patch
 bugfix/all/tools-perf-pmu-events-fix-reproducibility.patch
-bugfix/all/0001-libtraceevent-Fix-header-installation.patch
-bugfix/all/0004-libtraceevent-allow-custom-libdir-path.patch
-bugfix/all/0005-libtraceevent-Add-dependency-on-libdl.patch
-
-# wireless: Disable regulatory.db direct loading (until we sort out signing)
-debian/wireless-disable-regulatory.db-direct-loading.patch
+bugfix/all/bpftool-fix-version-string-in-recursive-builds.patch
+bugfix/all/tools-include-uapi-fix-errno.h.patch
 
 # overlay: allow mounting in user namespaces
 debian/overlayfs-permit-mounts-in-userns.patch
 
 # ABI maintenance
+debian/Deal-with-vc_data-ABI-changes-in-5.10.40.patch
 
 # AppArmor
 apparmor/0001-apparmor-patch-to-provide-compatibility-with-v2.x-ne.patch
@@ -151,31 +150,13 @@ apertis/sabreai-audio/0001-cs42xx8-i2c-Fix-module-auto-loading.patch
 apertis/sabreai-audio/0002-Hack-hardcode-to-sample-rates-usable-on-sabre-AI.patch
 apertis/sabrelite/0216-Disable-the-lcd-interface.patch
 apertis/sabrelite/0103-ARM-dts-imx6qdl-Enable-egalax-touch-screen.patch
-apertis/component-Add-an-API-to-cleanup-before-unbind.patch
-apertis/drm-imx-Fix-probe-oops.patch
 
-atari/controller/Add-driver-for-current-version-of-the-atari-gamepad-firmw.patch
-atari/controller/Correct-PID-of-the-atari-classic-controller.patch
-atari/controller/Add-mapping-for-the-atari-classic-controller.patch
-atari/controller/Map-triggers-to-ABS_RZ-and-ABS_Z.patch
-atari/controller/First-naive-mapping-of-rotational-axis.patch
-atari/controller/Add-support-for-rumble-and-leds.patch
-atari/controller/Adjust-for-new-firmare-revisions.patch
-atari/controller/Add-support-for-controller-battery-level.patch
-atari/controller/Correct-classic-controller-backwards-compatibility.patch
-atari/controller/Map-X-Box-one-controller-to-gamepad.rst.patch
-atari/controller/Add-modern-controller-support-more-features.patch
-atari/bugfix/drm-amdgpu-allow-direct-upload-save-restore-list-for-rave.patch
-atari/controller/Atari-Correct-sysfs-store-return.patch
-atari/controller/Adjust-rumble-request-for-classic-controller.patch
-atari/controller/Support-old-HID-xbox-controlled-HID-ids.patch
-atari/controller/hid-atari-Switch-to-output-reports.patch
-atari/controller/hid-atari-Fix-initial-info-and-ongoing-info.patch
-atari/controller/hid-microsoft-xbox-Correct-range-of-ABS_RY.patch
-atari/controller/Request-info-report-straight-away.patch
-atari/controller/atari-hid-Return-EAGAIN-if-there-is-no-valid-info-yet.patch
-atari/controller/atari-Don-t-use-mutex-in-interrupt-context.patch
-atari/bugfix/drm-amd-display-Stop-if-retimer-is-not-available.patch
-atari/bugfix/usb-xhci-apply-suspend-quirks-to-AMD-XHCI-controller.patch
-atari/bugfix/usb-xhci-workaround-css-timeout-setting-hce-amd.patch
-atari/bugfix/rtw88-config-8822c-multicast-address-in-MAC-init-flow.patch
+# Tune sabre AI to match typical Apertis setups better
+apertis/sabreai/Disable-lvds-display-by-default-on-Sabre-auto.patch
+
+# General configuration for mx6 boards
+apertis/mx6/dtb-imx6-Add-default-256M-CMA-area-on-i.MX6.patch
+
+# Atari patches
+atari/controller/Add-driver-for-Atari-controllers.patch
+atari/bugfix/bluetooth-btusb-allow-realtek-remote-wake-from-suspend.patch

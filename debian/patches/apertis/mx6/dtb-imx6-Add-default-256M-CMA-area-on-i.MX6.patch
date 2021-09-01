@@ -1,0 +1,40 @@
+From: Sjoerd Simons <sjoerd@collabora.com>
+Date: Tue, 27 Oct 2020 10:09:25 +0100
+Subject: dtb: imx6: Add default 256M CMA area on i.MX6
+
+To allow graphical environments to run out of the box on i.MX6 boards
+nicely reserve 256M of CMA memory.
+
+Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+---
+ arch/arm/boot/dts/imx6qdl.dtsi | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+diff --git a/arch/arm/boot/dts/imx6qdl.dtsi b/arch/arm/boot/dts/imx6qdl.dtsi
+index 43edbf1..36f5feb 100644
+--- a/arch/arm/boot/dts/imx6qdl.dtsi
++++ b/arch/arm/boot/dts/imx6qdl.dtsi
+@@ -17,6 +17,23 @@ / {
+ 	 */
+ 	chosen {};
+ 
++	/*
++	 *  Apertis specific; Add a 256Mb CMA area intended for use by etnaviv
++	 * so by default graphical applications can easily run
++	 */
++	reserved-memory {
++		#address-cells = <1>;
++		#size-cells = <1>;
++		ranges;
++
++		linux,cma {
++			compatible = "shared-dma-pool";
++			reusable;
++			size = <0x10000000>;
++			linux,cma-default;
++		};
++	};
++
+ 	aliases {
+ 		ethernet0 = &fec;
+ 		can0 = &can1;

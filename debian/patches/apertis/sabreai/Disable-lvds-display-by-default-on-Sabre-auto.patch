@@ -1,0 +1,52 @@
+From: Sjoerd Simons <sjoerd@collabora.com>
+Date: Tue, 27 Oct 2020 10:03:32 +0100
+Subject: Disable lvds display by default on Sabre auto
+
+The LVDS screen cannot be automatically detected by linux; So disable
+the relevant nodes by default to make it easier to test without a lvds
+screen (but using e.g. a HDMI screen).
+
+For those that do use an lvds screen at u-boot time the various nodes
+should be enabled again.
+
+Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+---
+ arch/arm/boot/dts/imx6qdl-sabreauto.dtsi | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/arch/arm/boot/dts/imx6qdl-sabreauto.dtsi b/arch/arm/boot/dts/imx6qdl-sabreauto.dtsi
+index 55f736d..6787cb2 100644
+--- a/arch/arm/boot/dts/imx6qdl-sabreauto.dtsi
++++ b/arch/arm/boot/dts/imx6qdl-sabreauto.dtsi
+@@ -156,7 +156,7 @@ backlight {
+ 		pwms = <&pwm3 0 5000000>;
+ 		brightness-levels = <0 4 8 16 32 64 128 255>;
+ 		default-brightness-level = <7>;
+-		status = "okay";
++		status = "disabled";
+ 	};
+ 
+ 	i2cmux {
+@@ -452,6 +452,7 @@ touchscreen@4 {
+ 		interrupt-parent = <&gpio2>;
+ 		interrupts = <28 IRQ_TYPE_EDGE_FALLING>;
+ 		wakeup-gpios = <&gpio2 28 GPIO_ACTIVE_HIGH>;
++		status = "disabled";
+ 	};
+ };
+ 
+@@ -775,12 +776,12 @@ MX6QDL_PAD_EIM_DA0__EIM_AD00		0xb0b1
+ };
+ 
+ &ldb {
+-	status = "okay";
++	status = "disabled";
+ 
+ 	lvds-channel@0 {
+ 		fsl,data-mapping = "spwg";
+ 		fsl,data-width = <18>;
+-		status = "okay";
++		status = "disabled";
+ 
+ 		display-timings {
+ 			native-mode = <&timing0>;

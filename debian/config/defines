@@ -2,9 +2,10 @@
 installer: false
 
 [abi]
-abiname: 3
+abiname: 7
 ignore-changes:
  __cpuhp_*
+ __udp_gso_segment
  bpf_analyzer
  cxl_*
  dax_flush
@@ -80,6 +81,8 @@ ignore-changes:
 # Not OOT
  nf_nat_masquerade_ipv4_register_notifier
  nf_nat_masquerade_ipv6_register_notifier
+# Not used in OOT (and changed in 5.10.5)
+ dfltcc_*
 # ignore changes to hisi_sas/*
  module:drivers/scsi/hisi_sas/*
 # KVM internal
@@ -98,6 +101,10 @@ ignore-changes:
  module:arch/powerpc/kvm/*
  module:arch/s390/kvm/*
  module:arch/x86/kvm/*
+# used only within arch/s390
+ uv_info
+# Not used in OOT
+ xhci_init_driver
 
 [base]
 arches:
@@ -145,7 +152,7 @@ debug-info: true
 signed-code: false
 
 [featureset-rt_base]
-enabled: false
+enabled: true
 
 [description]
 part-long-up: This kernel is not suitable for SMP (multi-processor,
@@ -153,6 +160,7 @@ part-long-up: This kernel is not suitable for SMP (multi-processor,
 
 [image]
 initramfs-generators: initramfs-tools initramfs-fallback
+breaks: fwupdate (<< 12-7), wireless-regdb (<< 2019.06.03-1~)
 recommends: apparmor
 
 [relations]

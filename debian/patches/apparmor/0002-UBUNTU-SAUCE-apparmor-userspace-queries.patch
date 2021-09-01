@@ -1,4 +1,3 @@
-From caff62af6d80da6beb5b4b5618a8b3dde0a662c0 Mon Sep 17 00:00:00 2001
 From: John Johansen <john.johansen@canonical.com>
 Date: Tue, 26 Jun 2018 08:07:54 -0700
 Subject: [PATCH 2/2] UBUNTU: SAUCE: apparmor: userspace queries
@@ -15,9 +14,11 @@ Signed-off-by: Seth Forshee <seth.forshee@canonical.com>
  security/apparmor/include/policy.h | 10 ++++++++++
  2 files changed, 11 insertions(+), 1 deletion(-)
 
---- a/security/apparmor/apparmorfs.c
-+++ b/security/apparmor/apparmorfs.c
-@@ -624,7 +624,7 @@ static void profile_query_cb(struct aa_p
+Index: linux/security/apparmor/apparmorfs.c
+===================================================================
+--- linux.orig/security/apparmor/apparmorfs.c	2020-10-09 02:03:52.628376441 +0300
++++ linux/security/apparmor/apparmorfs.c	2020-10-09 02:03:52.626376472 +0300
+@@ -624,7 +624,7 @@
  			tmp = aa_compute_fperms(dfa, state, &cond);
  		}
  	} else if (profile->policy.dfa) {
@@ -26,9 +27,11 @@ Signed-off-by: Seth Forshee <seth.forshee@canonical.com>
  			return;	/* no change to current perms */
  		dfa = profile->policy.dfa;
  		state = aa_dfa_match_len(dfa, profile->policy.start[0],
---- a/security/apparmor/include/policy.h
-+++ b/security/apparmor/include/policy.h
-@@ -226,6 +226,16 @@ static inline unsigned int PROFILE_MEDIA
+Index: linux/security/apparmor/include/policy.h
+===================================================================
+--- linux.orig/security/apparmor/include/policy.h	2020-10-09 02:03:52.628376441 +0300
++++ linux/security/apparmor/include/policy.h	2020-10-09 02:03:52.626376472 +0300
+@@ -225,6 +225,16 @@
  					profile->policy.start[0], &class, 1);
  }
  
