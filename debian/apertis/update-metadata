@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if [ ! -f debian/changelog ]; then
+    echo "ERROR: Run from main project directory"
+    exit 1
+fi
+
+rm debian/rules.gen debian/config.defines.dump debian/control \
+   debian/control.md5sum debian/*.maintscript debian/*.lintian-overrides \
+   debian/*.postinst debian/*.postrm debian/*.preinst debian/*.prerm \
+   debian/*.bug-presubj
+
+debian/rules debian/control
+
