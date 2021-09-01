@@ -1,3 +1,9 @@
+linux (5.10.46-4+apertis2atari1) atari; urgency=medium
+
+  * Refresh Atari patches on top of 5.10.46
+
+ -- Christopher Obbard <chris.obbard@collabora.com>  Wed, 01 Sep 2021 16:00:34 +0100
+
 linux (5.10.46-4+apertis2~2021) apertis; urgency=medium
 
   * Sync from apertis/v2022dev3. Remaining Apertis specific changes:
