@@ -12,7 +12,7 @@ Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
  create mode 100644 drivers/hid/hid-atari.c
 
 diff --git a/drivers/hid/Kconfig b/drivers/hid/Kconfig
-index 9b56226..975f20b 100644
+index 54bc563..4685dc0 100644
 --- a/drivers/hid/Kconfig
 +++ b/drivers/hid/Kconfig
 @@ -163,6 +163,12 @@ config HID_ASUS
@@ -955,10 +955,10 @@ index 0000000..08769cc
 +MODULE_DESCRIPTION("Atari game controllers");
 +MODULE_LICENSE("GPL");
 diff --git a/drivers/hid/hid-ids.h b/drivers/hid/hid-ids.h
-index e220a05..a4ef328 100644
+index 136b58a..d914d3a 100644
 --- a/drivers/hid/hid-ids.h
 +++ b/drivers/hid/hid-ids.h
-@@ -192,6 +192,10 @@
+@@ -193,6 +193,10 @@
  #define USB_DEVICE_ID_ASUSTEK_ROG_KEYBOARD3 0x1822
  #define USB_DEVICE_ID_ASUSTEK_FX503VD_KEYBOARD	0x1869
  
