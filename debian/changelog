@@ -1,3 +1,9 @@
+linux (5.10.46-4+apertis2atari2) atari; urgency=medium
+
+  * Enable class-compliant USB video device drivers
+
+ -- Christopher Obbard <chris.obbard@collabora.com>  Tue, 12 Oct 2021 11:18:11 +0100
+
 linux (5.10.46-4+apertis2atari1) atari; urgency=medium
 
   * Refresh Atari patches on top of 5.10.46
